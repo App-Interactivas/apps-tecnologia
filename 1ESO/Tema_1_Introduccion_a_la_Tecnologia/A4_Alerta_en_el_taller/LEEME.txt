@@ -1,0 +1,2 @@
+Coloca aquí la app A4 «Alerta en el taller».
+El archivo principal de la app debe llamarse index.html.

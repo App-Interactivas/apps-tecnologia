@@ -1,0 +1,2 @@
+Coloca aquí la app A2 «De la idea al producto».
+El archivo principal de la app debe llamarse index.html.

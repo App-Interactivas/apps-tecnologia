@@ -1,0 +1,2 @@
+Coloca aquí la app A3 «Misión: Taller Seguro».
+El archivo principal de la app debe llamarse index.html.

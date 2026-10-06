@@ -1,0 +1,2 @@
+Coloca aquí la app A6 «Pasaporte de acceso al aula-taller».
+El archivo principal de la app debe llamarse index.html.

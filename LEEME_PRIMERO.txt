@@ -1,0 +1,22 @@
+CARPETA NETLIFY — SOLO APPS
+
+1º ESO · Tema 1:
+- A1 Detectives de Tecnología
+- A2 El laboratorio tecnológico
+- A3 La fábrica misteriosa
+- A4 Alerta en el taller
+- A5 Código Seguridad
+- A6 Pasaporte de acceso al aula-taller
+
+2º ESO · Tema 1:
+- A1 Detectives de Tecnología 2.0
+- A2 De la idea al producto
+- A3 Misión: Taller Seguro
+
+INSTRUCCIONES:
+1. Entra en cada carpeta de actividad.
+2. Copia dentro la app correspondiente.
+3. Renombra el archivo principal de cada app como index.html.
+4. Cuando estén todas colocadas, sube la carpeta NETLIFY_APPS_TECNOLOGIA_CORREGIDA completa a Netlify.
+
+No hay carpetas de presentaciones.

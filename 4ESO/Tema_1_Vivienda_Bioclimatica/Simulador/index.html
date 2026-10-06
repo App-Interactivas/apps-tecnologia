@@ -1,0 +1,360 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Laboratorio Bioclimático · 4.º ESO</title>
+<style>
+:root{
+  --paper:#fffaf3;--ink:#2f312d;--muted:#6d7068;--line:#d8d0c4;
+  --green:#7f966c;--green2:#dfe8d6;--orange:#c8753d;--orange2:#f2ddcb;
+  --blue:#6f9fb1;--blue2:#dce9ee;--sand:#efe7d9;--shadow:0 14px 34px rgba(68,54,34,.12);
+}
+*{box-sizing:border-box} body{margin:0;background:linear-gradient(180deg,#f7f1e7,#eee5d8);color:var(--ink);font-family:Inter,Segoe UI,Arial,sans-serif}
+button,input,select,textarea{font:inherit} button{cursor:pointer}
+.app{max-width:1220px;margin:auto;padding:18px}
+.hero,.panel,.summary,.footer{background:var(--paper);border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow)}
+.hero{padding:24px;position:relative;overflow:hidden}.hero:before,.hero:after{content:"";position:absolute;border-radius:50%;opacity:.12}.hero:before{width:190px;height:190px;background:var(--orange);right:-65px;top:-78px}.hero:after{width:130px;height:130px;background:var(--green);right:95px;bottom:-62px}
+.kicker{font-size:.77rem;font-weight:900;letter-spacing:.12em;text-transform:uppercase;color:var(--orange)} h1{font-size:clamp(2rem,5vw,3.55rem);line-height:.95;margin:.3rem 0 .45rem}.subtitle{max-width:860px;color:var(--muted);font-size:1.03rem;margin:0 0 15px}.notice{max-width:950px;background:#fff6df;border:1px solid #e7c985;border-radius:14px;padding:11px 14px;font-size:.92rem}
+.progress-wrap{display:flex;align-items:center;gap:12px;margin-top:16px}.track{flex:1;height:12px;background:#e7e0d5;border-radius:999px;overflow:hidden}.bar{height:100%;width:0;background:linear-gradient(90deg,var(--orange),var(--green));transition:.3s}.progress-text{font-weight:900;min-width:70px}
+.tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:18px 0}.tab{border:1px solid var(--line);background:#fff9ef;border-radius:16px;padding:12px;font-weight:900;color:#555}.tab.active{background:var(--ink);color:white;border-color:var(--ink)}
+.panel{display:none;padding:20px}.panel.active{display:block}.panel-head{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;margin-bottom:14px}.panel-head h2{margin:0;font-size:1.55rem}.tag{padding:7px 10px;background:var(--green2);border-radius:999px;font-size:.79rem;font-weight:900;white-space:nowrap}
+.grid{display:grid;grid-template-columns:1.15fr .85fr;gap:16px}.lab-canvas{background:var(--sand);border:1px solid var(--line);border-radius:18px;padding:12px}.views{display:grid;grid-template-columns:1fr 1fr;gap:10px}.view-card{background:#fffdf8;border:1px solid #ddd3c5;border-radius:14px;padding:8px}.view-title{font-size:.78rem;font-weight:900;letter-spacing:.05em;text-transform:uppercase;color:#6e6d68;margin:2px 4px 6px}.view-card svg{width:100%;height:300px;display:block}.oneview svg{height:360px}.legend-box{font-size:.8rem;color:#555;background:rgba(255,255,255,.9);border:1px solid #ddd2c2;padding:8px 10px;border-radius:12px;margin-top:8px}
+.controls{display:flex;flex-direction:column;gap:12px}.card{background:#fffdf8;border:1px solid var(--line);border-radius:16px;padding:14px}.card h3{margin:0 0 10px;font-size:1rem}.control-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}.control label{display:block;font-size:.88rem;font-weight:800;margin-bottom:6px}.control select,.control input[type=range],textarea,input[type=text]{width:100%}.control select,textarea,input[type=text]{border:1px solid #cfc7bb;border-radius:10px;padding:9px;background:white} textarea{min-height:72px;resize:vertical}
+.metric{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center;margin:8px 0}.pill{padding:5px 10px;border-radius:999px;font-size:.82rem;font-weight:900}.low{background:#dcebdc;color:#365c36}.med{background:#f4e6bf;color:#75561b}.high{background:#f1d2c5;color:#7d3f26}.neutral{background:#e8e4dc;color:#5c5952}.small-note{font-size:.84rem;color:var(--muted);margin-top:8px}
+.actions{display:flex;gap:8px;flex-wrap:wrap}.btn{border:0;border-radius:12px;padding:9px 12px;font-weight:900}.btn.primary{background:var(--ink);color:#fff}.btn.secondary{background:var(--orange2);color:#6e3d20}.btn.green{background:var(--green2);color:#40563a}.btn.ghost{background:#eee8de;color:#555}.compare{display:grid;grid-template-columns:1fr 1fr;gap:8px}.slot{border:1px dashed #bdb4a6;border-radius:12px;padding:10px;min-height:72px;font-size:.88rem;background:#fffaf2}.slot b{display:block;margin-bottom:4px}
+.done{margin-top:14px;display:flex;align-items:center;justify-content:space-between;gap:12px;background:#eef3e9;border:1px solid #cbd9c2;padding:12px;border-radius:14px}.done input[type=checkbox]{width:20px;height:20px}.done input[type=text]{flex:1;max-width:330px}
+.summary{display:none;margin-top:18px;padding:18px}.summary.show{display:block}.summary h3{margin-top:0}.summary-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.summary-item{padding:12px;border-radius:12px;background:#f2ece2;border-left:5px solid var(--green)}.footer{margin:16px 0 4px;padding:14px 16px;color:var(--muted);font-size:.9rem}
+@media(max-width:980px){.grid{grid-template-columns:1fr}.views{grid-template-columns:1fr 1fr}}@media(max-width:760px){.tabs{grid-template-columns:1fr 1fr}.views{grid-template-columns:1fr}.view-card svg{height:280px}.summary-grid{grid-template-columns:1fr}}@media(max-width:520px){.app{padding:10px}.tabs{grid-template-columns:1fr}.control-row{grid-template-columns:1fr}.panel-head{flex-direction:column}.done{align-items:flex-start;flex-direction:column}.done input[type=text]{max-width:none}}
+</style>
+</head>
+<body>
+<div class="app">
+<section class="hero">
+  <div class="kicker">Tecnología · 4.º ESO · Canarias</div>
+  <h1>Laboratorio Bioclimático</h1>
+  <p class="subtitle">Experimenta antes de rediseñar tu Vivienda V2. Cada ensayo usa la vista que mejor explica el fenómeno: planta, sección o vista exterior.</p>
+  <div class="notice"><b>Importante:</b> este laboratorio es un modelo didáctico cualitativo. No calcula consumos, temperaturas ni certificaciones reales.</div>
+  <div class="progress-wrap"><div class="track"><div class="bar" id="bar"></div></div><div class="progress-text" id="prog">0 / 4</div></div>
+</section>
+
+<nav class="tabs">
+  <button class="tab active" data-tab="e1">1 · Sol y orientación</button>
+  <button class="tab" data-tab="e2">2 · Voladizos</button>
+  <button class="tab" data-tab="e3">3 · Ventilación</button>
+  <button class="tab" data-tab="e4">4 · Color, vegetación y cubierta</button>
+</nav>
+
+<section class="panel active" id="e1">
+  <div class="panel-head"><div><div class="kicker">Experimento 1</div><h2>Sol y orientación</h2></div><div class="tag">Planta + sección solar</div></div>
+  <div class="grid">
+    <div>
+      <div class="lab-canvas">
+        <div class="views">
+          <div class="view-card">
+            <div class="view-title">A · Vista en planta</div>
+            <svg viewBox="0 0 360 300" id="plan1">
+              <rect width="360" height="300" fill="#f5eee3"/>
+              <circle id="sunPlan1" cx="65" cy="220" r="22" fill="#f6c74f"/>
+              <circle id="sunPlanGlow1" cx="65" cy="220" r="34" fill="rgba(246,199,79,.18)"/>
+              <path id="sunArc1" d="M55 225 Q180 55 305 225" fill="none" stroke="#e2ae3c" stroke-width="3" stroke-dasharray="7 6"/>
+              <rect x="115" y="88" width="130" height="130" rx="3" fill="#e9d2b5" stroke="#6d553c" stroke-width="5"/>
+              <line x1="180" y1="88" x2="180" y2="218" stroke="#9a7a59" stroke-width="2" opacity=".55"/>
+              <line x1="115" y1="153" x2="245" y2="153" stroke="#9a7a59" stroke-width="2" opacity=".55"/>
+              <line id="glassN1" x1="145" y1="88" x2="215" y2="88" stroke="#5f9fbd" stroke-width="9" opacity=".18"/>
+              <line id="glassS1" x1="145" y1="218" x2="215" y2="218" stroke="#5f9fbd" stroke-width="9"/>
+              <line id="glassE1" x1="245" y1="120" x2="245" y2="188" stroke="#5f9fbd" stroke-width="9" opacity=".18"/>
+              <line id="glassO1" x1="115" y1="120" x2="115" y2="188" stroke="#5f9fbd" stroke-width="9" opacity=".18"/>
+              <line id="planRay1" x1="65" y1="220" x2="145" y2="218" stroke="#ef9f38" stroke-width="4" stroke-linecap="round"/>
+              <text x="171" y="72" text-anchor="middle" font-size="14" font-weight="800" fill="#59675a">N</text>
+              <text x="171" y="242" text-anchor="middle" font-size="14" font-weight="800" fill="#59675a">S</text>
+              <text x="260" y="157" font-size="14" font-weight="800" fill="#59675a">E</text>
+              <text x="95" y="157" text-anchor="end" font-size="14" font-weight="800" fill="#59675a">O</text>
+              <text id="timeLabel1" x="18" y="278" font-size="13" font-weight="800" fill="#6b6e67">Mañana</text>
+            </svg>
+          </div>
+          <div class="view-card">
+            <div class="view-title">B · Sección de la fachada seleccionada</div>
+            <svg viewBox="0 0 360 300" id="section1">
+              <rect width="360" height="300" fill="#f5eee3"/>
+              <line x1="0" y1="245" x2="360" y2="245" stroke="#bba782" stroke-width="4"/>
+              <rect x="205" y="72" width="118" height="173" fill="#e9d2b5" stroke="#6d553c" stroke-width="4"/>
+              <polygon points="190,78 264,32 338,78" fill="#b8744b" stroke="#6d553c" stroke-width="4"/>
+              <rect id="winSec1" x="207" y="132" width="18" height="72" fill="#9cc8db" stroke="#f7f2ec" stroke-width="3"/>
+              <circle id="sunSec1" cx="62" cy="72" r="22" fill="#f6c74f"/>
+              <circle id="sunSecGlow1" cx="62" cy="72" r="34" fill="rgba(246,199,79,.18)"/>
+              <line id="secRay1a" x1="62" y1="72" x2="207" y2="150" stroke="#ef9f38" stroke-width="4" stroke-linecap="round"/>
+              <line id="secRay1b" x1="62" y1="72" x2="207" y2="175" stroke="#ef9f38" stroke-width="4" stroke-linecap="round"/>
+              <polygon id="lightPatch1" points="225,150 310,188 310,221 225,176" fill="rgba(246,199,79,.26)"/>
+              <text id="sectionLabel1" x="18" y="278" font-size="13" font-weight="800" fill="#6b6e67">Incidencia directa</text>
+            </svg>
+          </div>
+        </div>
+      </div>
+      <div class="legend-box">La <b>planta</b> muestra de qué lado está el Sol. La <b>sección</b> muestra si la radiación directa puede atravesar el cristal y hasta dónde penetra aproximadamente.</div>
+    </div>
+    <div class="controls">
+      <div class="card"><h3>Configura</h3>
+        <div class="control-row">
+          <div class="control"><label>Fachada acristalada</label><select id="orient"><option value="S">Sur</option><option value="E">Este</option><option value="O">Oeste</option><option value="N">Norte</option></select></div>
+          <div class="control"><label>Momento del día</label><select id="time1"><option value="manana">Mañana</option><option value="mediodia">Mediodía</option><option value="tarde">Tarde</option></select></div>
+        </div>
+        <div class="control-row" style="margin-top:10px">
+          <div class="control"><label>Estación</label><select id="season1"><option value="verano">Verano</option><option value="invierno">Invierno</option></select></div>
+          <div class="control"><label>Tamaño de ventana</label><input id="winSize" type="range" min="1" max="3" step="1" value="2"></div>
+        </div>
+      </div>
+      <div class="card"><h3>Observa</h3><div class="metric"><span>Radiación directa</span><span class="pill med" id="directPill1">Media</span></div><div class="metric"><span>Penetración solar</span><span class="pill med" id="penPill1">Media</span></div><div class="small-note" id="obs1"></div></div>
+      <div class="card"><h3>Compara A / B</h3><div class="actions"><button class="btn secondary" onclick="saveCompare(1,'A')">Guardar A</button><button class="btn green" onclick="saveCompare(1,'B')">Guardar B</button></div><div class="compare" style="margin-top:8px"><div class="slot" id="c1A"><b>A</b>Sin guardar</div><div class="slot" id="c1B"><b>B</b>Sin guardar</div></div></div>
+    </div>
+  </div>
+  <div class="done"><label><input type="checkbox" class="donebox" data-i="1"> He comparado al menos dos orientaciones o momentos del día.</label><input type="text" id="note1" placeholder="Mi conclusión breve..."></div>
+</section>
+
+<section class="panel" id="e2">
+  <div class="panel-head"><div><div class="kicker">Experimento 2</div><h2>Voladizos y sombra</h2></div><div class="tag">Casa de contexto + sección constructiva</div></div>
+  <div class="grid">
+    <div>
+      <div class="lab-canvas">
+        <div class="views">
+          <div class="view-card">
+            <div class="view-title">A · Vivienda de contexto</div>
+            <svg viewBox="0 0 360 300">
+              <rect width="360" height="300" fill="#f5eee3"/>
+              <ellipse cx="180" cy="250" rx="120" ry="22" fill="#ddcfb9"/>
+              <polygon id="roofLeftContext2" points="80,164 180,164 176,58 85,112" fill="#c98558" stroke="#6d553c" stroke-width="4"/>
+              <polygon points="85,112 176,58 272,110 180,164" fill="#b8744b" stroke="#6d553c" stroke-width="4"/>
+              <polygon points="180,164 272,110 315,136 224,190" fill="#a96947" stroke="#6d553c" stroke-width="4"/>
+              <polygon points="80,164 180,164 180,245 80,245" fill="#f0dfc7" stroke="#6d553c" stroke-width="4"/>
+              <polygon points="180,164 224,190 224,245 180,245" fill="#e5d0b2" stroke="#6d553c" stroke-width="4"/>
+              <polygon points="224,190 315,136 315,217 224,245" fill="#dcc19b" stroke="#6d553c" stroke-width="4"/>
+              <rect x="103" y="190" width="52" height="36" fill="#9cc8db" stroke="#f7f2ec" stroke-width="4"/>
+              <polygon id="contextAwning2" points="94,180 168,180 198,166 124,166" fill="#8e6a52" stroke="#6d553c" stroke-width="3"/>
+              <circle id="sunContext2" cx="62" cy="64" r="22" fill="#f6c74f"/>
+              <line id="contextRay2" x1="62" y1="64" x2="120" y2="189" stroke="#ef9f38" stroke-width="4"/>
+              <text x="20" y="280" font-size="13" font-weight="800" fill="#6b6e67">El voladizo protege una fachada concreta.</text>
+            </svg>
+          </div>
+          <div class="view-card">
+            <div class="view-title">B · Sección lateral de la fachada</div>
+            <svg viewBox="0 0 360 300" id="section2">
+              <rect width="360" height="300" fill="#f5eee3"/>
+              <line x1="0" y1="250" x2="360" y2="250" stroke="#bba782" stroke-width="4"/>
+              <rect x="220" y="65" width="95" height="185" fill="#e9d2b5" stroke="#6d553c" stroke-width="4"/>
+              <rect x="220" y="122" width="14" height="86" fill="#9cc8db" stroke="#f7f2ec" stroke-width="3"/>
+              <line id="awning2" x1="220" y1="110" x2="150" y2="110" stroke="#806048" stroke-width="12" stroke-linecap="square"/>
+              <circle id="sun2" cx="70" cy="62" r="22" fill="#f6c74f"/>
+              <circle id="sunGlow2" cx="70" cy="62" r="34" fill="rgba(246,199,79,.18)"/>
+              <line id="ray2a" x1="70" y1="62" x2="220" y2="142" stroke="#ef9f38" stroke-width="4" stroke-linecap="round"/>
+              <line id="ray2b" x1="70" y1="62" x2="220" y2="172" stroke="#ef9f38" stroke-width="4" stroke-linecap="round"/>
+              <line id="ray2c" x1="70" y1="62" x2="220" y2="202" stroke="#ef9f38" stroke-width="4" stroke-linecap="round"/>
+              <polygon id="insideBeam2" points="234,145 300,173 300,210 234,175" fill="rgba(246,199,79,.24)"/>
+              <text id="blockedLabel2" x="18" y="278" font-size="13" font-weight="800" fill="#6b6e67">Rayos bloqueados: 0 / 3</text>
+            </svg>
+          </div>
+        </div>
+      </div>
+      <div class="legend-box">La vivienda de contexto te sitúa. La <b>sección lateral</b> es la vista de trabajo: el voladizo crece hacia el exterior y los rayos se detienen cuando chocan con él.</div>
+    </div>
+    <div class="controls">
+      <div class="card"><h3>Configura</h3><div class="control-row"><div class="control"><label>Estación</label><select id="season2"><option value="verano">Verano</option><option value="invierno">Invierno</option></select></div><div class="control"><label>Profundidad del voladizo</label><input id="depth" type="range" min="10" max="120" step="5" value="45"></div></div></div>
+      <div class="card"><h3>Observa</h3><div class="metric"><span>Sombra sobre ventana</span><span class="pill med" id="shadePill2">Media</span></div><div class="metric"><span>Rayos bloqueados</span><span class="pill neutral" id="blockPill2">1 / 3</span></div><div class="small-note" id="obs2"></div></div>
+      <div class="card"><h3>Compara A / B</h3><div class="actions"><button class="btn secondary" onclick="saveCompare(2,'A')">Guardar A</button><button class="btn green" onclick="saveCompare(2,'B')">Guardar B</button></div><div class="compare" style="margin-top:8px"><div class="slot" id="c2A"><b>A</b>Sin guardar</div><div class="slot" id="c2B"><b>B</b>Sin guardar</div></div></div>
+    </div>
+  </div>
+  <div class="done"><label><input type="checkbox" class="donebox" data-i="2"> He comparado al menos dos profundidades o estaciones.</label><input type="text" id="note2" placeholder="Mi conclusión breve..."></div>
+</section>
+
+<section class="panel" id="e3">
+  <div class="panel-head"><div><div class="kicker">Experimento 3</div><h2>Ventilación cruzada</h2></div><div class="tag">Planta + corte del recorrido del aire</div></div>
+  <div class="grid">
+    <div>
+      <div class="lab-canvas">
+        <div class="views">
+          <div class="view-card">
+            <div class="view-title">A · Planta de la vivienda</div>
+            <svg viewBox="0 0 360 300" id="plan3">
+              <defs><marker id="airHead3a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#3d89aa"/></marker></defs>
+              <rect width="360" height="300" fill="#f5eee3"/>
+              <rect x="90" y="60" width="190" height="170" fill="#f7efe2" stroke="#6d553c" stroke-width="5"/>
+              <line x1="180" y1="60" x2="180" y2="230" stroke="#8f7154" stroke-width="3"/>
+              <line x1="90" y1="145" x2="280" y2="145" stroke="#8f7154" stroke-width="3"/>
+              <rect id="leftOpen3" x="84" y="112" width="12" height="48" fill="#9cc8db" stroke="#fff" stroke-width="2"/>
+              <rect id="rightOpen3" x="274" y="112" width="12" height="48" fill="#9cc8db" stroke="#fff" stroke-width="2"/>
+              <rect id="topOpen3" x="155" y="54" width="48" height="12" fill="#9cc8db" stroke="#fff" stroke-width="2"/>
+              <path id="flowPlan3a" d="M40 136 C90 136 120 136 165 136" fill="none" stroke="#4a9abb" stroke-width="7" marker-end="url(#airHead3a)"/>
+              <path id="flowPlan3b" d="M165 136 C205 136 235 136 315 136" fill="none" stroke="#4a9abb" stroke-width="7" marker-end="url(#airHead3a)"/>
+              <path id="flowPlan3c" d="M165 136 C170 105 178 88 178 62" fill="none" stroke="#4a9abb" stroke-width="7" marker-end="url(#airHead3a)"/>
+              <text id="windText3" x="18" y="278" font-size="13" font-weight="800" fill="#3d89aa">Viento desde la izquierda</text>
+            </svg>
+          </div>
+          <div class="view-card">
+            <div class="view-title">B · Corte del recorrido del aire</div>
+            <svg viewBox="0 0 360 300" id="cut3">
+              <defs><marker id="airHead3b" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#3d89aa"/></marker></defs>
+              <rect width="360" height="300" fill="#f5eee3"/>
+              <line x1="0" y1="244" x2="360" y2="244" stroke="#bba782" stroke-width="4"/>
+              <rect x="92" y="86" width="176" height="158" fill="#f0dfc7" stroke="#6d553c" stroke-width="4"/>
+              <polygon points="78,88 180,36 282,88" fill="#b8744b" stroke="#6d553c" stroke-width="4" opacity=".72"/>
+              <rect id="cutLeftOpen3" x="88" y="148" width="12" height="46" fill="#9cc8db" stroke="#fff" stroke-width="2"/>
+              <rect id="cutRightOpen3" x="260" y="148" width="12" height="46" fill="#9cc8db" stroke="#fff" stroke-width="2"/>
+              <rect id="cutTopOpen3" x="158" y="82" width="44" height="12" fill="#9cc8db" stroke="#fff" stroke-width="2"/>
+              <path id="flowCut3a" d="M35 170 C95 170 145 170 180 170" fill="none" stroke="#4a9abb" stroke-width="7" marker-end="url(#airHead3b)"/>
+              <path id="flowCut3b" d="M180 170 C220 170 258 170 326 170" fill="none" stroke="#4a9abb" stroke-width="7" marker-end="url(#airHead3b)"/>
+              <path id="flowCut3c" d="M180 170 C180 140 180 112 180 90" fill="none" stroke="#4a9abb" stroke-width="7" marker-end="url(#airHead3b)"/>
+              <text id="cutLabel3" x="18" y="278" font-size="13" font-weight="800" fill="#6b6e67">Recorrido transversal</text>
+            </svg>
+          </div>
+        </div>
+      </div>
+      <div class="legend-box">La planta muestra <b>por dónde entra y sale</b> el aire. El corte ayuda a entender si el recorrido atraviesa realmente la vivienda o se queda cerca de una misma zona.</div>
+    </div>
+    <div class="controls">
+      <div class="card"><h3>Configura</h3><div class="control-row"><div class="control"><label>Aberturas</label><select id="openings"><option value="una">Una sola abertura</option><option value="mismo">Dos en zonas próximas</option><option value="opuestas">Fachadas opuestas</option></select></div><div class="control"><label>Dirección del viento</label><select id="wind"><option value="izq">Desde la izquierda</option><option value="der">Desde la derecha</option></select></div></div></div>
+      <div class="card"><h3>Observa</h3><div class="metric"><span>Potencial de ventilación</span><span class="pill med" id="ventPill3">Medio</span></div><div class="metric"><span>Recorrido interior</span><span class="pill neutral" id="flowPill3">Parcial</span></div><div class="small-note" id="obs3"></div></div>
+      <div class="card"><h3>Compara A / B</h3><div class="actions"><button class="btn secondary" onclick="saveCompare(3,'A')">Guardar A</button><button class="btn green" onclick="saveCompare(3,'B')">Guardar B</button></div><div class="compare" style="margin-top:8px"><div class="slot" id="c3A"><b>A</b>Sin guardar</div><div class="slot" id="c3B"><b>B</b>Sin guardar</div></div></div>
+    </div>
+  </div>
+  <div class="done"><label><input type="checkbox" class="donebox" data-i="3"> He comparado al menos dos disposiciones de aberturas.</label><input type="text" id="note3" placeholder="Mi conclusión breve..."></div>
+</section>
+
+<section class="panel" id="e4">
+  <div class="panel-head"><div><div class="kicker">Experimento 4</div><h2>Color, vegetación y cubierta</h2></div><div class="tag">Vista exterior</div></div>
+  <div class="grid">
+    <div>
+      <div class="lab-canvas oneview">
+        <div class="view-card"><div class="view-title">Vista exterior</div>
+          <svg viewBox="0 0 640 360" id="svg4">
+            <rect width="640" height="360" fill="#f5eee3"/>
+            <line x1="0" y1="310" x2="640" y2="310" stroke="#bba782" stroke-width="5"/>
+            <polygon id="roofLeft4" points="240,165 342,165 350,61 252,115" fill="#c98558" stroke="#6d553c" stroke-width="4"/>
+            <polygon id="roofFront4" points="252,115 350,61 438,111 342,165" fill="#b8744b" stroke="#6d553c" stroke-width="4"/>
+            <polygon id="roofSide4" points="438,111 518,155 432,209 342,165" fill="#a96947" stroke="#6d553c" stroke-width="4"/>
+            <polygon id="wallFront4" points="240,165 342,165 342,287 240,287" fill="#f2eadf" stroke="#6d553c" stroke-width="4"/>
+            <polygon id="wallMid4" points="342,165 432,209 432,287 342,287" fill="#ead9c1" stroke="#6d553c" stroke-width="4"/>
+            <polygon id="wallSide4" points="432,209 518,155 518,240 432,287" fill="#e0c6a5" stroke="#6d553c" stroke-width="4"/>
+            <rect x="262" y="197" width="28" height="52" fill="#9cc8db" stroke="#f4efe8" stroke-width="4"/>
+            <rect x="298" y="197" width="28" height="52" fill="#9cc8db" stroke="#f4efe8" stroke-width="4"/>
+            <ellipse id="shadeFront4" cx="302" cy="271" rx="86" ry="26" fill="rgba(77,100,87,.10)"/>
+            <g id="treeA4"><circle cx="172" cy="161" r="38" fill="#708a57"/><circle cx="145" cy="180" r="30" fill="#73905a"/><rect x="160" y="193" width="14" height="60" fill="#765236"/></g>
+            <g id="treeB4"><circle cx="215" cy="150" r="34" fill="#6a8452"/><circle cx="242" cy="165" r="28" fill="#74915d"/><rect x="220" y="183" width="13" height="60" fill="#765236"/></g>
+            <line id="ray4a" x1="88" y1="67" x2="265" y2="155" stroke="#ef9f38" stroke-width="4" stroke-linecap="round"/>
+            <line id="ray4b" x1="88" y1="67" x2="300" y2="181" stroke="#ef9f38" stroke-width="4" stroke-linecap="round"/>
+            <line id="ray4c" x1="88" y1="67" x2="350" y2="215" stroke="#ef9f38" stroke-width="4" stroke-linecap="round"/>
+            <circle cx="88" cy="67" r="24" fill="#f6c74f"/><circle cx="88" cy="67" r="40" fill="rgba(246,199,79,.18)"/>
+            <text x="36" y="337" font-size="16" font-weight="800" fill="#556353" id="envLabel4">Relación sombra / absorción: media</text>
+          </svg>
+        </div>
+      </div>
+      <div class="legend-box">El árbol se sitúa en la trayectoria aparente de los rayos. Puedes comparar sin árboles, con uno o con dos, además del color y la cubierta vegetal.</div>
+    </div>
+    <div class="controls">
+      <div class="card"><h3>Configura</h3><div class="control-row"><div class="control"><label>Color de fachada</label><select id="color4"><option value="claro">Claro</option><option value="oscuro">Oscuro</option></select></div><div class="control"><label>Árboles</label><select id="trees4"><option value="0">Sin árboles</option><option value="1">Un árbol</option><option value="2">Dos árboles</option></select></div></div><div class="control" style="margin-top:10px"><label>Tipo de cubierta</label><select id="roof4"><option value="conv">Cubierta convencional</option><option value="veg">Techo ajardinado / cubierta vegetal</option></select></div></div>
+      <div class="card"><h3>Observa</h3><div class="metric"><span>Absorción solar de fachada</span><span class="pill low" id="absPill4">Menor</span></div><div class="metric"><span>Sombra proyectada</span><span class="pill neutral" id="treePill4">Escasa</span></div><div class="metric"><span>Protección de cubierta</span><span class="pill neutral" id="roofPill4">Convencional</span></div><div class="small-note" id="obs4"></div></div>
+      <div class="card"><h3>Compara A / B</h3><div class="actions"><button class="btn secondary" onclick="saveCompare(4,'A')">Guardar A</button><button class="btn green" onclick="saveCompare(4,'B')">Guardar B</button></div><div class="compare" style="margin-top:8px"><div class="slot" id="c4A"><b>A</b>Sin guardar</div><div class="slot" id="c4B"><b>B</b>Sin guardar</div></div></div>
+    </div>
+  </div>
+  <div class="done"><label><input type="checkbox" class="donebox" data-i="4"> He comparado al menos dos combinaciones distintas.</label><input type="text" id="note4" placeholder="Mi conclusión breve..."></div>
+</section>
+
+<section class="summary" id="summary"><h3>Resumen de tus experimentos</h3><div class="summary-grid" id="summaryGrid"></div><div class="actions" style="margin-top:12px"><button class="btn primary" onclick="downloadReport()">⬇ Descargar informe</button><button class="btn green" onclick="copySummary()">Copiar resumen</button><button class="btn ghost" onclick="resetAll()">Reiniciar laboratorio</button></div><div class="small-note" style="margin-top:9px">El informe recoge las configuraciones probadas, comparaciones A/B y tus conclusiones. Puedes abrirlo e imprimirlo o guardarlo como PDF.</div></section>
+<div class="footer"><b>ODS 13 · Acción por el clima:</b> experimentar ayuda a justificar decisiones que pueden reducir necesidades energéticas y adaptar mejor la vivienda al clima.</div>
+</div>
+<script>
+const qs=s=>document.querySelector(s), qsa=s=>[...document.querySelectorAll(s)];
+qsa('.tab').forEach(b=>b.addEventListener('click',()=>{qsa('.tab').forEach(x=>x.classList.remove('active'));qsa('.panel').forEach(x=>x.classList.remove('active'));b.classList.add('active');qs('#'+b.dataset.tab).classList.add('active')}));
+const compare={1:{},2:{},3:{},4:{}};
+function pill(el,txt,level){el.textContent=txt;el.className='pill '+level}
+function setDisp(id,on){qs(id).style.display=on?'block':'none'}
+function setLine(id,x1,y1,x2,y2,color='#ef9f38'){const e=qs(id);e.setAttribute('x1',x1);e.setAttribute('y1',y1);e.setAttribute('x2',x2);e.setAttribute('y2',y2);e.setAttribute('stroke',color)}
+
+function update1(){
+  const o=qs('#orient').value,t=qs('#time1').value,s=qs('#season1').value,w=+qs('#winSize').value;
+  ['#glassN1','#glassS1','#glassE1','#glassO1'].forEach(id=>qs(id).setAttribute('opacity','.18'));
+  qs('#glass'+o+'1').setAttribute('opacity','1');
+  const sunPlan={manana:[55,205],mediodia:[180,45],tarde:[305,205]};
+  const [px,py]=sunPlan[t];qs('#sunPlan1').setAttribute('cx',px);qs('#sunPlan1').setAttribute('cy',py);qs('#sunPlanGlow1').setAttribute('cx',px);qs('#sunPlanGlow1').setAttribute('cy',py);
+  qs('#timeLabel1').textContent=t==='manana'?'Mañana · Sol al Este':t==='mediodia'?'Mediodía · Sol al Sur':'Tarde · Sol al Oeste';
+  const facadePt={N:[180,88],S:[180,218],E:[245,153],O:[115,153]}[o]; setLine('#planRay1',px,py,facadePt[0],facadePt[1]);
+  const direct=(t==='manana'&&o==='E')||(t==='mediodia'&&o==='S')||(t==='tarde'&&o==='O');
+  const sunY=s==='verano'?58:110; qs('#sunSec1').setAttribute('cy',sunY);qs('#sunSecGlow1').setAttribute('cy',sunY);
+  const secTarget1=s==='verano'?[207,142]:[207,168]; const secTarget2=s==='verano'?[207,165]:[207,195];
+  if(direct){setLine('#secRay1a',62,sunY,secTarget1[0],secTarget1[1]);setLine('#secRay1b',62,sunY,secTarget2[0],secTarget2[1]);setDisp('#lightPatch1',true);qs('#sectionLabel1').textContent='Incidencia directa sobre el vidrio';}
+  else{setLine('#secRay1a',62,sunY,180,82,'#c7b493');setLine('#secRay1b',62,sunY,175,95,'#c7b493');setDisp('#lightPatch1',false);qs('#sectionLabel1').textContent='Sin incidencia directa sobre esta fachada';}
+  const pen=direct?(s==='invierno'?3:2):1; const rad=direct?(w===3?3:2):1;
+  pill(qs('#directPill1'),rad===1?'Baja':rad===2?'Media':'Alta',rad===1?'low':rad===2?'med':'high');
+  pill(qs('#penPill1'),pen===1?'Baja':pen===2?'Media':'Alta',pen===1?'low':pen===2?'med':'high');
+  const hh={1:50,2:72,3:94}[w];qs('#winSec1').setAttribute('height',hh);qs('#winSec1').setAttribute('y',204-hh);
+  qs('#obs1').textContent=direct?(s==='invierno'?'El Sol incide directamente y, al estar más bajo, penetra más hacia el interior.':'El Sol incide directamente, pero en verano su mayor altura reduce la penetración hacia el interior.'):'El Sol está en otra orientación: la fachada seleccionada no recibe radiación directa en este momento.';
+}
+
+function update2(){
+  const s=qs('#season2').value,d=+qs('#depth').value; const sunY=s==='verano'?58:132;qs('#sun2').setAttribute('cy',sunY);qs('#sunGlow2').setAttribute('cy',sunY);qs('#sunContext2').setAttribute('cy',s==='verano'?58:118);
+  const outX=220-d;qs('#awning2').setAttribute('x2',outX);
+  const ext=Math.min(85,d*.7);qs('#contextAwning2').setAttribute('points',`94,180 168,180 ${198-ext},166 ${124-ext},166`);
+  setLine('#contextRay2',62,s==='verano'?58:118,122,188);
+  const thresholds=s==='verano'?[25,50,80]:[70,95,120]; const targets=[[220,142],[220,172],[220,202]]; let blocked=0;
+  ['a','b','c'].forEach((n,i)=>{if(d>=thresholds[i]){blocked++; const bx=Math.max(outX+6,75+i*15); const by=110+i*7; setLine('#ray2'+n,70,sunY,bx,by,'#c15c4a');}else setLine('#ray2'+n,70,sunY,targets[i][0],targets[i][1]);});
+  setDisp('#insideBeam2',blocked<3); qs('#blockedLabel2').textContent=`Rayos bloqueados: ${blocked} / 3`; pill(qs('#blockPill2'),`${blocked} / 3`,blocked===0?'high':blocked===1?'med':'low');pill(qs('#shadePill2'),blocked===0?'Baja':blocked===1?'Media':'Alta',blocked===0?'low':blocked===1?'med':'high');
+  qs('#obs2').textContent=s==='verano'?'Con el Sol alto, el voladizo exterior puede bloquear gran parte de la radiación directa.':'Con el Sol más bajo, hace falta más profundidad para bloquear la misma radiación.';
+}
+
+function update3(){
+  const o=qs('#openings').value,w=qs('#wind').value; const ids=['#rightOpen3','#topOpen3','#cutRightOpen3','#cutTopOpen3'];ids.forEach(id=>setDisp(id,false));setDisp('#leftOpen3',true);setDisp('#cutLeftOpen3',true);
+  ['#flowPlan3a','#flowPlan3b','#flowPlan3c','#flowCut3a','#flowCut3b','#flowCut3c'].forEach(id=>setDisp(id,false));
+  qs('#windText3').textContent=w==='izq'?'Viento desde la izquierda':'Viento desde la derecha';
+  if(o==='una'){
+    setDisp('#flowPlan3a',true);setDisp('#flowCut3a',true); if(w==='der'){qs('#flowPlan3a').setAttribute('d','M320 136 C275 136 245 136 200 136');qs('#flowCut3a').setAttribute('d','M325 170 C270 170 230 170 195 170');}else{qs('#flowPlan3a').setAttribute('d','M40 136 C90 136 120 136 165 136');qs('#flowCut3a').setAttribute('d','M35 170 C95 170 145 170 180 170');}
+    pill(qs('#ventPill3'),'Bajo','low');pill(qs('#flowPill3'),'Muy limitado','neutral');qs('#cutLabel3').textContent='Recorrido muy corto';qs('#obs3').textContent='Una sola abertura permite intercambio de aire, pero no genera un recorrido transversal claro.';
+  }else if(o==='mismo'){
+    setDisp('#topOpen3',true);setDisp('#cutTopOpen3',true);setDisp('#flowPlan3a',true);setDisp('#flowPlan3c',true);setDisp('#flowCut3a',true);setDisp('#flowCut3c',true);
+    if(w==='der'){qs('#flowPlan3a').setAttribute('d','M320 136 C275 136 245 136 200 136');qs('#flowCut3a').setAttribute('d','M325 170 C270 170 230 170 195 170');}else{qs('#flowPlan3a').setAttribute('d','M40 136 C90 136 120 136 165 136');qs('#flowCut3a').setAttribute('d','M35 170 C95 170 145 170 180 170');}
+    pill(qs('#ventPill3'),'Medio','med');pill(qs('#flowPill3'),'Parcial','med');qs('#cutLabel3').textContent='Recorrido parcial';qs('#obs3').textContent='Dos huecos próximos mejoran la renovación, pero gran parte de la vivienda queda fuera del barrido principal.';
+  }else{
+    setDisp('#rightOpen3',true);setDisp('#cutRightOpen3',true);setDisp('#flowPlan3a',true);setDisp('#flowPlan3b',true);setDisp('#flowCut3a',true);setDisp('#flowCut3b',true);
+    if(w==='der'){qs('#flowPlan3a').setAttribute('d','M320 136 C285 136 250 136 200 136');qs('#flowPlan3b').setAttribute('d','M200 136 C160 136 120 136 45 136');qs('#flowCut3a').setAttribute('d','M325 170 C280 170 230 170 180 170');qs('#flowCut3b').setAttribute('d','M180 170 C135 170 95 170 35 170');}
+    else{qs('#flowPlan3a').setAttribute('d','M40 136 C90 136 120 136 165 136');qs('#flowPlan3b').setAttribute('d','M165 136 C205 136 235 136 315 136');qs('#flowCut3a').setAttribute('d','M35 170 C95 170 145 170 180 170');qs('#flowCut3b').setAttribute('d','M180 170 C220 170 258 170 326 170');}
+    pill(qs('#ventPill3'),'Alto','high');pill(qs('#flowPill3'),'Continuo','low');qs('#cutLabel3').textContent='Recorrido transversal';qs('#obs3').textContent='Con aberturas opuestas, el aire puede atravesar una mayor parte de la vivienda.';
+  }
+}
+
+function update4(){
+  const c=qs('#color4').value,trees=+qs('#trees4').value,roof=qs('#roof4').value;qs('#wallFront4').setAttribute('fill',c==='claro'?'#f2eadf':'#72675f');qs('#wallMid4').setAttribute('fill',c==='claro'?'#ead9c1':'#655a53');qs('#wallSide4').setAttribute('fill',c==='claro'?'#e0c6a5':'#5d544d');qs('#roofLeft4').setAttribute('fill',roof==='veg'?'#7f9e69':'#c98558');qs('#roofFront4').setAttribute('fill',roof==='veg'?'#70915e':'#b8744b');qs('#roofSide4').setAttribute('fill',roof==='veg'?'#5e7e50':'#a96947');setDisp('#treeA4',trees>=1);setDisp('#treeB4',trees>=2);const ends=[[265,155],[300,181],[350,215]],block=trees===0?[false,false,false]:trees===1?[true,true,false]:[true,true,true];['a','b','c'].forEach((n,i)=>{if(block[i])setLine('#ray4'+n,88,67,trees===1?170:225,trees===1?(150+i*8):(140+i*18),'#c15c4a');else setLine('#ray4'+n,88,67,ends[i][0],ends[i][1]);});qs('#shadeFront4').setAttribute('rx',trees===0?86:trees===1?110:132);qs('#shadeFront4').setAttribute('fill',trees===0?'rgba(77,100,87,.10)':trees===1?'rgba(77,100,87,.20)':'rgba(77,100,87,.28)');pill(qs('#absPill4'),c==='claro'?'Menor':'Mayor',c==='claro'?'low':'high');pill(qs('#treePill4'),trees===0?'Escasa':trees===1?'Media':'Alta',trees===0?'neutral':trees===1?'med':'low');pill(qs('#roofPill4'),roof==='veg'?'Mayor protección conceptual':'Convencional',roof==='veg'?'low':'neutral');qs('#envLabel4').textContent=`Relación sombra / absorción: ${trees===0?'baja':trees===1?'media':'alta'}`;qs('#obs4').textContent=`El color ${c} modifica la absorción. Con ${trees===0?'ningún árbol':trees===1?'un árbol':'dos árboles'} aumenta el sombreado, y la cubierta ${roof==='veg'?'vegetal aporta protección adicional':'convencional mantiene el comportamiento básico'}.`;
+}
+
+['#orient','#time1','#season1','#winSize'].forEach(id=>qs(id).addEventListener('input',update1));['#season2','#depth'].forEach(id=>qs(id).addEventListener('input',update2));['#openings','#wind'].forEach(id=>qs(id).addEventListener('input',update3));['#color4','#trees4','#roof4'].forEach(id=>qs(id).addEventListener('input',update4));
+function stateText(i){if(i===1)return `${qs('#orient').selectedOptions[0].text} · ${qs('#time1').selectedOptions[0].text} · ${qs('#season1').selectedOptions[0].text} · radiación ${qs('#directPill1').textContent.toLowerCase()}`;if(i===2)return `${qs('#season2').selectedOptions[0].text} · voladizo ${qs('#depth').value} · bloqueados ${qs('#blockPill2').textContent}`;if(i===3)return `${qs('#openings').selectedOptions[0].text} · ${qs('#wind').selectedOptions[0].text} · potencial ${qs('#ventPill3').textContent.toLowerCase()}`;return `${qs('#color4').selectedOptions[0].text} · ${qs('#trees4').selectedOptions[0].text.toLowerCase()} · ${qs('#roof4').selectedOptions[0].text.toLowerCase()}`}
+function saveCompare(i,slot){compare[i][slot]=stateText(i);qs(`#c${i}${slot}`).innerHTML=`<b>${slot}</b>${compare[i][slot]}`;saveLocal()}
+qsa('.donebox').forEach(b=>b.addEventListener('change',updateProgress));qsa('[id^=note]').forEach(n=>n.addEventListener('input',updateProgress));
+function updateProgress(){const d=qsa('.donebox').filter(x=>x.checked).length;qs('#bar').style.width=(d*25)+'%';qs('#prog').textContent=`${d} / 4`;if(d===4){const sg=qs('#summaryGrid');sg.innerHTML='';[1,2,3,4].forEach(i=>{const div=document.createElement('div');div.className='summary-item';div.innerHTML=`<b>Experimento ${i}</b><br>${qs('#note'+i).value||'Sin conclusión escrita'}`;sg.appendChild(div)});qs('#summary').classList.add('show')}else qs('#summary').classList.remove('show');saveLocal()}
+function saveLocal(){localStorage.setItem('labBio4ESO_final',JSON.stringify({done:qsa('.donebox').map(x=>x.checked),notes:[1,2,3,4].map(i=>qs('#note'+i).value),compare}))}
+function loadLocal(){try{const d=JSON.parse(localStorage.getItem('labBio4ESO_final'));if(!d)return;qsa('.donebox').forEach((x,i)=>x.checked=!!d.done[i]);[1,2,3,4].forEach((i,k)=>qs('#note'+i).value=d.notes[k]||'');if(d.compare){[1,2,3,4].forEach(i=>{if(d.compare[i]){compare[i]=d.compare[i];if(d.compare[i].A)qs(`#c${i}A`).innerHTML=`<b>A</b>${d.compare[i].A}`;if(d.compare[i].B)qs(`#c${i}B`).innerHTML=`<b>B</b>${d.compare[i].B}`}})}}catch(e){}updateProgress()}
+function copySummary(){const text=[1,2,3,4].map(i=>`Experimento ${i}: ${qs('#note'+i).value||'Sin conclusión'}`).join('\n');navigator.clipboard?.writeText(text).then(()=>alert('Resumen copiado.'))}
+function escapeHtml(text){return String(text??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]))}
+function downloadReport(){
+  const names=['Sol y orientación','Voladizos y sombra','Ventilación cruzada','Color, vegetación y cubierta'];
+  const done=qsa('.donebox').map(x=>x.checked);
+  const rows=[1,2,3,4].map(i=>{
+    const current=escapeHtml(stateText(i));
+    const a=escapeHtml(compare[i]?.A||'No guardada');
+    const b=escapeHtml(compare[i]?.B||'No guardada');
+    const note=escapeHtml(qs('#note'+i).value||'Sin conclusión escrita');
+    return `<section class="exp"><h2>${i}. ${names[i-1]}</h2><p><b>Estado:</b> ${done[i-1]?'Completado':'Pendiente'}</p><p><b>Configuración actual:</b> ${current}</p><div class="ab"><div><b>Comparación A</b><br>${a}</div><div><b>Comparación B</b><br>${b}</div></div><p class="conclusion"><b>Conclusión del alumnado:</b><br>${note}</p></section>`;
+  }).join('');
+  const completed=done.filter(Boolean).length;
+  const date=new Date().toLocaleString('es-ES');
+  const html=`<!doctype html><html lang="es"><head><meta charset="utf-8"><title>Informe Laboratorio Bioclimático</title><style>
+  body{font-family:Arial,sans-serif;max-width:900px;margin:36px auto;color:#2f312d;line-height:1.45;padding:0 24px}h1{margin-bottom:4px}h2{color:#556b4e;border-bottom:2px solid #dfe8d6;padding-bottom:6px}.meta{background:#f6f1e8;border:1px solid #ddd2c2;padding:12px 15px;border-radius:10px}.exp{margin:26px 0;page-break-inside:avoid}.ab{display:grid;grid-template-columns:1fr 1fr;gap:12px}.ab>div,.conclusion{border:1px solid #ddd2c2;background:#fffaf3;border-radius:9px;padding:12px}.ods{margin-top:28px;background:#eef3e9;border-left:5px solid #7f966c;padding:12px 14px}@media print{body{margin:0;max-width:none}.exp{page-break-inside:avoid}}@media(max-width:620px){.ab{grid-template-columns:1fr}}</style></head><body>
+  <h1>Informe · Laboratorio Bioclimático</h1><p><b>Tecnología · 4.º ESO</b></p>
+  <div class="meta"><p><b>Alumno/a:</b> ____________________________________________</p><p><b>Fecha de descarga:</b> ${escapeHtml(date)}</p><p><b>Progreso:</b> ${completed} / 4 experimentos completados</p></div>
+  ${rows}
+  <div class="ods"><b>ODS 13 · Acción por el clima</b><br>Los ensayos permiten justificar decisiones de diseño que pueden reducir necesidades energéticas y mejorar la adaptación de la vivienda al clima.</div>
+  <p style="margin-top:30px;font-size:.85rem;color:#666">Modelo didáctico cualitativo: no calcula consumos, temperaturas ni certificaciones energéticas reales.</p>
+  </body></html>`;
+  const blob=new Blob([html],{type:'text/html;charset=utf-8'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='Informe_Laboratorio_Bioclimatico.html';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
+}
+function resetAll(){if(!confirm('¿Reiniciar el laboratorio y borrar las conclusiones guardadas en este dispositivo?'))return;localStorage.removeItem('labBio4ESO_final');location.reload()}
+update1();update2();update3();update4();loadLocal();
+</script>
+</body>
+</html>

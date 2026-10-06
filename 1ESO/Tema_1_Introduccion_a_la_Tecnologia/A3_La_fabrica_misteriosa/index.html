@@ -1,0 +1,1230 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>La fábrica misteriosa · 1.º ESO</title>
+<style>
+  :root{
+    --bg:#f5f7fb;
+    --card:#ffffff;
+    --ink:#172033;
+    --muted:#65708a;
+    --line:#dbe1ec;
+    --accent:#2f6fed;
+    --accent-2:#6c4ee3;
+    --ok:#138a5b;
+    --warn:#b96d00;
+    --danger:#c83c3c;
+    --soft:#eef3ff;
+    --shadow:0 10px 30px rgba(24,39,75,.10);
+    --radius:22px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    font-family:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    color:var(--ink);
+    background:
+      radial-gradient(circle at top right, #e7efff 0, transparent 32%),
+      linear-gradient(180deg,#f7f9fd,#eef2f8);
+    min-height:100vh;
+  }
+  button,input,textarea,select{font:inherit}
+  button{touch-action:manipulation}
+  .app{max-width:980px;margin:auto;padding:18px 18px 40px}
+  .topbar{
+    position:sticky; top:0; z-index:20;
+    padding:10px 0 14px;
+    background:linear-gradient(180deg,rgba(245,247,251,.98),rgba(245,247,251,.88),rgba(245,247,251,0));
+    backdrop-filter:blur(8px);
+  }
+  .brand{
+    display:flex;align-items:center;justify-content:space-between;gap:14px;
+    background:rgba(255,255,255,.9); border:1px solid var(--line);
+    border-radius:18px;padding:12px 14px;box-shadow:var(--shadow)
+  }
+  .brand-left{display:flex;align-items:center;gap:12px}
+  .logo{
+    width:48px;height:48px;border-radius:15px;display:grid;place-items:center;
+    background:linear-gradient(135deg,var(--accent),var(--accent-2)); color:white;font-size:26px;
+  }
+  .brand h1{font-size:18px;margin:0}
+  .brand p{margin:3px 0 0;color:var(--muted);font-size:13px}
+  .teacher-btn{
+    border:0;border-radius:12px;padding:10px 12px;background:#111827;color:white;cursor:pointer;
+  }
+  .progress-wrap{margin-top:10px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:9px 12px}
+  .progress-line{height:10px;border-radius:99px;background:#e7ebf2;overflow:hidden}
+  .progress-bar{height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--accent-2));transition:.25s}
+  .progress-meta{display:flex;justify-content:space-between;color:var(--muted);font-size:12px;margin-top:6px}
+
+  .screen{display:none}
+  .screen.active{display:block;animation:fade .25s ease}
+  @keyframes fade{from{opacity:.2;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+  .hero,.card{
+    background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+    box-shadow:var(--shadow)
+  }
+  .hero{padding:26px;margin-top:10px}
+  .hero h2{font-size:30px;margin:0 0 8px}
+  .hero p{color:var(--muted);line-height:1.55}
+  .badge{
+    display:inline-flex;align-items:center;gap:7px;padding:8px 11px;border-radius:999px;
+    background:var(--soft);color:#254aa5;font-size:13px;font-weight:700
+  }
+  .grid-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+  .field label{display:block;font-weight:700;margin:0 0 7px}
+  .field input,.field select{
+    width:100%;padding:14px 15px;border:1px solid var(--line);border-radius:14px;background:white;
+    outline:none;font-size:16px
+  }
+  .field input:focus,.field select:focus{border-color:var(--accent);box-shadow:0 0 0 3px #dfe9ff}
+  .actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+  .btn{
+    border:0;border-radius:14px;padding:13px 17px;font-weight:800;cursor:pointer;min-height:48px
+  }
+  .btn.primary{background:linear-gradient(135deg,var(--accent),var(--accent-2));color:white}
+  .btn.secondary{background:#edf1f7;color:var(--ink)}
+  .btn.ghost{background:white;border:1px solid var(--line);color:var(--ink)}
+  .btn.warn{background:#fff4dd;color:#8a5200}
+  .btn.success{background:#e6f7f0;color:#0a6a43}
+  .btn:disabled{opacity:.45;cursor:not-allowed}
+  .question-card{padding:24px;margin-top:10px}
+  .q-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+  .q-num{font-size:13px;color:var(--muted);font-weight:800;text-transform:uppercase;letter-spacing:.06em}
+  .q-title{font-size:24px;margin:5px 0 6px}
+  .q-text{font-size:17px;line-height:1.55;color:#2d3748}
+  .remember{
+    margin:16px 0;padding:14px 16px;border-radius:15px;background:#f2f6ff;border-left:5px solid var(--accent)
+  }
+  .remember strong{display:block;margin-bottom:3px}
+  .options{display:grid;gap:10px;margin-top:18px}
+  .option{
+    display:flex;align-items:center;gap:12px;text-align:left;width:100%;
+    padding:15px;border:1px solid var(--line);border-radius:15px;background:white;cursor:pointer;
+    transition:.15s;min-height:58px
+  }
+  .option:hover{transform:translateY(-1px);box-shadow:0 5px 15px rgba(0,0,0,.06)}
+  .option.selected{border-color:var(--accent);background:#edf3ff;box-shadow:0 0 0 2px #d7e4ff}
+  .option .ico{font-size:24px;width:30px;text-align:center}
+  .hint-box{
+    display:none;margin-top:12px;padding:13px 15px;border-radius:14px;background:#fff8e9;border:1px solid #f2d49e;color:#6e4b0b
+  }
+  .hint-box.show{display:block}
+  .feedback-mini{font-size:13px;color:var(--muted);margin-top:9px}
+  .multi-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:16px}
+  .mini-card{
+    border:1px solid var(--line);background:white;border-radius:16px;padding:14px;cursor:pointer;
+  }
+  .mini-card.selected{border-color:var(--accent);background:#eef4ff}
+  .mini-card strong{display:block;margin-bottom:3px}
+  .statement{padding:15px;border:1px solid var(--line);border-radius:15px;margin-top:10px}
+  .statement p{margin:0 0 10px}
+  .tf-row{display:flex;gap:8px}
+  .tf-row button{flex:1}
+  textarea{
+    width:100%;min-height:120px;border:1px solid var(--line);border-radius:14px;padding:14px;resize:vertical
+  }
+  .summary{padding:26px}
+  .summary h2{font-size:28px;margin-top:0}
+  .summary-box{
+    padding:16px;border:1px solid var(--line);border-radius:16px;background:#fbfcff;margin-top:12px
+  }
+  .summary-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:14px}
+  .metric{padding:14px;border-radius:14px;background:#f3f6fb;text-align:center}
+  .metric strong{display:block;font-size:22px}
+  .metric span{font-size:12px;color:var(--muted)}
+  .hidden-score{font-weight:800;color:#34415c}
+  .footer-note{color:var(--muted);font-size:12px;margin-top:18px}
+  .modal{
+    position:fixed;inset:0;background:rgba(15,23,42,.58);display:none;align-items:center;justify-content:center;
+    padding:16px;z-index:50
+  }
+  .modal.show{display:flex}
+  .modal-card{
+    width:min(760px,100%);max-height:88vh;overflow:auto;background:white;border-radius:22px;padding:22px;
+    box-shadow:0 25px 80px rgba(0,0,0,.25)
+  }
+  .modal-head{display:flex;align-items:center;justify-content:space-between;gap:12px}
+  .close{border:0;background:#eef1f6;width:40px;height:40px;border-radius:12px;cursor:pointer}
+  .teacher-score{font-size:42px;font-weight:900;margin:10px 0}
+  table{width:100%;border-collapse:collapse;font-size:14px}
+  th,td{padding:10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+  th{background:#f6f8fc;position:sticky;top:0}
+  .pill{display:inline-block;padding:4px 8px;border-radius:999px;font-size:12px;font-weight:800}
+  .pill.ok{background:#e7f7ef;color:#087247}
+  .pill.bad{background:#fdeaea;color:#a52727}
+  .pill.hint{background:#fff3d9;color:#875500}
+  .print-sheet{display:none}
+  .small{font-size:12px;color:var(--muted)}
+  .result-message{
+    padding:14px;border-radius:15px;background:#edf7ff;border:1px solid #cfe9ff;margin-top:14px
+  }
+
+  @media (max-width:720px){
+    .app{padding:10px 10px 30px}
+    .brand{align-items:flex-start}
+    .brand h1{font-size:16px}
+    .grid-2,.multi-grid,.summary-grid{grid-template-columns:1fr}
+    .hero{padding:20px}
+    .hero h2{font-size:25px}
+    .question-card{padding:19px}
+    .q-title{font-size:21px}
+    .teacher-btn{font-size:12px;padding:9px}
+  }
+
+  @media print{
+    body{background:white}
+    .app,.modal{display:none!important}
+    .print-sheet{display:block!important;padding:18mm;font-family:Arial,sans-serif;color:#111}
+    .print-sheet h1{margin-top:0}
+    .print-sheet .p-card{border:1px solid #bbb;border-radius:10px;padding:12px;margin:10px 0}
+    .print-sheet table{font-size:12px}
+  }
+
+  .pdi-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:14px 0}
+  .pdi-step{border:1px solid var(--line);border-radius:16px;padding:12px;background:#fff;text-align:center}
+  .pdi-step.active{border-color:var(--accent);background:#eef3ff}
+  .pdi-step.done{background:#edf9f1;border-color:#b9dfc5}
+  .pdi-step strong{display:block;margin-bottom:3px}
+  .check-row{display:flex;align-items:flex-start;gap:10px;padding:12px;border:1px solid var(--line);border-radius:14px;background:#fff;margin-top:14px}
+  .check-row input{width:22px;height:22px;margin-top:1px;flex:0 0 auto}
+  .feedback-box{display:none;margin-top:14px;padding:14px 16px;border-radius:16px;font-weight:700}
+  .feedback-box.show{display:block}
+  .feedback-box.good{background:#eaf8ef;color:#155d32;border:1px solid #bfe4cc}
+  .feedback-box.try{background:#fff4dd;color:#805400;border:1px solid #f2d28a}
+  .score-chip{display:inline-flex;align-items:center;gap:7px;border-radius:999px;padding:7px 10px;background:#f1f5f9;color:#334155;font-size:12px;font-weight:800}
+  .linked-sheet{border:1px dashed #90a4c4;background:#f7faff;border-radius:16px;padding:14px;margin-top:14px}
+  @media(max-width:650px){.pdi-strip{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="topbar">
+    <div class="brand">
+      <div class="brand-left">
+        <div class="logo">🏭</div>
+        <div>
+          <h1>La fábrica misteriosa</h1>
+          <p>1.º ESO · Tecnología y Digitalización</p>
+        </div>
+      </div>
+      <button class="teacher-btn" id="teacherOpen">Modo docente</button>
+    </div>
+    <div class="progress-wrap">
+      <div class="progress-line"><div class="progress-bar" id="progressBar"></div></div>
+      <div class="progress-meta"><span id="progressText">Inicio</span><span id="timerTop">⏱ 00:00</span><span id="hintCountTop">Pistas: 0</span></div>
+    </div>
+  </div>
+
+  <section class="screen active" id="screen-start">
+    <div class="hero">
+      <span class="badge">🏭 PDI · TEMA 1 · BLOQUE 3</span>
+      <h2>A3 · La fábrica misteriosa</h2>
+      <p>Supera <strong>7 retos</strong> para descubrir cómo se fabrican los productos, diferenciar artesanía e industria y reconocer qué recursos hacen falta para fabricar bien.</p>
+
+      <div class="pdi-strip">
+        <div class="pdi-step done"><strong>1 · Presentación</strong><span>Artesanía, industria y fabricación</span></div>
+        <div class="pdi-step active"><strong>2 · A3 interactiva</strong><span>La fábrica misteriosa</span></div>
+        <div class="pdi-step"><strong>3 · Ficha única del Tema 1</strong><span>Se completará al final del Tema 1</span></div>
+      </div>
+
+      <div class="remember">
+        <strong>🧠 Recuerda</strong>
+        Para fabricar necesitamos materiales, herramientas o máquinas, trabajo humano y organización.
+      </div>
+
+      <div class="grid-2">
+        <div class="field">
+          <label for="studentName">Nombre y apellidos *</label>
+          <input id="studentName" autocomplete="name" placeholder="Escribe tu nombre" />
+        </div>
+        <div class="field">
+          <label for="studentGroup">Clase *</label>
+          <select id="studentGroup">
+            <option value="">Selecciona tu clase</option>
+            <option value="1ºA">1.º A</option><option value="1ºB">1.º B</option>
+            <option value="1ºC">1.º C</option><option value="1ºD">1.º D</option>
+            <option value="1ºE">1.º E</option><option value="1ºF">1.º F</option>
+            <option value="1ºG">1.º G</option><option value="1ºH">1.º H</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="grid-2" style="margin-top:14px">
+        <div class="field">
+          <label for="studentDate">Fecha</label>
+          <input id="studentDate" type="date" />
+        </div>
+        <div class="field">
+          <label for="studentCode">Código de clase (opcional)</label>
+          <input id="studentCode" placeholder="Ej.: T1-A3" />
+        </div>
+      </div>
+
+      <label class="check-row">
+        <input id="sheetConfirm" type="checkbox" checked disabled />
+        <span><strong>Esta actividad forma parte de la ficha única del Tema 1.</strong><br>
+        <span class="small">No necesitas una ficha nueva para A3. La ficha global se completará al final del tema.</span></span>
+      </label>
+
+      <div class="linked-sheet">
+        <strong>🎯 Cómo se puntúan los retos</strong>
+        <p class="small" style="margin-bottom:0">Comprueba tu respuesta. Si aciertas a la primera obtienes la puntuación completa; si necesitas nuevos intentos, podrás corregir y aprender, pero la puntuación máxima de ese reto será menor. Usar una pista queda registrado y aplica una pequeña reducción al reto.</p>
+      </div>
+
+      <div class="actions">
+        <button class="btn primary" id="startBtn">Comenzar misión</button>
+        <button class="btn ghost" id="resetAttemptBtn">🔐 Reinicio docente</button>
+      </div>
+      <p class="footer-note">El progreso se guarda en este navegador para poder continuar si la actividad se interrumpe. Los resultados del modo docente son locales a este dispositivo.</p>
+    </div>
+  </section>
+
+  <section class="screen" id="screen-questions">
+    <div class="card question-card" id="questionCard"></div>
+  </section>
+
+  <section class="screen" id="screen-end">
+    <div class="card summary">
+      <span class="badge">✅ A3 COMPLETADA · CONTINÚA CON EL TEMA 1</span>
+      <h2>Misión terminada</h2>
+      <p>Has terminado la actividad A3. Esta actividad forma parte del recorrido del <strong>Tema 1</strong> y aportará aprendizajes para la ficha única final.</p>
+
+      <div class="pdi-strip">
+        <div class="pdi-step done"><strong>1 · Presentación</strong><span>Completada</span></div>
+        <div class="pdi-step done"><strong>2 · A3 interactiva</strong><span>Completada</span></div>
+        <div class="pdi-step"><strong>3 · Ficha única del Tema 1</strong><span>Se completará al final</span></div>
+      </div>
+
+      <div class="summary-box">
+        <strong id="endStudent"></strong>
+        <div class="summary-grid">
+          <div class="metric"><strong id="endAnswered">0</strong><span>Retos superados</span></div>
+          <div class="metric"><strong id="endHints">0</strong><span>Pistas utilizadas</span></div>
+          <div class="metric"><strong id="endScore">—</strong><span>Nota A3 / 10</span></div>
+        </div>
+      </div>
+
+      <div class="remember">
+        <strong>🧠 Lo que debes llevarte</strong>
+        1) Artesanía e industria son formas diferentes de fabricar. ·
+        2) Para fabricar hacen falta materiales, herramientas o máquinas, personas y organización. ·
+        3) Organizar bien el trabajo evita errores, repeticiones y pérdidas de tiempo.
+      </div>
+
+      <div class="summary-box">
+        <h3>🪞 Autoevaluación</h3>
+        <p>¿Cómo te encuentras después de la actividad?</p>
+        <div class="options" id="selfEvalOptions">
+          <button class="option" data-self="Lo entiendo bien"><span class="ico">🙂</span><span><strong>Lo entiendo bien</strong></span></button>
+          <button class="option" data-self="Tengo alguna duda"><span class="ico">😐</span><span><strong>Tengo alguna duda</strong></span></button>
+          <button class="option" data-self="Necesito repasarlo"><span class="ico">🆘</span><span><strong>Necesito repasarlo</strong></span></button>
+        </div>
+        <div class="field" style="margin-top:14px">
+          <label for="reflection">¿Qué idea te parece más importante después de esta actividad?</label>
+          <textarea id="reflection" placeholder="Escribe una o dos frases..."></textarea>
+        </div>
+      </div>
+
+      <div class="result-message">
+        <strong>Resultado de la A3: <span id="visibleScore">—</span> / 10.</strong><br>
+        <strong>Ficha única del Tema 1:</strong> se completará al finalizar el tema. Esta A3 aporta evidencias y conceptos para esa ficha global.
+      </div>
+
+      <div class="actions">
+        <button class="btn primary" id="savePdfBtn">Guardar / imprimir en PDF</button>
+        <button class="btn secondary" id="savePngBtn">Guardar como imagen PNG</button>
+        <button class="btn success" id="finalizeBtn">Finalizar y guardar A3</button>
+      </div>
+      <p class="footer-note" id="finalizeNote">Después de guardar, continúa con el siguiente bloque del Tema 1.</p>
+    </div>
+  </section>
+</div>
+
+<div class="modal" id="teacherModal" aria-hidden="true">
+  <div class="modal-card">
+    <div class="modal-head">
+      <div>
+        <span class="badge">🔐 MODO DOCENTE LOCAL</span>
+        <h2 style="margin:10px 0 0">Resultados de A3 · La fábrica misteriosa</h2>
+      </div>
+      <button class="close" id="teacherClose">✕</button>
+    </div>
+
+    <div id="teacherLock">
+      <p class="small">Introduce la clave docente configurada para este dispositivo.</p>
+      <div class="field">
+        <label for="teacherPin">Clave docente</label>
+        <input id="teacherPin" type="password" inputmode="numeric" placeholder="••••" />
+      </div>
+      <div class="actions">
+        <button class="btn primary" id="teacherUnlock">Abrir resultados</button>
+      </div>
+    </div>
+
+    <div id="teacherPanel" style="display:none">
+      <div class="summary-grid">
+        <div class="metric"><strong id="classCount">0</strong><span>Alumnos guardados</span></div>
+        <div class="metric"><strong id="classAverage">—</strong><span>Nota media</span></div>
+        <div class="metric"><strong id="classHints">0</strong><span>Pistas totales</span></div>
+      </div>
+
+      <div class="field" style="margin-top:16px">
+        <label for="teacherGroupFilter">Ver grupo</label>
+        <select id="teacherGroupFilter">
+          <option value="ALL">Todos los grupos</option>
+          <option value="1ºA">1.º A</option><option value="1ºB">1.º B</option>
+          <option value="1ºC">1.º C</option><option value="1ºD">1.º D</option>
+          <option value="1ºE">1.º E</option><option value="1ºF">1.º F</option>
+          <option value="1ºG">1.º G</option><option value="1ºH">1.º H</option>
+        </select>
+      </div>
+
+      <h3>Resultados guardados</h3>
+      <div style="overflow:auto;max-height:330px">
+        <table>
+          <thead><tr><th>Alumno</th><th>Grupo</th><th>Nota</th><th>Puntos</th><th>Pistas</th><th>Tiempo</th><th></th></tr></thead>
+          <tbody id="classResultsTable"></tbody>
+        </table>
+      </div>
+
+      <div id="studentDetailBlock" style="display:none;margin-top:18px">
+        <h3 id="studentDetailTitle">Detalle</h3>
+        <div class="teacher-score" id="teacherScore">—</div>
+        <div class="summary-grid">
+          <div class="metric"><strong id="teacherCorrect">0</strong><span>Puntos</span></div>
+          <div class="metric"><strong id="teacherHints">0</strong><span>Pistas</span></div>
+          <div class="metric"><strong id="teacherTime">0 min</strong><span>Tiempo</span></div>
+        </div>
+        <div style="overflow:auto;max-height:350px;margin-top:12px">
+          <table>
+            <thead><tr><th>#</th><th>Pregunta</th><th>Respuesta del alumno</th><th>Resultado</th><th>Pista</th></tr></thead>
+            <tbody id="teacherTable"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button class="btn secondary" id="teacherExcelBtn">Descargar Excel por grupos</button>
+        <button class="btn secondary" id="teacherPdfBtn">Guardar informe PDF</button>
+        <button class="btn ghost" id="changePinBtn">Cambiar contraseña</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="print-sheet" id="printSheet"></div>
+
+<script>
+const DEFAULT_TEACHER_PIN = "2468";
+const APP_ID = "A3_FABRICA_MISTERIOSA_PDI";
+const APP_TITLE = "A3 · La fábrica misteriosa";
+
+const state = {
+  student:{name:"",group:"",date:"",code:""},
+  index:0,
+  answers:{},
+  hints:{},
+  attempts:{},
+  awarded:{},
+  passed:{},
+  optionOrders:{},
+  startedAt:null,
+  finishedAt:null,
+  selfEval:"",
+  reflection:"",
+  finalized:false,
+  timerHandle:null
+};
+
+const questions = [
+  {
+    id:"q1", title:"¿Artesanía o industria?",
+    text:"Una persona fabrica a mano una vasija de barro y realiza casi todo el proceso. ¿Qué tipo de producción representa mejor?",
+    type:"single",
+    options:[
+      ["👐","Artesanía"],
+      ["🏭","Industria"],
+      ["💻","Digitalización"],
+      ["⚡","Electricidad"]
+    ],
+    correct:0,
+    hint:"Piensa en una producción manual o con herramientas sencillas realizada principalmente por una persona."
+  },
+  {
+    id:"q2", title:"Producción en gran cantidad",
+    text:"Una fábrica produce cientos de electrodomésticos muy parecidos utilizando máquinas y muchas personas. ¿Qué tipo de producción es?",
+    type:"single",
+    options:[
+      ["👐","Artesanía"],
+      ["🏭","Industria"],
+      ["🎨","Diseño artístico"],
+      ["🔬","Ciencia"]
+    ],
+    correct:1,
+    hint:"Busca el sistema que permite fabricar muchas unidades similares."
+  },
+  {
+    id:"q3", title:"Compara los dos sistemas",
+    text:"¿Cuál de estas afirmaciones distingue mejor artesanía e industria?",
+    type:"single",
+    options:[
+      ["⚖️","La artesanía suele ser más manual y lenta; la industria usa más máquinas y produce muchas unidades similares"],
+      ["🔄","Artesanía e industria son exactamente lo mismo"],
+      ["👐","La industria siempre fabrica productos únicos"],
+      ["🏭","La artesanía siempre necesita grandes fábricas"]
+    ],
+    correct:0,
+    hint:"Fíjate en cómo se produce, cuántas personas intervienen y cuántas unidades se fabrican."
+  },
+  {
+    id:"q4", title:"Los cuatro elementos",
+    text:"¿Qué combinación recoge correctamente lo necesario para fabricar un producto?",
+    type:"single",
+    options:[
+      ["🧩","Materiales + herramientas o máquinas + trabajo humano + organización"],
+      ["📱","Internet + electricidad + móvil + ordenador"],
+      ["🚚","Tienda + cliente + publicidad + precio"],
+      ["🎨","Color + forma + música + decoración"]
+    ],
+    correct:0,
+    hint:"Piensa en aquello con lo que fabricamos, con qué lo hacemos, quién trabaja y cómo se organiza el proceso."
+  },
+  {
+    id:"q5", title:"¿Qué está fallando?",
+    text:"Tenemos materiales, herramientas y personas, pero nadie sabe qué tarea debe hacer ni en qué orden. ¿Qué falta?",
+    type:"single",
+    options:[
+      ["📋","Organización"],
+      ["🪵","Materiales"],
+      ["🔨","Herramientas"],
+      ["👷","Trabajo humano"]
+    ],
+    correct:0,
+    hint:"Fabricar bien también exige decidir quién hace qué y en qué orden."
+  },
+  {
+    id:"q6", title:"Caso de fabricación",
+    text:"Para construir una pequeña caja de madera, ¿qué opción identifica correctamente cada elemento?",
+    type:"single",
+    options:[
+      ["🪵","Madera = material · martillo = herramienta · persona = trabajo humano · orden de montaje = organización"],
+      ["🔨","Martillo = material · madera = herramienta · persona = organización"],
+      ["👷","Persona = material · madera = trabajo humano · martillo = organización"],
+      ["📦","Caja terminada = herramienta · madera = organización"]
+    ],
+    correct:0,
+    hint:"Clasifica cada elemento según su función dentro del proceso de fabricación."
+  },
+  {
+    id:"q7", title:"Reto final · Organiza la fábrica",
+    text:"Una pequeña fábrica pierde tiempo porque dos personas hacen la misma tarea mientras otras tareas quedan sin hacer. ¿Qué medida mejoraría más el proceso?",
+    type:"single",
+    options:[
+      ["🗂️","Repartir y ordenar las tareas antes de comenzar"],
+      ["🔨","Comprar más herramientas aunque no sean necesarias"],
+      ["📦","Usar más material del necesario"],
+      ["🏃","Trabajar más rápido sin cambiar la organización"]
+    ],
+    correct:0,
+    hint:"El problema no es la cantidad de herramientas ni de material, sino cómo se organiza el trabajo."
+  }
+];
+
+const $ = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
+
+function shuffledIndexes(n){
+  const a=Array.from({length:n},(_,i)=>i);
+  for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}
+  return a;
+}
+function init(){
+  const today = new Date();
+  const local = new Date(today.getTime()-today.getTimezoneOffset()*60000).toISOString().slice(0,10);
+  $("#studentDate").value = local;
+  questions.forEach(q=>{ state.optionOrders[q.id]=shuffledIndexes(q.options.length); });
+  updateProgress();
+}
+init();
+
+function draftKey(name,group){
+  return APP_ID+"_draft_"+normalizeStudentKey(name)+"__"+String(group||"");
+}
+function saveDraft(){
+  if(!state.student.name || state.finalized) return;
+  const payload={
+    student:state.student,index:state.index,answers:state.answers,hints:state.hints,
+    attempts:state.attempts,awarded:state.awarded,passed:state.passed,
+    optionOrders:state.optionOrders,startedAt:state.startedAt,selfEval:state.selfEval,
+    reflection:state.reflection,finalized:false
+  };
+  localStorage.setItem(draftKey(state.student.name,state.student.group),JSON.stringify(payload));
+}
+function loadDraft(name,group){
+  try{
+    const raw=localStorage.getItem(draftKey(name,group));
+    return raw?JSON.parse(raw):null;
+  }catch(e){return null;}
+}
+function clearDraft(name,group){
+  localStorage.removeItem(draftKey(name,group));
+}
+
+function getTeacherPin(){
+  return localStorage.getItem(APP_ID+"_teacher_pin") || DEFAULT_TEACHER_PIN;
+}
+function normalizeStudentKey(name){
+  return String(name||"").trim().toLowerCase()
+    .normalize("NFD").replace(/[\u0300-\u036f]/g,"")
+    .replace(/[^a-z0-9]+/g,"_");
+}
+function attemptKey(name,group){
+  return APP_ID+"_attempt_"+normalizeStudentKey(name)+"__"+String(group||"");
+}
+function hasCompletedAttempt(name){
+  try{
+    const raw = localStorage.getItem(attemptKey(name, $("#studentGroup")?.value || state.student.group));
+    if(!raw) return false;
+    const data = JSON.parse(raw);
+    return !!data.finalized;
+  }catch(e){ return false; }
+}
+function saveCompletedAttempt(){
+  const payload = resultPayload();
+  payload.finalized = true;
+  payload.finalizedAt = new Date().toISOString();
+  localStorage.setItem(attemptKey(state.student.name,state.student.group), JSON.stringify(payload));
+  state.finalized = true;
+}
+function resultsKey(){
+  return APP_ID+"_all_results";
+}
+function loadAllResults(){
+  try{
+    const raw = localStorage.getItem(resultsKey());
+    const arr = raw ? JSON.parse(raw) : [];
+    return Array.isArray(arr) ? arr : [];
+  }catch(e){ return []; }
+}
+function saveResultToClassHistory(payload){
+  const all = loadAllResults();
+  const key = normalizeStudentKey(payload.student.name)+"__"+String(payload.student.group||"");
+  const idx = all.findIndex(r => normalizeStudentKey(r.student?.name)+"__"+String(r.student?.group||"") === key);
+  if(idx>=0) all[idx] = payload; else all.push(payload);
+  localStorage.setItem(resultsKey(), JSON.stringify(all));
+}
+
+function startTimer(){
+  if(state.timerHandle) clearInterval(state.timerHandle);
+  const paint=()=>{
+    if(!state.startedAt) return;
+    const end = state.finishedAt || Date.now();
+    const sec = Math.max(0, Math.floor((end-state.startedAt)/1000));
+    const mm = String(Math.floor(sec/60)).padStart(2,"0");
+    const ss = String(sec%60).padStart(2,"0");
+    $("#timerTop").textContent = `⏱ ${mm}:${ss}`;
+  };
+  paint();
+  state.timerHandle = setInterval(paint,1000);
+}
+function stopTimer(){
+  if(state.timerHandle){ clearInterval(state.timerHandle); state.timerHandle=null; }
+}
+
+function showScreen(id){
+  $$(".screen").forEach(x=>x.classList.remove("active"));
+  $("#"+id).classList.add("active");
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+$("#startBtn").addEventListener("click", ()=>{
+  const name = $("#studentName").value.trim();
+  const group = $("#studentGroup").value;
+  if(!name){ alert("Escribe tu nombre y apellidos antes de comenzar."); return; }
+  if(!group){ alert("Selecciona tu clase antes de comenzar."); return; }
+  
+  if(hasCompletedAttempt(name)){
+    alert("Esta A1 ya figura como finalizada con este nombre y grupo en este dispositivo. Si necesitas repetirla, debe autorizarlo el profesor.");
+    return;
+  }
+  const draft=loadDraft(name,group);
+  state.student={name,group,date:$("#studentDate").value,code:$("#studentCode").value.trim()};
+  if(draft && confirm("Hay una A1 sin finalizar guardada para este alumno/a. ¿Quieres continuar donde se quedó?")){
+    state.student=draft.student||state.student;
+    state.index=Number(draft.index||0);
+    state.answers=draft.answers||{};
+    state.hints=draft.hints||{};
+    state.attempts=draft.attempts||{};
+    state.awarded=draft.awarded||{};
+    state.passed=draft.passed||{};
+    state.optionOrders=draft.optionOrders||state.optionOrders;
+    state.startedAt=draft.startedAt||Date.now();
+    state.selfEval=draft.selfEval||"";
+    state.reflection=draft.reflection||"";
+  }else{
+    state.index=0; state.answers={}; state.hints={}; state.attempts={}; state.awarded={}; state.passed={};
+    questions.forEach(q=>{state.optionOrders[q.id]=shuffledIndexes(q.options.length);});
+    state.startedAt=Date.now();
+  }
+  state.finishedAt=null;
+  startTimer();
+  renderQuestion();
+  showScreen("screen-questions");
+  saveDraft();
+});
+
+$("#resetAttemptBtn").addEventListener("click",()=>{
+  const name=$("#studentName").value.trim();
+  const group=$("#studentGroup").value;
+  if(!name || !group){alert("Escribe primero el nombre y selecciona el grupo del alumno/a.");return;}
+  const pin=prompt("Clave docente para autorizar el reinicio:");
+  if(pin===null) return;
+  if(pin!==getTeacherPin()){alert("Clave incorrecta.");return;}
+  localStorage.removeItem(attemptKey(name,group));
+  clearDraft(name,group);
+  const all=loadAllResults();
+  const key=normalizeStudentKey(name)+"__"+String(group);
+  localStorage.setItem(resultsKey(),JSON.stringify(all.filter(r=>normalizeStudentKey(r.student?.name)+"__"+String(r.student?.group||"")!==key)));
+  alert("Intento reiniciado para este alumno/a y grupo en este dispositivo.");
+});
+
+function renderQuestion(){
+  const q=questions[state.index];
+  const wrap=$("#questionCard");
+  const answered=state.answers[q.id];
+  const passed=!!state.passed[q.id];
+  const attempts=Number(state.attempts[q.id]||0);
+  const awarded=state.awarded[q.id];
+
+  let html=`
+    <div class="q-head">
+      <div>
+        <div class="q-num">Reto ${state.index+1} de ${questions.length}</div>
+        <h2 class="q-title">${q.title}</h2>
+      </div>
+      <span class="score-chip">${passed ? "✓ Superado" : `Intentos: ${attempts}`}</span>
+    </div>
+    <p class="q-text">${q.text}</p>
+    <div class="options">`;
+
+  const order=state.optionOrders[q.id]||q.options.map((_,i)=>i);
+  order.forEach(idx=>{
+    const o=q.options[idx];
+    const sel=answered===idx?"selected":"";
+    html+=`<button class="option ${sel}" data-opt="${idx}" ${passed?"disabled":""}>
+      <span class="ico">${o[0]}</span><span>${o[1]}</span>
+    </button>`;
+  });
+  html+=`</div>`;
+
+  const used=!!state.hints[q.id];
+  const fb=passed
+    ? `<div class="feedback-box show good">✅ ¡Reto superado! Puntuación conseguida en este reto: ${Number(awarded||0).toFixed(2).replace(".",",")} / 1.</div>`
+    : attempts>0
+      ? `<div class="feedback-box show try">🔁 Esa respuesta no era correcta. Revisa la pista o vuelve a pensarlo y prueba otra vez. Puedes aprender y corregir, aunque la puntuación máxima del reto ya es menor.</div>`
+      : `<div class="feedback-box"></div>`;
+
+  html+=`
+    ${fb}
+    <div class="actions">
+      <button class="btn warn" id="hintBtn" ${passed?"disabled":""}>💡 ${used?"Pista utilizada":"Necesito una pista"}</button>
+      <button class="btn primary" id="checkBtn" ${passed||!Number.isInteger(answered)?"disabled":""}>Comprobar respuesta</button>
+    </div>
+    <div class="hint-box ${used?"show":""}" id="hintBox"><strong>Pista:</strong> ${q.hint}</div>
+    <div class="actions">
+      <button class="btn ghost" id="prevBtn" ${state.index===0?"disabled":""}>← Anterior</button>
+      <button class="btn primary" id="nextBtn" ${!passed?"disabled":""}>${state.index===questions.length-1?"Terminar A1":"Siguiente reto →"}</button>
+    </div>
+    <div class="feedback-mini">La primera respuesta correcta fija la puntuación del reto. Después puedes consultar los retos anteriores, pero no cambiar su resultado.</div>
+  `;
+  wrap.innerHTML=html;
+
+  wrap.querySelectorAll("[data-opt]").forEach(btn=>{
+    btn.addEventListener("click",()=>{
+      if(state.passed[q.id]) return;
+      state.answers[q.id]=Number(btn.dataset.opt);
+      saveDraft(); renderQuestion(); updateProgress();
+    });
+  });
+
+  $("#hintBtn").addEventListener("click",()=>{
+    if(state.passed[q.id]) return;
+    state.hints[q.id]=true;
+    saveDraft(); renderQuestion(); updateProgress();
+  });
+
+  $("#checkBtn").addEventListener("click",()=>{
+    if(!Number.isInteger(state.answers[q.id])){alert("Selecciona una respuesta.");return;}
+    state.attempts[q.id]=Number(state.attempts[q.id]||0)+1;
+    if(state.answers[q.id]===q.correct){
+      const n=state.attempts[q.id];
+      let pts=n===1?1:(n===2?0.75:0.5);
+      if(state.hints[q.id]) pts*=0.85;
+      state.awarded[q.id]=Math.round(pts*100)/100;
+      state.passed[q.id]=true;
+    }
+    saveDraft(); renderQuestion(); updateProgress();
+    if($("#teacherPanel").style.display==="block") renderTeacherDashboard();
+  });
+
+  $("#prevBtn").addEventListener("click",()=>{
+    if(state.index>0){state.index--;saveDraft();renderQuestion();updateProgress();}
+  });
+  $("#nextBtn").addEventListener("click",()=>{
+    if(!state.passed[q.id]){alert("Debes superar este reto antes de continuar.");return;}
+    if(state.index<questions.length-1){state.index++;saveDraft();renderQuestion();updateProgress();}
+    else finishActivity();
+  });
+
+  updateProgress();
+}
+
+function isAnswered(q){ return !!state.passed[q.id]; }
+
+function updateProgress(){
+  const done=questions.filter(isAnswered).length;
+  const pct=Math.round(done/questions.length*100);
+  $("#progressBar").style.width=pct+"%";
+  $("#progressText").textContent=done===0?"Inicio":`${done} de ${questions.length} retos`;
+  $("#hintCountTop").textContent="Pistas: "+Object.keys(state.hints).length;
+}
+
+function scoreActivity(){
+  const details=questions.map((q,idx)=>{
+    const pts=Number(state.awarded[q.id]||0);
+    return {
+      index:idx+1,id:q.id,title:q.title,correct:!!state.passed[q.id],
+      earned:pts,possible:1,hint:!!state.hints[q.id],answer:state.answers[q.id],
+      attempts:Number(state.attempts[q.id]||0)
+    };
+  });
+  const earned=details.reduce((s,d)=>s+d.earned,0);
+  const score=Math.round((earned/questions.length*10)*100)/100;
+  return {score,correctCount:Math.round(earned*100)/100,totalUnits:questions.length,details};
+}
+function finishActivity(){
+  state.finishedAt=Date.now();
+  stopTimer();
+  showScreen("screen-end");
+  $("#endStudent").textContent = `${state.student.name}${state.student.group ? " · "+state.student.group : ""}`;
+  $("#endAnswered").textContent = questions.filter(isAnswered).length;
+  const r=scoreActivity();
+  $("#endScore").textContent = r.score.toFixed(2).replace(".",",");
+  $("#visibleScore").textContent = r.score.toFixed(2).replace(".",",");
+  saveDraft();
+  $("#endHints").textContent = Object.keys(state.hints).length;
+  $("#progressBar").style.width="100%";
+  $("#progressText").textContent="Completada";
+  if($("#teacherPanel").style.display==="block") renderTeacherDashboard();
+}
+
+$$("[data-self]").forEach(btn=>{
+  btn.addEventListener("click",()=>{
+    state.selfEval=btn.dataset.self;
+    $$("#selfEvalOptions .option").forEach(b=>b.classList.remove("selected"));
+    btn.classList.add("selected");
+    if($("#teacherPanel").style.display==="block") renderTeacherDashboard();
+  });
+});
+
+$("#reflection").addEventListener("input",e=>{state.reflection=e.target.value; if($("#teacherPanel").style.display==="block") renderTeacherDashboard();});
+
+function resultPayload(){
+  state.reflection=$("#reflection").value.trim();
+  const result=scoreActivity();
+  const elapsed = state.startedAt && state.finishedAt ? Math.max(1,Math.round((state.finishedAt-state.startedAt)/60000)) : 0;
+  return {
+    schema:"gdactividad-v1",
+    appId:APP_ID,
+    appTitle:APP_TITLE,
+    subject:"Tecnología y Digitalización",
+    level:"1.º ESO",
+    student:state.student,
+    completedAt:new Date(state.finishedAt||Date.now()).toISOString(),
+    elapsedMinutes:elapsed,
+    score:result.score,
+    scoreScale:10,
+    linkedSheet:"Ficha única del Tema 1 (global)",
+    scoringMethod:"1er acierto: 100%; 2º: 75%; 3º o posteriores: 50%; pista: -15% sobre el reto",
+    earnedUnits:result.correctCount,
+    totalUnits:result.totalUnits,
+    hintsUsed:Object.keys(state.hints).length,
+    hintQuestionIds:Object.keys(state.hints),
+    selfEvaluation:state.selfEval,
+    reflection:state.reflection,
+    details:result.details
+  };
+}
+
+function slug(s){
+  return s.normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-zA-Z0-9]+/g,"_").replace(/^_+|_+$/g,"");
+}
+
+function buildPrintSheet(includeTeacher=false){
+  const data=resultPayload();
+  const rows=data.details.map(d=>`
+    <tr><td>${d.index}</td><td>${d.title}</td><td>${d.attempts}</td>
+    <td>${Number(d.earned||0).toFixed(2).replace(".",",")} / 1</td><td>${d.hint?"Sí":"No"}</td></tr>`).join("");
+
+  $("#printSheet").innerHTML=`
+    <h1>🏭 A3 · La fábrica misteriosa</h1>
+    <div class="p-card">
+      <strong>Alumno/a:</strong> ${escapeHtml(data.student.name)}<br>
+      <strong>Grupo:</strong> ${escapeHtml(data.student.group||"—")}<br>
+      <strong>Fecha:</strong> ${escapeHtml(data.student.date||"—")}<br>
+      <strong>Tema:</strong> Tema 1 · Introducción a la Tecnología
+    </div>
+    <div class="p-card">
+      <strong>Nota A3:</strong> ${Number(data.score||0).toFixed(2).replace(".",",")} / 10<br>
+      <strong>Pistas utilizadas:</strong> ${data.hintsUsed}<br>
+      <strong>Autoevaluación:</strong> ${escapeHtml(data.selfEvaluation||"Sin seleccionar")}<br>
+      <strong>Idea clave:</strong> ${escapeHtml(data.reflection||"Sin respuesta")}<br>
+      <strong>Siguiente paso:</strong> Ficha única del Tema 1
+    </div>
+    <h2>Resumen de los 7 retos</h2>
+    <table><thead><tr><th>#</th><th>Reto</th><th>Intentos</th><th>Puntuación</th><th>Pista</th></tr></thead><tbody>${rows}</tbody></table>
+    <p><strong>Resultado interactivo A1:</strong> ${Number(data.score||0).toFixed(2).replace(".",",")} / 10</p>
+    <p><strong>Ficha única del Tema 1:</strong> se completará al finalizar el tema. Este documento recoge únicamente el resultado de A3.</p>
+  `;
+}
+$("#savePdfBtn").addEventListener("click",()=>{
+  buildPrintSheet(false);
+  window.print();
+});
+
+
+$("#finalizeBtn").addEventListener("click",()=>{
+  if(!state.selfEval){
+    alert("Selecciona primero tu autoevaluación.");
+    return;
+  }
+  saveCompletedAttempt();
+  clearDraft(state.student.name,state.student.group);
+  const payload = resultPayload();
+  payload.finalized = true;
+  payload.finalizedAt = new Date().toISOString();
+  saveResultToClassHistory(payload);
+  if($("#teacherPanel").style.display==="block") renderTeacherDashboard();
+  $("#finalizeBtn").disabled = true;
+  $("#finalizeBtn").textContent = "✓ Actividad finalizada y guardada";
+  $("#finalizeNote").innerHTML = "<strong>Actividad finalizada.</strong> Ya queda registrada en este navegador. Guarda tu PDF o PNG y continúa con el Tema 1.";
+  alert("Actividad finalizada y guardada en este dispositivo.");
+});
+
+function csvEscape(v){
+  const s = String(v ?? "");
+  return `"${s.replace(/"/g,'""')}"`;
+}
+function downloadTeacherCsv(){
+  const data=resultPayload();
+  const headers = [
+    "Alumno","Grupo","Fecha","Actividad","Nota","Aciertos","Total","Pistas","Tiempo_min",
+    ...data.details.map(d=>`P${d.index}_${d.id}`),
+    "Autoevaluacion","Reflexion"
+  ];
+  const row = [
+    data.student.name,data.student.group,data.student.date,data.appTitle,
+    data.score,data.earnedUnits,data.totalUnits,data.hintsUsed,data.elapsedMinutes,
+    ...data.details.map(d=>d.correct ? "Correcta" : `${Number(d.earned||0).toFixed(2).replace(".",",")} / ${d.possible}`),
+    data.selfEvaluation,data.reflection
+  ];
+  const csv = "\ufeff" + headers.map(csvEscape).join(";") + "\n" + row.map(csvEscape).join(";");
+  const blob = new Blob([csv], {type:"text/csv;charset=utf-8"});
+  const a=document.createElement("a");
+  a.href=URL.createObjectURL(blob);
+  a.download=`${APP_ID}_${slug(state.student.name||"Alumno")}_resultado.csv`;
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(()=>URL.revokeObjectURL(a.href),500);
+}
+
+
+$("#savePngBtn").addEventListener("click",async()=>{
+  const data=resultPayload();
+  const width=1200, height=1500;
+  const canvas=document.createElement("canvas");
+  canvas.width=width; canvas.height=height;
+  const ctx=canvas.getContext("2d");
+  ctx.fillStyle="#f6f8fc"; ctx.fillRect(0,0,width,height);
+  ctx.fillStyle="#ffffff"; roundRect(ctx,60,60,1080,1380,34); ctx.fill();
+  ctx.fillStyle="#172033"; ctx.font="bold 54px Arial"; ctx.fillText("🏭 A3 · La fábrica misteriosa",110,150);
+  ctx.font="28px Arial"; ctx.fillStyle="#334155";
+  drawText(ctx,`Alumno/a: ${data.student.name}`,110,220,950,38);
+  drawText(ctx,`Grupo: ${data.student.group||"—"}     Fecha: ${data.student.date||"—"}`,110,270,950,38);
+  ctx.fillStyle="#eef3ff"; roundRect(ctx,110,320,980,180,24); ctx.fill();
+  ctx.fillStyle="#172033"; ctx.font="bold 30px Arial"; ctx.fillText("Resumen PDI · Actividad A3",150,375);
+  ctx.font="26px Arial"; ctx.fillText(`Retos superados: ${questions.length}`,150,425);
+  ctx.fillText(`Pistas utilizadas: ${data.hintsUsed}`,150,468);
+  ctx.font="bold 34px Arial"; ctx.fillText(`Nota obtenida: ${Number(data.score||0).toFixed(2).replace(".",",")} / 10`,150,520);
+  ctx.font="bold 30px Arial"; ctx.fillText("Autoevaluación",110,610);
+  ctx.font="25px Arial"; drawText(ctx,data.selfEvaluation||"Sin seleccionar",110,660,980,35);
+  ctx.font="bold 30px Arial"; ctx.fillText("¿Qué he aprendido?",110,750);
+  ctx.font="24px Arial"; drawText(ctx,data.reflection||"Sin respuesta",110,800,980,34);
+  ctx.fillStyle="#eaf7ff"; roundRect(ctx,110,1050,980,170,24); ctx.fill();
+  ctx.fillStyle="#172033"; ctx.font="bold 28px Arial"; ctx.fillText("Actividad corregida internamente",150,1110);
+  ctx.font="24px Arial"; drawText(ctx,"Siguiente paso: continuar con el Tema 1. La ficha única se realizará al final.",150,1160,870,34);
+  ctx.fillStyle="#65708a"; ctx.font="20px Arial"; ctx.fillText("1.º ESO · Tecnología y Digitalización",110,1360);
+
+  const link=document.createElement("a");
+  link.download=`${APP_ID}_${slug(state.student.name||"Alumno")}.png`;
+  link.href=canvas.toDataURL("image/png");
+  link.click();
+});
+
+function roundRect(ctx,x,y,w,h,r){
+  ctx.beginPath();
+  ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);
+  ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath();
+}
+function drawText(ctx,text,x,y,maxWidth,lineHeight){
+  const words=String(text).split(" "); let line="", yy=y;
+  for(const word of words){
+    const test=line+word+" ";
+    if(ctx.measureText(test).width>maxWidth && line){
+      ctx.fillText(line,x,yy); line=word+" "; yy+=lineHeight;
+    }else line=test;
+  }
+  ctx.fillText(line,x,yy);
+}
+function escapeHtml(s){
+  return String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));
+}
+
+
+function buildStoredTeacherPrintSheet(data){
+  const rows=(data.details||[]).map(d=>`
+    <tr><td>${d.index}</td><td>${questions[d.index-1]?.title||d.id}</td>
+    <td>${`${Number(d.earned||0).toFixed(2).replace(".",",")} pt · ${d.attempts||0} intento(s)`}</td><td>${d.hint?"Sí":"No"}</td></tr>`).join("");
+  $("#printSheet").innerHTML=`
+    <h1>Informe docente · A1 La fábrica misteriosa</h1>
+    <div class="p-card">
+      <strong>Alumno/a:</strong> ${escapeHtml(data.student?.name||"—")}<br>
+      <strong>Grupo:</strong> ${escapeHtml(data.student?.group||"—")}<br>
+      <strong>Nota:</strong> ${Number(data.score||0).toFixed(2).replace(".",",")} / 10<br>
+      <strong>Pistas:</strong> ${data.hintsUsed||0}<br>
+      <strong>Tiempo:</strong> ${data.elapsedMinutes||0} min
+    </div>
+    <table><thead><tr><th>#</th><th>Reto</th><th>Resultado</th><th>Pista</th></tr></thead><tbody>${rows}</tbody></table>`;
+}
+function buildClassPrintSheet(){
+  const filter = $("#teacherGroupFilter").value;
+  const all=loadAllResults();
+  const rows=(filter==="ALL"?all:all.filter(r=>r.student?.group===filter));
+  $("#printSheet").innerHTML=`
+    <h1>Resultados · A1 La fábrica misteriosa</h1>
+    <p><strong>Grupo:</strong> ${filter==="ALL"?"Todos":filter}</p>
+    <table><thead><tr><th>Alumno</th><th>Grupo</th><th>Nota</th><th>Puntos</th><th>Pistas</th><th>Tiempo</th></tr></thead>
+    <tbody>${rows.map(r=>`<tr><td>${escapeHtml(r.student?.name||"—")}</td><td>${escapeHtml(r.student?.group||"—")}</td><td>${Number(r.score||0).toFixed(2).replace(".",",")}</td><td>${r.earnedUnits}/${r.totalUnits}</td><td>${r.hintsUsed||0}</td><td>${r.elapsedMinutes||0} min</td></tr>`).join("")}</tbody></table>`;
+}
+
+/* Minimal XLSX writer: ZIP store mode, no external libraries */
+function crc32(bytes){
+  let table=crc32.table;
+  if(!table){
+    table=crc32.table=new Uint32Array(256);
+    for(let n=0;n<256;n++){let c=n;for(let k=0;k<8;k++)c=(c&1)?0xEDB88320^(c>>>1):c>>>1;table[n]=c>>>0;}
+  }
+  let c=0xFFFFFFFF;
+  for(const b of bytes)c=table[(c^b)&0xFF]^(c>>>8);
+  return (c^0xFFFFFFFF)>>>0;
+}
+function u16(n){return new Uint8Array([n&255,(n>>>8)&255]);}
+function u32(n){return new Uint8Array([n&255,(n>>>8)&255,(n>>>16)&255,(n>>>24)&255]);}
+function concatArrays(arrs){
+  const len=arrs.reduce((s,a)=>s+a.length,0), out=new Uint8Array(len); let o=0;
+  for(const a of arrs){out.set(a,o);o+=a.length;} return out;
+}
+function zipStore(files){
+  const enc=new TextEncoder(); const locals=[], centrals=[]; let offset=0;
+  for(const f of files){
+    const name=enc.encode(f.name), data=f.data instanceof Uint8Array?f.data:enc.encode(f.data);
+    const crc=crc32(data);
+    const local=concatArrays([u32(0x04034b50),u16(20),u16(0),u16(0),u16(0),u16(0),u32(crc),u32(data.length),u32(data.length),u16(name.length),u16(0),name,data]);
+    locals.push(local);
+    const central=concatArrays([u32(0x02014b50),u16(20),u16(20),u16(0),u16(0),u16(0),u16(0),u32(crc),u32(data.length),u32(data.length),u16(name.length),u16(0),u16(0),u16(0),u16(0),u32(0),u32(offset),name]);
+    centrals.push(central); offset+=local.length;
+  }
+  const centralBlock=concatArrays(centrals);
+  const end=concatArrays([u32(0x06054b50),u16(0),u16(0),u16(files.length),u16(files.length),u32(centralBlock.length),u32(offset),u16(0)]);
+  return concatArrays([...locals,centralBlock,end]);
+}
+function xmlEsc(s){return String(s??"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
+function colName(n){let s="";while(n){n--;s=String.fromCharCode(65+n%26)+s;n=Math.floor(n/26);}return s;}
+function sheetXml(rows){
+  let xml='<?xml version="1.0" encoding="UTF-8" standalone="yes"?>';
+  xml+='<worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"><sheetData>';
+  rows.forEach((row,ri)=>{
+    xml+=`<row r="${ri+1}">`;
+    row.forEach((v,ci)=>{
+      const ref=colName(ci+1)+(ri+1);
+      if(typeof v==="number" && Number.isFinite(v)) xml+=`<c r="${ref}"><v>${v}</v></c>`;
+      else xml+=`<c r="${ref}" t="inlineStr"><is><t>${xmlEsc(v)}</t></is></c>`;
+    });
+    xml+='</row>';
+  });
+  xml+='</sheetData></worksheet>'; return xml;
+}
+function downloadExcelByGroups(){
+  const all=loadAllResults();
+  if(!all.length){alert("Todavía no hay resultados guardados.");return;}
+  const groups=["1ºA","1ºB","1ºC","1ºD","1ºE","1ºF","1ºG","1ºH"].filter(g=>all.some(r=>r.student?.group===g));
+  const sheets=groups.map((g,i)=>({g,id:i+1,rows:[
+    ["Alumno","Grupo","Fecha","Nota_A1","Puntos_retos","Total_retos","Pistas","Tiempo_min","Autoevaluacion","Reflexion",
+      ...questions.map((q,qi)=>`P${qi+1}`)],
+    ...all.filter(r=>r.student?.group===g).sort((a,b)=>(a.student?.name||"").localeCompare(b.student?.name||"")).map(r=>[
+      r.student?.name||"",r.student?.group||"",r.student?.date||"",Number(r.score||0),r.earnedUnits||0,r.totalUnits||0,
+      r.hintsUsed||0,r.elapsedMinutes||0,r.selfEvaluation||"",r.reflection||"",
+      ...(r.details||[]).map(d=>`${Number(d.earned||0).toFixed(2).replace(".",",")} pt · ${d.attempts||0} intento(s)`)
+    ])
+  ]}));
+  const workbook='<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
+    +'<workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"><sheets>'
+    +sheets.map(s=>`<sheet name="${xmlEsc(s.g)}" sheetId="${s.id}" r:id="rId${s.id}"/>`).join("")
+    +'</sheets></workbook>';
+  const rels='<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
+    +'<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">'
+    +sheets.map(s=>`<Relationship Id="rId${s.id}" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet${s.id}.xml"/>`).join("")
+    +'</Relationships>';
+  const rootRels='<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
+    +'<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="xl/workbook.xml"/></Relationships>';
+  const types='<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
+    +'<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/>'
+    +sheets.map(s=>`<Override PartName="/xl/worksheets/sheet${s.id}.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/>`).join("")
+    +'</Types>';
+  const files=[
+    {name:"[Content_Types].xml",data:types},
+    {name:"_rels/.rels",data:rootRels},
+    {name:"xl/workbook.xml",data:workbook},
+    {name:"xl/_rels/workbook.xml.rels",data:rels},
+    ...sheets.map(s=>({name:`xl/worksheets/sheet${s.id}.xml`,data:sheetXml(s.rows)}))
+  ];
+  const bytes=zipStore(files);
+  const blob=new Blob([bytes],{type:"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
+  const a=document.createElement("a");
+  a.href=URL.createObjectURL(blob); a.download=`${APP_ID}_resultados_por_grupos.xlsx`;
+  document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(a.href),500);
+}
+
+/* Teacher mode */
+$("#teacherOpen").addEventListener("click",()=>{
+  $("#teacherModal").classList.add("show");
+  $("#teacherModal").setAttribute("aria-hidden","false");
+  if($("#teacherPanel").style.display==="block"){
+    renderTeacherDashboard();
+  }else{
+    $("#teacherPin").focus();
+  }
+});
+$("#teacherClose").addEventListener("click",closeTeacher);
+$("#teacherModal").addEventListener("click",e=>{if(e.target.id==="teacherModal")closeTeacher()});
+function closeTeacher(){
+  $("#teacherModal").classList.remove("show");
+  $("#teacherModal").setAttribute("aria-hidden","true");
+}
+$("#teacherUnlock").addEventListener("click",()=>{
+  if($("#teacherPin").value!==getTeacherPin()){alert("Clave incorrecta.");return;}
+  renderTeacherDashboard();
+  $("#teacherLock").style.display="none";
+  $("#teacherPanel").style.display="block";
+});
+
+$("#teacherGroupFilter").addEventListener("change",()=>{ selectedTeacherResult=null; $("#studentDetailBlock").style.display="none"; renderTeacherDashboard(); });
+
+$("#teacherExcelBtn").addEventListener("click",downloadExcelByGroups);
+$("#teacherPdfBtn").addEventListener("click",()=>{
+  if(selectedTeacherResult){
+    buildStoredTeacherPrintSheet(selectedTeacherResult);
+  }else{
+    buildClassPrintSheet();
+  }
+  window.print();
+});
+$("#changePinBtn").addEventListener("click",()=>{
+  const current = prompt("Introduce la contraseña docente actual:");
+  if(current===null) return;
+  if(current!==getTeacherPin()){ alert("La contraseña actual no es correcta."); return; }
+  const next = prompt("Nueva contraseña docente (mínimo 4 caracteres):");
+  if(next===null) return;
+  if(next.trim().length<4){ alert("La nueva contraseña debe tener al menos 4 caracteres."); return; }
+  const confirmNext = prompt("Repite la nueva contraseña:");
+  if(confirmNext!==next){ alert("Las contraseñas no coinciden."); return; }
+  localStorage.setItem(APP_ID+"_teacher_pin", next);
+  $("#teacherPin").value="";
+  alert("Contraseña docente cambiada en este navegador.");
+});
+
+function getAnswerText(question, answer){
+  if(question.type==="single"){
+    if(!Number.isInteger(answer)) return "Sin responder";
+    return question.options[answer] ? question.options[answer][1] : "Sin responder";
+  }
+  if(question.type==="tf"){
+    if(!Array.isArray(answer)) return "Sin responder";
+    return answer.map((v,i)=>`${i+1}: ${v===true?"Verdadero":v===false?"Falso":"—"}`).join(" · ");
+  }
+  return "—";
+}
+
+let selectedTeacherResult = null;
+
+function renderTeacherDashboard(){
+  const all = loadAllResults();
+  const filter = $("#teacherGroupFilter") ? $("#teacherGroupFilter").value : "ALL";
+  const rows = filter==="ALL" ? all : all.filter(r=>r.student?.group===filter);
+
+  $("#classCount").textContent = rows.length;
+  const avg = rows.length ? rows.reduce((s,r)=>s+Number(r.score||0),0)/rows.length : 0;
+  $("#classAverage").textContent = rows.length ? avg.toFixed(2).replace(".",",") : "—";
+  $("#classHints").textContent = rows.reduce((s,r)=>s+Number(r.hintsUsed||0),0);
+
+  $("#classResultsTable").innerHTML = rows.length ? rows
+    .sort((a,b)=>(a.student?.group||"").localeCompare(b.student?.group||"") || (a.student?.name||"").localeCompare(b.student?.name||""))
+    .map((r,i)=>`
+      <tr>
+        <td>${escapeHtml(r.student?.name||"—")}</td>
+        <td>${escapeHtml(r.student?.group||"—")}</td>
+        <td><strong>${Number(r.score||0).toFixed(2).replace(".",",")}</strong></td>
+        <td>${r.earnedUnits}/${r.totalUnits}</td>
+        <td>${r.hintsUsed||0}</td>
+        <td>${r.elapsedMinutes||0} min</td>
+        <td><button class="btn ghost" style="padding:7px 10px;min-height:auto" data-view-result="${i}">Ver</button></td>
+      </tr>`).join("")
+    : `<tr><td colspan="7" class="small">Todavía no hay resultados guardados para este grupo en este dispositivo.</td></tr>`;
+
+  const sortedRows = rows
+    .sort((a,b)=>(a.student?.group||"").localeCompare(b.student?.group||"") || (a.student?.name||"").localeCompare(b.student?.name||""));
+  $$("#classResultsTable [data-view-result]").forEach(btn=>{
+    btn.addEventListener("click",()=>{
+      selectedTeacherResult = sortedRows[Number(btn.dataset.viewResult)];
+      renderStoredStudentDetail(selectedTeacherResult);
+    });
+  });
+}
+
+function renderStoredStudentDetail(data){
+  if(!data) return;
+  $("#studentDetailBlock").style.display="block";
+  $("#studentDetailTitle").textContent = `${data.student?.name||"Alumno"} · ${data.student?.group||""}`;
+  $("#teacherScore").textContent = `${Number(data.score||0).toFixed(2).replace(".",",")} / 10`;
+  $("#teacherCorrect").textContent = `${data.earnedUnits}/${data.totalUnits}`;
+  $("#teacherHints").textContent = data.hintsUsed||0;
+  $("#teacherTime").textContent = `${data.elapsedMinutes||0} min`;
+  $("#teacherTable").innerHTML = (data.details||[]).map(d=>{
+    const q = questions[d.index-1];
+    return `
+    <tr>
+      <td>${d.index}</td>
+      <td><strong>${q.title}</strong><br><span class="small">${q.text}</span></td>
+      <td>${getAnswerText(q, d.answer)}</td>
+      <td><span class="pill ${d.correct?'ok':'bad'}">${d.correct?'Correcta':`${Number(d.earned||0).toFixed(2).replace(".",",")} / ${d.possible}`}</span></td>
+      <td>${d.hint?'<span class="pill hint">Sí</span>':'—'}</td>
+    </tr>`;
+  }).join("");
+}
+</script>
+</body>
+</html>

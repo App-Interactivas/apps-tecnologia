@@ -1,0 +1,2 @@
+Coloca aquí la app A5 «Código Seguridad».
+El archivo principal de la app debe llamarse index.html.
