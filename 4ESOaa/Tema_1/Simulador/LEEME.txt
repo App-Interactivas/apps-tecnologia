@@ -1,5 +1,0 @@
-Coloca aquí la app del Simulador de vivienda bioclimática.
-
-IMPORTANTE:
-- El archivo principal de la app debe llamarse index.html.
-- Cuando lo copies, puedes borrar este LEEME.txt.
