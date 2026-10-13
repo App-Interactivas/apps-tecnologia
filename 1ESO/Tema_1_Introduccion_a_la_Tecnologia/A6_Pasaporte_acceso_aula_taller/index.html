@@ -239,20 +239,18 @@
 
       <div class="grid-2">
         <div class="field">
-          <label for="studentName">Nombre y apellidos *</label>
-          <input id="studentName" autocomplete="name" placeholder="Escribe tu nombre" />
+          <label for="studentId1">ID del alumno/a 1 *</label>
+          <input id="studentId1" autocomplete="off" autocapitalize="characters" maxlength="20" placeholder="Ej.: 1A-K7M4" />
         </div>
         <div class="field">
-          <label for="studentGroup">Clase *</label>
-          <select id="studentGroup">
-            <option value="">Selecciona tu clase</option>
-            <option value="1ºA">1.º A</option><option value="1ºB">1.º B</option>
-            <option value="1ºC">1.º C</option><option value="1ºD">1.º D</option>
-            <option value="1ºE">1.º E</option><option value="1ºF">1.º F</option>
-            <option value="1ºG">1.º G</option><option value="1ºH">1.º H</option>
-          </select>
+          <label for="studentId2">ID del alumno/a 2 (opcional)</label>
+          <input id="studentId2" autocomplete="off" autocapitalize="characters" maxlength="20" placeholder="Solo si trabajáis en pareja" />
         </div>
       </div>
+      <div class="actions" style="margin-top:12px">
+        <button class="btn ghost" id="verifyIdsBtn" type="button">Comprobar ID/s</button>
+      </div>
+      <div id="identityStatus" class="linked-sheet" style="display:none;margin-top:12px"></div>
 
       <div class="grid-2" style="margin-top:14px">
         <div class="field">
@@ -280,7 +278,7 @@
         <button class="btn primary" id="startBtn">Comenzar misión</button>
         <button class="btn ghost" id="resetAttemptBtn">🔐 Reinicio docente</button>
       </div>
-      <p class="footer-note">El progreso se guarda en este navegador para poder continuar si la actividad se interrumpe. Los resultados del modo docente son locales a este dispositivo.</p>
+      <p class="footer-note">El progreso se guarda en este navegador para poder continuar si la actividad se interrumpe. Al finalizar, la nota automática se envía también al registro central del profesor.</p>
     </div>
   </section>
 
@@ -340,10 +338,14 @@
         <strong>Ficha única del Tema 1:</strong> será el cierre escrito final. El resultado de A6 se conserva como evidencia del pasaporte.
       </div>
 
+      <div id="centralSyncStatus" class="linked-sheet" style="margin-top:14px">
+        <strong>Registro central:</strong> el resultado se enviará cuando pulses “Finalizar, guardar y enviar”.
+      </div>
+
       <div class="actions">
         <button class="btn primary" id="savePdfBtn">Guardar / imprimir en PDF</button>
         <button class="btn secondary" id="savePngBtn">Guardar como imagen PNG</button>
-        <button class="btn success" id="finalizeBtn">Finalizar y guardar A6</button>
+        <button class="btn success" id="finalizeBtn">Finalizar, guardar y enviar</button>
       </div>
       <p class="footer-note" id="finalizeNote">Después de guardar, completa la ficha única del Tema 1.</p>
     </div>
@@ -428,6 +430,9 @@
 const DEFAULT_TEACHER_PIN = "2468";
 const APP_ID = "A6_PASAPORTE_AULA_TALLER_PDI";
 const APP_TITLE = "A6 · Pasaporte de acceso al aula-taller";
+const RESULTS_API_URL = "https://script.google.com/macros/s/AKfycbzYhutDT6EZ7meQq2KfVdKq0h8JH9GYnOmZVqjW_IkmOvdMdjS7FxWQWezmx8SfWQf9/exec";
+const ACTIVITY_META = {tema:"Tema 1 · Introducción a la Tecnología", actividad:APP_TITLE};
+let identityVerified = null;
 
 const state = {
   student:{name:"",group:"",date:"",code:""},
@@ -630,9 +635,9 @@ function normalizeStudentKey(name){
 function attemptKey(name,group){
   return APP_ID+"_attempt_"+normalizeStudentKey(name)+"__"+String(group||"");
 }
-function hasCompletedAttempt(name){
+function hasCompletedAttempt(name,group){
   try{
-    const raw = localStorage.getItem(attemptKey(name, $("#studentGroup")?.value || state.student.group));
+    const raw = localStorage.getItem(attemptKey(name, group || state.student.group));
     if(!raw) return false;
     const data = JSON.parse(raw);
     return !!data.finalized;
@@ -686,19 +691,71 @@ function showScreen(id){
   window.scrollTo({top:0,behavior:"smooth"});
 }
 
-$("#startBtn").addEventListener("click", ()=>{
-  const name = $("#studentName").value.trim();
-  const group = $("#studentGroup").value;
-  if(!name){ alert("Escribe tu nombre y apellidos antes de comenzar."); return; }
-  if(!group){ alert("Selecciona tu clase antes de comenzar."); return; }
-  
-  if(hasCompletedAttempt(name)){
-    alert("Esta A1 ya figura como finalizada con este nombre y grupo en este dispositivo. Si necesitas repetirla, debe autorizarlo el profesor.");
+async function verifyStudentIds(){
+  const id1=String($("#studentId1").value||"").trim().toUpperCase();
+  const id2=String($("#studentId2").value||"").trim().toUpperCase();
+  const ids=[id1,id2].filter(Boolean);
+  if(!id1){alert("Introduce al menos el ID del primer alumno/a.");return null;}
+  if(id2 && id1===id2){alert("Los dos IDs no pueden ser iguales.");return null;}
+
+  const fingerprint=ids.join("|");
+  if(identityVerified?.fingerprint===fingerprint) return identityVerified;
+
+  const box=$("#identityStatus");
+  box.style.display="block";
+  box.innerHTML="<strong>Comprobando ID/s…</strong>";
+  try{
+    const results=await Promise.all(ids.map(async id=>{
+      const response=await fetch(RESULTS_API_URL+"?action=lookup&id="+encodeURIComponent(id)+"&_="+Date.now(),{method:"GET",cache:"no-store",redirect:"follow"});
+      if(!response.ok) throw new Error("No se pudo consultar el registro.");
+      return response.json();
+    }));
+    if(results.some(r=>!r?.ok||!r?.encontrado||!r?.alumno)){
+      identityVerified=null;
+      box.innerHTML="<strong>❌ ID no encontrado.</strong> Revisa el código.";
+      return null;
+    }
+    const students=results.map(r=>r.alumno);
+    if(students.some(a=>String(a.curso||"").replace(/[^0-9A-Z]/gi,"").toUpperCase()!=="1ESO")){
+      identityVerified=null;
+      box.innerHTML="<strong>❌ Curso incorrecto.</strong> Esta actividad corresponde a 1.º ESO.";
+      return null;
+    }
+    if(students.length===2 && String(students[0].grupo)!==String(students[1].grupo)){
+      identityVerified=null;
+      box.innerHTML="<strong>❌ Grupos distintos.</strong> Ambos IDs deben pertenecer al mismo grupo.";
+      return null;
+    }
+    identityVerified={fingerprint,ids,students};
+    box.innerHTML="<strong>✅ Identidad confirmada.</strong><br>"+students.map(a=>escapeHtml(a.nombre)+" · 1.º ESO "+escapeHtml(a.grupo)).join("<br>");
+    return identityVerified;
+  }catch(error){
+    identityVerified=null;
+    box.innerHTML="<strong>❌ No se pudo comprobar el ID.</strong> Revisa la conexión a Internet.";
+    return null;
+  }
+}
+
+$("#verifyIdsBtn").addEventListener("click",verifyStudentIds);
+["studentId1","studentId2"].forEach(id=>$("#"+id).addEventListener("input",()=>{
+  $("#"+id).value=String($("#"+id).value||"").toUpperCase();
+  identityVerified=null;
+  $("#identityStatus").style.display="none";
+}));
+
+$("#startBtn").addEventListener("click", async ()=>{
+  const verified=await verifyStudentIds();
+  if(!verified) return;
+  const name=verified.students.map(a=>a.nombre).join(" / ");
+  const group="1º"+verified.students[0].grupo;
+  if(!$("#sheetConfirm").checked){alert("Confirma que tienes disponible la ficha o documento indicado.");return;}
+  if(hasCompletedAttempt(name,group)){
+    alert("Esta actividad ya figura como finalizada en este dispositivo. Si necesitas repetirla, debe autorizarlo el profesor.");
     return;
   }
   const draft=loadDraft(name,group);
-  state.student={name,group,date:$("#studentDate").value,code:$("#studentCode").value.trim()};
-  if(draft && confirm("Hay una A1 sin finalizar guardada para este alumno/a. ¿Quieres continuar donde se quedó?")){
+  state.student={name,group,date:$("#studentDate").value,code:$("#studentCode").value.trim(),ids:verified.ids};
+  if(draft && confirm("Hay una actividad sin finalizar guardada para este alumno/a o pareja. ¿Quieres continuar donde se quedó?")){
     state.student=draft.student||state.student;
     state.index=Number(draft.index||0);
     state.answers=draft.answers||{};
@@ -711,30 +768,32 @@ $("#startBtn").addEventListener("click", ()=>{
     state.selfEval=draft.selfEval||"";
     state.reflection=draft.reflection||"";
   }else{
-    state.index=0; state.answers={}; state.hints={}; state.attempts={}; state.awarded={}; state.passed={};
+    state.index=0;state.answers={};state.hints={};state.attempts={};state.awarded={};state.passed={};
     questions.forEach(q=>{state.optionOrders[q.id]=shuffledIndexes(q.options.length);});
     state.startedAt=Date.now();
   }
   state.finishedAt=null;
+  state.finalized=false;
   startTimer();
   renderQuestion();
   showScreen("screen-questions");
   saveDraft();
 });
 
-$("#resetAttemptBtn").addEventListener("click",()=>{
-  const name=$("#studentName").value.trim();
-  const group=$("#studentGroup").value;
-  if(!name || !group){alert("Escribe primero el nombre y selecciona el grupo del alumno/a.");return;}
+$("#resetAttemptBtn").addEventListener("click",async()=>{
+  const verified=await verifyStudentIds();
+  if(!verified) return;
+  const name=verified.students.map(a=>a.nombre).join(" / ");
+  const group="1º"+verified.students[0].grupo;
   const pin=prompt("Clave docente para autorizar el reinicio:");
-  if(pin===null) return;
+  if(pin===null)return;
   if(pin!==getTeacherPin()){alert("Clave incorrecta.");return;}
   localStorage.removeItem(attemptKey(name,group));
   clearDraft(name,group);
   const all=loadAllResults();
   const key=normalizeStudentKey(name)+"__"+String(group);
   localStorage.setItem(resultsKey(),JSON.stringify(all.filter(r=>normalizeStudentKey(r.student?.name)+"__"+String(r.student?.group||"")!==key)));
-  alert("Intento reiniciado para este alumno/a y grupo en este dispositivo.");
+  alert("Intento reiniciado para este alumno/a o pareja en este dispositivo.");
 });
 
 function renderQuestion(){
@@ -953,22 +1012,63 @@ $("#savePdfBtn").addEventListener("click",()=>{
 });
 
 
-$("#finalizeBtn").addEventListener("click",()=>{
+async function sendCentralResults(){
+  const ids=Array.isArray(state.student?.ids)?state.student.ids:[];
+  const status=$("#centralSyncStatus");
+  if(!ids.length){
+    status.innerHTML="<strong>❌ No se pudo enviar.</strong> Esta sesión no tiene IDs asociados.";
+    return false;
+  }
+  status.innerHTML="<strong>Enviando resultado al registro central…</strong>";
+  const result=resultPayload();
+  for(const id of ids){
+    try{
+      const payload={
+        id,
+        tema:ACTIVITY_META.tema,
+        actividad:ACTIVITY_META.actividad,
+        puntuacion:result.score,
+        maximo:10,
+        evidencia:JSON.stringify({puntosRetos:result.earnedUnits,totalRetos:result.totalUnits,pistasUsadas:result.hintsUsed,detalleRetos:result.details}),
+        detalle:JSON.stringify({inicio:state.startedAt?new Date(state.startedAt).toISOString():"",fin:state.finishedAt?new Date(state.finishedAt).toISOString():"",autoevaluacion:state.selfEval,reflexion:state.reflection})
+      };
+      const response=await fetch(RESULTS_API_URL,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(payload),redirect:"follow"});
+      const data=await response.json();
+      if(!data?.ok) throw new Error(data?.error||"No guardado");
+    }catch(error){
+      const detail=error?.message||String(error);
+      status.innerHTML='<strong>❌ No se pudo completar el envío.</strong><br><span class="small"><strong>Detalle:</strong> '+escapeHtml(detail)+'</span><div class="actions" style="margin-top:10px"><button class="btn ghost" id="retryCentralBtn" type="button">Reintentar envío</button></div>';
+      $("#retryCentralBtn")?.addEventListener("click",sendCentralResults);
+      return false;
+    }
+  }
+  status.innerHTML="<strong>✅ Resultado enviado correctamente.</strong> Ya está registrado para el profesorado.";
+  return true;
+}
+
+$("#finalizeBtn").addEventListener("click",async()=>{
   if(!state.selfEval){
     alert("Selecciona primero tu autoevaluación.");
     return;
   }
   saveCompletedAttempt();
   clearDraft(state.student.name,state.student.group);
-  const payload = resultPayload();
-  payload.finalized = true;
-  payload.finalizedAt = new Date().toISOString();
+  const payload=resultPayload();
+  payload.finalized=true;
+  payload.finalizedAt=new Date().toISOString();
   saveResultToClassHistory(payload);
-  if($("#teacherPanel").style.display==="block") renderTeacherDashboard();
-  $("#finalizeBtn").disabled = true;
-  $("#finalizeBtn").textContent = "✓ Actividad finalizada y guardada";
-  $("#finalizeNote").innerHTML = "<strong>Actividad finalizada.</strong> Ya queda registrada en este navegador. Guarda tu PDF o PNG y completa la ficha única del Tema 1.";
-  alert("Actividad finalizada y guardada en este dispositivo.");
+  if($("#teacherPanel").style.display==="block")renderTeacherDashboard();
+  $("#finalizeBtn").disabled=true;
+  $("#finalizeBtn").textContent="✓ Finalizada, guardada y enviada";
+  $("#finalizeNote").innerHTML="<strong>Actividad guardada.</strong> Enviando el resultado al registro central…";
+  const sent=await sendCentralResults();
+  if(sent){
+    $("#finalizeNote").innerHTML="<strong>Actividad finalizada.</strong> El resultado está guardado y enviado al profesor.";
+    alert("Actividad finalizada, guardada y enviada correctamente.");
+  }else{
+    $("#finalizeBtn").textContent="✓ Actividad guardada";
+    $("#finalizeNote").innerHTML="<strong>Actividad guardada localmente.</strong> El envío central ha fallado; pulsa “Reintentar envío”.";
+  }
 });
 
 function csvEscape(v){
