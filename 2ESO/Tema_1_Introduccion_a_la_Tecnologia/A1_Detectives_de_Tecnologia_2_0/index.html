@@ -1163,6 +1163,7 @@
       }
 
       let failed = false;
+      let lastError = "";
       for (const id of pending) {
         try {
           const payload = {
@@ -1196,6 +1197,8 @@
           saveSession();
         } catch (error) {
           failed = true;
+          lastError = error?.message || String(error);
+          console.error("Error de envío central:", error);
         }
       }
 
@@ -1209,7 +1212,8 @@
 
       if (status) {
         status.className = "feedback bad";
-        status.innerHTML = '<strong>No se pudo completar el envío.</strong> Comprueba Internet y pulsa <button class="btn btn-outline btn-sm" id="retryCentralBtn" type="button" style="margin-left:8px">Reintentar</button>';
+        const detail = lastError ? '<div style="margin-top:8px;font-size:.86rem;font-weight:600;word-break:break-word"><strong>Detalle:</strong> ' + escapeHtml(lastError) + '</div>' : "";
+        status.innerHTML = '<strong>No se pudo completar el envío.</strong> Pulsa Reintentar.' + detail + ' <button class="btn btn-outline btn-sm" id="retryCentralBtn" type="button" style="margin-left:8px">Reintentar</button>';
         $("#retryCentralBtn")?.addEventListener("click", sendCentralResults);
       }
       return false;
