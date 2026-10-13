@@ -1165,12 +1165,12 @@
       let failed = false;
       for (const id of pending) {
         try {
-          const body = new URLSearchParams({
+          const payload = {
             id,
             tema: ACTIVITY_META.tema,
             actividad: ACTIVITY_META.actividad,
-            puntuacion: String(appScore()),
-            maximo: "10",
+            puntuacion: appScore(),
+            maximo: 10,
             evidencia: JSON.stringify({
               puntuacionesRetos: state.scores,
               pistasUsadas: state.hints.filter(Boolean).length,
@@ -1182,16 +1182,18 @@
               intentos: state.attempts,
               pistas: state.hints
             })
-          });
+          };
 
           const response = await fetch(RESULTS_API_URL, {
             method: "POST",
-            body,
+            headers: { "Content-Type": "text/plain;charset=utf-8" },
+            body: JSON.stringify(payload),
             redirect: "follow"
           });
           const data = await response.json();
-          if (!data?.ok || !data?.guardado) throw new Error(data?.error || "No guardado");
+          if (!data?.ok) throw new Error(data?.error || "No guardado");
           state.sentIds.push(id);
+          saveSession();
         } catch (error) {
           failed = true;
         }
@@ -1211,6 +1213,29 @@
         $("#retryCentralBtn")?.addEventListener("click", sendCentralResults);
       }
       return false;
+    }
+
+    async function restorePendingFinishedResult() {
+      try {
+        const raw = localStorage.getItem(SESSION_KEY);
+        if (!raw) return false;
+        const pendingState = JSON.parse(raw);
+        if (!pendingState?.finishedAt || !Array.isArray(pendingState.studentIds) || !pendingState.studentIds.length) return false;
+
+        state = pendingState;
+        renderResults();
+        showScreen("resultScreen");
+        const status = $("#centralSyncStatus");
+        if (status) {
+          status.className = "feedback info";
+          status.innerHTML = "<strong>Resultado pendiente recuperado.</strong> Reintentando el envío…";
+        }
+        const sent = await sendCentralResults();
+        if (sent) localStorage.removeItem(SESSION_KEY);
+        return true;
+      } catch {
+        return false;
+      }
     }
 
     function configureStartOptions() {
@@ -1341,7 +1366,10 @@
     $("#changePinBtn").addEventListener("click",()=>{ const p=prompt("Nueva clave de 4 a 12 caracteres:",""); if(p&&p.length>=4&&p.length<=12){localStorage.setItem(PIN_KEY,p);toast("Clave actualizada.");} });
     $("#clearHistoryBtn").addEventListener("click",()=>{ if(confirm("¿Borrar todo el historial? Esta acción no se puede deshacer.")&&confirm("Confirma de nuevo: ¿eliminar todos los resultados?")){localStorage.removeItem(HISTORY_KEY);renderHistory();} });
 
-    configureStartOptions();
+    (async () => {
+      const restored = await restorePendingFinishedResult();
+      if (!restored) configureStartOptions();
+    })();
   </script>
 </body>
 </html>
