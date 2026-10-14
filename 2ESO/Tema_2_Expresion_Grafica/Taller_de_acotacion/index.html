@@ -2,101 +2,192 @@
 </style><style>.figure-picker{display:flex;flex-wrap:wrap;gap:10px;margin:20px 0}.draw-fields{display:flex;flex-wrap:wrap;gap:12px;margin:14px 0}.draw-fields label,.draw-field{display:grid;gap:5px}.draw-fields input{width:145px}.draw-fields select{min-width:105px}.draw-field select{margin-bottom:12px}#cotaCanvas{max-height:none;touch-action:manipulation}#cotaList{padding-left:24px}#cotaList li{margin:10px 0}#cotaList button{font-size:14px;padding:5px 9px;margin-left:8px}.draw-point{cursor:pointer}.draw-point:focus{outline:none}.draw-point:focus circle:last-of-type{stroke:#c38100;stroke-width:5}#drawingPractice .grid{grid-template-columns:minmax(0,1.2fr) minmax(0,1fr)}@media(max-width:820px){#drawingPractice .grid{grid-template-columns:1fr}}
 </style></head><body data-app="acotacion"><header><div class="brand">TECNOLOGÍA Y DIGITALIZACIÓN · 2.º ESO</div><div class="tag">TEMA 2 · EXPRESIÓN GRÁFICA</div><h1>Taller de acotación</h1><p>Da los datos necesarios para fabricar</p></header><main><section class="registro" aria-labelledby="registroTitulo">
 <div><h2 id="registroTitulo">Tu actividad</h2><p class="note" id="conexionInfo"></p></div>
-<div class="reg-controls"><label for="alumnoID">ID del alumnado</label><input id="alumnoID" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="El código que te da el profesor" maxlength="32"><button id="comprobarID">Comprobar ID</button><button id="cambiarAlumno" hidden>Cambiar de alumno</button></div>
-<p id="registroMensaje" role="status" aria-live="polite">El nombre se obtiene del registro del profesor; no lo escribas aquí. El ID no se guarda en este dispositivo.</p>
-<details class="teacher"><summary>Conexión docente</summary><p>En el portal se reutiliza la configuración central. Para probar este archivo por separado, introduce la misma URL de Apps Script.</p><label for="urlCentral">URL central terminada en /exec</label><input id="urlCentral" type="url" autocomplete="off" placeholder="https://script.google.com/macros/s/…/exec"><button id="aplicarConexion">Guardar conexión</button><p id="configMensaje" role="status"></p></details>
+<div class="reg-controls"><label for="alumnoID">ID del alumnado</label><input id="alumnoID" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="El código que te da el profesor" maxlength="32"><label for="alumnoID2">Segundo ID (opcional, pareja)</label><input id="alumnoID2" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="Solo si trabajáis en pareja" maxlength="32"><button id="comprobarID">Comprobar ID</button><button id="cambiarAlumno" hidden>Cambiar de alumno</button></div>
+<p id="registroMensaje" role="status" aria-live="polite">Los nombres, curso y grupo se obtienen del registro del profesor. Solo se conserva temporalmente un resultado pendiente de envío.</p>
+
 </section>
-<nav class="tabs" aria-label="Modo de trabajo"><button id="exploreTab" aria-pressed="true">Explorar</button><button id="practiceTab" aria-pressed="false">Diez retos prácticos</button><button id="drawingTab" aria-pressed="false">Acotar figuras</button></nav><section id="explore"><div class="grid"><section class="panel"><h2>Construye un plano útil</h2><p>Base real de 180 × 100 × 3 mm, con dos agujeros Ø10. Cada centro está a 20 mm de su extremo y a 50 mm del borde delantero.</p><label>Escala del dibujo<select id="plateScale"><option>1:1</option><option selected>1:2</option></select></label><div id="plateScene"></div><p id="geometryState" class="note"></p><p class="figure-note">Esquema de pantalla. Las cifras de cota expresan medidas reales.</p></section><section class="panel"><h2>Añade la información</h2><div class="controls"><label><input id="showLong" type="checkbox" checked> Largo</label><label><input id="showDepth" type="checkbox" checked> Fondo</label><label><input id="showDiam" type="checkbox"> Diámetro y cantidad</label><label><input id="showPos" type="checkbox"> Posiciones</label><label><input id="showThickness" type="checkbox"> Espesor</label><label><input id="showCenters" type="checkbox" checked> Ejes</label></div><p id="planState" class="feedback" role="status"></p><div class="actions"><button id="addAll">Completar el plano</button><button id="clearDims">Quitar cotas</button></div><p>Quita una posición y comprueba qué dato deja de poder conocerse. Tener dos agujeros del diámetro correcto no indica dónde hacerlos.</p><p class="tip">Usa líneas de cota independientes del contorno. Evita repetir una medida que ya queda determinada.</p></section></div><div class="grid" style="margin-top:22px"><section class="panel"><h2>Un origen o varios tramos</h2><div class="mini-tabs"><button id="seriesButton" aria-pressed="true">En serie</button><button id="parallelButton" aria-pressed="false">En paralelo</button></div><div id="stripScene"></div><p id="stripExplanation"></p></section><section class="panel"><h2>Un ángulo se expresa en grados</h2><div id="angleScene"></div><p>El arco relaciona las dos direcciones y la cifra 45° indica la inclinación del corte.</p></section></div></section><section id="practice" hidden><p id="sessionWarning" class="tip">Comprueba tu ID para acceder a la práctica y guardar el resultado. La exploración está disponible sin ID.</p><div id="quizWork"><div class="track"><span id="progressLabel"></span><progress id="quizProgress" max="10" value="0" aria-label="Retos comprobados"></progress><span id="level" class="level"></span></div><div class="panel"><h2 id="questionTitle"></h2><p id="questionPrompt"></p><div id="questionFigure"></div><div id="answerArea"></div><details id="hint"><summary>Ver una pista</summary><p id="hintText"></p></details><p id="inputError" class="field-error" role="status"></p><button id="check" class="active">Comprobar</button><p id="feedback" class="feedback" role="status" aria-live="polite"></p><div class="actions"><button id="prev">Anterior</button><button id="next" disabled>Siguiente reto</button></div></div></div><section id="quizResult" class="panel" hidden><h2>Resultado de la práctica</h2><p id="score" class="result-score"></p><p id="scoreNote"></p><p>Revisa los retos antes de empezar otro intento.</p><div id="review" class="review-list"></div><div class="actions"><button id="again">Nuevo intento</button><button id="downloadResult">Descargar resultado</button></div></section></section><section id="drawingPractice" hidden><h2>Acota cuatro figuras ya dibujadas</h2><p>Cuenta los cuadros de 5 mm y escribe las medidas reales en mm. Elige una distancia entre dos puntos o un diámetro/radio sobre una circunferencia. La app traza las líneas y las flechas para que puedas concentrarte en decidir qué medidas hacen falta.</p><div class="figure-picker" id="figurePicker"></div><div class="grid"><section class="panel"><h3 id="drawingTitle"></h3><p id="drawingDescription" class="note"></p><svg id="cotaCanvas" viewBox="60 40 440 420" role="img" aria-label="Figura en cuadrícula de 5 milímetros para acotar"></svg><p class="figure-note">Cada cuadro representa 5 mm reales. El tamaño de pantalla no es una escala para medir con regla.</p><div class="actions"><button id="checkDrawing" class="active">Comprobar plano</button><button id="solutionDrawing">Ver una solución</button><button id="clearDrawing">Borrar cotas de esta figura</button></div><p id="drawingFeedback" class="feedback" role="status" aria-live="polite"></p></section><section class="panel"><h3>Elige y coloca una cota</h3><label class="draw-field">Tipo de cota<select id="cotaType"><option value="distance">Distancia</option><option value="diameter">Ø Diámetro</option><option value="radius">R Radio</option></select></label><div id="pointControls" class="draw-fields"><label>Punto inicial<select id="pointStart"></select></label><label>Punto final<select id="pointEnd"></select></label><label>Dirección<select id="cotaAxis"><option value="auto">Automática</option><option value="x">Horizontal</option><option value="y">Vertical</option></select></label></div><div id="curveControls" hidden><label class="draw-field">Elemento curvo<select id="curveTarget"></select></label></div><p id="selectionNote" class="note">También puedes seleccionar los puntos o las curvas tocando el dibujo.</p><div class="draw-fields"><label>Medida real (mm)<input id="cotaValue" type="text" inputmode="decimal" autocomplete="off" placeholder="Tu medida"></label><label id="sideLabel">Colocar fuera, hacia<select id="cotaSide"><option value="near">Arriba / izquierda</option><option value="far">Abajo / derecha</option></select></label></div><button id="addDrawingCota">Colocar cota</button><p id="drawingError" class="field-error" role="status"></p><h3 style="margin-top:24px">Cotas del plano</h3><ol id="cotaList"></ol><p class="tip">Busca datos suficientes y evita repetir dimensiones que ya quedan determinadas. En la corona usa Ø; en el arco superior de D usa R. B tiene un eje de simetría.</p><p id="drawingProgress" class="note"></p><p class="note">La nota usa la primera comprobación de cada figura. Después puedes revisar y corregir.</p><div class="actions"><button id="finishDrawings" disabled>Terminar las cuatro figuras</button><button id="newDrawings">Nuevo intento completo</button><button id="downloadDrawings" disabled>Descargar resultado</button></div><p id="drawingResult" class="feedback" role="status"></p></section></div></section>
+<nav class="tabs" aria-label="Modo de trabajo"><button id="exploreTab" aria-pressed="true">Explorar</button><button id="practiceTab" aria-pressed="false">Diez retos prácticos</button><button id="drawingTab" aria-pressed="false">Acotar figuras</button></nav><section id="explore"><div class="grid"><section class="panel"><h2>Construye un plano útil</h2><p>Base real de 180 × 100 × 3 mm, con dos agujeros Ø10. Cada centro está a 20 mm de su extremo y a 50 mm del borde delantero.</p><label>Escala del dibujo<select id="plateScale"><option>1:1</option><option selected>1:2</option></select></label><div id="plateScene"></div><p id="geometryState" class="note"></p><p class="figure-note">Esquema de pantalla. Las cifras de cota expresan medidas reales.</p></section><section class="panel"><h2>Añade la información</h2><div class="controls"><label><input id="showLong" type="checkbox" checked> Largo</label><label><input id="showDepth" type="checkbox" checked> Fondo</label><label><input id="showDiam" type="checkbox"> Diámetro y cantidad</label><label><input id="showPos" type="checkbox"> Posiciones</label><label><input id="showThickness" type="checkbox"> Espesor</label><label><input id="showCenters" type="checkbox" checked> Ejes</label></div><p id="planState" class="feedback" role="status"></p><div class="actions"><button id="addAll">Completar el plano</button><button id="clearDims">Quitar cotas</button></div><p>Quita una posición y comprueba qué dato deja de poder conocerse. Tener dos agujeros del diámetro correcto no indica dónde hacerlos.</p><p class="tip">Usa líneas de cota independientes del contorno. Evita repetir una medida que ya queda determinada.</p></section></div><div class="grid" style="margin-top:22px"><section class="panel"><h2>Un origen o varios tramos</h2><div class="mini-tabs"><button id="seriesButton" aria-pressed="true">En serie</button><button id="parallelButton" aria-pressed="false">En paralelo</button></div><div id="stripScene"></div><p id="stripExplanation"></p></section><section class="panel"><h2>Un ángulo se expresa en grados</h2><div id="angleScene"></div><p>El arco relaciona las dos direcciones y la cifra 45° indica la inclinación del corte.</p></section></div></section><section id="practice" hidden><p id="sessionWarning" class="tip">Comprueba tu ID para acceder a la práctica y guardar el resultado. La exploración está disponible sin ID.</p><div id="quizWork"><div class="track"><span id="progressLabel"></span><progress id="quizProgress" max="10" value="0" aria-label="Retos comprobados"></progress><span id="level" class="level"></span></div><div class="panel"><h2 id="questionTitle"></h2><p id="questionPrompt"></p><div id="questionFigure"></div><div id="answerArea"></div><details id="hint"><summary>Ver una pista</summary><p id="hintText"></p></details><p id="inputError" class="field-error" role="status"></p><button id="check" class="active">Comprobar</button><p id="feedback" class="feedback" role="status" aria-live="polite"></p><div class="actions"><button id="prev">Anterior</button><button id="next" disabled>Siguiente reto</button></div></div></div><section id="quizResult" class="panel" hidden><h2>Resultado de la práctica</h2><p id="score" class="result-score"></p><p id="scoreNote"></p><p>Revisa los retos antes de empezar otro intento.</p><div id="review" class="review-list"></div><div class="actions"><button id="again">Nuevo intento</button><button id="downloadResult">Descargar resultado</button></div></section></section><section id="drawingPractice" hidden><h2>Acota cuatro figuras ya dibujadas</h2><p>Cuenta los cuadros de 5 mm y escribe las medidas reales en mm. Elige una distancia entre dos puntos o un diámetro/radio sobre una circunferencia. La app traza las líneas y las flechas para que puedas concentrarte en decidir qué medidas hacen falta.</p><div class="figure-picker" id="figurePicker"></div><div class="grid"><section class="panel"><h3 id="drawingTitle"></h3><p id="drawingDescription" class="note"></p><svg id="cotaCanvas" viewBox="60 40 440 420" role="img" aria-label="Figura en cuadrícula de 5 milímetros para acotar"></svg><p class="figure-note">Cada cuadro representa 5 mm reales. El tamaño de pantalla no es una escala para medir con regla.</p><div class="actions"><button id="checkDrawing" class="active">Comprobar plano</button><button id="solutionDrawing">Ver una solución</button><button id="clearDrawing">Borrar cotas de esta figura</button></div><p id="drawingFeedback" class="feedback" role="status" aria-live="polite"></p></section><section class="panel"><h3>Elige y coloca una cota</h3><label class="draw-field">Tipo de cota<select id="cotaType"><option value="distance">Distancia</option><option value="diameter">Ø Diámetro</option><option value="radius">R Radio</option></select></label><div id="pointControls" class="draw-fields"><label>Punto inicial<select id="pointStart"></select></label><label>Punto final<select id="pointEnd"></select></label><label>Dirección<select id="cotaAxis"><option value="auto">Automática</option><option value="x">Horizontal</option><option value="y">Vertical</option></select></label></div><div id="curveControls" hidden><label class="draw-field">Elemento curvo<select id="curveTarget"></select></label></div><p id="selectionNote" class="note">También puedes seleccionar los puntos o las curvas tocando el dibujo.</p><div class="draw-fields"><label>Medida real (mm)<input id="cotaValue" type="text" inputmode="decimal" autocomplete="off" placeholder="Tu medida"></label><label id="sideLabel">Colocar fuera, hacia<select id="cotaSide"><option value="near">Arriba / izquierda</option><option value="far">Abajo / derecha</option></select></label></div><button id="addDrawingCota">Colocar cota</button><p id="drawingError" class="field-error" role="status"></p><h3 style="margin-top:24px">Cotas del plano</h3><ol id="cotaList"></ol><p class="tip">Busca datos suficientes y evita repetir dimensiones que ya quedan determinadas. En la corona usa Ø; en el arco superior de D usa R. B tiene un eje de simetría.</p><p id="drawingProgress" class="note"></p><p class="note">La nota usa la primera comprobación de cada figura. Después puedes revisar y corregir.</p><div class="actions"><button id="finishDrawings" disabled>Finalizar, guardar y enviar</button><button id="newDrawings">Nuevo intento completo</button><button id="downloadDrawings" disabled>Descargar resultado</button></div><p id="drawingResult" class="feedback" role="status"></p></section></div></section>
 <div id="envioPanel" class="registro" hidden><p id="envioMensaje" role="status" aria-live="polite"></p><button id="reintentarEnvio" hidden>Reintentar el mismo envío</button></div>
-</main><footer>Apoyo a A6 y A7 · Acotar y revisar · 5 retos fáciles, 3 medios y 2 difíciles. HTML independiente. El registro de resultados necesita conexión a Internet y la configuración central del profesor.</footer><script>(function(){
-'use strict';
-const CFG_KEY='pdi_resultados_endpoint_v1';
-let endpoint='', identity=null, mode='', generation=0, pending=null, busy=false;
-const el=id=>document.getElementById(id);
-const normalize=id=>String(id||'').trim().toUpperCase().replace(/\s+/g,'');
-const valid=url=>/^https:\/\/script\.google\.com\/macros\/s\/[A-Za-z0-9_-]+\/exec$/.test(url);
-const uuid=()=>globalThis.crypto?.randomUUID?.()||'pdi-'+Date.now()+'-'+Math.random().toString(36).slice(2);
-function status(text){el('registroMensaje').textContent=text;}
-function loadEndpoint(){
- const fromRoot=window.RESULTADOS_CONFIG?.APPS_SCRIPT_URL||window.RESULTS_ENDPOINT;
- if(valid(fromRoot))endpoint=fromRoot;
- else try{const remembered=localStorage.getItem(CFG_KEY);if(valid(remembered))endpoint=remembered;}catch{}
- el('urlCentral').value=endpoint;
- el('conexionInfo').textContent=endpoint?'Conexión central configurada. Introduce tu ID para comprobarlo.':'Registro central pendiente de configurar. Puedes explorar sin registrar resultados.';
-}
-function jsonp(params){
- return new Promise((resolve,reject)=>{
-  const cb='__pdi_'+uuid().replace(/[^A-Za-z0-9_]/g,'_'), script=document.createElement('script');let done=false;
-  const clean=()=>{if(done)return;done=true;clearTimeout(timer);delete window[cb];script.remove();};
-  const timer=setTimeout(()=>{clean();reject(new Error('No se pudo consultar el registro. Revisa la conexión e inténtalo de nuevo.'));},12000);
-  window[cb]=data=>{clean();resolve(data);};script.onerror=()=>{clean();reject(new Error('No se pudo conectar con Apps Script.'));};
-  const url=new URL(endpoint);for(const [key,val] of Object.entries(params))url.searchParams.set(key,val);url.searchParams.set('prefix',cb);script.src=url;document.head.append(script);
- });
-}
-async function verify(){
- const id=normalize(el('alumnoID').value);el('alumnoID').value=id;
- if(!id){status('Introduce el ID que te ha dado el profesor.');return;}
- if(!endpoint){status('Falta la conexión central. El profesor puede configurarla en Conexión docente.');return;}
- const token=++generation;el('comprobarID').disabled=true;status('Comprobando ID…');
- try{
-  const data=await jsonp({action:'lookup',id});if(token!==generation)return;
-  if(!data?.ok)throw new Error('ID no encontrado o inactivo. Comprueba tu código.');
-  if(data.level!=='2ESO')throw new Error('Este ID no corresponde a 2.º ESO. Consulta al profesor.');
-  identity={studentId:normalize(data.id),level:data.level,group:data.group};mode='registered';
-  el('alumnoID').disabled=true;el('comprobarID').hidden=true;el('cambiarAlumno').hidden=false;
-  status('ID comprobado · 2.º ESO · Grupo '+data.group+'. Los resultados se enviarán al terminar.');document.dispatchEvent(new Event('pdi-session'));
- }catch(err){if(token===generation)status(err.message);}finally{if(token===generation)el('comprobarID').disabled=false;}
-}
-function reset(){
- generation++;identity=null;mode='';pending=null;busy=false;el('alumnoID').value='';el('alumnoID').disabled=false;el('comprobarID').hidden=false;el('comprobarID').disabled=false;el('cambiarAlumno').hidden=true;el('envioPanel').hidden=true;status('Introduce tu ID para un nuevo intento registrado.');document.dispatchEvent(new Event('pdi-reset'));
-}
-async function transmit(){
- if(!pending||busy)return;
- busy=true;const snapshot=pending,token=generation;el('reintentarEnvio').disabled=true;el('envioMensaje').textContent='Enviando resultado y comprobando recepción…';
- try{
-  const data=new URLSearchParams();data.set('payload',JSON.stringify(snapshot));
-  const controller=new AbortController();const timeout=setTimeout(()=>controller.abort(),12000);
-  try{await fetch(endpoint,{method:'POST',mode:'no-cors',body:data,signal:controller.signal});}finally{clearTimeout(timeout);}
-  let receipt=null;
-  for(let i=0;i<5;i++){
-   if(token!==generation)return;
-   if(i)await new Promise(r=>setTimeout(r,1200));
-   const check=await jsonp({action:'status',studentId:snapshot.studentId,submissionId:snapshot.submissionId});
-   if(check?.service==='Apps Tecnologia'&&!('received' in check))throw new Error('El servidor central necesita la actualización incluida en el paquete.');
-   if(check?.ok&&check.received&&check.groupReceived&&check.submissionId===snapshot.submissionId){receipt=check;break;}
+</main><footer>Apoyo a A6 y A7 · Acotar y revisar · 5 retos fáciles, 3 medios y 2 difíciles. HTML independiente. El registro de resultados necesita conexión a Internet y la configuración central del profesor.</footer><script>(function () {
+  'use strict';
+
+  // La URL procede de las aplicaciones vigentes del Tema 1 de 2.º ESO.
+  const ENDPOINT = 'https://script.google.com/macros/s/AKfycbzYhutDT6EZ7meQq2KfVdKq0h8JH9GYnOmZVqjW_IkmOvdMdjS7FxWQWezmx8SfWQf9/exec';
+  const KEY = 'pdi_pending_' + document.body.dataset.app + '_tema2_v1';
+  const $ = id => document.getElementById(id);
+  const normalize = value => String(value || '').trim().toUpperCase().replace(/\s+/g, '');
+  const uid = () => globalThis.crypto?.randomUUID?.() || 'pdi-' + Date.now() + '-' + Math.random().toString(36).slice(2);
+  const course = value => String(value || '').replace(/[^0-9A-Z]/gi, '').toUpperCase();
+  let identity = null, verifying = false, sending = false;
+  let queue = [];
+
+  try {
+    const saved = JSON.parse(localStorage.getItem(KEY) || '[]');
+    if (Array.isArray(saved)) queue = saved.filter(x => x && Array.isArray(x.ids) && x.result);
+  } catch (_) { /* El envío aún se puede reintentar durante esta sesión. */ }
+
+  function persist() {
+    try {
+      if (queue.length) localStorage.setItem(KEY, JSON.stringify(queue));
+      else localStorage.removeItem(KEY);
+      return true;
+    } catch (_) { return false; }
   }
-  if(token!==generation)return;
-  if(!receipt)throw new Error('No se ha confirmado el guardado en Sheets. Reintenta el mismo envío o descarga una copia.');
-  el('envioMensaje').textContent='Resultado recibido en Sheets y en la pestaña de tu grupo.';el('reintentarEnvio').hidden=true;
- }catch(err){if(token===generation){el('envioMensaje').textContent=err.message+' No se da por registrado.';el('reintentarEnvio').hidden=false;}}
- finally{if(token===generation){busy=false;el('reintentarEnvio').disabled=false;}}
-}
-window.PDI={
- ready:()=>mode==='registered', registered:()=>mode==='registered', id:()=>identity?.studentId||null,
- newAttempt:()=>{generation++;pending=null;busy=false;el('envioPanel').hidden=true;return uuid();},
- submit(result){
-  if(mode!=='registered'){el('envioPanel').hidden=false;el('envioMensaje').textContent='Comprueba tu ID antes de registrar el resultado.';el('reintentarEnvio').hidden=true;return;}
-  pending={...result,...identity,originUrl:location.href};el('envioPanel').hidden=false;el('reintentarEnvio').hidden=true;transmit();
- },
- export(result,file){
-  const data={...result,studentId:identity?.studentId||null,nivel:identity?.level||'2ESO',grupo:identity?.group||null,registro:mode==='registered'?'ID comprobado; consulta el estado del envío':'Sin ID comprobado'};
-  const url=URL.createObjectURL(new Blob([JSON.stringify(data,null,2)],{type:'application/json'}));const a=document.createElement('a');a.href=url;a.download=file;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
- }
-};
-el('comprobarID').onclick=verify;el('alumnoID').onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();verify();}};
-el('cambiarAlumno').onclick=()=>{if(confirm('Cambiar de alumno borra el intento actual de esta pantalla. ¿Continuar?'))reset();};
-el('reintentarEnvio').onclick=transmit;
-window.addEventListener('pageshow',event=>{if(event.persisted)reset();});
-el('aplicarConexion').onclick=()=>{
- const url=el('urlCentral').value.trim();if(!valid(url)){el('configMensaje').textContent='Introduce una URL de Apps Script que empiece por https://script.google.com/macros/s/ y termine en /exec.';return;}
- if(mode){el('configMensaje').textContent='Cambia de alumno antes de cambiar la conexión.';return;}
- endpoint=url;try{localStorage.setItem(CFG_KEY,url);}catch{}
- el('configMensaje').textContent='Conexión guardada en este navegador. No se guarda ningún ID ni nombre.';loadEndpoint();
-};
-loadEndpoint();
-if(/^https?:$/.test(location.protocol)){
- const script=document.createElement('script');script.src=new URL('/config_resultados.js',location.href);script.onload=()=>{if(!mode)loadEndpoint();};script.onerror=()=>{};document.head.append(script);
-}
+
+  function showPending(message) {
+    $('envioPanel').hidden = false;
+    $('envioMensaje').textContent = message;
+    $('reintentarEnvio').hidden = !queue.length;
+  }
+
+  async function lookup(id) {
+    const url = ENDPOINT + '?action=lookup&id=' + encodeURIComponent(id) + '&_=' + Date.now();
+    const response = await fetch(url, { method: 'GET', cache: 'no-store', redirect: 'follow' });
+    if (!response.ok) throw new Error('No se pudo consultar el registro: HTTP ' + response.status + '.');
+    const data = await response.json();
+    if (!data?.ok || !data?.encontrado || !data?.alumno) throw new Error('ID no encontrado o inactivo: ' + id + '.');
+    return data.alumno;
+  }
+
+  async function verify() {
+    if (verifying) return;
+    const id1 = normalize($('alumnoID').value), id2 = normalize($('alumnoID2').value);
+    $('alumnoID').value = id1;
+    $('alumnoID2').value = id2;
+    if (!id1) { $('registroMensaje').textContent = 'Introduce el primer ID.'; return; }
+    if (id2 && id1 === id2) { $('registroMensaje').textContent = 'Los dos ID deben ser diferentes.'; return; }
+    verifying = true;
+    $('comprobarID').disabled = true;
+    $('registroMensaje').textContent = 'Comprobando ID en el registro del profesor…';
+    try {
+      const ids = [id1, id2].filter(Boolean);
+      const students = await Promise.all(ids.map(lookup));
+      if (students.some(x => course(x.curso) !== '2ESO')) throw new Error('Uno de los ID no corresponde a 2.º ESO.');
+      if (students.length === 2 && String(students[0].grupo) !== String(students[1].grupo)) {
+        throw new Error('Para trabajar en pareja, ambos alumnos deben pertenecer al mismo grupo.');
+      }
+      identity = { ids, group: String(students[0].grupo), names: students.map(x => String(x.nombre || 'Alumno/a')) };
+      $('alumnoID').disabled = true;
+      $('alumnoID2').disabled = true;
+      $('comprobarID').hidden = true;
+      $('cambiarAlumno').hidden = false;
+      $('registroMensaje').textContent = 'Identidad confirmada: ' + identity.names.join(' y ') + ' · 2.º ESO · Grupo ' + identity.group + '.';
+      document.dispatchEvent(new Event('pdi-session'));
+    } catch (error) {
+      identity = null;
+      $('registroMensaje').textContent = error.message || String(error);
+    } finally {
+      verifying = false;
+      $('comprobarID').disabled = false;
+    }
+  }
+
+  function resetIdentity() {
+    identity = null;
+    for (const id of ['alumnoID', 'alumnoID2']) { $(id).value = ''; $(id).disabled = false; }
+    $('comprobarID').hidden = false;
+    $('cambiarAlumno').hidden = true;
+    $('registroMensaje').textContent = 'Introduce el ID para iniciar otra actividad.';
+    document.dispatchEvent(new Event('pdi-reset'));
+  }
+
+  function makePayload(item, id) {
+    const r = item.result;
+    return {
+      id,
+      tema: r.theme,
+      actividad: r.activity,
+      puntuacion: r.score,
+      maximo: 10,
+      evidencia: JSON.stringify({
+        puntuacionesRetos: r.scores || [],
+        pistasUsadas: (r.hints || []).filter(Boolean).length,
+        intentosTotales: (r.attempts || []).reduce((a, b) => a + (Number(b) || 0), 0),
+        resultado: r.evidence || null
+      }),
+      detalle: JSON.stringify({
+        inicio: r.startedAt,
+        fin: r.finishedAt,
+        intentos: r.attempts || [],
+        pistas: r.hints || [],
+        submissionId: r.submissionId,
+        titulo: r.title,
+        appVersion: r.appVersion,
+        urlOrigen: r.originUrl
+      })
+    };
+  }
+
+  async function transmit() {
+    if (sending || !queue.length) return;
+    sending = true;
+    $('reintentarEnvio').disabled = true;
+    showPending('Enviando el resultado al registro del profesor…');
+    try {
+      while (queue.length) {
+        const item = queue[0];
+        for (const id of item.ids.filter(id => !item.sentIds.includes(id))) {
+          const response = await fetch(ENDPOINT, {
+            method: 'POST',
+            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+            body: JSON.stringify(makePayload(item, id)),
+            redirect: 'follow'
+          });
+          if (!response.ok) throw new Error('Error HTTP ' + response.status + ' al enviar el ID ' + id + '.');
+          const data = await response.json();
+          if (!data?.ok) throw new Error(data?.error || 'El servidor rechazó el resultado del ID ' + id + '.');
+          item.sentIds.push(id);
+          persist();
+        }
+        queue.shift();
+        persist();
+      }
+      showPending('Resultado enviado para todos los ID. Comprueba su registro en la hoja central.');
+    } catch (error) {
+      const saved = persist();
+      showPending((error.message || String(error)) +
+        (saved ? ' El resultado pendiente se ha conservado en este navegador. Pulsa Reintentar.' :
+          ' Pulsa Reintentar sin cerrar esta pestaña, o descarga el resultado.'));
+    } finally {
+      sending = false;
+      $('reintentarEnvio').disabled = false;
+      $('reintentarEnvio').hidden = !queue.length;
+    }
+  }
+
+  window.PDI = {
+    ready: () => !!identity,
+    registered: () => !!identity,
+    id: () => identity?.ids[0] || null,
+    newAttempt: uid,
+    submit(result) {
+      if (!identity) { showPending('Comprueba el ID antes de registrar el resultado.'); return; }
+      const item = { result: { ...result, originUrl: location.href }, ids: [...identity.ids], sentIds: [] };
+      queue.push(item);
+      const saved = persist();
+      showPending(saved ? 'Resultado guardado temporalmente. Iniciando envío…' :
+        'Iniciando envío. Mantén esta pestaña abierta hasta confirmar la recepción.');
+      transmit();
+    },
+    export(result, file) {
+      const data = { ...result, studentIds: identity?.ids || [], group: identity?.group || null,
+        registro: queue.length ? 'Pendiente de envío' : 'Consulta la hoja central para confirmar el registro' };
+      const url = URL.createObjectURL(new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' }));
+      const a = document.createElement('a'); a.href = url; a.download = file; a.click();
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
+    }
+  };
+
+  $('conexionInfo').textContent = 'Introduce tu ID para consultar el registro del profesor. La actividad necesita conexión a Internet.';
+  $('comprobarID').onclick = verify;
+  for (const id of ['alumnoID', 'alumnoID2']) $(id).onkeydown = event => {
+    if (event.key === 'Enter') { event.preventDefault(); verify(); }
+  };
+  $('cambiarAlumno').onclick = () => {
+    if (confirm('Cambiar de alumno reinicia la actividad actual. Los resultados pendientes seguirán guardados. ¿Continuar?')) resetIdentity();
+  };
+  $('reintentarEnvio').onclick = transmit;
+  if (queue.length) showPending('Hay ' + queue.length + ' resultado(s) pendientes. Pulsa Reintentar.');
 })();
 </script><script>'use strict';
 const $=id=>document.getElementById(id), kind=document.body.dataset.app;
@@ -197,7 +288,7 @@ function render(){
  }
  $('feedback').textContent=checked[index]?(correct(index)?'Correcto. ':'Revisa tu respuesta. ')+q.explain+(q.fields?' Resultado: '+q.answers.map(fmt).join(' · ')+'.':''):'';
  $('feedback').className='feedback '+(checked[index]?(correct(index)?'correct':'wrong'):'');
- $('check').disabled=checked[index];$('prev').disabled=index===0;$('next').disabled=!checked[index];$('next').textContent=index===questions.length-1?'Ver resultado':'Siguiente reto';
+ $('check').disabled=checked[index];$('prev').disabled=index===0;$('next').disabled=!checked[index];$('next').textContent=index===questions.length-1?'Finalizar, guardar y enviar':'Siguiente reto';
 }
 function check(){
  if(!PDI.ready()){$('inputError').textContent='Comprueba tu ID para acceder a la actividad.';$('alumnoID').focus();return;}
