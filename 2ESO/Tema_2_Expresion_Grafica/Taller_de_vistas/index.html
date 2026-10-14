@@ -16,9 +16,9 @@
 <div class="intro"><div class="tag">TEMA 2 · EXPRESIÓN GRÁFICA</div><h1>Explora las vistas de una pieza</h1><p>Gira el volumen, mira desde distintas direcciones y comprueba qué información aparece en cada vista.</p></div>
 <section class="registro" aria-labelledby="registroTitulo">
 <div><h2 id="registroTitulo">Tu actividad</h2><p class="note" id="conexionInfo"></p></div>
-<div class="reg-controls"><label for="alumnoID">ID del alumnado</label><input id="alumnoID" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="El código que te da el profesor" maxlength="32"><button id="comprobarID">Comprobar ID</button><button id="cambiarAlumno" hidden>Cambiar de alumno</button></div>
-<p id="registroMensaje" role="status" aria-live="polite">El nombre se obtiene del registro del profesor; no lo escribas aquí. El ID no se guarda en este dispositivo.</p>
-<details class="teacher"><summary>Conexión docente</summary><p>En el portal se reutiliza la configuración central. Para probar este archivo por separado, introduce la misma URL de Apps Script.</p><label for="urlCentral">URL central terminada en /exec</label><input id="urlCentral" type="url" autocomplete="off" placeholder="https://script.google.com/macros/s/…/exec"><button id="aplicarConexion">Guardar conexión</button><p id="configMensaje" role="status"></p></details>
+<div class="reg-controls"><label for="alumnoID">ID del alumnado</label><input id="alumnoID" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="El código que te da el profesor" maxlength="32"><label for="alumnoID2">Segundo ID (opcional, pareja)</label><input id="alumnoID2" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="Solo si trabajáis en pareja" maxlength="32"><button id="comprobarID">Comprobar ID</button><button id="cambiarAlumno" hidden>Cambiar de alumno</button></div>
+<p id="registroMensaje" role="status" aria-live="polite">Los nombres, curso y grupo se obtienen del registro del profesor. Solo se conserva temporalmente un resultado pendiente de envío.</p>
+
 </section>
 <nav class="tabs" aria-label="Modo de trabajo"><button id="exploreTab" aria-pressed="true">Explorar</button><button id="practiceTab" aria-pressed="false">Retos de vistas</button><button id="examTab" aria-pressed="false">Relacionar piezas y vistas</button></nav>
 <section id="explore">
@@ -44,97 +44,188 @@
 <div class="actions"><button id="retry">Empezar de nuevo</button><button id="download" disabled>Descargar resultado</button></div>
 <p class="note">Las respuestas se corrigen en este dispositivo. Un intento con ID comprobado se envía al registro central al terminar. El resultado de la práctica requiere un ID comprobado.</p>
 </section>
-<section id="examViews" hidden><h2>Relaciona seis piezas con sus vistas</h2><p>Elige un número para cada alzado, planta y perfil derecho. Una vista puede repetirse. El frente es azul; en la planta queda abajo y en el perfil derecho, a la izquierda.</p><p class="hint">Primero observa las tres dimensiones, después los escalones y huecos. Las líneas discontinuas representan aristas ocultas. Las 18 casillas se corrigen al terminar; se registra la nota de la primera comprobación.</p><h3>Banco de 17 vistas</h3><div id="examBank" class="exam-bank"></div><h3>Piezas y respuestas</h3><div id="examPieces" class="exam-pieces"></div><div class="actions"><button id="examCheck" class="active">Comprobar las 18 vistas</button><button id="examSolution" hidden>Ver correspondencias</button><button id="examAgain">Nuevo intento</button><button id="examDownload" disabled>Descargar resultado</button></div><p id="examFeedback" class="feedback" role="status" aria-live="polite"></p></section><div id="envioPanel" class="registro" hidden><p id="envioMensaje" role="status" aria-live="polite"></p><button id="reintentarEnvio" hidden>Reintentar el mismo envío</button></div>
+<section id="examViews" hidden><h2>Relaciona seis piezas con sus vistas</h2><p>Elige un número para cada alzado, planta y perfil derecho. Una vista puede repetirse. El frente es azul; en la planta queda abajo y en el perfil derecho, a la izquierda.</p><p class="hint">Primero observa las tres dimensiones, después los escalones y huecos. Las líneas discontinuas representan aristas ocultas. Las 18 casillas se corrigen al terminar; se registra la nota de la primera comprobación.</p><h3>Banco de 17 vistas</h3><div id="examBank" class="exam-bank"></div><h3>Piezas y respuestas</h3><div id="examPieces" class="exam-pieces"></div><div class="actions"><button id="examCheck" class="active">Finalizar, guardar y enviar</button><button id="examSolution" hidden>Ver correspondencias</button><button id="examAgain">Nuevo intento</button><button id="examDownload" disabled>Descargar resultado</button></div><p id="examFeedback" class="feedback" role="status" aria-live="polite"></p></section><div id="envioPanel" class="registro" hidden><p id="envioMensaje" role="status" aria-live="polite"></p><button id="reintentarEnvio" hidden>Reintentar el mismo envío</button></div>
 </main><footer>R1 · Apoyo a las actividades A8 y A9. Las vistas ortogonales mantienen las dimensiones compartidas; no usan puntos de fuga.</footer>
-<script>(function(){
-'use strict';
-const CFG_KEY='pdi_resultados_endpoint_v1';
-let endpoint='', identity=null, mode='', generation=0, pending=null, busy=false;
-const el=id=>document.getElementById(id);
-const normalize=id=>String(id||'').trim().toUpperCase().replace(/\s+/g,'');
-const valid=url=>/^https:\/\/script\.google\.com\/macros\/s\/[A-Za-z0-9_-]+\/exec$/.test(url);
-const uuid=()=>globalThis.crypto?.randomUUID?.()||'pdi-'+Date.now()+'-'+Math.random().toString(36).slice(2);
-function status(text){el('registroMensaje').textContent=text;}
-function loadEndpoint(){
- const fromRoot=window.RESULTADOS_CONFIG?.APPS_SCRIPT_URL||window.RESULTS_ENDPOINT;
- if(valid(fromRoot))endpoint=fromRoot;
- else try{const remembered=localStorage.getItem(CFG_KEY);if(valid(remembered))endpoint=remembered;}catch{}
- el('urlCentral').value=endpoint;
- el('conexionInfo').textContent=endpoint?'Conexión central configurada. Introduce tu ID para comprobarlo.':'Registro central pendiente de configurar. Puedes explorar sin registrar resultados.';
-}
-function jsonp(params){
- return new Promise((resolve,reject)=>{
-  const cb='__pdi_'+uuid().replace(/[^A-Za-z0-9_]/g,'_'), script=document.createElement('script');let done=false;
-  const clean=()=>{if(done)return;done=true;clearTimeout(timer);delete window[cb];script.remove();};
-  const timer=setTimeout(()=>{clean();reject(new Error('No se pudo consultar el registro. Revisa la conexión e inténtalo de nuevo.'));},12000);
-  window[cb]=data=>{clean();resolve(data);};script.onerror=()=>{clean();reject(new Error('No se pudo conectar con Apps Script.'));};
-  const url=new URL(endpoint);for(const [key,val] of Object.entries(params))url.searchParams.set(key,val);url.searchParams.set('prefix',cb);script.src=url;document.head.append(script);
- });
-}
-async function verify(){
- const id=normalize(el('alumnoID').value);el('alumnoID').value=id;
- if(!id){status('Introduce el ID que te ha dado el profesor.');return;}
- if(!endpoint){status('Falta la conexión central. El profesor puede configurarla en Conexión docente.');return;}
- const token=++generation;el('comprobarID').disabled=true;status('Comprobando ID…');
- try{
-  const data=await jsonp({action:'lookup',id});if(token!==generation)return;
-  if(!data?.ok)throw new Error('ID no encontrado o inactivo. Comprueba tu código.');
-  if(data.level!=='2ESO')throw new Error('Este ID no corresponde a 2.º ESO. Consulta al profesor.');
-  identity={studentId:normalize(data.id),level:data.level,group:data.group};mode='registered';
-  el('alumnoID').disabled=true;el('comprobarID').hidden=true;el('cambiarAlumno').hidden=false;
-  status('ID comprobado · 2.º ESO · Grupo '+data.group+'. Los resultados se enviarán al terminar.');document.dispatchEvent(new Event('pdi-session'));
- }catch(err){if(token===generation)status(err.message);}finally{if(token===generation)el('comprobarID').disabled=false;}
-}
-function reset(){
- generation++;identity=null;mode='';pending=null;busy=false;el('alumnoID').value='';el('alumnoID').disabled=false;el('comprobarID').hidden=false;el('comprobarID').disabled=false;el('cambiarAlumno').hidden=true;el('envioPanel').hidden=true;status('Introduce tu ID para un nuevo intento registrado.');document.dispatchEvent(new Event('pdi-reset'));
-}
-async function transmit(){
- if(!pending||busy)return;
- busy=true;const snapshot=pending,token=generation;el('reintentarEnvio').disabled=true;el('envioMensaje').textContent='Enviando resultado y comprobando recepción…';
- try{
-  const data=new URLSearchParams();data.set('payload',JSON.stringify(snapshot));
-  const controller=new AbortController();const timeout=setTimeout(()=>controller.abort(),12000);
-  try{await fetch(endpoint,{method:'POST',mode:'no-cors',body:data,signal:controller.signal});}finally{clearTimeout(timeout);}
-  let receipt=null;
-  for(let i=0;i<5;i++){
-   if(token!==generation)return;
-   if(i)await new Promise(r=>setTimeout(r,1200));
-   const check=await jsonp({action:'status',studentId:snapshot.studentId,submissionId:snapshot.submissionId});
-   if(check?.service==='Apps Tecnologia'&&!('received' in check))throw new Error('El servidor central necesita la actualización incluida en el paquete.');
-   if(check?.ok&&check.received&&check.groupReceived&&check.submissionId===snapshot.submissionId){receipt=check;break;}
+<script>(function () {
+  'use strict';
+
+  // La URL procede de las aplicaciones vigentes del Tema 1 de 2.º ESO.
+  const ENDPOINT = 'https://script.google.com/macros/s/AKfycbzYhutDT6EZ7meQq2KfVdKq0h8JH9GYnOmZVqjW_IkmOvdMdjS7FxWQWezmx8SfWQf9/exec';
+  const KEY = 'pdi_pending_' + document.body.dataset.app + '_tema2_v1';
+  const $ = id => document.getElementById(id);
+  const normalize = value => String(value || '').trim().toUpperCase().replace(/\s+/g, '');
+  const uid = () => globalThis.crypto?.randomUUID?.() || 'pdi-' + Date.now() + '-' + Math.random().toString(36).slice(2);
+  const course = value => String(value || '').replace(/[^0-9A-Z]/gi, '').toUpperCase();
+  let identity = null, verifying = false, sending = false;
+  let queue = [];
+
+  try {
+    const saved = JSON.parse(localStorage.getItem(KEY) || '[]');
+    if (Array.isArray(saved)) queue = saved.filter(x => x && Array.isArray(x.ids) && x.result);
+  } catch (_) { /* El envío aún se puede reintentar durante esta sesión. */ }
+
+  function persist() {
+    try {
+      if (queue.length) localStorage.setItem(KEY, JSON.stringify(queue));
+      else localStorage.removeItem(KEY);
+      return true;
+    } catch (_) { return false; }
   }
-  if(token!==generation)return;
-  if(!receipt)throw new Error('No se ha confirmado el guardado en Sheets. Reintenta el mismo envío o descarga una copia.');
-  el('envioMensaje').textContent='Resultado recibido en Sheets y en la pestaña de tu grupo.';el('reintentarEnvio').hidden=true;
- }catch(err){if(token===generation){el('envioMensaje').textContent=err.message+' No se da por registrado.';el('reintentarEnvio').hidden=false;}}
- finally{if(token===generation){busy=false;el('reintentarEnvio').disabled=false;}}
-}
-window.PDI={
- ready:()=>mode==='registered', registered:()=>mode==='registered', id:()=>identity?.studentId||null,
- newAttempt:()=>{generation++;pending=null;busy=false;el('envioPanel').hidden=true;return uuid();},
- submit(result){
-  if(mode!=='registered'){el('envioPanel').hidden=false;el('envioMensaje').textContent='Comprueba tu ID antes de registrar el resultado.';el('reintentarEnvio').hidden=true;return;}
-  pending={...result,...identity,originUrl:location.href};el('envioPanel').hidden=false;el('reintentarEnvio').hidden=true;transmit();
- },
- export(result,file){
-  const data={...result,studentId:identity?.studentId||null,nivel:identity?.level||'2ESO',grupo:identity?.group||null,registro:mode==='registered'?'ID comprobado; consulta el estado del envío':'Sin ID comprobado'};
-  const url=URL.createObjectURL(new Blob([JSON.stringify(data,null,2)],{type:'application/json'}));const a=document.createElement('a');a.href=url;a.download=file;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
- }
-};
-el('comprobarID').onclick=verify;el('alumnoID').onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();verify();}};
-el('cambiarAlumno').onclick=()=>{if(confirm('Cambiar de alumno borra el intento actual de esta pantalla. ¿Continuar?'))reset();};
-el('reintentarEnvio').onclick=transmit;
-window.addEventListener('pageshow',event=>{if(event.persisted)reset();});
-el('aplicarConexion').onclick=()=>{
- const url=el('urlCentral').value.trim();if(!valid(url)){el('configMensaje').textContent='Introduce una URL de Apps Script que empiece por https://script.google.com/macros/s/ y termine en /exec.';return;}
- if(mode){el('configMensaje').textContent='Cambia de alumno antes de cambiar la conexión.';return;}
- endpoint=url;try{localStorage.setItem(CFG_KEY,url);}catch{}
- el('configMensaje').textContent='Conexión guardada en este navegador. No se guarda ningún ID ni nombre.';loadEndpoint();
-};
-loadEndpoint();
-if(/^https?:$/.test(location.protocol)){
- const script=document.createElement('script');script.src=new URL('/config_resultados.js',location.href);script.onload=()=>{if(!mode)loadEndpoint();};script.onerror=()=>{};document.head.append(script);
-}
+
+  function showPending(message) {
+    $('envioPanel').hidden = false;
+    $('envioMensaje').textContent = message;
+    $('reintentarEnvio').hidden = !queue.length;
+  }
+
+  async function lookup(id) {
+    const url = ENDPOINT + '?action=lookup&id=' + encodeURIComponent(id) + '&_=' + Date.now();
+    const response = await fetch(url, { method: 'GET', cache: 'no-store', redirect: 'follow' });
+    if (!response.ok) throw new Error('No se pudo consultar el registro: HTTP ' + response.status + '.');
+    const data = await response.json();
+    if (!data?.ok || !data?.encontrado || !data?.alumno) throw new Error('ID no encontrado o inactivo: ' + id + '.');
+    return data.alumno;
+  }
+
+  async function verify() {
+    if (verifying) return;
+    const id1 = normalize($('alumnoID').value), id2 = normalize($('alumnoID2').value);
+    $('alumnoID').value = id1;
+    $('alumnoID2').value = id2;
+    if (!id1) { $('registroMensaje').textContent = 'Introduce el primer ID.'; return; }
+    if (id2 && id1 === id2) { $('registroMensaje').textContent = 'Los dos ID deben ser diferentes.'; return; }
+    verifying = true;
+    $('comprobarID').disabled = true;
+    $('registroMensaje').textContent = 'Comprobando ID en el registro del profesor…';
+    try {
+      const ids = [id1, id2].filter(Boolean);
+      const students = await Promise.all(ids.map(lookup));
+      if (students.some(x => course(x.curso) !== '2ESO')) throw new Error('Uno de los ID no corresponde a 2.º ESO.');
+      if (students.length === 2 && String(students[0].grupo) !== String(students[1].grupo)) {
+        throw new Error('Para trabajar en pareja, ambos alumnos deben pertenecer al mismo grupo.');
+      }
+      identity = { ids, group: String(students[0].grupo), names: students.map(x => String(x.nombre || 'Alumno/a')) };
+      $('alumnoID').disabled = true;
+      $('alumnoID2').disabled = true;
+      $('comprobarID').hidden = true;
+      $('cambiarAlumno').hidden = false;
+      $('registroMensaje').textContent = 'Identidad confirmada: ' + identity.names.join(' y ') + ' · 2.º ESO · Grupo ' + identity.group + '.';
+      document.dispatchEvent(new Event('pdi-session'));
+    } catch (error) {
+      identity = null;
+      $('registroMensaje').textContent = error.message || String(error);
+    } finally {
+      verifying = false;
+      $('comprobarID').disabled = false;
+    }
+  }
+
+  function resetIdentity() {
+    identity = null;
+    for (const id of ['alumnoID', 'alumnoID2']) { $(id).value = ''; $(id).disabled = false; }
+    $('comprobarID').hidden = false;
+    $('cambiarAlumno').hidden = true;
+    $('registroMensaje').textContent = 'Introduce el ID para iniciar otra actividad.';
+    document.dispatchEvent(new Event('pdi-reset'));
+  }
+
+  function makePayload(item, id) {
+    const r = item.result;
+    return {
+      id,
+      tema: r.theme,
+      actividad: r.activity,
+      puntuacion: r.score,
+      maximo: 10,
+      evidencia: JSON.stringify({
+        puntuacionesRetos: r.scores || [],
+        pistasUsadas: (r.hints || []).filter(Boolean).length,
+        intentosTotales: (r.attempts || []).reduce((a, b) => a + (Number(b) || 0), 0),
+        resultado: r.evidence || null
+      }),
+      detalle: JSON.stringify({
+        inicio: r.startedAt,
+        fin: r.finishedAt,
+        intentos: r.attempts || [],
+        pistas: r.hints || [],
+        submissionId: r.submissionId,
+        titulo: r.title,
+        appVersion: r.appVersion,
+        urlOrigen: r.originUrl
+      })
+    };
+  }
+
+  async function transmit() {
+    if (sending || !queue.length) return;
+    sending = true;
+    $('reintentarEnvio').disabled = true;
+    showPending('Enviando el resultado al registro del profesor…');
+    try {
+      while (queue.length) {
+        const item = queue[0];
+        for (const id of item.ids.filter(id => !item.sentIds.includes(id))) {
+          const response = await fetch(ENDPOINT, {
+            method: 'POST',
+            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+            body: JSON.stringify(makePayload(item, id)),
+            redirect: 'follow'
+          });
+          if (!response.ok) throw new Error('Error HTTP ' + response.status + ' al enviar el ID ' + id + '.');
+          const data = await response.json();
+          if (!data?.ok) throw new Error(data?.error || 'El servidor rechazó el resultado del ID ' + id + '.');
+          item.sentIds.push(id);
+          persist();
+        }
+        queue.shift();
+        persist();
+      }
+      showPending('Resultado enviado para todos los ID. Comprueba su registro en la hoja central.');
+    } catch (error) {
+      const saved = persist();
+      showPending((error.message || String(error)) +
+        (saved ? ' El resultado pendiente se ha conservado en este navegador. Pulsa Reintentar.' :
+          ' Pulsa Reintentar sin cerrar esta pestaña, o descarga el resultado.'));
+    } finally {
+      sending = false;
+      $('reintentarEnvio').disabled = false;
+      $('reintentarEnvio').hidden = !queue.length;
+    }
+  }
+
+  window.PDI = {
+    ready: () => !!identity,
+    registered: () => !!identity,
+    id: () => identity?.ids[0] || null,
+    newAttempt: uid,
+    submit(result) {
+      if (!identity) { showPending('Comprueba el ID antes de registrar el resultado.'); return; }
+      const item = { result: { ...result, originUrl: location.href }, ids: [...identity.ids], sentIds: [] };
+      queue.push(item);
+      const saved = persist();
+      showPending(saved ? 'Resultado guardado temporalmente. Iniciando envío…' :
+        'Iniciando envío. Mantén esta pestaña abierta hasta confirmar la recepción.');
+      transmit();
+    },
+    export(result, file) {
+      const data = { ...result, studentIds: identity?.ids || [], group: identity?.group || null,
+        registro: queue.length ? 'Pendiente de envío' : 'Consulta la hoja central para confirmar el registro' };
+      const url = URL.createObjectURL(new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' }));
+      const a = document.createElement('a'); a.href = url; a.download = file; a.click();
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
+    }
+  };
+
+  $('conexionInfo').textContent = 'Introduce tu ID para consultar el registro del profesor. La actividad necesita conexión a Internet.';
+  $('comprobarID').onclick = verify;
+  for (const id of ['alumnoID', 'alumnoID2']) $(id).onkeydown = event => {
+    if (event.key === 'Enter') { event.preventDefault(); verify(); }
+  };
+  $('cambiarAlumno').onclick = () => {
+    if (confirm('Cambiar de alumno reinicia la actividad actual. Los resultados pendientes seguirán guardados. ¿Continuar?')) resetIdentity();
+  };
+  $('reintentarEnvio').onclick = transmit;
+  if (queue.length) showPending('Hay ' + queue.length + ' resultado(s) pendientes. Pulsa Reintentar.');
 })();
 </script><script>
 'use strict';
@@ -405,7 +496,7 @@ function renderQuestion(){
  $('feedback').textContent=quizChecked[quizIndex]?q.options[quizAnswers[quizIndex]].feedback:'';
  $('feedback').className='feedback '+(quizChecked[quizIndex]?(quizAnswers[quizIndex]===q.correctIndex?'correct':'wrong'):'');
  $('checkAnswer').disabled=quizChecked[quizIndex]||quizAnswers[quizIndex]===null;
- $('prevQuestion').disabled=quizIndex===0;$('nextQuestion').disabled=!quizChecked[quizIndex];$('nextQuestion').textContent=quizIndex===9?'Ver resultado':'Siguiente reto';
+ $('prevQuestion').disabled=quizIndex===0;$('nextQuestion').disabled=!quizChecked[quizIndex];$('nextQuestion').textContent=quizIndex===9?'Finalizar, guardar y enviar':'Siguiente reto';
  quizYaw=30;quizPitch=22;$('quizYaw').value=30;$('quizPitch').value=22;drawQuizModel();updateQuizProgress();
 }
 function checkAnswer(){if(!PDI.ready()){$('registroMensaje').textContent='Comprueba tu ID para acceder a la actividad.';$('alumnoID').focus();return;}if(!viewStartedAt)viewStartedAt=new Date().toISOString();if(quizAnswers[quizIndex]===null||quizChecked[quizIndex])return;quizChecked[quizIndex]=true;renderQuestion()}
