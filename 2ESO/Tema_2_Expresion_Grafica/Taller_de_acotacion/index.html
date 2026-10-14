@@ -1,0 +1,332 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Taller de acotación · Expresión gráfica</title><style>:root{--ink:#21333c;--muted:#52656e;--blue:#126784;--paper:#fcfaf3;--line:#d4dedf;--green:#286943;--red:#a2382e}*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.5 system-ui,sans-serif}header,main,footer{max-width:1200px;margin:auto;padding:24px}header{border-bottom:1px solid var(--line)}h1{font-size:clamp(28px,4vw,39px);line-height:1.15;margin:12px 0}h2{font-size:22px;margin:0 0 12px}h3{font-size:18px}.brand,.tag{font-size:13px;letter-spacing:.05em;font-weight:700}.note{font-size:14px;color:var(--muted)}p{margin:8px 0 16px}button,input,select{font:inherit}button,select,input{border:1px solid #9baeb7;border-radius:8px;background:white;color:var(--ink);padding:9px 12px;max-width:100%}button{cursor:pointer}button:hover{background:#edf4f5}button:disabled{opacity:.6;cursor:default}button.active,button[aria-pressed=true]{background:var(--blue);color:white;border-color:var(--blue)}button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid #c38100;outline-offset:3px}[hidden]{display:none!important}.tabs,.actions,.controls{display:flex;gap:10px;flex-wrap:wrap;margin:20px 0}.grid{display:grid;grid-template-columns:1.1fr 1fr;gap:22px}.panel{padding:22px;background:white;border:1px solid var(--line);border-radius:12px}.panel svg{display:block;width:100%;height:auto;max-height:440px}.formrow{display:flex;gap:14px;align-items:end;flex-wrap:wrap}.formrow label{display:grid;gap:6px}.formrow input{width:110px}table{border-collapse:collapse;width:100%;font-size:15px}th,td{padding:10px;border:1px solid var(--line);text-align:left}th{background:#eaf1f3}.feedback{padding:14px 0;font-weight:600;min-height:48px}.correct{color:var(--green)}.wrong{color:var(--red)}.options{display:grid;grid-template-columns:1fr 1fr;gap:12px}.option{display:block;border:2px solid var(--line);border-radius:10px;background:white;padding:12px;cursor:pointer}.option:hover{border-color:#829eab}.option.chosen{border-color:var(--blue)}.option.good{border-color:var(--green)}.option.bad{border-color:var(--red)}.option input{width:18px;height:18px;accent-color:var(--blue)}.option svg{width:100%;height:auto;max-height:235px}.option-name{font-weight:700;display:flex;align-items:center;gap:9px}.level{display:inline-block;border-radius:20px;background:#f7ebbf;padding:4px 12px;font-size:14px}.numeric-fields{display:flex;gap:18px;flex-wrap:wrap;margin:18px 0}.numeric-fields label{display:grid;gap:7px}.numeric-fields input{width:135px}.track{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:20px}progress{accent-color:var(--blue);width:220px;height:13px}.result-score{font-size:32px;font-weight:700}.review-list{display:flex;gap:8px;flex-wrap:wrap}.review-list button{font-size:14px}.tip{background:#f8f2d8;padding:12px;border-radius:8px}.field-error{color:var(--red);font-size:15px}footer{font-size:13px;color:var(--muted);border-top:1px solid var(--line)}fieldset{border:0;margin:0;padding:0;min-width:0}legend{font-weight:600;margin-bottom:12px}input[type=checkbox]{accent-color:var(--blue);width:17px;height:17px}input[type=range]{accent-color:var(--blue);padding:0}.registro{padding:18px;margin:18px 0;border:1px solid var(--line);border-radius:12px;background:white}.registro h2{font-size:18px}.reg-controls{display:flex;gap:9px;align-items:center;flex-wrap:wrap}.reg-controls input{width:300px}.registro #registroMensaje{font-size:14px;margin-top:12px}.teacher{margin-top:10px;color:var(--muted);font-size:14px}.teacher summary{cursor:pointer}.teacher input{display:block;width:100%;margin:8px 0}.registro #envioMensaje{font-weight:600}.metric{font-size:22px;font-weight:700}.mini-tabs{display:flex;gap:7px;flex-wrap:wrap;margin:15px 0}.mini-tabs button{font-size:14px}.figure-note{font-size:13px;text-align:center;color:var(--muted)}@media(max-width:820px){.grid{grid-template-columns:1fr}.panel{padding:16px}header,main,footer{padding:18px}.numeric-fields{gap:10px}}@media(max-width:420px){.options{gap:8px}.option{padding:8px}body{font-size:16px}.reg-controls input{width:100%}}
+</style><style>.figure-picker{display:flex;flex-wrap:wrap;gap:10px;margin:20px 0}.draw-fields{display:flex;flex-wrap:wrap;gap:12px;margin:14px 0}.draw-fields label,.draw-field{display:grid;gap:5px}.draw-fields input{width:145px}.draw-fields select{min-width:105px}.draw-field select{margin-bottom:12px}#cotaCanvas{max-height:none;touch-action:manipulation}#cotaList{padding-left:24px}#cotaList li{margin:10px 0}#cotaList button{font-size:14px;padding:5px 9px;margin-left:8px}.draw-point{cursor:pointer}.draw-point:focus{outline:none}.draw-point:focus circle:last-of-type{stroke:#c38100;stroke-width:5}#drawingPractice .grid{grid-template-columns:minmax(0,1.2fr) minmax(0,1fr)}@media(max-width:820px){#drawingPractice .grid{grid-template-columns:1fr}}
+</style></head><body data-app="acotacion"><header><div class="brand">TECNOLOGÍA Y DIGITALIZACIÓN · 2.º ESO</div><div class="tag">TEMA 2 · EXPRESIÓN GRÁFICA</div><h1>Taller de acotación</h1><p>Da los datos necesarios para fabricar</p></header><main><section class="registro" aria-labelledby="registroTitulo">
+<div><h2 id="registroTitulo">Tu actividad</h2><p class="note" id="conexionInfo"></p></div>
+<div class="reg-controls"><label for="alumnoID">ID del alumnado</label><input id="alumnoID" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="El código que te da el profesor" maxlength="32"><button id="comprobarID">Comprobar ID</button><button id="cambiarAlumno" hidden>Cambiar de alumno</button></div>
+<p id="registroMensaje" role="status" aria-live="polite">El nombre se obtiene del registro del profesor; no lo escribas aquí. El ID no se guarda en este dispositivo.</p>
+<details class="teacher"><summary>Conexión docente</summary><p>En el portal se reutiliza la configuración central. Para probar este archivo por separado, introduce la misma URL de Apps Script.</p><label for="urlCentral">URL central terminada en /exec</label><input id="urlCentral" type="url" autocomplete="off" placeholder="https://script.google.com/macros/s/…/exec"><button id="aplicarConexion">Guardar conexión</button><p id="configMensaje" role="status"></p></details>
+</section>
+<nav class="tabs" aria-label="Modo de trabajo"><button id="exploreTab" aria-pressed="true">Explorar</button><button id="practiceTab" aria-pressed="false">Diez retos prácticos</button><button id="drawingTab" aria-pressed="false">Acotar figuras</button></nav><section id="explore"><div class="grid"><section class="panel"><h2>Construye un plano útil</h2><p>Base real de 180 × 100 × 3 mm, con dos agujeros Ø10. Cada centro está a 20 mm de su extremo y a 50 mm del borde delantero.</p><label>Escala del dibujo<select id="plateScale"><option>1:1</option><option selected>1:2</option></select></label><div id="plateScene"></div><p id="geometryState" class="note"></p><p class="figure-note">Esquema de pantalla. Las cifras de cota expresan medidas reales.</p></section><section class="panel"><h2>Añade la información</h2><div class="controls"><label><input id="showLong" type="checkbox" checked> Largo</label><label><input id="showDepth" type="checkbox" checked> Fondo</label><label><input id="showDiam" type="checkbox"> Diámetro y cantidad</label><label><input id="showPos" type="checkbox"> Posiciones</label><label><input id="showThickness" type="checkbox"> Espesor</label><label><input id="showCenters" type="checkbox" checked> Ejes</label></div><p id="planState" class="feedback" role="status"></p><div class="actions"><button id="addAll">Completar el plano</button><button id="clearDims">Quitar cotas</button></div><p>Quita una posición y comprueba qué dato deja de poder conocerse. Tener dos agujeros del diámetro correcto no indica dónde hacerlos.</p><p class="tip">Usa líneas de cota independientes del contorno. Evita repetir una medida que ya queda determinada.</p></section></div><div class="grid" style="margin-top:22px"><section class="panel"><h2>Un origen o varios tramos</h2><div class="mini-tabs"><button id="seriesButton" aria-pressed="true">En serie</button><button id="parallelButton" aria-pressed="false">En paralelo</button></div><div id="stripScene"></div><p id="stripExplanation"></p></section><section class="panel"><h2>Un ángulo se expresa en grados</h2><div id="angleScene"></div><p>El arco relaciona las dos direcciones y la cifra 45° indica la inclinación del corte.</p></section></div></section><section id="practice" hidden><p id="sessionWarning" class="tip">Comprueba tu ID para acceder a la práctica y guardar el resultado. La exploración está disponible sin ID.</p><div id="quizWork"><div class="track"><span id="progressLabel"></span><progress id="quizProgress" max="10" value="0" aria-label="Retos comprobados"></progress><span id="level" class="level"></span></div><div class="panel"><h2 id="questionTitle"></h2><p id="questionPrompt"></p><div id="questionFigure"></div><div id="answerArea"></div><details id="hint"><summary>Ver una pista</summary><p id="hintText"></p></details><p id="inputError" class="field-error" role="status"></p><button id="check" class="active">Comprobar</button><p id="feedback" class="feedback" role="status" aria-live="polite"></p><div class="actions"><button id="prev">Anterior</button><button id="next" disabled>Siguiente reto</button></div></div></div><section id="quizResult" class="panel" hidden><h2>Resultado de la práctica</h2><p id="score" class="result-score"></p><p id="scoreNote"></p><p>Revisa los retos antes de empezar otro intento.</p><div id="review" class="review-list"></div><div class="actions"><button id="again">Nuevo intento</button><button id="downloadResult">Descargar resultado</button></div></section></section><section id="drawingPractice" hidden><h2>Acota cuatro figuras ya dibujadas</h2><p>Cuenta los cuadros de 5 mm y escribe las medidas reales en mm. Elige una distancia entre dos puntos o un diámetro/radio sobre una circunferencia. La app traza las líneas y las flechas para que puedas concentrarte en decidir qué medidas hacen falta.</p><div class="figure-picker" id="figurePicker"></div><div class="grid"><section class="panel"><h3 id="drawingTitle"></h3><p id="drawingDescription" class="note"></p><svg id="cotaCanvas" viewBox="60 40 440 420" role="img" aria-label="Figura en cuadrícula de 5 milímetros para acotar"></svg><p class="figure-note">Cada cuadro representa 5 mm reales. El tamaño de pantalla no es una escala para medir con regla.</p><div class="actions"><button id="checkDrawing" class="active">Comprobar plano</button><button id="solutionDrawing">Ver una solución</button><button id="clearDrawing">Borrar cotas de esta figura</button></div><p id="drawingFeedback" class="feedback" role="status" aria-live="polite"></p></section><section class="panel"><h3>Elige y coloca una cota</h3><label class="draw-field">Tipo de cota<select id="cotaType"><option value="distance">Distancia</option><option value="diameter">Ø Diámetro</option><option value="radius">R Radio</option></select></label><div id="pointControls" class="draw-fields"><label>Punto inicial<select id="pointStart"></select></label><label>Punto final<select id="pointEnd"></select></label><label>Dirección<select id="cotaAxis"><option value="auto">Automática</option><option value="x">Horizontal</option><option value="y">Vertical</option></select></label></div><div id="curveControls" hidden><label class="draw-field">Elemento curvo<select id="curveTarget"></select></label></div><p id="selectionNote" class="note">También puedes seleccionar los puntos o las curvas tocando el dibujo.</p><div class="draw-fields"><label>Medida real (mm)<input id="cotaValue" type="text" inputmode="decimal" autocomplete="off" placeholder="Tu medida"></label><label id="sideLabel">Colocar fuera, hacia<select id="cotaSide"><option value="near">Arriba / izquierda</option><option value="far">Abajo / derecha</option></select></label></div><button id="addDrawingCota">Colocar cota</button><p id="drawingError" class="field-error" role="status"></p><h3 style="margin-top:24px">Cotas del plano</h3><ol id="cotaList"></ol><p class="tip">Busca datos suficientes y evita repetir dimensiones que ya quedan determinadas. En la corona usa Ø; en el arco superior de D usa R. B tiene un eje de simetría.</p><p id="drawingProgress" class="note"></p><p class="note">La nota usa la primera comprobación de cada figura. Después puedes revisar y corregir.</p><div class="actions"><button id="finishDrawings" disabled>Terminar las cuatro figuras</button><button id="newDrawings">Nuevo intento completo</button><button id="downloadDrawings" disabled>Descargar resultado</button></div><p id="drawingResult" class="feedback" role="status"></p></section></div></section>
+<div id="envioPanel" class="registro" hidden><p id="envioMensaje" role="status" aria-live="polite"></p><button id="reintentarEnvio" hidden>Reintentar el mismo envío</button></div>
+</main><footer>Apoyo a A6 y A7 · Acotar y revisar · 5 retos fáciles, 3 medios y 2 difíciles. HTML independiente. El registro de resultados necesita conexión a Internet y la configuración central del profesor.</footer><script>(function(){
+'use strict';
+const CFG_KEY='pdi_resultados_endpoint_v1';
+let endpoint='', identity=null, mode='', generation=0, pending=null, busy=false;
+const el=id=>document.getElementById(id);
+const normalize=id=>String(id||'').trim().toUpperCase().replace(/\s+/g,'');
+const valid=url=>/^https:\/\/script\.google\.com\/macros\/s\/[A-Za-z0-9_-]+\/exec$/.test(url);
+const uuid=()=>globalThis.crypto?.randomUUID?.()||'pdi-'+Date.now()+'-'+Math.random().toString(36).slice(2);
+function status(text){el('registroMensaje').textContent=text;}
+function loadEndpoint(){
+ const fromRoot=window.RESULTADOS_CONFIG?.APPS_SCRIPT_URL||window.RESULTS_ENDPOINT;
+ if(valid(fromRoot))endpoint=fromRoot;
+ else try{const remembered=localStorage.getItem(CFG_KEY);if(valid(remembered))endpoint=remembered;}catch{}
+ el('urlCentral').value=endpoint;
+ el('conexionInfo').textContent=endpoint?'Conexión central configurada. Introduce tu ID para comprobarlo.':'Registro central pendiente de configurar. Puedes explorar sin registrar resultados.';
+}
+function jsonp(params){
+ return new Promise((resolve,reject)=>{
+  const cb='__pdi_'+uuid().replace(/[^A-Za-z0-9_]/g,'_'), script=document.createElement('script');let done=false;
+  const clean=()=>{if(done)return;done=true;clearTimeout(timer);delete window[cb];script.remove();};
+  const timer=setTimeout(()=>{clean();reject(new Error('No se pudo consultar el registro. Revisa la conexión e inténtalo de nuevo.'));},12000);
+  window[cb]=data=>{clean();resolve(data);};script.onerror=()=>{clean();reject(new Error('No se pudo conectar con Apps Script.'));};
+  const url=new URL(endpoint);for(const [key,val] of Object.entries(params))url.searchParams.set(key,val);url.searchParams.set('prefix',cb);script.src=url;document.head.append(script);
+ });
+}
+async function verify(){
+ const id=normalize(el('alumnoID').value);el('alumnoID').value=id;
+ if(!id){status('Introduce el ID que te ha dado el profesor.');return;}
+ if(!endpoint){status('Falta la conexión central. El profesor puede configurarla en Conexión docente.');return;}
+ const token=++generation;el('comprobarID').disabled=true;status('Comprobando ID…');
+ try{
+  const data=await jsonp({action:'lookup',id});if(token!==generation)return;
+  if(!data?.ok)throw new Error('ID no encontrado o inactivo. Comprueba tu código.');
+  if(data.level!=='2ESO')throw new Error('Este ID no corresponde a 2.º ESO. Consulta al profesor.');
+  identity={studentId:normalize(data.id),level:data.level,group:data.group};mode='registered';
+  el('alumnoID').disabled=true;el('comprobarID').hidden=true;el('cambiarAlumno').hidden=false;
+  status('ID comprobado · 2.º ESO · Grupo '+data.group+'. Los resultados se enviarán al terminar.');document.dispatchEvent(new Event('pdi-session'));
+ }catch(err){if(token===generation)status(err.message);}finally{if(token===generation)el('comprobarID').disabled=false;}
+}
+function reset(){
+ generation++;identity=null;mode='';pending=null;busy=false;el('alumnoID').value='';el('alumnoID').disabled=false;el('comprobarID').hidden=false;el('comprobarID').disabled=false;el('cambiarAlumno').hidden=true;el('envioPanel').hidden=true;status('Introduce tu ID para un nuevo intento registrado.');document.dispatchEvent(new Event('pdi-reset'));
+}
+async function transmit(){
+ if(!pending||busy)return;
+ busy=true;const snapshot=pending,token=generation;el('reintentarEnvio').disabled=true;el('envioMensaje').textContent='Enviando resultado y comprobando recepción…';
+ try{
+  const data=new URLSearchParams();data.set('payload',JSON.stringify(snapshot));
+  const controller=new AbortController();const timeout=setTimeout(()=>controller.abort(),12000);
+  try{await fetch(endpoint,{method:'POST',mode:'no-cors',body:data,signal:controller.signal});}finally{clearTimeout(timeout);}
+  let receipt=null;
+  for(let i=0;i<5;i++){
+   if(token!==generation)return;
+   if(i)await new Promise(r=>setTimeout(r,1200));
+   const check=await jsonp({action:'status',studentId:snapshot.studentId,submissionId:snapshot.submissionId});
+   if(check?.service==='Apps Tecnologia'&&!('received' in check))throw new Error('El servidor central necesita la actualización incluida en el paquete.');
+   if(check?.ok&&check.received&&check.groupReceived&&check.submissionId===snapshot.submissionId){receipt=check;break;}
+  }
+  if(token!==generation)return;
+  if(!receipt)throw new Error('No se ha confirmado el guardado en Sheets. Reintenta el mismo envío o descarga una copia.');
+  el('envioMensaje').textContent='Resultado recibido en Sheets y en la pestaña de tu grupo.';el('reintentarEnvio').hidden=true;
+ }catch(err){if(token===generation){el('envioMensaje').textContent=err.message+' No se da por registrado.';el('reintentarEnvio').hidden=false;}}
+ finally{if(token===generation){busy=false;el('reintentarEnvio').disabled=false;}}
+}
+window.PDI={
+ ready:()=>mode==='registered', registered:()=>mode==='registered', id:()=>identity?.studentId||null,
+ newAttempt:()=>{generation++;pending=null;busy=false;el('envioPanel').hidden=true;return uuid();},
+ submit(result){
+  if(mode!=='registered'){el('envioPanel').hidden=false;el('envioMensaje').textContent='Comprueba tu ID antes de registrar el resultado.';el('reintentarEnvio').hidden=true;return;}
+  pending={...result,...identity,originUrl:location.href};el('envioPanel').hidden=false;el('reintentarEnvio').hidden=true;transmit();
+ },
+ export(result,file){
+  const data={...result,studentId:identity?.studentId||null,nivel:identity?.level||'2ESO',grupo:identity?.group||null,registro:mode==='registered'?'ID comprobado; consulta el estado del envío':'Sin ID comprobado'};
+  const url=URL.createObjectURL(new Blob([JSON.stringify(data,null,2)],{type:'application/json'}));const a=document.createElement('a');a.href=url;a.download=file;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
+ }
+};
+el('comprobarID').onclick=verify;el('alumnoID').onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();verify();}};
+el('cambiarAlumno').onclick=()=>{if(confirm('Cambiar de alumno borra el intento actual de esta pantalla. ¿Continuar?'))reset();};
+el('reintentarEnvio').onclick=transmit;
+window.addEventListener('pageshow',event=>{if(event.persisted)reset();});
+el('aplicarConexion').onclick=()=>{
+ const url=el('urlCentral').value.trim();if(!valid(url)){el('configMensaje').textContent='Introduce una URL de Apps Script que empiece por https://script.google.com/macros/s/ y termine en /exec.';return;}
+ if(mode){el('configMensaje').textContent='Cambia de alumno antes de cambiar la conexión.';return;}
+ endpoint=url;try{localStorage.setItem(CFG_KEY,url);}catch{}
+ el('configMensaje').textContent='Conexión guardada en este navegador. No se guarda ningún ID ni nombre.';loadEndpoint();
+};
+loadEndpoint();
+if(/^https?:$/.test(location.protocol)){
+ const script=document.createElement('script');script.src=new URL('/config_resultados.js',location.href);script.onload=()=>{if(!mode)loadEndpoint();};script.onerror=()=>{};document.head.append(script);
+}
+})();
+</script><script>'use strict';
+const $=id=>document.getElementById(id), kind=document.body.dataset.app;
+const fmt=n=>Number.isInteger(n)?String(n):String(Math.round(n*100)/100).replace('.',',');
+const svg=(body,w=360,h=230)=>`<svg viewBox="0 0 ${w} ${h}" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Dibujo técnico del ejercicio"><g font-family="system-ui,sans-serif" font-size="14" fill="#20333c">${body}</g></svg>`;
+const line=(x,y,a,b,stroke='#20333c',width=1.5,dash='')=>`<line x1="${x}" y1="${y}" x2="${a}" y2="${b}" stroke="${stroke}" stroke-width="${width}" ${dash?`stroke-dasharray="${dash}"`:''}/>`;
+const text=(x,y,t,size=14)=>`<text x="${x}" y="${y}" text-anchor="middle" font-size="${size}">${t}</text>`;
+const rect=(x,y,w,h,fill='#f0f7f8')=>`<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="${fill}" stroke="#20333c" stroke-width="2"/>`;
+function dim(x1,x2,y,base,label){return line(x1,base,x1,y+6,'#617681',1)+line(x2,base,x2,y+6,'#617681',1)+line(x1,y,x2,y,'#617681',1)+line(x1,y,x1+7,y-3,'#617681',1)+line(x1,y,x1+7,y+3,'#617681',1)+line(x2,y,x2-7,y-3,'#617681',1)+line(x2,y,x2-7,y+3,'#617681',1)+text((x1+x2)/2,y-6,label);}
+function rectangle(w,h,cw=w,ch=h){
+ const factor=1.15;return svg(rect(32,30,w*factor,h*factor)+dim(32,32+w*factor,30+h*factor+24,30+h*factor,fmt(cw))+text(32+w*factor+24,30+h*factor/2,fmt(ch))+'<text x="8" y="218" font-size="12">Cifras en mm</text>');
+}
+function fitFigure(w,h,factor){
+ const s=.9, dw=w*factor,dh=h*factor;return svg(rect(20,35,180*s,120*s,'#faf7e9')+rect(20,35,dw*s,dh*s,'none')+text(102,23,'Zona útil 180 × 120')+text(180,210,fmt(dw)+' × '+fmt(dh)+' mm en el papel'));
+}
+function plate(options={}){
+ const o={long:true,depth:true,diam:true,pos:true,thickness:true,centers:true,lvalue:180,dvalue:100,diameter:10,right:20,...options};
+ let b=rect(54,48,216,120,'#fbfcfc');
+ for(const x of [78,246]){
+  b+=`<circle cx="${x}" cy="108" r="6" fill="white" stroke="#20333c" stroke-width="2"/>`;
+  if(o.centers)b+=line(x-12,108,x+12,108,'#617681',1,'8 3 1 3')+line(x,96,x,120,'#617681',1,'8 3 1 3');
+ }
+ if(o.long)b+=dim(54,270,191,168,String(o.lvalue));
+ if(o.depth)b+=line(270,48,310,48,'#617681',1)+line(270,168,310,168,'#617681',1)+line(301,48,301,168,'#617681',1)+text(327,115,String(o.dvalue));
+ if(o.pos)b+=dim(54,78,32,48,'20')+dim(246,270,32,48,String(o.right))+line(54,108,25,108,'#617681',1)+line(54,168,25,168,'#617681',1)+line(31,108,31,168,'#617681',1)+text(15,143,'50');
+ if(o.diam)b+=line(82,104,115,79,'#617681',1)+text(151,77,'2 agujeros Ø'+o.diameter);
+ if(o.thickness)b+=text(185,219,'Espesor 3 · Cotas en mm',12);
+ return svg(b,360,235);
+}
+function strip(mode='serie',total=false){
+ let b=line(28,35,292,35,'#20333c',3);for(const x of [28,94,182,292])b+=line(x,30,x,40);
+ if(mode==='serie'){b+=dim(28,94,66,35,'30')+dim(94,182,66,35,'40')+dim(182,292,66,35,'50');if(total)b+=dim(28,292,105,35,'120');}
+ else b+=dim(28,94,65,35,'30')+dim(28,182,101,35,'70')+dim(28,292,137,35,'120');
+ return svg(b,330,165);
+}
+function coteline(mode){
+ let b=rect(40,40,160,75);
+ if(mode===0)b+=dim(40,200,148,115,'180');
+ if(mode===1)b+=line(40,115,200,115,'#617681',1)+text(120,112,'180');
+ if(mode===2)b+=line(40,151,200,151,'#20333c',7)+text(120,144,'180');
+ if(mode===3)b+=line(40,149,200,149,'#617681',1)+text(120,163,'90');
+ return svg(b,260,190);
+}
+function angle(label='45°',arc=true){
+ let b='<path d="M 42 150 L 42 45 L 158 45 L 263 150 Z" fill="#f0f7f8" stroke="#20333c" stroke-width="2"/>'+line(158,45,264,45,'#617681',1);
+ if(arc)b+='<path d="M 210 45 A 52 52 0 0 1 194.77 81.77" fill="none" stroke="#617681" stroke-width="1.5"/>'+text(240,87,label);
+ else b+=dim(42,263,182,150,label);
+ return svg(b,310,210);
+}
+const scales=[
+{id:'E01',level:'Fácil',title:'Reduce una longitud',prompt:'Una pieza mide 180 mm. ¿Qué longitud dibujas a escala 1:2?',fields:['Longitud en el papel en mm'],answers:[90],explain:'180 × 1/2 = 90 mm. La pieza conserva sus 180 mm reales.',hint:'Para 1:2, divide la longitud real entre 2.',sketch:()=>rectangle(180,25,180,25)},
+{id:'E02',level:'Fácil',title:'Amplía sin cambiar la pieza',prompt:'Una longitud real de 100 mm se representa a escala 2:1. Calcula la longitud dibujada.',fields:['Longitud dibujada en mm'],answers:[200],explain:'100 × 2 = 200 mm. La escala 2:1 amplía el dibujo.',hint:'En 2:1, cada milímetro real se representa con dos.'},
+{id:'E03',level:'Fácil',title:'Recupera la medida real',prompt:'En un plano a escala 1:5, un segmento dibujado mide 25 mm. ¿Cuánto mide la pieza?',fields:['Longitud real en mm'],answers:[125],explain:'25 × 5 = 125 mm. Se deshace la reducción.',hint:'El dibujo es cinco veces menor que el objeto.'},
+{id:'E04',level:'Fácil',title:'Elige el dibujo reducido',prompt:'La pieza real mide 120 × 60 mm. Elige el dibujo que corresponde a escala 1:2. Las cifras indican longitudes del papel.',options:[()=>rectangle(120,60),()=>rectangle(60,30),()=>rectangle(120,30),()=>rectangle(60,60)],correct:1,explain:'Las dos dimensiones se reducen: 120/2 = 60 y 60/2 = 30 mm.',hint:'La escala se aplica al ancho y al alto, con el mismo factor.'},
+{id:'E05',level:'Fácil',title:'Comprueba la escala natural',prompt:'Una longitud real de 60 mm se dibuja a escala 1:1. ¿Qué longitud debe tener sobre el papel?',fields:['Longitud dibujada en mm'],answers:[60],explain:'1:1 mantiene el tamaño: 60 × 1 = 60 mm.',hint:'En escala natural, el tamaño del dibujo coincide con el real.'},
+{id:'E06',level:'Media',title:'¿Qué escala cabe?',prompt:'Una pieza de 300 × 180 mm debe caber en una zona útil de 180 × 120 mm. Elige el dibujo más grande que quepa.',options:[()=>fitFigure(300,180,1),()=>fitFigure(300,180,.2),()=>fitFigure(300,180,.5)],labels:['Escala 1:1','Escala 1:5','Escala 1:2'],correct:2,explain:'1:2 produce 150 × 90 mm y cabe. 1:1 no cabe; 1:5 cabe, pero es menor.',hint:'Calcula ancho y alto para cada escala. Comprueba las dos dimensiones.'},
+{id:'E07',level:'Media',title:'Trabaja con la misma unidad',prompt:'La longitud real es 18 cm y la escala es 1:5. Da el tamaño dibujado en mm.',fields:['Longitud dibujada en mm'],answers:[36],explain:'18 cm = 180 mm. Después, 180/5 = 36 mm.',hint:'Un centímetro equivale a diez milímetros.'},
+{id:'E08',level:'Media',title:'Las cotas dicen lo real',prompt:'La pieza real es de 120 × 60 mm y el dibujo es de 60 × 30 mm a escala 1:2. Elige sus cifras de cota correctas.',options:[()=>rectangle(60,30,60,30),()=>rectangle(60,30,120,60),()=>rectangle(60,30,240,120),()=>rectangle(60,30,120,30)],correct:1,explain:'Las cifras de cota son 120 y 60. Expresan las medidas reales, aunque el dibujo mida la mitad.',hint:'La escala cambia el dibujo, pero no la pieza ni sus cifras de cota.'},
+{id:'E09',level:'Difícil',title:'Calcula las dos dimensiones',prompt:'Dibuja mentalmente una pieza de 300 × 180 mm a escala 1:2. Calcula su ancho y su alto sobre el papel.',fields:['Ancho dibujado en mm','Alto dibujado en mm'],answers:[150,90],explain:'300/2 = 150 mm y 180/2 = 90 mm. Ambas longitudes usan el mismo factor.',hint:'Aplica 1/2 por separado a cada dimensión.'},
+{id:'E10',level:'Difícil',title:'Elige una escala para el plano',prompt:'Una pieza de 600 × 400 mm debe caber en 180 × 120 mm. Entre estas opciones, elige el dibujo más grande que quepa.',options:[()=>fitFigure(600,400,.5),()=>fitFigure(600,400,.1),()=>fitFigure(600,400,1),()=>fitFigure(600,400,.2)],labels:['Escala 1:2','Escala 1:10','Escala 1:1','Escala 1:5'],correct:3,explain:'1:5 da 120 × 80 mm y es la mayor opción que cabe. 1:10 da 60 × 40; 1:2 y 1:1 superan el área.',hint:'Descarta primero las escalas que superan el ancho o el alto disponibles.'}
+];
+const dimensions=[
+{id:'C01',level:'Fácil',title:'Localiza los centros',prompt:'Base de 180 × 100 mm. Cada agujero está a 20 mm de su extremo y a 50 mm del borde delantero. El origen es la esquina izquierda delantera. Completa los dos centros.',fields:['X del centro izquierdo','Y del centro izquierdo','X del centro derecho','Y del centro derecho'],answers:[20,50,160,50],sketch:()=>plate({pos:false,diam:false,thickness:false}),explain:'Centros (20,50) y (160,50). El segundo está a 180 − 20 = 160 mm desde la izquierda.',hint:'Los dos centros usan el mismo origen, no un origen distinto en cada extremo.'},
+{id:'C02',level:'Fácil',title:'La cota expresa la longitud real',prompt:'La base real mide 180 mm de largo. Su planta se dibuja a 1:2. ¿Qué cifra debe indicar la cota del largo?',fields:['Cifra de cota en mm'],answers:[180],explain:'La cifra es 180. Los 90 mm corresponden al tamaño del dibujo sobre el papel.',hint:'La cota comunica cuánto mide la pieza que se va a fabricar.'},
+{id:'C03',level:'Fácil',title:'Dibuja el agujero a escala',prompt:'Un agujero real es Ø10. La planta se representa a escala 1:2. ¿Qué diámetro trazas en el papel?',fields:['Diámetro dibujado en mm'],answers:[5],explain:'10/2 = 5 mm en el papel; la anotación de cota sigue siendo Ø10.',hint:'Aquí se pide lo que dibujas, no la cifra de cota.'},
+{id:'C04',level:'Fácil',title:'Separa contorno y cota',prompt:'Elige el esquema que coloca una línea de cota independiente de la arista, con auxiliares, extremos y cifra real 180.',options:[()=>coteline(1),()=>coteline(0),()=>coteline(2),()=>coteline(3)],correct:1,explain:'La línea fina exterior y sus auxiliares comunican la medida sin utilizar la arista del objeto como cota.',hint:'Busca la línea fina exterior con una cifra de 180 y extremos claros.'},
+{id:'C05',level:'Fácil',title:'Un agujero también tiene posición',prompt:'La base debe llevar dos agujeros Ø10. ¿Qué plano permite localizar sus centros sin adivinar? Todas las cotas son reales.',options:[()=>plate({pos:false}),()=>plate({diam:false,pos:false}),()=>plate()],correct:2,explain:'El plano completo indica diámetro, cantidad, 20 desde cada extremo y 50 desde el borde delantero.',hint:'El diámetro da el tamaño, pero faltan dos referencias para situar cada centro.'},
+{id:'C06',level:'Media',title:'Acota en serie',prompt:'La tira mide 120 mm. Las marcas están a 30 y 70 mm desde la izquierda. Completa los tres tramos consecutivos.',fields:['Primer tramo en mm','Segundo tramo en mm','Tercer tramo en mm'],answers:[30,40,50],sketch:()=>svg(line(28,55,292,55)+[28,94,182,292].map(x=>line(x,45,x,65)).join('')+text(28,85,'0')+text(94,85,'30')+text(182,85,'70')+text(292,85,'120'),330,120),explain:'30; 70 − 30 = 40; 120 − 70 = 50. Suman 120 mm.',hint:'Cada tramo en serie empieza donde acaba el anterior.'},
+{id:'C07',level:'Media',title:'Acota en paralelo',prompt:'Usa la misma tira, con marcas a 30 y 70 mm y extremo final a 120. ¿Qué tres cotas parten del extremo izquierdo común?',fields:['Primera posición en mm','Segunda posición en mm','Extremo final en mm'],answers:[30,70,120],explain:'30, 70 y 120 mm, todos desde el mismo origen. 40 y 50 son tramos, no posiciones desde la izquierda.',hint:'En paralelo se mantiene una referencia común.'},
+{id:'C08',level:'Media',title:'Acota el corte inclinado',prompt:'El corte forma 45° con la horizontal. Elige la cota angular que expresa ese dato.',options:[()=>angle('45 mm'),()=>angle('90°'),()=>angle('45°'),()=>angle('45',false)],correct:2,explain:'Un arco entre las dos direcciones y la cifra 45° indican el ángulo. Un ángulo no se expresa en mm.',hint:'Busca el símbolo de grados y el arco entre las dos líneas.'},
+{id:'C09',level:'Difícil',title:'Evita una repetición',prompt:'Si conservas los tres tramos en serie, ¿qué cota adicional puedes eliminar porque se obtiene sumándolos?',sketch:()=>strip('serie',true),options:['La cota total 120','El tramo 40','El tramo 30','Ninguna'],correct:0,explain:'Si se conservan 30, 40 y 50, el total 120 queda determinado por la suma y no hace falta repetirlo.',hint:'La pregunta exige conservar los tres tramos.'},
+{id:'C10',level:'Difícil',title:'Elige el plano de fabricación',prompt:'Base real 180 × 100 × 3, dos agujeros Ø10 con centros a 20 mm de cada extremo y a 50 del borde delantero. El plano es 1:2. Elige sus cotas correctas.',options:[()=>plate({lvalue:90,dvalue:50,diameter:5}),()=>plate({right:160}),()=>plate({thickness:false,pos:false}),()=>plate()],correct:3,explain:'Las cotas conservan 180, 100, Ø10, 20 desde cada extremo, 50 desde delante y espesor 3. Escala 1:2 cambia el tamaño del dibujo.',hint:'La cota derecha de este esquema se mide desde el extremo derecho, no desde la izquierda.'}
+];
+const questions=kind==='escalas'?scales:dimensions;
+let index=0, answers=[], checked=[], hints=[], attemptId='', startedAt='', finalResult=null, sentAttempt='';
+function resetAttempt(){
+ index=0;answers=Array(questions.length).fill(null);checked=Array(questions.length).fill(false);hints=Array(questions.length).fill(false);attemptId=PDI.newAttempt();startedAt='';finalResult=null;sentAttempt='';$('quizResult').hidden=true;$('quizWork').hidden=false;render();
+}
+function correct(i){const q=questions[i],a=answers[i];return checked[i]&&(q.fields?q.answers.every((v,j)=>Math.abs(v-a[j])<.001):a===q.correct);}
+function render(){
+ const q=questions[index];$('level').textContent=q.level;$('questionTitle').textContent=q.title;$('questionPrompt').textContent=q.prompt;
+ $('progressLabel').textContent=`Reto ${index+1} de ${questions.length} · ${checked.filter(Boolean).length} comprobados`;$('quizProgress').value=checked.filter(Boolean).length;
+ const figure=$('questionFigure');figure.innerHTML=q.sketch?q.sketch():'';figure.hidden=!q.sketch;
+ $('hintText').textContent=q.hint;$('hint').open=false;
+ const target=$('answerArea');target.replaceChildren();$('inputError').textContent='';
+ if(q.fields){
+  const row=document.createElement('div');row.className='numeric-fields';
+  q.fields.forEach((label,j)=>{const a=document.createElement('label');a.textContent=label;const input=document.createElement('input');input.type='text';input.inputMode='decimal';input.autocomplete='off';input.id='num'+j;input.setAttribute('aria-label',label);input.value=answers[index]?.[j]??'';input.disabled=checked[index];a.append(input);row.append(a);});target.append(row);
+ }else{
+  const group=document.createElement('fieldset');const legend=document.createElement('legend');legend.textContent='Selecciona una opción';group.append(legend);const opts=document.createElement('div');opts.className='options';
+  q.options.forEach((option,i)=>{
+   const label=document.createElement('label');label.className='option'+(answers[index]===i?' chosen':'')+(checked[index]&&i===q.correct?' good':'')+(checked[index]&&i===answers[index]&&i!==q.correct?' bad':'');
+   const input=document.createElement('input');input.type='radio';input.name='answer';input.value=i;input.checked=answers[index]===i;input.disabled=checked[index];input.setAttribute('aria-label','Opción '+'ABCD'[i]);
+   const name=document.createElement('div');name.className='option-name';name.append(input,document.createTextNode(q.labels?.[i]||'Opción '+'ABCD'[i]));label.append(name);
+   const drawing=document.createElement('div');if(typeof option==='function')drawing.innerHTML=option();else drawing.textContent=option;label.append(drawing);
+   input.onchange=()=>{answers[index]=i;document.querySelectorAll('.option').forEach(x=>x.classList.remove('chosen'));label.classList.add('chosen');};opts.append(label);
+  });group.append(opts);target.append(group);
+ }
+ $('feedback').textContent=checked[index]?(correct(index)?'Correcto. ':'Revisa tu respuesta. ')+q.explain+(q.fields?' Resultado: '+q.answers.map(fmt).join(' · ')+'.':''):'';
+ $('feedback').className='feedback '+(checked[index]?(correct(index)?'correct':'wrong'):'');
+ $('check').disabled=checked[index];$('prev').disabled=index===0;$('next').disabled=!checked[index];$('next').textContent=index===questions.length-1?'Ver resultado':'Siguiente reto';
+}
+function check(){
+ if(!PDI.ready()){$('inputError').textContent='Comprueba tu ID para acceder a la actividad.';$('alumnoID').focus();return;}
+ if(checked[index])return;const q=questions[index];
+ if(q.fields){
+  const values=q.fields.map((_,j)=>$('num'+j).value.trim());
+  const invalid=values.findIndex(x=>!/^\d+(?:[.,]\d+)?$/.test(x)||!Number.isFinite(Number(x.replace(',','.'))));
+  if(invalid>=0){$('inputError').textContent='Completa todas las medidas con números. Puedes usar coma o punto decimal.';$('num'+invalid).focus();return;}
+  answers[index]=values.map(x=>Number(x.replace(',','.')));
+ }else if(answers[index]===null){$('inputError').textContent='Selecciona una opción antes de comprobar.';return;}
+ if(!startedAt)startedAt=new Date().toISOString();checked[index]=true;render();
+}
+function result(){
+ const earned=questions.filter((_,i)=>correct(i)).length;
+ return {submissionId:attemptId,theme:'Tema_2_Expresion_grafica',activity:kind==='escalas'?'T2_A5_Escalas':'T2_A6_A7_Acotacion',title:kind==='escalas'?'Taller de escalas':'Taller de acotación',score:Math.round(earned/questions.length*100)/10,scores:questions.map((_,i)=>correct(i)?10:0),hints:[...hints],attempts:checked.map(v=>v?1:0),startedAt,finishedAt:new Date().toISOString(),appVersion:'2.0-ID',evidence:{aciertos:earned,total:questions.length,retos:questions.map((q,i)=>({id:q.id,dificultad:q.level,respuesta:answers[i],correcta:correct(i),pista:hints[i]}))}};
+}
+function summary(){
+ if(!checked.every(Boolean))return;
+ if(!finalResult)finalResult=result();const r=finalResult;
+ $('quizWork').hidden=true;$('quizResult').hidden=false;$('score').textContent=`${r.evidence.aciertos} / ${questions.length}`;
+ $('scoreNote').textContent='Nota de la app: '+fmt(r.score)+' / 10. Se conserva la primera respuesta comprobada de cada reto. En un reto con varias medidas, deben ser correctas todas.';
+ const list=$('review');list.replaceChildren();questions.forEach((q,i)=>{const b=document.createElement('button');b.textContent=q.id+' · '+(correct(i)?'Correcto':'Revisar');b.onclick=()=>{index=i;$('quizWork').hidden=false;$('quizResult').hidden=true;render();};list.append(b);});
+ if(sentAttempt!==attemptId){sentAttempt=attemptId;PDI.submit(r);}
+}
+function tab(which){
+ $('explore').hidden=which!=='explore';$('practice').hidden=which!=='practice';$('exploreTab').setAttribute('aria-pressed',String(which==='explore'));$('practiceTab').setAttribute('aria-pressed',String(which==='practice'));
+ if(which==='practice'&&!PDI.ready())$('sessionWarning').hidden=false;else $('sessionWarning').hidden=true;
+ if(which==='practice'&&!startedAt&&PDI.ready())startedAt=new Date().toISOString();
+}
+$('exploreTab').onclick=()=>tab('explore');$('practiceTab').onclick=()=>tab('practice');$('check').onclick=check;
+$('prev').onclick=()=>{if(index){index--;render();}};$('next').onclick=()=>{if(!checked[index])return;if(index<questions.length-1){index++;render();}else summary();};
+$('hint').querySelector('summary').addEventListener('click',()=>{if(!$('hint').open)hints[index]=true;});
+$('again').onclick=()=>{resetAttempt();tab('practice');};$('downloadResult').onclick=()=>{if(finalResult)PDI.export(finalResult,(kind==='escalas'?'T2_Escalas':'T2_Acotacion')+'_resultado.json');};
+document.addEventListener('pdi-reset',()=>{resetAttempt();tab('explore');});document.addEventListener('pdi-session',()=>{resetAttempt();tab('explore');});
+
+function exploreScales(){
+ const w=Number($('realWidth').value),h=Number($('realHeight').value);if(!Number.isFinite(w)||!Number.isFinite(h)||w<=0||h<=0||w>600||h>400){$('exploreError').textContent='Introduce ancho entre 1 y 600 y alto entre 1 y 400 mm.';return;}
+ $('exploreError').textContent='';const scale=$('scale').value,[n,d]=scale.split(':').map(Number),f=n/d,dw=w*f,dh=h*f;
+ const x=w+100,W=x+dw+70,H=Math.max(h,dh)+100;
+ $('scaleScene').innerHTML=svg(rect(30,45,w,h,'#edf4f5')+text(30+w/2,25,'Pieza real')+rect(x,45,dw,dh,'#f8ecc0')+text(x+dw/2,25,'Dibujo '+scale)+dim(30,30+w,h+69,h+45,fmt(w))+dim(x,x+dw,dh+69,dh+45,fmt(w)),W,H);
+ $('scaleResult').textContent=fmt(dw)+' × '+fmt(dh)+' mm';$('scaleType').textContent=f<1?'Reducción':f>1?'Ampliación':'Escala natural';
+ $('scaleCalculation').textContent=`Ancho: ${fmt(w)} × ${n}/${d} = ${fmt(dw)} mm. Alto: ${fmt(h)} × ${n}/${d} = ${fmt(dh)} mm.`;
+ $('realData').textContent=fmt(w)+' × '+fmt(h)+' mm';$('cotaData').textContent=fmt(w)+' y '+fmt(h)+' mm';
+}
+function exploreCotas(){
+ const data={long:$('showLong').checked,depth:$('showDepth').checked,diam:$('showDiam').checked,pos:$('showPos').checked,thickness:$('showThickness').checked,centers:$('showCenters').checked};
+ $('plateScene').innerHTML=plate(data);const missing=[];if(!data.long)missing.push('largo');if(!data.depth)missing.push('fondo');if(!data.diam)missing.push('diámetro y cantidad');if(!data.pos)missing.push('posición de los centros');if(!data.thickness)missing.push('espesor');
+ $('planState').textContent=missing.length?'Faltan datos: '+missing.join(', ')+'.':'El plano contiene las medidas necesarias para marcar esta base.';
+ $('planState').className='feedback '+(missing.length?'wrong':'correct');$('geometryState').textContent=$('plateScale').value==='1:2'?'Papel a 1:2: base 90 × 50 mm; agujeros Ø5. Cotas reales: 180, 100 y Ø10.':'Papel a 1:1: base 180 × 100 mm; agujeros Ø10. Las cotas reales no cambian.';
+ $('plateScene').style.maxWidth='100%';
+}
+if(kind==='escalas'){
+ ['realWidth','realHeight','scale'].forEach(id=>$(id).oninput=exploreScales);$('scaleReset').onclick=()=>{$('realWidth').value=120;$('realHeight').value=60;$('scale').value='1:2';exploreScales();};exploreScales();
+}else{
+ ['showLong','showDepth','showDiam','showPos','showThickness','showCenters','plateScale'].forEach(id=>$(id).onchange=exploreCotas);
+ $('addAll').onclick=()=>{['showLong','showDepth','showDiam','showPos','showThickness','showCenters'].forEach(id=>$(id).checked=true);exploreCotas();};
+ $('clearDims').onclick=()=>{['showLong','showDepth','showDiam','showPos','showThickness'].forEach(id=>$(id).checked=false);exploreCotas();};
+ $('seriesButton').onclick=()=>{$('stripScene').innerHTML=strip('serie');$('stripExplanation').textContent='Serie: 30 + 40 + 50 = 120 mm. Cada tramo parte del anterior.';$('seriesButton').setAttribute('aria-pressed','true');$('parallelButton').setAttribute('aria-pressed','false');};
+ $('parallelButton').onclick=()=>{$('stripScene').innerHTML=strip('paralelo');$('stripExplanation').textContent='Paralelo: 30, 70 y 120 mm desde el mismo extremo izquierdo.';$('seriesButton').setAttribute('aria-pressed','false');$('parallelButton').setAttribute('aria-pressed','true');};
+ $('angleScene').innerHTML=angle();$('seriesButton').click();exploreCotas();
+}
+resetAttempt();
+</script><script>(function(){
+ 'use strict';const E=id=>document.getElementById(id),NS='http://www.w3.org/2000/svg',zero=n=>Array(n).fill(0),format=n=>String(Math.round(n*100)/100).replace('.',',');
+ // Symbolic coordinates allow equivalent independent sets of dimensions.
+ const figures=[
+ {name:'A · Entrante en L',description:'Contorno con entrante. Necesita cuatro dimensiones independientes.',params:[40,30,20,20],xs:[[0,0,0,0],[1,0,0,0],[1,0,0,0],[0,0,1,0],[0,0,1,0],[0,0,0,0]],ys:[[0,0,0,0],[0,0,0,0],[0,1,0,0],[0,1,0,0],[0,1,0,-1],[0,1,0,-1]],w:40,h:30,solution:[['distance',0,1,40,'near'],['distance',1,2,30,'far'],['distance',4,5,20,'far'],['distance',3,4,20,'near']]},
+ {name:'B · T invertida',description:'Figura simétrica. Necesita ancho y alto, más dos dimensiones que definan el tallo y la base.',params:[45,35,15,15],xs:[[.5,0,-.5,0],[.5,0,.5,0],[.5,0,.5,0],[1,0,0,0],[1,0,0,0],[0,0,0,0],[0,0,0,0],[.5,0,-.5,0]],ys:[[0,0,0,0],[0,0,0,0],[0,1,0,-1],[0,1,0,-1],[0,1,0,0],[0,1,0,0],[0,1,0,-1],[0,1,0,-1]],w:45,h:35,axis:true,solution:[['distance',4,5,45,'far'],['distance',3,4,15,'near'],['distance',0,1,15,'near'],['distance',1,4,35,'far']]},
+ {name:'C · Corona circular',description:'Dos circunferencias concéntricas. Acota sus dos diámetros con Ø.',params:[40,20],xs:[],ys:[],w:40,h:40,axis:true,curves:[{label:'Circunferencia exterior',r:20,row:[1,0]},{label:'Circunferencia interior',r:10,row:[0,1]}],solution:[['diameter',0,null,40,'near'],['diameter',1,null,20,'far']]},
+ {name:'D · Remate semicircular',description:'Arco superior de semicírculo. Indica R y una altura que determine el tramo recto.',params:[15,20],xs:[[0,0],[2,0],[2,0],[0,0],[1,0]],ys:[[1,0],[1,0],[1,1],[1,1],[0,0]],w:30,h:35,axis:true,curves:[{label:'Arco superior',r:15,row:[1,0]}],solution:[['radius',0,null,15,'near'],['distance',0,3,20,'near']]}
+ ];
+ const dot=(row,p)=>row.reduce((s,x,i)=>s+x*p[i],0),sub=(a,b)=>a.map((x,i)=>x-b[i]);
+ const point=(f,i)=>[dot(f.xs[i],f.params),dot(f.ys[i],f.params)];
+ function rank(rows,n){const a=rows.map(r=>r.slice());let k=0;for(let c=0;c<n&&k<a.length;c++){const j=a.findIndex((r,i)=>i>=k&&Math.abs(r[c])>1e-8);if(j<0)continue;[a[j],a[k]]=[a[k],a[j]];const v=a[k][c];a[k]=a[k].map(x=>x/v);for(let i=0;i<a.length;i++)if(i!==k){const v=a[i][c];a[i]=a[i].map((x,t)=>x-v*a[k][t]);}k++;}return k;}
+ let index=0,selected=[],curve=0,attempt=crypto.randomUUID(),started='',finished='',sent=false,states=figures.map(()=>({cotas:[],first:null,checks:0,hint:false}));
+ const svg=E('cotaCanvas');
+ function node(type,attrs,parent=svg){const x=document.createElementNS(NS,type);Object.entries(attrs).forEach(([k,v])=>x.setAttribute(k,v));parent.append(x);return x;}
+ const screen=p=>[160+p[0]*5,140+p[1]*5];
+ function segment(a,b,attrs={}){return node('line',{x1:a[0],y1:a[1],x2:b[0],y2:b[1],stroke:'#263b45','stroke-width':1.2,...attrs});}
+ function label(x,y,t,attrs={}){const q=node('text',{x,y,'text-anchor':'middle','font-size':20,'font-family':'system-ui',fill:'#21333c',...attrs});q.textContent=t;return q;}
+ function arrow(p,towards){const dx=towards[0]-p[0],dy=towards[1]-p[1],len=Math.hypot(dx,dy);if(!len)return;const ux=dx/len,uy=dy/len;node('polygon',{points:[p,[p[0]+ux*9-uy*3,p[1]+uy*9+ux*3],[p[0]+ux*9+uy*3,p[1]+uy*9-ux*3]].map(x=>x.join(',')).join(' '),fill:'#263b45'});}
+ function drawCota(c,i,f){
+  if(c.type==='distance'){const a=screen(point(f,c.a)),b=screen(point(f,c.b)),horizontal=c.axis==='x';
+   const same=states[index].cotas.slice(0,i).filter(d=>d.type==='distance'&&d.axis===c.axis&&d.side===c.side).length;
+   const offset=45+same*28;let p,q;
+   if(horizontal){const y=c.side==='near'?140-offset:140+f.h*5+offset;p=[a[0],y];q=[b[0],y];segment([a[0],a[1]],[a[0],y+(c.side==='near'?-7:7)]);segment([b[0],b[1]],[b[0],y+(c.side==='near'?-7:7)]);label((p[0]+q[0])/2,y-7,format(c.value));}
+   else{const x=c.side==='near'?160-offset:160+f.w*5+offset;p=[x,a[1]];q=[x,b[1]];segment(a,[x+(c.side==='near'?-7:7),a[1]]);segment(b,[x+(c.side==='near'?-7:7),b[1]]);label(x-8,(p[1]+q[1])/2,format(c.value),{transform:`rotate(-90 ${x-8} ${(p[1]+q[1])/2})`});}
+   segment(p,q);arrow(p,q);arrow(q,p);
+  }else{
+   const center=screen(index===2?[20,20]:[15,15]),r=f.curves[c.a].r*5;
+   const v=index===2&&c.a===1?[-.707,.707]:[.707,-.707],end=[center[0]+v[0]*r,center[1]+v[1]*r],ext=[end[0]+v[0]*38,end[1]+v[1]*38],far=[ext[0]+(v[0]>0?58:-58),ext[1]];
+   if(c.type==='radius')segment(center,end);segment(end,ext);segment(ext,far);arrow(end,c.type==='radius'?center:ext);label((ext[0]+far[0])/2,far[1]-8,(c.type==='diameter'?'Ø':'R')+format(c.value));
+  }
+ }
+ function draw(){
+  const f=figures[index];svg.replaceChildren();
+  for(let x=60;x<=540;x+=25)segment([x,55],[x,450],{stroke:'#dce5e5','stroke-width':.7});for(let y=65;y<=440;y+=25)segment([60,y],[540,y],{stroke:'#dce5e5','stroke-width':.7});
+  // Grid aligned to the origin; all vertices are multiples of 5 mm except symmetry centres.
+  if(f.axis){const x=160+f.w*2.5;segment([x,110],[x,140+f.h*5+28],{'stroke-dasharray':'12 4 2 4',stroke:'#7a8d96'});}
+  if(index<2)node('polygon',{points:f.xs.map((_,i)=>screen(point(f,i)).join(',')).join(' '),fill:'#fff','fill-opacity':.65,stroke:'#20333c','stroke-width':2.5});
+  else if(index===2){const [cx,cy]=screen([20,20]);segment([cx-125,cy],[cx+125,cy],{'stroke-dasharray':'12 4 2 4',stroke:'#7a8d96'});f.curves.forEach((c,i)=>{const group=node('g',{class:'draw-point',role:'button',tabindex:0,'aria-label':'Seleccionar '+c.label});node('circle',{cx,cy,r:c.r*5,fill:'none',stroke:'transparent','stroke-width':22},group);node('circle',{cx,cy,r:c.r*5,fill:'none',stroke:E('cotaType').value!=='distance'&&curve===i?'#146783':'#20333c','stroke-width':3},group);group.onclick=()=>chooseCurve(i);group.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();chooseCurve(i);}};});}
+  else{const [x,y]=screen([0,15]);node('path',{d:`M ${x} ${y+100} L ${x+150} ${y+100} L ${x+150} ${y} A 75 75 0 0 0 ${x} ${y} Z`,fill:'#fff','fill-opacity':.65,stroke:'#20333c','stroke-width':2.5});const arc=node('path',{d:`M ${x} ${y} A 75 75 0 0 1 ${x+150} ${y}`,fill:'none',stroke:E('cotaType').value!=='distance'?'#146783':'transparent','stroke-width':18,'stroke-opacity':.18,role:'button',tabindex:0,'aria-label':'Seleccionar arco superior',class:'draw-point'});arc.onclick=()=>chooseCurve(0);arc.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();chooseCurve(0);}};}
+  states[index].cotas.forEach((c,i)=>drawCota(c,i,f));
+  f.xs.forEach((_,i)=>{const p=screen(point(f,i)),g=node('g',{role:'button',tabindex:0,class:'draw-point','aria-label':'Seleccionar punto '+(i+1)});node('circle',{cx:p[0],cy:p[1],r:23,fill:'transparent'},g);node('circle',{cx:p[0],cy:p[1],r:6,fill:selected.includes(i)?'#146783':'#fff',stroke:'#146783','stroke-width':2},g);const t=node('text',{x:p[0]+12,y:p[1]-9,'font-size':20,'font-family':'system-ui',fill:'#146783'},g);t.textContent=i+1;g.onclick=()=>choosePoint(i);g.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();choosePoint(i);}};});
+  const list=E('cotaList');list.replaceChildren();states[index].cotas.forEach((c,i)=>{const item=document.createElement('li');item.textContent=(c.type==='distance'?`P${c.a+1}–P${c.b+1}: `:f.curves[c.a].label+': ')+(c.type==='diameter'?'Ø':c.type==='radius'?'R':'')+format(c.value);const b=document.createElement('button');b.textContent='Quitar';b.setAttribute('aria-label','Quitar cota '+(i+1));b.onclick=()=>{states[index].cotas.splice(i,1);draw();};item.append(b);list.append(item);});
+ }
+ function choosePoint(i){if(E('cotaType').value!=='distance'){E('cotaType').value='distance';typeChanged();}selected=selected.length===2?[i]:selected.concat(i);E('pointStart').value=selected[0]??'';E('pointEnd').value=selected[1]??'';selectionNote();draw();}
+ function chooseCurve(i){if(E('cotaType').value==='distance')E('cotaType').value=index===3?'radius':'diameter';curve=i;E('curveTarget').value=i;typeChanged();}
+ function selectionNote(){E('selectionNote').textContent=E('cotaType').value==='distance'?(selected.length?`Puntos seleccionados: ${selected.map(x=>x+1).join(' y ')}. Para puntos desalineados, elige la dirección de la medida.`:'Elige dos puntos alineados en el dibujo o en los selectores.'):('Elemento: '+figures[index].curves[curve]?.label+'. Escribe su '+(E('cotaType').value==='radius'?'radio':'diámetro')+'.');}
+ function typeChanged(){const type=E('cotaType').value;E('pointControls').hidden=type!=='distance';E('curveControls').hidden=type==='distance';E('sideLabel').hidden=type!=='distance';selectionNote();draw();}
+ function setup(){const f=figures[index];selected=[];curve=0;E('drawingTitle').textContent=f.name;E('drawingDescription').textContent=f.description;E('cotaType').value='distance';E('cotaValue').value='';E('cotaAxis').value='auto';E('drawingError').textContent='';E('drawingFeedback').textContent='';for(const id of ['pointStart','pointEnd'])E(id).innerHTML='<option value="">—</option>'+f.xs.map((_,i)=>`<option value="${i}">Punto ${i+1}</option>`).join('');E('curveTarget').innerHTML=(f.curves||[]).map((c,i)=>`<option value="${i}">${c.label}</option>`).join('');for(const option of E('cotaType').options)option.disabled=option.value!=='distance'&&!f.curves;E('cotaType').options[0].disabled=!f.xs.length;if(!f.xs.length)E('cotaType').value='diameter';E('figurePicker').querySelectorAll('button').forEach((b,i)=>b.setAttribute('aria-pressed',String(i===index)));typeChanged();progress();}
+ function add(){const f=figures[index],type=E('cotaType').value,raw=E('cotaValue').value.trim().replace(',','.'),value=Number(raw);E('drawingError').textContent='';if(!raw||!Number.isFinite(value)||value<=0){E('drawingError').textContent='Escribe una medida positiva; puedes usar coma decimal.';return;}if(states[index].cotas.length>=10){E('drawingError').textContent='Hay muchas cotas. Revisa y quita las que no hagan falta.';return;}let c;
+  if(type==='distance'){if(selected.length!==2||selected[0]===selected[1]){E('drawingError').textContent='Elige dos puntos distintos.';return;}const [a,b]=selected,p=point(f,a),q=point(f,b),axis=E('cotaAxis').value!=='auto'?E('cotaAxis').value:Math.abs(p[1]-q[1])<1e-7?'x':Math.abs(p[0]-q[0])<1e-7?'y':null;if(!axis){E('drawingError').textContent='Estos puntos no están alineados. Elige dirección Horizontal o Vertical para medir su separación proyectada.';return;}const row=sub(axis==='x'?f.xs[b]:f.ys[b],axis==='x'?f.xs[a]:f.ys[a]);if(Math.abs(dot(row,f.params))<1e-7){E('drawingError').textContent='La separación en esa dirección es cero. Elige otros puntos o cambia la dirección.';return;}c={type,a,b,axis,row,value,expected:Math.abs(dot(row,f.params)),side:E('cotaSide').value,symbolOK:true};}
+  else{if(!f.curves?.[curve]){E('drawingError').textContent='Selecciona una circunferencia o el arco.';return;}const row=f.curves[curve].row.map(v=>v*(index===2?(type==='radius'?.5:1):(type==='diameter'?2:1)));c={type,a:curve,row,value,expected:dot(row,f.params),symbolOK:index===2?type==='diameter':type==='radius',side:E('cotaSide').value};}
+  started=started||new Date().toISOString();states[index].cotas.push(c);E('cotaValue').value='';draw();
+ }
+ function assess(){const f=figures[index],cotas=states[index].cotas,good=cotas.filter(c=>Math.abs(c.value-c.expected)<.11&&c.symbolOK),full=rank(good.map(c=>c.row),f.params.length),allRank=rank(cotas.map(c=>c.row),f.params.length),valuesOK=cotas.length&&cotas.every(c=>Math.abs(c.value-c.expected)<.11),symbolsOK=cotas.length&&cotas.every(c=>c.symbolOK)&&(index!==3||good.some(c=>c.type==='radius')),noRedundant=cotas.length&&allRank===cotas.length;
+  const score=!cotas.length?0:Math.round((7*full/f.params.length+(valuesOK?1:0)+(symbolsOK?1:0)+(noRedundant?1:0))*100)/100;
+  const messages=[];if(!valuesOK)messages.push('Hay cifras incorrectas: vuelve a contar los cuadros de 5 mm.');if(!symbolsOK)messages.push(index===2?'En C se piden diámetros con Ø.':'En D el arco superior se acota con R.');if(full<f.params.length)messages.push(`Faltan dimensiones independientes: has definido ${full} de ${f.params.length}.`);if(!noRedundant&&cotas.length)messages.push('Hay cotas redundantes. Quita las que se deducen de otras medidas.');if(!messages.length)messages.push('Plano completo: cifras correctas, datos suficientes y sin cotas redundantes.');return {score,messages,full,valuesOK:!!valuesOK,symbolsOK:!!symbolsOK,noRedundant:!!noRedundant};}
+ function check(){if(!PDI.ready()){E('drawingFeedback').textContent='Comprueba tu ID para acceder a la actividad.';E('alumnoID').focus();return;}if(!states[index].cotas.length){E('drawingFeedback').textContent='Coloca cotas antes de comprobar el plano.';return;}if(sent){E('drawingFeedback').textContent='Este intento ya está terminado. Puedes revisar o empezar otro.';return;}started=started||new Date().toISOString();const result=assess(),state=states[index];state.checks++;if(state.first===null)state.first={score:result.score,cotas:JSON.parse(JSON.stringify(state.cotas)),hint:state.hint};E('drawingFeedback').textContent=result.messages.join(' ')+' Resultado actual: '+format(result.score)+' / 10. Primera comprobación: '+format(state.first.score)+' / 10.';E('drawingFeedback').className='feedback '+(result.score===10?'correct':'wrong');progress();}
+ function progress(){const done=states.filter(s=>s.first!==null).length;E('drawingProgress').textContent=`Figuras comprobadas: ${done} de 4.`;E('finishDrawings').disabled=done!==4||sent;}
+ const payload=()=>({submissionId:attempt,theme:'Tema_2_Expresion_grafica',activity:'T2_A6_A7_Acotacion_Figuras',title:'Acotar cuatro figuras',score:states.reduce((s,x)=>s+x.first.score,0)/4,scores:states.map(s=>s.first.score),hints:states.map(s=>s.first.hint),attempts:states.map(s=>s.checks),startedAt:started,finishedAt:finished,appVersion:'3.0-ID',evidence:{gridMm:5,figures:states.map((s,i)=>({figure:'ABCD'[i],first:s.first,finalCotas:s.cotas,checks:s.checks,solutionViewed:s.hint})),criteria:'7 puntos por dimensiones correctas e independientes; 1 cifras, 1 símbolos y 1 ausencia de redundancias. Líneas y flechas trazadas por la app.'}});
+ function reset(){index=0;attempt=crypto.randomUUID();started='';finished='';sent=false;states=figures.map(()=>({cotas:[],first:null,checks:0,hint:false}));E('downloadDrawings').disabled=true;E('drawingResult').textContent='';setup();}
+ figures.forEach((f,i)=>{const b=document.createElement('button');b.textContent=f.name;b.onclick=()=>{index=i;setup();};E('figurePicker').append(b);});
+ E('cotaType').onchange=typeChanged;E('curveTarget').onchange=e=>{curve=Number(e.target.value);selectionNote();draw();};for(const id of ['pointStart','pointEnd'])E(id).onchange=()=>{const a=E('pointStart').value,b=E('pointEnd').value;selected=[a,b].filter(x=>x!=='').map(Number);selectionNote();draw();};
+ E('addDrawingCota').onclick=add;E('cotaValue').onkeydown=e=>{if(e.key==='Enter')add();};E('checkDrawing').onclick=check;E('clearDrawing').onclick=()=>{states[index].cotas=[];E('drawingFeedback').textContent='Cotas borradas. La primera nota se conserva; para repetir la evaluación usa Nuevo intento completo.';draw();};
+ E('solutionDrawing').onclick=()=>{states[index].hint=true;const f=figures[index];const examples=f.solution.map(([type,a,b,value])=>type==='distance'?`P${a+1}–P${b+1} (${Math.abs(Math.abs(point(f,a)[1]-point(f,b)[1])-value)<.01?'vertical':'horizontal'}): ${format(value)}`:`${f.curves[a].label}: ${type==='diameter'?'Ø':'R'}${format(value)}`);E('drawingFeedback').textContent='Una solución posible (mm): '+examples.join(' · ')+'. También se admiten otras cotas suficientes y sin redundancias.';};
+ E('finishDrawings').onclick=()=>{if(!PDI.ready()||sent||states.some(s=>s.first===null))return;finished=new Date().toISOString();sent=true;const data=payload();E('drawingResult').textContent='Nota de la práctica: '+format(data.score)+' / 10. Puedes seguir revisando tus planos.';E('downloadDrawings').disabled=false;progress();PDI.submit(data);};E('downloadDrawings').onclick=()=>{if(sent)PDI.export(payload(),'T2_Acotacion_figuras_resultado.json');};E('newDrawings').onclick=reset;
+ for(const id of ['exploreTab','practiceTab']){const old=E(id).onclick;E(id).onclick=e=>{E('drawingPractice').hidden=true;E('drawingTab').setAttribute('aria-pressed','false');old(e);};}E('drawingTab').onclick=()=>{E('explore').hidden=true;E('practice').hidden=true;E('drawingPractice').hidden=false;for(const id of ['exploreTab','practiceTab'])E(id).setAttribute('aria-pressed','false');E('drawingTab').setAttribute('aria-pressed','true');};
+ document.addEventListener('pdi-reset',()=>{reset();E('exploreTab').click();});document.addEventListener('pdi-session',()=>{reset();E('exploreTab').click();});setup();
+})();
+</script></body></html>

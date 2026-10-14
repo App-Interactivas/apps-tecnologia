@@ -1,0 +1,462 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Taller de vistas · Expresión gráfica</title>
+<meta name="description" content="Gira piezas con caras de colores y relaciona el volumen con su alzado, planta y perfil. Tecnología y Digitalización de 2.º ESO.">
+<style>
+:root{--ink:#20323b;--muted:#586a72;--blue:#146783;--paper:#fcfaf3;--line:#d8dfde;--yellow:#f1c752}*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.5 system-ui,sans-serif}header,main,footer{max-width:1240px;margin:auto;padding:24px}header{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line)}.brand{font-weight:800;letter-spacing:.08em;font-size:13px}.tag{font-size:13px;color:var(--muted)}h1{font-size:clamp(26px,4vw,39px);line-height:1.15;margin:12px 0}h2{font-size:21px;margin:0 0 10px}h3{font-size:17px;margin:0 0 8px}p{margin:8px 0 16px}.intro{max-width:800px}.tabs{display:flex;gap:8px;margin:24px 0}button,select,input{font:inherit}button,select{border:1px solid #a9b9bf;background:white;border-radius:9px;padding:9px 15px;color:var(--ink)}button{cursor:pointer}button:hover{background:#edf4f4}button[aria-pressed=true],.active{background:var(--blue);color:white;border-color:var(--blue)}button:focus-visible,select:focus-visible,input:focus-visible{outline:3px solid #c38100;outline-offset:3px}.toolbar{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-bottom:18px}.workspace{display:grid;grid-template-columns:1.1fr 1fr;gap:22px}.panel{background:white;border:1px solid var(--line);border-radius:14px;padding:20px}.canvas{height:355px;position:relative;background-image:linear-gradient(#e8efef 1px,transparent 1px),linear-gradient(90deg,#e8efef 1px,transparent 1px);background-size:22px 22px;border-radius:8px}#model{width:100%;height:100%;touch-action:none;cursor:grab}#model:active{cursor:grabbing}.legend{display:flex;flex-wrap:wrap;gap:8px;font-size:13px;margin:14px 0}.chip{display:inline-flex;gap:6px;align-items:center}.swatch{width:12px;height:12px;border:1px solid #53646c;border-radius:3px}.controls{display:flex;gap:8px;flex-wrap:wrap}.note{color:var(--muted);font-size:14px}.sliders{display:grid;grid-template-columns:1fr 1fr;gap:15px;margin:15px 0}.sliders label{display:grid;font-size:14px}.sliders input{width:100%;accent-color:var(--blue)}.views{display:grid;grid-template-columns:1fr 1fr;gap:8px}.view{padding:10px;border:1px solid var(--line);border-radius:9px;background:#fff}.view svg{width:100%;height:128px}.view h3{text-align:center;font-size:15px}.view .note{text-align:center;font-size:12px;margin:0}.blank{display:flex;align-items:center;padding:14px;font-size:14px;color:var(--muted)}.span{grid-column:1/-1}.hint{background:#f9f3d9;padding:10px;border-radius:8px;font-size:14px}.dim{font-size:14px;font-weight:600}.practice{max-width:850px}.question{padding:22px 0;border-bottom:1px solid var(--line)}.options{display:flex;gap:10px;flex-wrap:wrap}.options label{background:white;border:1px solid var(--line);border-radius:8px;padding:10px;cursor:pointer}.answer{max-width:130px;padding:8px;border:1px solid #a9b9bf;border-radius:7px}.feedback{font-weight:600;min-height:27px}.correct{color:#21673a}.wrong{color:#9d3b1b}.actions{display:flex;gap:10px;flex-wrap:wrap;margin:20px 0}footer{font-size:13px;color:var(--muted);border-top:1px solid var(--line)}[hidden]{display:none!important}@media(max-width:820px){.workspace{grid-template-columns:1fr}.canvas{height:310px}header{display:block}.sliders{grid-template-columns:1fr}main{padding:18px}.panel{padding:15px}}@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto}}
+
+.practice{max-width:none}.quiz-progress{display:flex;align-items:center;gap:20px;flex-wrap:wrap;margin:22px 0;font-size:15px;font-weight:600}progress{accent-color:var(--blue);width:240px;height:12px}.question-heading{display:flex;gap:12px;align-items:center;margin:15px 0}.question-heading h3{font-size:23px;margin:0}.difficulty{background:#f7ebbc;border-radius:20px;padding:5px 13px;font-size:13px;font-weight:700;white-space:nowrap}.quiz-layout{display:grid;grid-template-columns:1fr 1.15fr;gap:24px;align-items:start}.quiz-piece{position:sticky;top:15px}.quiz-piece .canvas{height:290px}#quizModel{width:100%;height:100%;touch-action:none;cursor:grab}.graphic-fieldset{border:0;padding:0;margin:0;min-width:0}.graphic-fieldset legend{font-weight:700;margin-bottom:12px}.graphic-options{display:grid;grid-template-columns:1fr 1fr;gap:12px}.graphic-option{display:block;background:white;border:2px solid #d6e0e2;border-radius:12px;cursor:pointer;padding:12px}.graphic-option:hover{border-color:#879fa8}.graphic-option.selected{border-color:#146783;background:#f3f9fa}.graphic-option.option-correct{border-color:#297a47}.graphic-option.option-wrong{border-color:#b34928}.graphic-option:focus-within{outline:3px solid #c38100;outline-offset:2px}.graphic-option svg{width:100%;height:auto;display:block}.option-title{display:flex;align-items:center;gap:8px;font-weight:700;font-size:15px}.option-title input{accent-color:var(--blue);width:18px;height:18px}.quiz-actions{margin:20px 0}.quiz-actions .feedback{max-width:1000px;padding-top:10px}.quiz-piece details{font-size:14px}.quiz-piece summary{cursor:pointer}.quiz-piece .sliders{margin-bottom:8px}button:disabled{opacity:.5;cursor:default}@media(max-width:820px){.quiz-layout{grid-template-columns:1fr}.quiz-piece{position:static}.quiz-piece .canvas{height:230px}.question-heading{align-items:start}.question-heading h3{font-size:21px}}@media(max-width:480px){.graphic-options{gap:8px}.graphic-option{padding:7px}.option-title{font-size:13px}.quiz-progress{gap:8px}.question-heading{flex-wrap:wrap}}
+</style>
+<style>.registro{padding:18px;margin:18px 0;border:1px solid var(--line);border-radius:12px;background:white}.registro h2{font-size:18px}.reg-controls{display:flex;gap:9px;align-items:center;flex-wrap:wrap}.reg-controls input{width:300px}.registro #registroMensaje{font-size:14px;margin-top:12px}.teacher{margin-top:10px;color:var(--muted);font-size:14px}.teacher summary{cursor:pointer}.teacher input{display:block;width:100%;margin:8px 0}.registro #envioMensaje{font-weight:600}.metric{font-size:22px;font-weight:700}.mini-tabs{display:flex;gap:7px;flex-wrap:wrap;margin:15px 0}.mini-tabs button{font-size:14px}.figure-note{font-size:13px;text-align:center;color:var(--muted)}</style><style>.tabs{flex-wrap:wrap}select,input{max-width:100%}.exam-bank{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px;margin:16px 0 24px}.bank-view{background:white;border:1px solid var(--line);border-radius:8px;text-align:center;padding:6px}.bank-view svg{width:100%;display:block}.exam-pieces{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px}.exam-pieces svg{width:100%;display:block}.exam-fields{display:grid;gap:7px}.exam-fields label{display:flex;justify-content:space-between;align-items:center;gap:8px}.exam-fields select{width:80px}.match-ok{border:3px solid #286943}.match-bad{border:3px solid #a2382e}@media(max-width:820px){.exam-pieces{grid-template-columns:repeat(2,minmax(0,1fr))}.exam-bank{grid-template-columns:repeat(4,minmax(0,1fr))}}@media(max-width:480px){.exam-pieces{grid-template-columns:1fr}.exam-bank{grid-template-columns:repeat(3,minmax(0,1fr))}.reg-controls input{width:100%}}</style></head>
+<body>
+<header><div class="brand">PDI · CUADERNO TÉCNICO</div><div class="tag">Tecnología y Digitalización · 2.º ESO</div></header>
+<main>
+<div class="intro"><div class="tag">TEMA 2 · EXPRESIÓN GRÁFICA</div><h1>Explora las vistas de una pieza</h1><p>Gira el volumen, mira desde distintas direcciones y comprueba qué información aparece en cada vista.</p></div>
+<section class="registro" aria-labelledby="registroTitulo">
+<div><h2 id="registroTitulo">Tu actividad</h2><p class="note" id="conexionInfo"></p></div>
+<div class="reg-controls"><label for="alumnoID">ID del alumnado</label><input id="alumnoID" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="El código que te da el profesor" maxlength="32"><button id="comprobarID">Comprobar ID</button><button id="cambiarAlumno" hidden>Cambiar de alumno</button></div>
+<p id="registroMensaje" role="status" aria-live="polite">El nombre se obtiene del registro del profesor; no lo escribas aquí. El ID no se guarda en este dispositivo.</p>
+<details class="teacher"><summary>Conexión docente</summary><p>En el portal se reutiliza la configuración central. Para probar este archivo por separado, introduce la misma URL de Apps Script.</p><label for="urlCentral">URL central terminada en /exec</label><input id="urlCentral" type="url" autocomplete="off" placeholder="https://script.google.com/macros/s/…/exec"><button id="aplicarConexion">Guardar conexión</button><p id="configMensaje" role="status"></p></details>
+</section>
+<nav class="tabs" aria-label="Modo de trabajo"><button id="exploreTab" aria-pressed="true">Explorar</button><button id="practiceTab" aria-pressed="false">Retos de vistas</button><button id="examTab" aria-pressed="false">Relacionar piezas y vistas</button></nav>
+<section id="explore">
+<div class="toolbar"><label for="piece">Pieza</label><select id="piece"><option value="prism">Prisma rectangular</option><option value="step" selected>Pieza escalonada</option><option value="roof">Pieza con plano inclinado</option><option value="tunnel">Bloque con túnel rectangular</option><option value="rear">Escalón alto hacia atrás</option><option value="l">Pieza con base en L</option><option value="u">Pieza en U abierta al frente</option></select><button id="reset">Restablecer giro</button><label><input type="checkbox" id="colors" checked> Caras de colores</label><label id="hiddenControl" hidden><input type="checkbox" id="hiddenEdges" checked> Aristas ocultas en el volumen</label></div>
+<div class="workspace">
+<section class="panel"><h2>Volumen que puedes girar</h2><p class="dim" id="dimensions"></p><p id="cavityInfo" class="hint" hidden>Túnel rectangular de 24 × 16 mm que atraviesa los 40 mm de fondo. La entrada está centrada en el frente. Gira la pieza para mirar dentro; en planta y perfil, el material tapa el túnel y sus aristas aparecen discontinuas.</p><div class="canvas"><svg id="model" viewBox="0 0 440 340" role="img" aria-label="Modelo tridimensional de la pieza seleccionada"><g id="faces"></g></svg></div><p class="note">Arrastra sobre la pieza o utiliza los controles. El frente elegido sigue siendo la cara azul aunque gires la pieza.</p><div class="sliders"><label>Giro horizontal <input id="yaw" type="range" min="-180" max="180" step="1" value="30"></label><label>Giro vertical <input id="pitch" type="range" min="-90" max="90" step="1" value="25"></label></div><div class="controls"><button data-camera="front">Mirar de frente</button><button data-camera="top">Mirar desde arriba</button><button data-camera="right">Mirar desde la derecha</button><button data-camera="left">Mirar desde la izquierda</button></div><div class="legend" id="legend"></div></section>
+<section class="panel"><h2>Vistas en sistema europeo</h2><p class="note">Estas vistas mantienen la orientación inicial de la pieza. Girar la cámara ayuda a comprobarlas.</p><div class="views"><div class="view"><h3>Perfil derecho</h3><svg id="rightView" viewBox="0 0 200 140" role="img" aria-label="Perfil derecho"></svg><p class="note">Profundidad × altura</p></div><div class="view"><h3>Alzado</h3><svg id="frontView" viewBox="0 0 200 140" role="img" aria-label="Alzado"></svg><p class="note">Anchura × altura</p></div><div class="blank">Se observa desde la derecha y se coloca a la izquierda del alzado.</div><div class="view"><h3>Planta</h3><svg id="topView" viewBox="0 0 200 140" role="img" aria-label="Planta"></svg><p class="note">Anchura × profundidad</p></div></div><p class="hint">El alzado y la planta comparten anchura. El alzado y el perfil comparten altura. La planta y el perfil comparten profundidad.</p><p class="note">Colores para reconocer caras, líneas continuas para aristas visibles y discontinuas para las ocultas. Las dimensiones se expresan en mm. Los dibujos de pantalla son esquemas, no plantillas para medir o cortar.</p></section>
+</div></section>
+<section id="practice" class="practice" hidden><p id="sessionWarning" class="hint">Comprueba tu ID para acceder a los retos puntuables. La exploración está disponible sin ID.</p>
+<h2>Diez retos con piezas y dibujos</h2>
+<p>5 fáciles, 3 de dificultad media y 2 difíciles. Observa el volumen y elige la vista o el conjunto de vistas que le corresponde. Todas las opciones de un reto usan la misma escala. Para los conjuntos se utiliza el sistema europeo.</p>
+<div class="quiz-progress"><span id="quizProgress" aria-live="polite"></span><progress id="progressBar" max="10" value="0" aria-label="Retos comprobados"></progress></div>
+<div id="quizWorkspace">
+<div class="question-heading"><span id="difficulty" class="difficulty"></span><h3 id="questionTitle"></h3></div>
+<div class="quiz-layout">
+<div class="panel quiz-piece"><h3>Pieza de referencia</h3><p id="quizDimensions" class="note"></p><div class="canvas"><svg id="quizModel" viewBox="0 0 440 340" role="img" aria-label="Pieza del reto que puedes girar"><g id="quizFaces"></g></svg></div><p class="note">Arrastra para girar. El frente sigue siendo la cara azul.</p><div class="sliders"><label>Giro horizontal<input id="quizYaw" type="range" min="-180" max="180" value="30"></label><label>Giro vertical<input id="quizPitch" type="range" min="-90" max="90" value="22"></label></div><details id="hintDetails"><summary>Ver una pista</summary><p id="questionHint" class="note"></p></details></div>
+<fieldset class="graphic-fieldset"><legend>Selecciona un dibujo</legend><div id="graphicOptions" class="graphic-options"></div></fieldset>
+</div>
+<div class="quiz-actions"><button id="checkAnswer" class="active" disabled>Comprobar elección</button><p id="feedback" class="feedback" aria-live="polite"></p></div>
+<div class="actions"><button id="prevQuestion">Anterior</button><button id="nextQuestion" disabled>Siguiente reto</button></div>
+</div>
+<section id="quizSummary" class="panel" hidden><h3 id="resultHeading"></h3><ul id="resultBreakdown"></ul><p>Revisa los dibujos y la explicación de cada reto.</p><div id="reviewQuestions" class="actions"></div></section>
+<div class="actions"><button id="retry">Empezar de nuevo</button><button id="download" disabled>Descargar resultado</button></div>
+<p class="note">Las respuestas se corrigen en este dispositivo. Un intento con ID comprobado se envía al registro central al terminar. El resultado de la práctica requiere un ID comprobado.</p>
+</section>
+<section id="examViews" hidden><h2>Relaciona seis piezas con sus vistas</h2><p>Elige un número para cada alzado, planta y perfil derecho. Una vista puede repetirse. El frente es azul; en la planta queda abajo y en el perfil derecho, a la izquierda.</p><p class="hint">Primero observa las tres dimensiones, después los escalones y huecos. Las líneas discontinuas representan aristas ocultas. Las 18 casillas se corrigen al terminar; se registra la nota de la primera comprobación.</p><h3>Banco de 17 vistas</h3><div id="examBank" class="exam-bank"></div><h3>Piezas y respuestas</h3><div id="examPieces" class="exam-pieces"></div><div class="actions"><button id="examCheck" class="active">Comprobar las 18 vistas</button><button id="examSolution" hidden>Ver correspondencias</button><button id="examAgain">Nuevo intento</button><button id="examDownload" disabled>Descargar resultado</button></div><p id="examFeedback" class="feedback" role="status" aria-live="polite"></p></section><div id="envioPanel" class="registro" hidden><p id="envioMensaje" role="status" aria-live="polite"></p><button id="reintentarEnvio" hidden>Reintentar el mismo envío</button></div>
+</main><footer>R1 · Apoyo a las actividades A8 y A9. Las vistas ortogonales mantienen las dimensiones compartidas; no usan puntos de fuga.</footer>
+<script>(function(){
+'use strict';
+const CFG_KEY='pdi_resultados_endpoint_v1';
+let endpoint='', identity=null, mode='', generation=0, pending=null, busy=false;
+const el=id=>document.getElementById(id);
+const normalize=id=>String(id||'').trim().toUpperCase().replace(/\s+/g,'');
+const valid=url=>/^https:\/\/script\.google\.com\/macros\/s\/[A-Za-z0-9_-]+\/exec$/.test(url);
+const uuid=()=>globalThis.crypto?.randomUUID?.()||'pdi-'+Date.now()+'-'+Math.random().toString(36).slice(2);
+function status(text){el('registroMensaje').textContent=text;}
+function loadEndpoint(){
+ const fromRoot=window.RESULTADOS_CONFIG?.APPS_SCRIPT_URL||window.RESULTS_ENDPOINT;
+ if(valid(fromRoot))endpoint=fromRoot;
+ else try{const remembered=localStorage.getItem(CFG_KEY);if(valid(remembered))endpoint=remembered;}catch{}
+ el('urlCentral').value=endpoint;
+ el('conexionInfo').textContent=endpoint?'Conexión central configurada. Introduce tu ID para comprobarlo.':'Registro central pendiente de configurar. Puedes explorar sin registrar resultados.';
+}
+function jsonp(params){
+ return new Promise((resolve,reject)=>{
+  const cb='__pdi_'+uuid().replace(/[^A-Za-z0-9_]/g,'_'), script=document.createElement('script');let done=false;
+  const clean=()=>{if(done)return;done=true;clearTimeout(timer);delete window[cb];script.remove();};
+  const timer=setTimeout(()=>{clean();reject(new Error('No se pudo consultar el registro. Revisa la conexión e inténtalo de nuevo.'));},12000);
+  window[cb]=data=>{clean();resolve(data);};script.onerror=()=>{clean();reject(new Error('No se pudo conectar con Apps Script.'));};
+  const url=new URL(endpoint);for(const [key,val] of Object.entries(params))url.searchParams.set(key,val);url.searchParams.set('prefix',cb);script.src=url;document.head.append(script);
+ });
+}
+async function verify(){
+ const id=normalize(el('alumnoID').value);el('alumnoID').value=id;
+ if(!id){status('Introduce el ID que te ha dado el profesor.');return;}
+ if(!endpoint){status('Falta la conexión central. El profesor puede configurarla en Conexión docente.');return;}
+ const token=++generation;el('comprobarID').disabled=true;status('Comprobando ID…');
+ try{
+  const data=await jsonp({action:'lookup',id});if(token!==generation)return;
+  if(!data?.ok)throw new Error('ID no encontrado o inactivo. Comprueba tu código.');
+  if(data.level!=='2ESO')throw new Error('Este ID no corresponde a 2.º ESO. Consulta al profesor.');
+  identity={studentId:normalize(data.id),level:data.level,group:data.group};mode='registered';
+  el('alumnoID').disabled=true;el('comprobarID').hidden=true;el('cambiarAlumno').hidden=false;
+  status('ID comprobado · 2.º ESO · Grupo '+data.group+'. Los resultados se enviarán al terminar.');document.dispatchEvent(new Event('pdi-session'));
+ }catch(err){if(token===generation)status(err.message);}finally{if(token===generation)el('comprobarID').disabled=false;}
+}
+function reset(){
+ generation++;identity=null;mode='';pending=null;busy=false;el('alumnoID').value='';el('alumnoID').disabled=false;el('comprobarID').hidden=false;el('comprobarID').disabled=false;el('cambiarAlumno').hidden=true;el('envioPanel').hidden=true;status('Introduce tu ID para un nuevo intento registrado.');document.dispatchEvent(new Event('pdi-reset'));
+}
+async function transmit(){
+ if(!pending||busy)return;
+ busy=true;const snapshot=pending,token=generation;el('reintentarEnvio').disabled=true;el('envioMensaje').textContent='Enviando resultado y comprobando recepción…';
+ try{
+  const data=new URLSearchParams();data.set('payload',JSON.stringify(snapshot));
+  const controller=new AbortController();const timeout=setTimeout(()=>controller.abort(),12000);
+  try{await fetch(endpoint,{method:'POST',mode:'no-cors',body:data,signal:controller.signal});}finally{clearTimeout(timeout);}
+  let receipt=null;
+  for(let i=0;i<5;i++){
+   if(token!==generation)return;
+   if(i)await new Promise(r=>setTimeout(r,1200));
+   const check=await jsonp({action:'status',studentId:snapshot.studentId,submissionId:snapshot.submissionId});
+   if(check?.service==='Apps Tecnologia'&&!('received' in check))throw new Error('El servidor central necesita la actualización incluida en el paquete.');
+   if(check?.ok&&check.received&&check.groupReceived&&check.submissionId===snapshot.submissionId){receipt=check;break;}
+  }
+  if(token!==generation)return;
+  if(!receipt)throw new Error('No se ha confirmado el guardado en Sheets. Reintenta el mismo envío o descarga una copia.');
+  el('envioMensaje').textContent='Resultado recibido en Sheets y en la pestaña de tu grupo.';el('reintentarEnvio').hidden=true;
+ }catch(err){if(token===generation){el('envioMensaje').textContent=err.message+' No se da por registrado.';el('reintentarEnvio').hidden=false;}}
+ finally{if(token===generation){busy=false;el('reintentarEnvio').disabled=false;}}
+}
+window.PDI={
+ ready:()=>mode==='registered', registered:()=>mode==='registered', id:()=>identity?.studentId||null,
+ newAttempt:()=>{generation++;pending=null;busy=false;el('envioPanel').hidden=true;return uuid();},
+ submit(result){
+  if(mode!=='registered'){el('envioPanel').hidden=false;el('envioMensaje').textContent='Comprueba tu ID antes de registrar el resultado.';el('reintentarEnvio').hidden=true;return;}
+  pending={...result,...identity,originUrl:location.href};el('envioPanel').hidden=false;el('reintentarEnvio').hidden=true;transmit();
+ },
+ export(result,file){
+  const data={...result,studentId:identity?.studentId||null,nivel:identity?.level||'2ESO',grupo:identity?.group||null,registro:mode==='registered'?'ID comprobado; consulta el estado del envío':'Sin ID comprobado'};
+  const url=URL.createObjectURL(new Blob([JSON.stringify(data,null,2)],{type:'application/json'}));const a=document.createElement('a');a.href=url;a.download=file;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
+ }
+};
+el('comprobarID').onclick=verify;el('alumnoID').onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();verify();}};
+el('cambiarAlumno').onclick=()=>{if(confirm('Cambiar de alumno borra el intento actual de esta pantalla. ¿Continuar?'))reset();};
+el('reintentarEnvio').onclick=transmit;
+window.addEventListener('pageshow',event=>{if(event.persisted)reset();});
+el('aplicarConexion').onclick=()=>{
+ const url=el('urlCentral').value.trim();if(!valid(url)){el('configMensaje').textContent='Introduce una URL de Apps Script que empiece por https://script.google.com/macros/s/ y termine en /exec.';return;}
+ if(mode){el('configMensaje').textContent='Cambia de alumno antes de cambiar la conexión.';return;}
+ endpoint=url;try{localStorage.setItem(CFG_KEY,url);}catch{}
+ el('configMensaje').textContent='Conexión guardada en este navegador. No se guarda ningún ID ni nombre.';loadEndpoint();
+};
+loadEndpoint();
+if(/^https?:$/.test(location.protocol)){
+ const script=document.createElement('script');script.src=new URL('/config_resultados.js',location.href);script.onload=()=>{if(!mode)loadEndpoint();};script.onerror=()=>{};document.head.append(script);
+}
+})();
+</script><script>
+'use strict';
+const NS='http://www.w3.org/2000/svg';
+const palette={front:'#65b9dc',back:'#b4a0da',bottom:'#bdc9ce',right:'#efa25d',left:'#91bf91',top:'#f2d56c',topLow:'#a2d9d1',riser:'#de9db3',innerLeft:'#81b4c7',innerTop:'#e6b288',innerRight:'#b3bc80',innerBottom:'#c99dbf',innerBack:'#ceba94'};
+const names={front:'Frente',back:'Trasera',bottom:'Base',right:'Derecha',left:'Izquierda',top:'Superior',topLow:'Superior baja',riser:'Escalón vertical',innerLeft:'Pared interior izquierda',innerTop:'Techo interior',innerRight:'Pared interior derecha',innerBottom:'Suelo interior',innerBack:'Fondo de la cavidad'};
+function makePrism(w=60,d=40,h=30){return {w,d,h,type:'prism',poly:[[0,0],[w,0],[w,h],[0,h]]}}
+function makeStep(w=60,d=40,h=30,low=15,split=30){return {w,d,h,low,split,type:'step',poly:[[0,0],[w,0],[w,low],[split,low],[split,h],[0,h]]}}
+function makeRoof(w=60,d=40,h=30,low=15){return {w,d,h,low,type:'roof',poly:[[0,0],[w,0],[w,low],[0,h]]}}
+function makeTunnel(end=null){return {...makePrism(60,40,40),type:'tunnel',hole:{x0:18,x1:42,y0:12,y1:28,end}}}
+function heightPiece(rows,unit=15){
+ const cells=[];rows.forEach((row,z)=>row.forEach((h,x)=>{for(let y=0;y<h;y++)cells.push([x,y,z]);}));
+ return {type:'voxel',cells,unit,w:rows[0].length*unit,d:rows.length*unit,h:Math.max(...rows.flat())*unit};
+}
+function loopsOf(edges){
+ const remaining=edges.map(e=>e.map(p=>[...p])),loops=[];
+ while(remaining.length){const e=remaining.shift(),loop=[e[0]],start=e[0].join(','),next=e[1];let cur=next;
+  while(cur.join(',')!==start){loop.push(cur);const j=remaining.findIndex(x=>x[0].join(',')===cur.join(','));if(j<0)throw Error('Contorno abierto');cur=remaining.splice(j,1)[0][1];}
+  let changed=true;while(changed&&loop.length>3){changed=false;for(let i=0;i<loop.length;i++){const a=loop[(i+loop.length-1)%loop.length],b=loop[i],c=loop[(i+1)%loop.length];if(Math.abs((b[0]-a[0])*(c[1]-b[1])-(b[1]-a[1])*(c[0]-b[0]))<1e-8){loop.splice(i,1);changed=true;break;}}}loops.push(loop);
+ }return loops;
+}
+function voxelGeometry(p){
+ const set=new Set(p.cells.map(c=>c.join(','))),groups=new Map();
+ const specs=[{n:[0,0,-1],color:'front',axis:2,uv:[0,1]},{n:[0,0,1],color:'back',axis:2,uv:[0,1]},{n:[1,0,0],color:'right',axis:0,uv:[2,1]},{n:[-1,0,0],color:'left',axis:0,uv:[2,1]},{n:[0,1,0],color:'top',axis:1,uv:[0,2]},{n:[0,-1,0],color:'bottom',axis:1,uv:[0,2]}];
+ for(const cell of p.cells)for(const spec of specs){if(set.has(cell.map((v,i)=>v+spec.n[i]).join(',')))continue;
+  const plane=cell[spec.axis]+(spec.n[spec.axis]>0?1:0),key=spec.color+plane;let g=groups.get(key);if(!g){g={...spec,plane,squares:[]};groups.set(key,g);}g.squares.push(spec.uv.map(i=>cell[i]));
+ }
+ const faces=[];for(const g of groups.values()){
+  const squares=new Set(g.squares.map(c=>c.join(','))),edges=[];
+  for(const [u,v]of g.squares){if(!squares.has([u,v-1].join(',')))edges.push([[u,v],[u+1,v]]);if(!squares.has([u+1,v].join(',')))edges.push([[u+1,v],[u+1,v+1]]);if(!squares.has([u,v+1].join(',')))edges.push([[u+1,v+1],[u,v+1]]);if(!squares.has([u-1,v].join(',')))edges.push([[u,v+1],[u,v]]);}
+  for(const loop of loopsOf(edges)){const points=loop.map(q=>{const v=[0,0,0];v[g.axis]=g.plane;g.uv.forEach((i,j)=>v[i]=q[j]);return v.map((a,i)=>a*p.unit-[p.w,p.h,p.d][i]/2);});faces.push({points,n:g.n,color:g.color});}
+ }return faces;
+}
+function voxelView(p,kind){
+ const axes=kind==='front'?[0,1,2]:kind==='top'?[0,2,1]:[2,1,0],surf=new Map();
+ for(const cell of p.cells){const key=axes.slice(0,2).map(i=>cell[i]).join(','),d=cell[axes[2]];surf.set(key,surf.has(key)?(kind==='front'?Math.min(surf.get(key),d):Math.max(surf.get(key),d)):d);}
+ const edges=[],inside=new Map();for(const [k,d] of surf){const [u,v]=k.split(',').map(Number);const sides=[[[u,v-1],[u,v],[u+1,v]],[[u+1,v],[u+1,v],[u+1,v+1]],[[u,v+1],[u+1,v+1],[u,v+1]],[[u-1,v],[u,v+1],[u,v]]];for(const [q,a,b]of sides){const other=q.join(',');if(!surf.has(other))edges.push([a,b]);else if(surf.get(other)!==d){const key=[a.join(','),b.join(',')].sort().join('|');inside.set(key,[a,b]);}}}
+ const loops=loopsOf(edges).map(loop=>loop.map(q=>q.map(n=>n*p.unit))),segments=[...inside.values()];
+ // Join contiguous unit segments; unit boundaries are not physical edges.
+ let changed=true;while(changed){changed=false;outer:for(let i=0;i<segments.length;i++)for(let j=i+1;j<segments.length;j++){const a=segments[i],b=segments[j];for(const [ai,bi]of [[0,0],[0,1],[1,0],[1,1]])if(a[ai].join(',')===b[bi].join(',')){const x=a[1-ai],m=a[ai],z=b[1-bi];if((m[0]-x[0])*(z[1]-m[1])===(m[1]-x[1])*(z[0]-m[0])){segments[i]=[x,z];segments.splice(j,1);changed=true;break outer;}}}}
+ return {w:kind==='right'?p.d:p.w,h:kind==='top'?p.d:p.h,outline:loops[0],holes:[],lines:segments.map(e=>line(e[0].map(n=>n*p.unit),e[1].map(n=>n*p.unit)))};
+}
+
+const pieces={prism:makePrism(),step:makeStep(),roof:makeRoof(),tunnel:makeTunnel(),rear:heightPiece([[1,1,1,1],[3,3,3,3]]),l:heightPiece([[2,2,2,2],[2,2,2,2],[2,0,0,0]]),u:heightPiece([[3,0,0,3],[3,0,0,3],[3,3,3,3]])};
+function dot(a,b){return a.reduce((sum,v,i)=>sum+v*b[i],0)}
+function project(v,ya,pi){return [dot(v,[Math.cos(ya),0,Math.sin(ya)]),dot(v,[-Math.sin(pi)*Math.sin(ya),Math.cos(pi),Math.sin(pi)*Math.cos(ya)])]}
+function geometry(p){
+ if(p.cells)return voxelGeometry(p);
+ const center=v=>[v[0]-p.w/2,v[1]-p.h/2,v[2]-p.d/2];
+ const front=p.poly.map(v=>center([...v,0])),back=p.poly.map(v=>center([...v,p.d]));
+ const faces=[{points:front,n:[0,0,-1],color:'front'},{points:back,n:[0,0,1],color:'back'}];
+ p.poly.forEach((a,i)=>{const b=p.poly[(i+1)%p.poly.length],dx=b[0]-a[0],dy=b[1]-a[1];
+  let color=dy>0?'right':dy<0?'left':dx>0?'bottom':'top';
+  if(dy>0&&a[0]!==p.w)color='riser';if(dx<0&&dy>0)color='top';
+  if(p.type==='step'&&dx<0&&a[1]<p.h)color='topLow';
+  faces.push({points:[center([...a,0]),center([...b,0]),center([...b,p.d]),center([...a,p.d])],n:[dy,-dx,0],color});
+ });
+ if(p.hole){const h=p.hole,end=h.end??p.d,loop=[[h.x0,h.y0],[h.x0,h.y1],[h.x1,h.y1],[h.x1,h.y0]];
+  faces[0].holes=[loop.map(v=>center([...v,0]))];
+  if(h.end===null)faces[1].holes=[loop.map(v=>center([...v,p.d]))];
+  loop.forEach((a,i)=>{const b=loop[(i+1)%4],dx=b[0]-a[0],dy=b[1]-a[1];
+   faces.push({points:[center([...a,0]),center([...b,0]),center([...b,end]),center([...a,end])],n:[dy,-dx,0],color:['innerLeft','innerTop','innerRight','innerBottom'][i]});
+  });
+  if(h.end!==null)faces.push({points:loop.map(v=>center([...v,end])),n:[0,0,-1],color:'innerBack'});
+ }
+ return faces;
+}
+function svgNode(type,attrs,parent){const el=document.createElementNS(NS,type);Object.entries(attrs).forEach(([k,v])=>el.setAttribute(k,v));if(parent)parent.append(el);return el}
+function svgPath(points,transform){return points.map((p,i)=>`${i?'L':'M'}${transform(p).join(',')}`).join(' ')+' Z'}
+function rayOccluded(v,n,p){
+ const point=[v[0]+p.w/2,v[1]+p.h/2,v[2]+p.d/2],h=p.hole;
+ const planes=[[0,p.w,h.x0,h.x1],[0,p.h,h.y0,h.y1],[0,p.d,h.end??p.d]];
+ const times=[0];planes.forEach((a,i)=>{if(Math.abs(n[i])<1e-9)return;a.forEach(c=>{const t=(c-point[i])/n[i];if(t>1e-7)times.push(t)})});
+ times.sort((a,b)=>a-b);
+ for(let i=0;i<times.length-1;i++){
+  const t=(times[i]+times[i+1])/2,x=point.map((c,j)=>c+t*n[j]);
+  const inBox=x[0]>1e-7&&x[0]<p.w-1e-7&&x[1]>1e-7&&x[1]<p.h-1e-7&&x[2]>1e-7&&x[2]<p.d-1e-7;
+  const inVoid=x[0]>h.x0-1e-7&&x[0]<h.x1+1e-7&&x[1]>h.y0-1e-7&&x[1]<h.y1+1e-7&&x[2]<(h.end??p.d)+1e-7;
+  if(inBox&&!inVoid)return true;
+ }
+ return false;
+}
+function cavityEdges(p){const h=p.hole,end=h.end??p.d,loop=[[h.x0,h.y0],[h.x1,h.y0],[h.x1,h.y1],[h.x0,h.y1]],center=v=>[v[0]-p.w/2,v[1]-p.h/2,v[2]-p.d/2],edges=[];
+ loop.forEach((a,i)=>{const b=loop[(i+1)%4];for(const z of [0,end])edges.push([center([...a,z]),center([...b,z])]);edges.push([center([...a,0]),center([...a,end])])});return edges;
+}
+function drawModel(target,p,ya,pi,{colors=true,hidden=false,scale=3.6}={}){
+ target.replaceChildren();const camera=[Math.sin(ya)*Math.cos(pi),Math.sin(pi),-Math.cos(ya)*Math.cos(pi)];
+ const transform=v=>{const [x,y]=project(v,ya,pi);return [220+x*scale,170-y*scale]};
+ const depth=f=>dot(f.points.reduce((t,v)=>t.map((n,i)=>n+v[i]/f.points.length),[0,0,0]),camera);
+ const faces=geometry(p).filter(f=>dot(f.n,camera)>1e-7).sort((a,b)=>depth(a)-depth(b));
+ faces.forEach(f=>{let attrs={fill:colors?palette[f.color]:'#e0e8ea',stroke:'#263b45','stroke-width':1.5,'stroke-linejoin':'round'};
+  let el;if(f.holes){attrs.d=svgPath(f.points,transform)+f.holes.map(h=>svgPath(h,transform)).join(' ');attrs['fill-rule']='evenodd';el=svgNode('path',attrs,target)}
+  else{attrs.points=f.points.map(transform).map(v=>v.join(',')).join(' ');el=svgNode('polygon',attrs,target)}
+  const title=svgNode('title',{},el);title.textContent=names[f.color];
+ });
+ if(p.hole&&hidden){const group=svgNode('g',{'aria-label':'Aristas interiores ocultas',stroke:'#344651','stroke-width':1.3,'stroke-dasharray':'5 4',fill:'none'},target);
+  cavityEdges(p).forEach(([a,b])=>{let start=null;const point=t=>a.map((v,i)=>v+(b[i]-v)*t);
+   for(let i=0;i<40;i++){
+    const isHidden=rayOccluded(point((i+.5)/40),camera,p);
+    if(isHidden&&start===null)start=i/40;
+    if(start!==null&&(!isHidden||i===39)){const end=isHidden&&i===39?1:i/40;const [x1,y1]=transform(point(start)),[x2,y2]=transform(point(end));svgNode('line',{x1,y1,x2,y2},group);start=null}
+   }
+  });
+ }
+}
+function line(a,b,hidden=false){return {type:'line',a,b,hidden}}
+function viewSpec(p,kind){
+ if(p.cells)return voxelView(p,kind);
+ const rect=(w,h)=>({w,h,outline:[[0,0],[w,0],[w,h],[0,h]],lines:[],holes:[]});let v;
+ if(kind==='front'){v=rect(p.w,p.h);v.outline=p.poly.map(x=>[...x]);if(p.hole){const h=p.hole;v.holes.push({x:h.x0,y:h.y0,w:h.x1-h.x0,h:h.y1-h.y0})}}
+ if(kind==='top'){v=rect(p.w,p.d);if(p.type==='step'){v.lines.push(line([p.split,0],[p.split,p.d]));v.regions=[{outline:[[p.split,0],[p.w,0],[p.w,p.d],[p.split,p.d]],color:'topLow'}]}if(p.hole){const h=p.hole,end=h.end??p.d;v.lines.push(line([h.x0,0],[h.x0,end],true),line([h.x1,0],[h.x1,end],true));if(h.end!==null)v.lines.push(line([h.x0,end],[h.x1,end],true))}}
+ if(kind==='right'){v=rect(p.d,p.h);if(p.type==='step'||p.type==='roof'){v.lines.push(line([0,p.low],[p.d,p.low]));v.regions=[{outline:[[0,p.low],[p.d,p.low],[p.d,p.h],[0,p.h]],color:p.type==='step'?'riser':'top'}]}if(p.hole){const h=p.hole,end=h.end??p.d;v.lines.push(line([0,h.y0],[end,h.y0],true),line([0,h.y1],[end,h.y1],true));if(h.end!==null)v.lines.push(line([end,h.y0],[end,h.y1],true))}}
+ return v;
+}
+function drawView(target,v,{cx=100,cy=70,scale=2.1,color=null}={}){
+ const transform=([x,y])=>[cx+(x-v.w/2)*scale,cy-(y-v.h/2)*scale];
+ const stroke={stroke:'#263b45','stroke-width':1.6,'stroke-linecap':'butt','stroke-linejoin':'round'};
+ svgNode('polygon',{points:v.outline.map(transform).map(x=>x.join(',')).join(' '),fill:color??'#fff',...stroke},target);
+ if(color)(v.regions??[]).forEach(r=>svgNode('polygon',{points:r.outline.map(transform).map(x=>x.join(',')).join(' '),fill:palette[r.color],...stroke},target));
+ v.holes.forEach(h=>{if(h.circle){const [x,y]=transform([h.x,h.y]);svgNode('circle',{cx:x,cy:y,r:h.r*scale,fill:'#fff',...stroke,...(h.hidden?{'stroke-dasharray':'5 4'}:{})},target)}
+  else{const [x,y]=transform([h.x,h.y+h.h]);svgNode('rect',{x,y,width:h.w*scale,height:h.h*scale,fill:'#fff',...stroke,...(h.hidden?{'stroke-dasharray':'5 4'}:{})},target)}});
+ v.lines.forEach(l=>{const [x1,y1]=transform(l.a),[x2,y2]=transform(l.b);svgNode('line',{x1,y1,x2,y2,...stroke,...(l.hidden?{'stroke-dasharray':'5 4'}:{})},target)});
+}
+function tripleSpecs(p){return {front:viewSpec(p,'front'),top:viewSpec(p,'top'),right:viewSpec(p,'right')}}
+function drawTriple(target,specs){for(const [kind,cx,cy,name] of [['right',65,76,'Perfil derecho'],['front',190,76,'Alzado'],['top',190,183,'Planta']]){
+ const txt=svgNode('text',{x:cx,y:cy-47,'text-anchor':'middle','font-size':12,fill:'#344651','font-family':'system-ui,sans-serif'},target);txt.textContent=name;
+ drawView(target,specs[kind],{cx,cy,scale:1.5});
+}}
+
+</script>
+<script>
+'use strict';
+const $=id=>document.getElementById(id);
+let key='step',yaw=Math.PI/6,pitch=25*Math.PI/180,drag=null;
+function render(){drawModel($('faces'),pieces[key],yaw,pitch,{colors:$('colors').checked,hidden:$('hiddenEdges').checked});$('yaw').value=Math.round(yaw*180/Math.PI);$('pitch').value=Math.round(pitch*180/Math.PI)}
+function views(){const p=pieces[key],color=$('colors').checked;
+ for(const [id,kind,c] of [['frontView','front','front'],['topView','top','top'],['rightView','right','right']]){
+  const target=$(id);target.replaceChildren();drawView(target,viewSpec(p,kind),{color:color?palette[c]:null});
+ }
+ $('dimensions').textContent=`${p.w} mm de ancho · ${p.d} mm de fondo · ${p.h} mm de alto`;
+ $('cavityInfo').hidden=!p.hole;$('hiddenControl').hidden=!p.hole;
+ const colors=[...new Set(geometry(p).map(f=>f.color))];$('legend').replaceChildren();colors.forEach(k=>{const el=document.createElement('span');el.className='chip';const sw=document.createElement('span');sw.className='swatch';sw.style.background=color?palette[k]:'#e0e8ea';el.append(sw,document.createTextNode(names[k]));$('legend').append(el)});
+}
+function setPiece(value){key=value;$('piece').value=value;if(value==='tunnel'){yaw=20*Math.PI/180;pitch=15*Math.PI/180}views();render()}
+function switchTab(practice){$('explore').hidden=practice;$('practice').hidden=!practice;$('exploreTab').setAttribute('aria-pressed',String(!practice));$('practiceTab').setAttribute('aria-pressed',String(practice))}
+$('exploreTab').onclick=()=>switchTab(false);$('practiceTab').onclick=()=>{switchTab(true);$('sessionWarning').hidden=PDI.ready();if(PDI.ready()&&!viewStartedAt)viewStartedAt=new Date().toISOString();};
+$('piece').onchange=e=>setPiece(e.target.value);$('colors').onchange=()=>{views();render()};$('hiddenEdges').onchange=render;
+$('reset').onclick=()=>{yaw=(key==='tunnel'?20:30)*Math.PI/180;pitch=(key==='tunnel'?15:25)*Math.PI/180;render()};
+$('yaw').oninput=e=>{yaw=Number(e.target.value)*Math.PI/180;render()};$('pitch').oninput=e=>{pitch=Number(e.target.value)*Math.PI/180;render()};
+document.querySelectorAll('[data-camera]').forEach(b=>b.onclick=()=>{const v=b.dataset.camera;yaw=v==='right'?Math.PI/2:v==='left'?-Math.PI/2:0;pitch=v==='top'?Math.PI/2:0;render()});
+$('model').onpointerdown=e=>{drag={x:e.clientX,y:e.clientY,yaw,pitch};$('model').setPointerCapture(e.pointerId)};
+$('model').onpointermove=e=>{if(!drag)return;yaw=Math.atan2(Math.sin(drag.yaw-(e.clientX-drag.x)*.01),Math.cos(drag.yaw-(e.clientX-drag.x)*.01));pitch=Math.max(-Math.PI/2,Math.min(Math.PI/2,drag.pitch+(e.clientY-drag.y)*.01));render()};
+$('model').onpointerup=$('model').onpointercancel=()=>drag=null;
+setPiece('step');
+
+</script>
+<script>
+'use strict';
+const clone=v=>JSON.parse(JSON.stringify(v));
+const option=(drawing,feedback)=>({drawing,feedback});
+function changed(base,edit){const v=clone(base);edit(v);return v}
+function mirrored(v){return changed(v,x=>{x.outline=x.outline.map(([a,b])=>[x.w-a,b]);x.lines=x.lines.map(l=>({...l,a:[x.w-l.a[0],l.a[1]],b:[x.w-l.b[0],l.b[1]]}))})}
+function makeChallenge(id,level,piece,prompt,kind,correctDrawing,feedback,wrong,hint,correctIndex){
+ const opts=wrong.map(x=>option(x[0],x[1]));opts.splice(correctIndex,0,option(correctDrawing,feedback));
+ return {id,level,piece,prompt,kind,options:opts,correctIndex,hint};
+}
+const challenges=[];
+{
+ const p=makePrism(60,40,30),v=viewSpec(p,'front');
+ challenges.push(makeChallenge('V01','Fácil',p,'Elige el alzado de este prisma.','single',v,
+  'El frente mide 60 de ancho y 30 de alto: el alzado es el rectángulo horizontal que conserva esas proporciones.',[
+   [viewSpec(p,'top'),'Este rectángulo corresponde a la planta: utiliza 40 mm de fondo en lugar de 30 mm de altura.'],
+   [viewSpec(makeRoof(),'front'),'El prisma no tiene una cara superior inclinada: su alzado no es un trapecio.'],
+   [viewSpec(makePrism(30,40,60),'front'),'Esta figura intercambia la anchura y la altura del prisma.']
+  ],'Localiza la cara frontal azul y compara su anchura con su altura.',1));
+}
+{
+ const p=makeStep(),v=viewSpec(p,'front');
+ challenges.push(makeChallenge('V02','Fácil',p,'¿Qué dibujo es el alzado de la pieza escalonada?','single',v,
+  'La parte alta está a la izquierda del frente azul; el alzado conserva ese escalón.',[
+   [mirrored(v),'Este dibujo coloca la parte alta a la derecha: está invertido respecto al frente de referencia.'],
+   [viewSpec(makePrism(),'front'),'Este rectángulo elimina el cambio de altura del frente.'],
+   [viewSpec(makeRoof(),'front'),'El cambio de nivel es un escalón, no una superficie inclinada.']
+  ],'Sigue con la vista el contorno de la cara azul, de izquierda a derecha.',2));
+}
+{
+ const p=pieces.l,v=viewSpec(p,'top');challenges.push(makeChallenge('V03','Fácil',p,'¿Qué planta corresponde a la pieza con base en L?','single',v,'La planta conserva la base en L; el brazo largo queda delante.',[[mirrored(v),'El brazo está en el lado contrario.'],[viewSpec(makePrism(60,45,30),'top'),'Este rectángulo rellena el entrante.'],[viewSpec(pieces.u,'top'),'Esta planta corresponde a una U, no a la base en L.']],'En la planta, el frente queda en el borde inferior.',0));
+}
+{
+ const p=makeStep(),v=viewSpec(p,'top');
+ challenges.push(makeChallenge('V04','Fácil',p,'¿Cuál es la planta de esta pieza escalonada?','single',v,
+  'Desde arriba, el contorno es rectangular. La línea de cambio de nivel recorre el fondo y separa izquierda y derecha.',[
+   [viewSpec(p,'front'),'Esta forma escalonada corresponde al alzado, no al contorno visto desde arriba.'],
+   [changed(v,x=>{x.lines=[line([0,p.d/2],[p.w,p.d/2])] }),'Esta línea separa la parte delantera de la trasera; el escalón real separa izquierda y derecha.'],
+   [changed(v,x=>{x.lines=[]}),'Falta la arista visible entre las dos superficies superiores de distinta altura.']
+  ],'El escalón recorre todo el fondo. Imagina la pieza observada verticalmente desde arriba.',3));
+}
+{
+ const p=pieces.rear,v=viewSpec(p,'right');challenges.push(makeChallenge('V05','Fácil',p,'Elige el perfil derecho del escalón alto hacia atrás.','single',v,'El frente queda a la izquierda del perfil: tramo bajo delante y tramo alto detrás.',[[mirrored(v),'Este perfil sitúa el tramo alto delante.'],[viewSpec(makePrism(60,30,45),'right'),'Falta el escalón.'],[viewSpec(makeRoof(30,30,45,15),'front'),'El desnivel no es un plano inclinado.']],'Observa desde la derecha: la parte delantera está a la izquierda del dibujo.',0));
+}
+{
+ const p=makeStep(60,40,40,20,20),s=tripleSpecs(p);
+ challenges.push(makeChallenge('V06','Media',p,'Selecciona el conjunto correcto de alzado, planta y perfil derecho.','triple',s,
+  'El tramo alto ocupa 20 mm de ancho. La planta conserva esa posición y el perfil alcanza 40 mm, con una arista visible a 20 mm de altura.',[
+   [changed(s,x=>{x.front=mirrored(x.front)}),'El alzado invierte el escalón: la parte alta debe quedar a la izquierda.'],
+   [changed(s,x=>{x.right=viewSpec(makePrism(40,40,20),'front')}),'El perfil no se limita a la parte baja: la parte alta sobresale detrás y alcanza 40 mm.'],
+   [changed(s,x=>{x.top.lines=[line([40,0],[40,p.d])]}),'La planta coloca el cambio de nivel a 40 mm del borde izquierdo; debe coincidir con el escalón del alzado a 20 mm.']
+  ],'Comprueba primero dónde cambia la altura y traslada esa posición a la planta.',2));
+}
+{
+ const p=pieces.u,s=tripleSpecs(p);challenges.push(makeChallenge('V07','Media',p,'¿Qué conjunto de vistas corresponde a la U abierta al frente?','triple',s,'La planta abre hacia el frente, abajo. El alzado muestra las dos aristas que separan los brazos y el fondo.',[[changed(s,x=>{x.top.outline=x.top.outline.map(([a,b])=>[a,p.d-b]);}),'Esta planta abre hacia atrás.'],[changed(s,x=>{x.front.lines=[];}),'Faltan las aristas visibles del fondo de la U.'],[tripleSpecs(pieces.l),'Estas vistas pertenecen a una base en L.']],'El hueco llega desde el frente hasta el travesaño trasero.',1));
+}
+{
+ const p=makeTunnel(),v=viewSpec(p,'top');
+ challenges.push(makeChallenge('V08','Media',p,'Elige la planta del bloque con túnel rectangular pasante.','single',v,
+  'Desde arriba, el techo tapa el túnel. Sus dos límites laterales se proyectan como líneas discontinuas que recorren todo el fondo.',[
+   [changed(v,x=>{x.lines.forEach(l=>l.hidden=false)}),'Estas líneas continuas harían visible el hueco desde arriba, pero el techo del bloque lo tapa.'],
+   [changed(v,x=>{x.lines=[]}),'Sin discontinuas no se comunica la presencia del túnel interior.'],
+   [changed(v,x=>{x.lines=[];x.holes=[{x:18,y:12,w:24,h:16}]}),'Esta opción dibuja una abertura en la cara superior; el túnel se abre en el frente y la trasera.']
+  ],'La entrada está en el frente azul. Decide qué aristas quedan tapadas al mirar desde arriba.',3));
+}
+{
+ const p={...makePrism(70,45,40),type:'tunnel',hole:{x0:12,x1:36,y0:10,y1:28,end:null}},s=tripleSpecs(p);
+ challenges.push(makeChallenge('V09','Difícil',p,'Elige el conjunto completo de vistas de este túnel descentrado.','triple',s,
+  'La entrada descentrada se ve con línea continua en el alzado. Sus límites aparecen ocultos en planta y perfil, con posiciones coherentes con la abertura.',[
+   [changed(s,x=>{x.top.lines.forEach(l=>l.hidden=false)}),'Las aristas del túnel quedan tapadas por el techo en planta: no deben aparecer continuas.'],
+   [changed(s,x=>{x.front.holes[0].x=34}),'Esta abertura está desplazada al lado derecho y ya no coincide con el hueco del volumen ni con las discontinuas de la planta.'],
+   [changed(s,x=>{x.right.lines=[line([0,12],[45,12],true),line([0,30],[45,30],true)]}),'Las alturas de las discontinuas del perfil no coinciden con los bordes de la abertura: son 10 y 28 mm.']
+  ],'Relaciona la posición horizontal del hueco con la planta y sus alturas con el perfil.',2));
+}
+{
+ const p=makeTunnel(26),s=tripleSpecs(p);
+ challenges.push(makeChallenge('V10','Difícil',p,'Esta cavidad entra 26 mm desde el frente y termina dentro. ¿Qué conjunto de vistas es correcto?','triple',s,
+  'La abertura es visible en el alzado. Las discontinuas de planta y perfil llegan hasta 26 mm y se unen en el fondo de la cavidad; no atraviesan toda la pieza.',[
+   [tripleSpecs(makeTunnel()),'Estas discontinuas atraviesan todo el fondo: representan un túnel pasante y omiten el cierre interior.'],
+   [changed(s,x=>{x.front.holes[0].hidden=true}),'La entrada de la cavidad está abierta en el frente: sus bordes se ven y se dibujan con línea continua.'],
+   [changed(s,x=>{x.right.lines=x.right.lines.map(l=>({...l,a:[p.d-l.a[0],l.a[1]],b:[p.d-l.b[0],l.b[1]]}))}),'Este perfil sitúa la cavidad junto a la trasera. Debe comenzar en el borde delantero, igual que la entrada del alzado.']
+  ],'Busca en las vistas laterales y superior la arista que representa dónde termina la cavidad.',0));
+}
+
+</script>
+<script>
+'use strict';
+let quizIndex=0,quizAnswers=Array(challenges.length).fill(null),quizChecked=Array(challenges.length).fill(false),quizResult=null,quizYaw=30,quizPitch=22,quizDrag=null,viewAttemptId=PDI.newAttempt(),viewStartedAt="",viewHints=Array(10).fill(false),viewSentAttempt="";
+const difficultyGroup=level=>challenges.map((q,i)=>({q,i})).filter(x=>x.q.level===level);
+function quizScore(){return quizAnswers.filter((a,i)=>quizChecked[i]&&a===challenges[i].correctIndex).length}
+function drawQuizModel(){drawModel($('quizFaces'),challenges[quizIndex].piece,quizYaw*Math.PI/180,quizPitch*Math.PI/180,{colors:true,hidden:false})}
+function updateQuizProgress(){const completed=quizChecked.filter(Boolean).length;$('quizProgress').textContent=`Reto ${quizIndex+1} de 10 · ${completed} comprobados`;$('progressBar').value=completed}
+function renderQuestion(){
+ const q=challenges[quizIndex];quizResult=null;$('download').disabled=true;$('quizSummary').hidden=true;$('quizWorkspace').hidden=false;
+ $('difficulty').textContent=q.level;$('questionTitle').textContent=q.prompt;
+ const p=q.piece;let detail=`${p.w} mm de ancho · ${p.d} mm de fondo · ${p.h} mm de altura máxima. Frente azul.`;
+ if(p.type==='step')detail+=` Tramo alto: ${p.split} mm de ancho; tramo bajo: ${p.low} mm de altura.`;
+ if(p.hole){const h=p.hole;detail+=` Hueco: ${h.x1-h.x0} × ${h.y1-h.y0} mm. Borde izquierdo a ${h.x0} mm; borde inferior a ${h.y0} mm.`;detail+=h.end===null?' Atraviesa todo el fondo.':` Profundidad de la cavidad: ${h.end} mm; trasera cerrada.`}
+ $('quizDimensions').textContent=detail;
+ $('questionHint').textContent=q.hint;$('hintDetails').open=false;
+ const parent=$('graphicOptions');parent.replaceChildren();
+ q.options.forEach((o,i)=>{const label=document.createElement('label');label.className='graphic-option';
+  if(quizChecked[quizIndex]){if(i===q.correctIndex)label.classList.add('option-correct');else if(i===quizAnswers[quizIndex])label.classList.add('option-wrong')}
+  const row=document.createElement('div');row.className='option-title';
+  const input=document.createElement('input');input.type='radio';input.name='graphicAnswer';input.value=String(i);input.checked=quizAnswers[quizIndex]===i;input.disabled=quizChecked[quizIndex];input.setAttribute('aria-label',`Opción ${'ABCD'[i]}`);
+  input.onchange=()=>{quizAnswers[quizIndex]=i;$('checkAnswer').disabled=false;document.querySelectorAll('.graphic-option').forEach(x=>x.classList.remove('selected'));label.classList.add('selected')};
+  if(input.checked)label.classList.add('selected');row.append(input,document.createTextNode(`Opción ${'ABCD'[i]}`));label.append(row);
+  const svg=svgNode('svg',{viewBox:q.kind==='triple'?'0 0 280 250':'0 0 200 140',role:'img','aria-label':`${q.kind==='triple'?'Conjunto de tres vistas':'Vista dibujada'} de la opción ${'ABCD'[i]}`},label);
+  if(q.kind==='triple')drawTriple(svg,o.drawing);else drawView(svg,o.drawing);
+  parent.append(label);
+ });
+ $('feedback').textContent=quizChecked[quizIndex]?q.options[quizAnswers[quizIndex]].feedback:'';
+ $('feedback').className='feedback '+(quizChecked[quizIndex]?(quizAnswers[quizIndex]===q.correctIndex?'correct':'wrong'):'');
+ $('checkAnswer').disabled=quizChecked[quizIndex]||quizAnswers[quizIndex]===null;
+ $('prevQuestion').disabled=quizIndex===0;$('nextQuestion').disabled=!quizChecked[quizIndex];$('nextQuestion').textContent=quizIndex===9?'Ver resultado':'Siguiente reto';
+ quizYaw=30;quizPitch=22;$('quizYaw').value=30;$('quizPitch').value=22;drawQuizModel();updateQuizProgress();
+}
+function checkAnswer(){if(!PDI.ready()){$('registroMensaje').textContent='Comprueba tu ID para acceder a la actividad.';$('alumnoID').focus();return;}if(!viewStartedAt)viewStartedAt=new Date().toISOString();if(quizAnswers[quizIndex]===null||quizChecked[quizIndex])return;quizChecked[quizIndex]=true;renderQuestion()}
+function resultData(){return {actividad:'T2_R1_Vistas_graficas',fecha:new Date().toISOString(),puntuacion:quizScore(),maximo:10,retos:challenges.map((q,i)=>({id:q.id,dificultad:q.level,opcion:quizAnswers[i]===null?null:'ABCD'[quizAnswers[i]],correcta:quizChecked[i]&&quizAnswers[i]===q.correctIndex})),porDificultad:Object.fromEntries(['Fácil','Media','Difícil'].map(level=>{const group=difficultyGroup(level);return [level,{aciertos:group.filter(({q,i})=>quizChecked[i]&&quizAnswers[i]===q.correctIndex).length,total:group.length}]}))}}
+function showSummary(){if(!quizChecked.every(Boolean))return;quizResult=resultData();$('quizWorkspace').hidden=true;$('quizSummary').hidden=false;$('resultHeading').textContent=`Has resuelto ${quizResult.puntuacion} de 10 retos`;
+ const list=$('resultBreakdown');list.replaceChildren();for(const [level,result] of Object.entries(quizResult.porDificultad)){const item=document.createElement('li');item.textContent=`${level}: ${result.aciertos} de ${result.total}`;list.append(item)}
+ const review=$('reviewQuestions');review.replaceChildren();challenges.forEach((q,i)=>{const b=document.createElement('button');b.type='button';b.textContent=`${i+1} · ${quizAnswers[i]===q.correctIndex?'Resuelto':'Revisar'}`;b.onclick=()=>{quizIndex=i;renderQuestion()};review.append(b)});$('download').disabled=false;if(viewSentAttempt!==viewAttemptId){viewSentAttempt=viewAttemptId;PDI.submit(viewPayload());}
+}
+$('checkAnswer').onclick=checkAnswer;
+$('prevQuestion').onclick=()=>{if(quizIndex>0){quizIndex--;renderQuestion()}};
+$('nextQuestion').onclick=()=>{if(!quizChecked[quizIndex])return;if(quizIndex<9){quizIndex++;renderQuestion()}else showSummary()};
+$('retry').onclick=()=>{quizIndex=0;quizAnswers=Array(10).fill(null);quizChecked=Array(10).fill(false);quizResult=null;renderQuestion()};
+$('quizYaw').oninput=e=>{quizYaw=Number(e.target.value);drawQuizModel()};$('quizPitch').oninput=e=>{quizPitch=Number(e.target.value);drawQuizModel()};
+$('quizModel').onpointerdown=e=>{quizDrag={x:e.clientX,y:e.clientY,yaw:quizYaw,pitch:quizPitch};$('quizModel').setPointerCapture(e.pointerId)};
+$('quizModel').onpointermove=e=>{if(!quizDrag)return;quizYaw=quizDrag.yaw-(e.clientX-quizDrag.x)*.5;quizYaw=((quizYaw+180)%360+360)%360-180;quizPitch=Math.max(-90,Math.min(90,quizDrag.pitch+(e.clientY-quizDrag.y)*.5));$('quizYaw').value=quizYaw;$('quizPitch').value=quizPitch;drawQuizModel()};
+$('quizModel').onpointerup=$('quizModel').onpointercancel=()=>quizDrag=null;
+function viewPayload(){
+ const r=quizResult||resultData();return {submissionId:viewAttemptId,theme:'Tema_2_Expresion_grafica',activity:'T2_R1_Vistas_graficas',title:'Taller de vistas',score:r.puntuacion,scores:r.retos.map(x=>x.correcta?10:0),hints:[...viewHints],attempts:quizChecked.map(x=>x?1:0),startedAt:viewStartedAt,finishedAt:r.fecha,appVersion:'2.0-ID',evidence:r};
+}
+function resetViewAttempt(){quizIndex=0;quizAnswers=Array(10).fill(null);quizChecked=Array(10).fill(false);quizResult=null;viewAttemptId=PDI.newAttempt();viewStartedAt='';viewHints=Array(10).fill(false);viewSentAttempt='';renderQuestion();}
+$('retry').onclick=resetViewAttempt;
+$('download').onclick=()=>{if(quizResult)PDI.export(viewPayload(),'T2_R1_Vistas_10_retos_resultado.json');};
+$('hintDetails').querySelector('summary').addEventListener('click',()=>{if(!$('hintDetails').open)viewHints[quizIndex]=true;});
+document.addEventListener('pdi-reset',()=>{resetViewAttempt();$('exploreTab').click();});
+document.addEventListener('pdi-session',()=>{resetViewAttempt();$('sessionWarning').hidden=true;});
+
+renderQuestion();
+
+</script>
+<script>(function(){
+ const el=id=>document.getElementById(id),container=el('examViews');
+ const models=[heightPiece([[2,2,2,2],[2,2,2,2],[2,2,2,2]]),heightPiece([[3,3,1,1],[3,3,1,1],[3,3,1,1]]),pieces.rear,pieces.l,pieces.u,{...makePrism(60,45,45),type:'tunnel',hole:{x0:15,x1:45,y0:15,y1:30,end:null}}];
+ const kinds=['front','top','right'],labels=['Alzado','Planta','Perfil derecho'];
+ const bank=[],answers=[];
+ const signature=v=>{const edges=v.outline.map((a,i)=>[a,v.outline[(i+1)%v.outline.length],false]).concat(v.lines.map(l=>[l.a,l.b,!!l.hidden]));return JSON.stringify([v.w,v.h,edges.map(([a,b,h])=>[...([a,b].map(p=>p.join(',')).sort()),h]).sort(),v.holes]);};
+ models.forEach(p=>answers.push(kinds.map(kind=>{const v=viewSpec(p,kind),sig=signature(v);let n=bank.findIndex(x=>x.sig===sig);if(n<0){n=bank.length;bank.push({sig,v});}return n+1;})));
+ if(bank.length!==17)throw Error('Banco de vistas: se esperaban 17 vistas distintas, hay '+bank.length);
+ const order=bank.map((_,i)=>i);let seed=8723;for(let i=order.length-1;i>0;i--){seed=(seed*1664525+1013904223)>>>0;const j=seed%(i+1);[order[i],order[j]]=[order[j],order[i]];}const original=bank.slice();order.forEach((n,i)=>bank[i]=original[n]);answers.forEach(row=>row.forEach((n,j)=>row[j]=order.indexOf(n-1)+1));
+ let firstChoices=null,first=null,attempt=crypto.randomUUID(),started='',finished='',sent=false,values=Array.from({length:6},()=>Array(3).fill(''));
+ const cards=el('examPieces');models.forEach((p,i)=>{const card=document.createElement('article');card.className='panel';card.innerHTML=`<h3>Pieza ${'ABCDEF'[i]}</h3><svg viewBox="0 0 440 340" role="img" aria-label="Pieza ${'ABCDEF'[i]}, frente azul"></svg><div class="exam-fields"></div>`;cards.append(card);drawModel(card.querySelector('svg'),p,Math.PI/6,25*Math.PI/180,{scale:3.8});
+  labels.forEach((label,j)=>{const lab=document.createElement('label');lab.textContent=label;const select=document.createElement('select');select.id=`match${i}${j}`;select.setAttribute('aria-label',label+' de la pieza '+'ABCDEF'[i]);select.innerHTML='<option value="">—</option>'+bank.map((_,n)=>`<option value="${n+1}">${n+1}</option>`).join('');select.onchange=()=>values[i][j]=select.value;lab.append(select);card.querySelector('.exam-fields').append(lab);});
+ });
+ bank.forEach(({v},i)=>{const box=document.createElement('div');box.className='bank-view';box.innerHTML=`<strong>${i+1}</strong><svg viewBox="0 0 200 140" role="img" aria-label="Vista numerada ${i+1}"></svg>`;el('examBank').append(box);drawView(box.querySelector('svg'),v,{scale:1.8});});
+ const payload=()=>({submissionId:attempt,theme:'Tema_2_Expresion_grafica',activity:'T2_A8_Vistas_Examen',title:'Relacionar piezas y vistas',score:first.reduce((a,b)=>a+b,0)/6,scores:first,hints:Array(6).fill(false),attempts:Array(6).fill(1),startedAt:started,finishedAt:finished,appVersion:'3.0-ID',evidence:{pieces:'ABCDEF',viewOrder:labels,answers:firstChoices,reviewedAnswers:values.map(row=>row.map(Number)),correct:answers,firstScores:first,bankCount:17}});
+ el('examCheck').onclick=()=>{if(!PDI.ready()){el('examFeedback').textContent='Comprueba tu ID para acceder a la actividad.';el('alumnoID').focus();return;}if(values.flat().some(x=>!x)){el('examFeedback').textContent='Completa las 18 casillas antes de comprobar.';return;}started=started||new Date().toISOString();const scores=values.map((row,i)=>row.filter((n,j)=>Number(n)===answers[i][j]).length*10/3);if(!first){first=scores;firstChoices=values.map(row=>row.map(Number));finished=new Date().toISOString();}
+  let correct=0;values.forEach((row,i)=>row.forEach((n,j)=>{const select=el(`match${i}${j}`),ok=Number(n)===answers[i][j];if(ok)correct++;select.classList.toggle('match-ok',ok);select.classList.toggle('match-bad',!ok);select.setAttribute('aria-invalid',String(!ok));}));el('examFeedback').textContent=`${correct} de 18 vistas correctas. Nota del primer intento: ${(first.reduce((a,b)=>a+b,0)/6).toFixed(2).replace('.',',')} / 10. Puedes corregir las casillas señaladas y comprobar de nuevo.`;el('examDownload').disabled=false;el('examSolution').hidden=false;if(!sent){sent=true;PDI.submit(payload());}};
+ el('examSolution').onclick=()=>{el('examFeedback').textContent=answers.map((row,i)=>'ABCDEF'[i]+': '+labels.map((l,j)=>l+' '+row[j]).join(' · ')).join(' | ');};
+ function reset(){firstChoices=null;first=null;sent=false;started='';finished='';attempt=crypto.randomUUID();values=Array.from({length:6},()=>Array(3).fill(''));container.querySelectorAll('select').forEach(s=>{s.value='';s.classList.remove('match-ok','match-bad');s.removeAttribute('aria-invalid');});el('examFeedback').textContent='';el('examDownload').disabled=true;el('examSolution').hidden=true;}
+ el('examAgain').onclick=reset;el('examDownload').onclick=()=>{if(first)PDI.export(payload(),'T2_Vistas_relacionar_resultado.json');};
+ for(const id of ['exploreTab','practiceTab']){const old=el(id).onclick;el(id).onclick=e=>{container.hidden=true;el('examTab').setAttribute('aria-pressed','false');old(e);};}
+ el('examTab').onclick=()=>{el('explore').hidden=true;el('practice').hidden=true;container.hidden=false;for(const id of ['exploreTab','practiceTab'])el(id).setAttribute('aria-pressed','false');el('examTab').setAttribute('aria-pressed','true');started=started||new Date().toISOString();};
+ document.addEventListener('pdi-reset',reset);document.addEventListener('pdi-session',reset);
+})();
+</script></body></html>
