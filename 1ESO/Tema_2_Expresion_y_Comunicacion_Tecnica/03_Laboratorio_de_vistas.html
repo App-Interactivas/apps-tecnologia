@@ -297,7 +297,7 @@ function applySegment(a,b){
 function choosePoint(point){S.kbPoint=point;if(S.point)applySegment(S.point,point);else {S.point=point;$('drawArea').innerHTML=drawingSVG(APP.questions[S.index]);}document.querySelector(`[data-point="${point.join(',')}"]`)?.focus();}
 function finish(){
  if(S.records.filter(Boolean).length!==10)return;
- const score=scoreTotal(S.records);S.result={submissionId:S.submissionId,theme:'UD2 Expresión y comunicación técnica',activity:APP.id,title:APP.title,score:Number(score.toFixed(4)),scores:S.records.map(r=>Number((r.score*10).toFixed(4))),maximo:10,percentage:score*10,hints:S.hints.map(Boolean),attempts:APP.questions.map(()=>1),startedAt:S.startedAt,finishedAt:new Date().toISOString(),appVersion:'1.1.0-central-v6',evidence:{course:'1ESO',block:APP.block,questions:S.records}};
+ const score=scoreTotal(S.records);S.result={submissionId:S.submissionId,theme:'UD2 Expresión y comunicación técnica',activity:APP.id,title:APP.title,score:Number(score.toFixed(4)),scores:S.records.map(r=>Number((r.score*10).toFixed(4))),maximo:10,percentage:score*10,hints:S.hints.map(Boolean),attempts:APP.questions.map(()=>1),startedAt:S.startedAt,finishedAt:new Date().toISOString(),appVersion:'1.1.1-central-v6',evidence:{course:'1ESO',block:APP.block,questions:S.records}};
  $('quizStage').hidden=true;$('resultStage').hidden=false;
  $('resultStage').innerHTML=`<div class="panel"><div class="eyebrow">Trabajo terminado</div><h2>Tu resultado</h2><div class="score">${fmt(score)} <small>/ 10</small></div><p>Diez retos de un punto. Las relaciones y los dibujos pueden sumar puntos parciales. Las pistas se registran y no restan.</p><table class="results-table"><thead><tr><th>Reto</th><th>Trabajo</th><th>Puntos</th></tr></thead><tbody>${S.records.map((r,i)=>`<tr><td>${i+1}</td><td>${esc(r.title)}${r.hint?' · Con pista':''}</td><td>${fmt(r.score)} / 1</td></tr>`).join('')}</tbody></table><div id="sendMessage" class="status" role="status" aria-live="polite"></div><div class="actions"><button data-action="retrySend" id="retrySend" hidden>Reintentar el mismo envío</button><button data-action="downloadResult">Descargar resultado</button><button data-action="newAttempt">Nuevo intento</button><button data-action="changeStudent">Cambiar de alumno</button></div><p class="note">La copia descargada conserva el detalle del trabajo. El registro central solo se confirma cuando aparece el mensaje de recepción.</p></div>`;
  if(S.mode==='registered'){S.pending={result:S.result,students:S.students.map(x=>({...x})),endpoint:S.endpoint};transmit();}
@@ -403,6 +403,14 @@ function actions(action,target){
  }
  else if(action==='exportBox'){labRefresh();const l=S.lab;if([$ ('labW'),$('labD'),$('labH')].map(e=>Number(e.value)).some((v,i)=>!Number.isFinite(v)||v<10||v>[120,80,60][i]))return;download(boxCleanSVG(l.w,l.d,l.h,true),'image/svg+xml','UD2_Mi_caja_vistas.svg');setStatus('labMessage','SVG descargado. Para comprobar 1:1 imprime al 100 % y mide una dimensión conocida.');}
 }
+function drawingPointAt(e,canvas){
+ // SVG meet scaling can leave margins inside its CSS box. Use the actual
+ // screen transform so the pointer and the drawn geometry share coordinates.
+ const matrix=canvas.getScreenCTM();if(!matrix)return null;
+ const point=canvas.createSVGPoint();point.x=e.clientX;point.y=e.clientY;
+ const local=point.matrixTransform(matrix.inverse());
+ return [Math.max(0,Math.min(16,Math.round((local.x-28)/22))),Math.max(0,Math.min(12,Math.round((local.y-30)/22)))];
+}
 function boot(){
  renderExplore();loadEndpoint();renderQuiz();
  document.addEventListener('click',e=>{const t=e.target.closest('[data-action],[data-tab]');if(!t||t.disabled)return;if(t.dataset.tab)selectTab(t.dataset.tab);else actions(t.dataset.action,t);});
@@ -422,10 +430,9 @@ function boot(){
  document.addEventListener('keydown',e=>{const t=e.target.closest('[data-point]');if(t&&['Enter',' '].includes(e.key)){e.preventDefault();choosePoint(t.dataset.point.split(',').map(Number));}if(t&&['ArrowUp','ArrowDown','ArrowLeft','ArrowRight'].includes(e.key)){e.preventDefault();let[x,y]=t.dataset.point.split(',').map(Number);if(e.key==='ArrowUp')y--;if(e.key==='ArrowDown')y++;if(e.key==='ArrowLeft')x--;if(e.key==='ArrowRight')x++;x=Math.max(0,Math.min(16,x));y=Math.max(0,Math.min(12,y));t.setAttribute('tabindex','-1');S.kbPoint=[x,y];const next=document.querySelector(`[data-point="${x},${y}"]`);next?.setAttribute('tabindex','0');next?.focus();}if(['id1','id2'].includes(e.target.id)&&e.key==='Enter'){e.preventDefault();verifyIds();}});
  let down=null,labDragging=false;
  function labPointer(e){const box=$('angleLab')?.getBoundingClientRect();if(!box||box.width===0)return;let x=(e.clientX-box.left)*420/box.width,y=(e.clientY-box.top)*255/box.height;S.lab.angle=Math.max(10,Math.min(170,Math.round(Math.atan2(210-y,x-200)*180/Math.PI)));labRefresh();}
- function pointAt(e,canvas){const b=canvas.getBoundingClientRect();return [Math.max(0,Math.min(16,Math.round(((e.clientX-b.left)*410/b.width-28)/22))),Math.max(0,Math.min(12,Math.round(((e.clientY-b.top)*336/b.height-30)/22)))];}
- document.addEventListener('pointerdown',e=>{const canvas=e.target.closest('#drawCanvas');if(canvas&&!S.records[S.index]){e.preventDefault();down=pointAt(e,canvas);}if(e.target.closest('#angleLab')){e.preventDefault();labDragging=true;labPointer(e);}});
+ document.addEventListener('pointerdown',e=>{const canvas=e.target.closest('#drawCanvas');if(canvas&&!S.records[S.index]){e.preventDefault();down=drawingPointAt(e,canvas);}if(e.target.closest('#angleLab')){e.preventDefault();labDragging=true;labPointer(e);}});
  document.addEventListener('pointermove',e=>{if(labDragging)labPointer(e);});
- document.addEventListener('pointerup',e=>{labDragging=false;if(!down)return;const canvas=$('drawCanvas');if(canvas){const end=pointAt(e,canvas);if(down[0]===end[0]&&down[1]===end[1])choosePoint(end);else applySegment(down,end);}down=null;});
+ document.addEventListener('pointerup',e=>{labDragging=false;if(!down)return;const canvas=$('drawCanvas');if(canvas){const end=drawingPointAt(e,canvas);if(!end){down=null;return;}if(down[0]===end[0]&&down[1]===end[1])choosePoint(end);else applySegment(down,end);}down=null;});
  document.addEventListener('pointercancel',()=>{down=null;labDragging=false;});
  window.addEventListener('beforeunload',e=>{if(S.pending){e.preventDefault();e.returnValue='';}});
  window.addEventListener('pageshow',e=>{if(e.persisted)resetStudent(true);});
