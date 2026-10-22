@@ -41,6 +41,9 @@ h1{position:relative;z-index:1;margin:0;font-size:clamp(2rem,5vw,3.7rem);line-he
 .title{display:block;margin-top:8px;font-size:1.18rem;font-weight:900;letter-spacing:-.015em}
 .desc{display:block;margin-top:5px;color:var(--muted);font-size:.92rem;line-height:1.45}
 .arrow{font-size:1.35rem;color:var(--accent);font-weight:900}
+.qr{display:grid;justify-items:center;gap:4px;padding:6px;border-radius:14px;background:#fff;border:1px solid var(--line);box-shadow:0 4px 12px rgba(15,23,42,.08);color:var(--accent)}
+.qr-code,.qr-code canvas,.qr-code img{display:block!important;width:78px!important;height:78px!important}
+.qr small{font-size:.62rem;font-weight:900;letter-spacing:.05em;text-transform:uppercase;color:var(--accent)}
 .section-title{display:flex;justify-content:space-between;gap:12px;align-items:end;margin:28px 2px 14px}
 .section-title h2{margin:0;font-size:1.18rem}
 .section-title span{color:var(--muted);font-size:.88rem}
@@ -52,7 +55,7 @@ h1{position:relative;z-index:1;margin:0;font-size:clamp(2rem,5vw,3.7rem);line-he
 .back:hover{background:#fff}
 footer{text-align:center;margin-top:34px;color:#8a94a4;font-size:.82rem}
 @media(max-width:720px){body{padding:18px 13px 34px}.hero{padding:25px 21px;border-radius:23px}.grid{grid-template-columns:1fr}.card{min-height:110px;padding:17px;gap:13px}.icon{width:52px;height:52px}.section-title{align-items:start;flex-direction:column}}
-@media(max-width:420px){.card{grid-template-columns:auto 1fr}.arrow{display:none}.title{font-size:1.05rem}.desc{font-size:.87rem}.hero:after{width:180px;height:180px}}
+@media(max-width:420px){.card{grid-template-columns:auto 1fr auto;gap:10px;padding:14px 12px}.icon{width:46px;height:46px}.qr{padding:4px}.qr-code,.qr-code canvas,.qr-code img{width:60px!important;height:60px!important}.qr small{font-size:.54rem}.title{font-size:1rem}.desc{font-size:.82rem}.hero:after{width:180px;height:180px}}
 </style>
 </head>
 <body style="--accent:#16a34a;--soft:#dcfce7">
@@ -68,15 +71,21 @@ footer{text-align:center;margin-top:34px;color:#8a94a4;font-size:.82rem}
 <a class="card" href="./Tema_1_Introduccion_a_la_Tecnologia/" style="--accent:#16a34a;--soft:#dcfce7;--tint:#f0fdf4">
   <span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 8.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7Z"/><path d="m19.4 13.5 1.6 1.2-2 3.5-1.9-.8a8 8 0 0 1-1.8 1l-.2 2.1h-4l-.2-2.1a8 8 0 0 1-1.8-1l-1.9.8-2-3.5 1.6-1.2a8 8 0 0 1 0-2.1L5.2 10l2-3.5 1.9.8a8 8 0 0 1 1.8-1l.2-2.1h4l.2 2.1a8 8 0 0 1 1.8 1l1.9-.8 2 3.5-1.6 1.3a8 8 0 0 1 0 2.2Z"/></svg></span>
   <span class="card-copy"><span class="tag">Tema 1</span><span class="title">Introducción a la Tecnología</span><span class="desc">3 actividades interactivas para investigar la tecnología, el proceso tecnológico y la seguridad.</span></span>
-  <span class="arrow" aria-hidden="true">→</span>
+  <span class="qr" data-url="https://app-interactivas.github.io/apps-tecnologia/2ESO/Tema_1_Introduccion_a_la_Tecnologia/" role="img" aria-label="Código QR para abrir Tema 1: Introducción a la Tecnología"><span class="qr-code" aria-hidden="true"></span><small>Escanea</small></span>
 </a>
 <a class="card" href="./Tema_2_Expresion_Grafica/" style="--accent:#0e7490;--soft:#cffafe;--tint:#ecfeff">
   <span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h16M5 17l9-9 3 3-9 9H5v-3Z"/><path d="M14 8l2-2 3 3-2 2M3 4h8M3 7h5"/></svg></span>
   <span class="card-copy"><span class="tag">Tema 2</span><span class="title">Expresión gráfica</span><span class="desc">Dibuja y comprueba medidas, cotas y vistas con tres talleres interactivos.</span></span>
-  <span class="arrow" aria-hidden="true">→</span>
+  <span class="qr" data-url="https://app-interactivas.github.io/apps-tecnologia/2ESO/Tema_2_Expresion_Grafica/" role="img" aria-label="Código QR para abrir Tema 2: Expresión gráfica"><span class="qr-code" aria-hidden="true"></span><small>Escanea</small></span>
 </a>
 </div>
 <a class="back" href="../">← Volver al inicio</a>
 <footer>2º ESO · Tecnología y Digitalización</footer></main>
+<script src="../qrcode.min.js"></script>
+<script>
+document.querySelectorAll(".qr[data-url]").forEach(function(qr){
+  new QRCode(qr.querySelector(".qr-code"),{text:qr.dataset.url,width:78,height:78,colorDark:"#172033",colorLight:"#ffffff",correctLevel:QRCode.CorrectLevel.M});
+});
+</script>
 </body>
 </html>
