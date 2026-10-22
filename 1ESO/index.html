@@ -44,6 +44,22 @@ h1{position:relative;z-index:1;margin:0;font-size:clamp(2rem,5vw,3.7rem);line-he
 .qr{display:grid;justify-items:center;gap:4px;padding:6px;border-radius:14px;background:#fff;border:1px solid var(--line);box-shadow:0 4px 12px rgba(15,23,42,.08);color:var(--accent)}
 .qr-code{width:78px;height:78px}.qr-code canvas,.qr-code img{width:78px!important;height:78px!important}
 .qr small{font-size:.62rem;font-weight:900;letter-spacing:.05em;text-transform:uppercase;color:var(--accent)}
+
+.qr{cursor:zoom-in}
+.qr:focus-visible{outline:3px solid color-mix(in srgb,var(--accent) 55%,white);outline-offset:3px}
+.qr-modal[hidden]{display:none}
+.qr-modal{position:fixed;z-index:1000;inset:0;display:grid;place-items:center;padding:20px;background:rgba(15,23,42,.78);backdrop-filter:blur(5px)}
+.qr-modal-panel{position:relative;width:min(94vw,480px);max-height:94vh;overflow:auto;text-align:center;background:#fff;border-radius:26px;padding:30px 26px 26px;box-shadow:0 28px 80px rgba(0,0,0,.32)}
+.qr-modal-close{position:absolute;top:12px;right:14px;width:42px;height:42px;border:0;border-radius:50%;background:#eef2f7;color:#172033;font-size:1.7rem;line-height:1;cursor:pointer}
+.qr-modal-close:hover{background:#e2e8f0}
+.qr-modal-kicker{margin:0 46px 6px;font-size:.72rem;font-weight:900;letter-spacing:.12em;color:var(--accent);text-transform:uppercase}
+.qr-modal-title{margin:0 34px 18px;font-size:clamp(1.25rem,4vw,1.7rem);line-height:1.2}
+.qr-large{display:grid;place-items:center;width:min-content;margin:0 auto;padding:14px;background:#fff;border:1px solid var(--line);border-radius:18px}
+.qr-large canvas,.qr-large img{max-width:min(74vw,320px)!important;height:auto!important}
+.qr-modal-help{margin:15px 0 6px;color:var(--muted);font-size:.94rem}
+.qr-modal-link{display:inline-flex;margin-top:12px;padding:10px 15px;border-radius:12px;background:var(--soft);color:var(--accent);font-weight:900;text-decoration:none}
+body.qr-modal-open{overflow:hidden}
+@media(max-width:420px){.qr-modal-panel{padding:27px 16px 21px;border-radius:21px}.qr-large{padding:10px}.qr-modal-close{width:38px;height:38px}}
 .section-title{display:flex;justify-content:space-between;gap:12px;align-items:end;margin:28px 2px 14px}
 .section-title h2{margin:0;font-size:1.18rem}
 .section-title span{color:var(--muted);font-size:.88rem}
@@ -71,21 +87,77 @@ footer{text-align:center;margin-top:34px;color:#8a94a4;font-size:.82rem}
 <a class="card" href="./Tema_1_Introduccion_a_la_Tecnologia/" style="--accent:#3b82f6;--soft:#dbeafe;--tint:#eff6ff">
   <span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="6" cy="6" r="2"/><circle cx="18" cy="6" r="2"/><circle cx="6" cy="18" r="2"/><circle cx="18" cy="18" r="2"/><path d="M8 6h4v12h4M12 10h6M8 18h4"/></svg></span>
   <span class="card-copy"><span class="tag">Tema 1</span><span class="title">Introducción a la Tecnología</span><span class="desc">6 actividades interactivas para investigar, experimentar y prepararte para el aula-taller.</span></span>
-  <span class="qr" data-url="https://app-interactivas.github.io/apps-tecnologia/1ESO/Tema_1_Introduccion_a_la_Tecnologia/" role="img" aria-label="Código QR para abrir Tema 1: Introducción a la Tecnología"><span class="qr-code" aria-hidden="true"></span><small>Escanea</small></span>
+  <span class="qr" data-url="https://app-interactivas.github.io/apps-tecnologia/1ESO/Tema_1_Introduccion_a_la_Tecnologia/" role="button" tabindex="0" title="Ampliar código QR" aria-label="Ampliar código QR para abrir Tema 1: Introducción a la Tecnología"><span class="qr-code" aria-hidden="true"></span><small>Escanea</small></span>
 </a>
 <a class="card" href="./Tema_2_Expresion_y_Comunicacion_Tecnica/" style="--accent:#3b82f6;--soft:#dbeafe;--tint:#eff6ff">
   <span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 19 16 6l5 5L8 24M3 19v5h5M12 3h9v9M16 6l5 5M7 15l2 2M10 12l2 2"/></svg></span>
   <span class="card-copy"><span class="tag">Tema 2</span><span class="title">Expresión y comunicación técnica</span><span class="desc">4 apps para practicar bocetos, instrumentos, vistas y cotas con 40 retos visuales.</span></span>
-  <span class="qr" data-url="https://app-interactivas.github.io/apps-tecnologia/1ESO/Tema_2_Expresion_y_Comunicacion_Tecnica/" role="img" aria-label="Código QR para abrir Tema 2: Expresión y comunicación técnica"><span class="qr-code" aria-hidden="true"></span><small>Escanea</small></span>
+  <span class="qr" data-url="https://app-interactivas.github.io/apps-tecnologia/1ESO/Tema_2_Expresion_y_Comunicacion_Tecnica/" role="button" tabindex="0" title="Ampliar código QR" aria-label="Ampliar código QR para abrir Tema 2: Expresión y comunicación técnica"><span class="qr-code" aria-hidden="true"></span><small>Escanea</small></span>
 </a>
 </div>
 <a class="back" href="../">← Volver al inicio</a>
 <footer>1º ESO · Tecnología y Digitalización</footer></main>
+<div class="qr-modal" id="qr-modal" hidden role="dialog" aria-modal="true" aria-labelledby="qr-modal-title">
+  <div class="qr-modal-panel">
+    <button class="qr-modal-close" type="button" aria-label="Cerrar código QR">×</button>
+    <p class="qr-modal-kicker">Acceso directo</p>
+    <h2 class="qr-modal-title" id="qr-modal-title">Código QR del tema</h2>
+    <div class="qr-large" id="qr-large" aria-hidden="true"></div>
+    <p class="qr-modal-help">Escanea este código para abrir el tema y acceder a sus actividades.</p>
+    <a class="qr-modal-link" id="qr-modal-link" href="#">Abrir el tema</a>
+  </div>
+</div>
 <script src="../qrcode.min.js"></script>
 <script>
-document.querySelectorAll(".qr[data-url]").forEach(function(qr){
+const qrItems=document.querySelectorAll(".qr[data-url]");
+const qrModal=document.getElementById("qr-modal");
+const qrLarge=document.getElementById("qr-large");
+const qrModalTitle=document.getElementById("qr-modal-title");
+const qrModalLink=document.getElementById("qr-modal-link");
+const qrModalClose=document.querySelector(".qr-modal-close");
+let lastQrTrigger=null;
+
+qrItems.forEach(function(qr){
   new QRCode(qr.querySelector(".qr-code"),{text:qr.dataset.url,width:78,height:78,colorDark:"#172033",colorLight:"#ffffff",correctLevel:QRCode.CorrectLevel.M});
 });
+
+function openQrModal(qr){
+  lastQrTrigger=qr;
+  const card=qr.closest(".card");
+  const title=card&&card.querySelector(".title")?card.querySelector(".title").textContent.trim():"Código QR del tema";
+  qrModalTitle.textContent=title;
+  qrModalLink.href=qr.dataset.url;
+  qrLarge.innerHTML="";
+  new QRCode(qrLarge,{text:qr.dataset.url,width:320,height:320,colorDark:"#172033",colorLight:"#ffffff",correctLevel:QRCode.CorrectLevel.M});
+  qrModal.hidden=false;
+  document.body.classList.add("qr-modal-open");
+  qrModalClose.focus();
+}
+
+function closeQrModal(){
+  qrModal.hidden=true;
+  document.body.classList.remove("qr-modal-open");
+  qrLarge.innerHTML="";
+  if(lastQrTrigger) lastQrTrigger.focus();
+}
+
+qrItems.forEach(function(qr){
+  qr.addEventListener("click",function(event){
+    event.preventDefault();
+    event.stopPropagation();
+    openQrModal(qr);
+  });
+  qr.addEventListener("keydown",function(event){
+    if(event.key==="Enter"||event.key===" "){
+      event.preventDefault();
+      event.stopPropagation();
+      openQrModal(qr);
+    }
+  });
+});
+qrModalClose.addEventListener("click",closeQrModal);
+qrModal.addEventListener("click",function(event){if(event.target===qrModal) closeQrModal();});
+document.addEventListener("keydown",function(event){if(event.key==="Escape"&&!qrModal.hidden) closeQrModal();});
 </script>
 </body>
 </html>
