@@ -41,6 +41,9 @@ h1{position:relative;z-index:1;margin:0;font-size:clamp(2rem,5vw,3.7rem);line-he
 .title{display:block;margin-top:8px;font-size:1.18rem;font-weight:900;letter-spacing:-.015em}
 .desc{display:block;margin-top:5px;color:var(--muted);font-size:.92rem;line-height:1.45}
 .arrow{font-size:1.35rem;color:var(--accent);font-weight:900}
+.qr{display:grid;justify-items:center;gap:4px;padding:6px;border-radius:14px;background:#fff;border:1px solid var(--line);box-shadow:0 4px 12px rgba(15,23,42,.08);color:var(--accent)}
+.qr-code,.qr-code canvas,.qr-code img{display:block!important;width:78px!important;height:78px!important}
+.qr small{font-size:.62rem;font-weight:900;letter-spacing:.05em;text-transform:uppercase;color:var(--accent)}
 .section-title{display:flex;justify-content:space-between;gap:12px;align-items:end;margin:28px 2px 14px}
 .section-title h2{margin:0;font-size:1.18rem}
 .section-title span{color:var(--muted);font-size:.88rem}
@@ -52,7 +55,7 @@ h1{position:relative;z-index:1;margin:0;font-size:clamp(2rem,5vw,3.7rem);line-he
 .back:hover{background:#fff}
 footer{text-align:center;margin-top:34px;color:#8a94a4;font-size:.82rem}
 @media(max-width:720px){body{padding:18px 13px 34px}.hero{padding:25px 21px;border-radius:23px}.grid{grid-template-columns:1fr}.card{min-height:110px;padding:17px;gap:13px}.icon{width:52px;height:52px}.section-title{align-items:start;flex-direction:column}}
-@media(max-width:420px){.card{grid-template-columns:auto 1fr}.arrow{display:none}.title{font-size:1.05rem}.desc{font-size:.87rem}.hero:after{width:180px;height:180px}}
+@media(max-width:420px){.card{grid-template-columns:auto 1fr auto;gap:10px;padding:14px 12px}.icon{width:46px;height:46px}.qr{padding:4px}.qr-code,.qr-code canvas,.qr-code img{width:60px!important;height:60px!important}.qr small{font-size:.54rem}.title{font-size:1rem}.desc{font-size:.82rem}.hero:after{width:180px;height:180px}}
 </style>
 </head>
 <body style="--accent:#d97706;--soft:#fef3c7">
@@ -68,10 +71,16 @@ footer{text-align:center;margin-top:34px;color:#8a94a4;font-size:.82rem}
 <a class="card" href="./Tema_1_Vivienda_Bioclimatica/" style="--accent:#d97706;--soft:#fef3c7;--tint:#fffbeb">
   <span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 11 9-7 9 7"/><path d="M5 10v10h14V10M10 20v-6h4v6"/><path d="M17 5c1.8-1.7 3.5-1.5 4-.9-.2 2-1.5 3.3-4 3.1"/></svg></span>
   <span class="card-copy"><span class="tag">Tema 1</span><span class="title">Vivienda bioclimática</span><span class="desc">Experimenta con orientación, clima y decisiones de diseño mediante un simulador interactivo.</span></span>
-  <span class="arrow" aria-hidden="true">→</span>
+  <span class="qr" data-url="https://app-interactivas.github.io/apps-tecnologia/4ESO/Tema_1_Vivienda_Bioclimatica/" role="img" aria-label="Código QR para abrir Tema 1: Vivienda bioclimática"><span class="qr-code" aria-hidden="true"></span><small>Escanea</small></span>
 </a>
 </div>
 <a class="back" href="../">← Volver al inicio</a>
 <footer>4º ESO · Tecnología y Digitalización</footer></main>
+<script src="../qrcode.min.js"></script>
+<script>
+document.querySelectorAll(".qr[data-url]").forEach(function(qr){
+  new QRCode(qr.querySelector(".qr-code"),{text:qr.dataset.url,width:78,height:78,colorDark:"#172033",colorLight:"#ffffff",correctLevel:QRCode.CorrectLevel.M});
+});
+</script>
 </body>
 </html>
