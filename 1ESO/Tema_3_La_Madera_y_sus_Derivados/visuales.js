@@ -2,12 +2,49 @@
  'use strict';
  function svg(body,label){return `<svg viewBox="0 0 500 320" role="img" aria-label="${label}"><title>${label}</title>${body}</svg>`;}
  function text(x,y,s,size=19){return `<text x="${x}" y="${y}" fill="#304b48" font-family="system-ui,sans-serif" font-size="${size}">${s}</text>`;}
- function trunk(active=0){let b='';const radii=[125,115,109,76,12],colors=['#7b563a','#d7aa70','#f2e3b8','#ba8c60','#6c4d36'];radii.forEach((r,i)=>b+=`<circle cx="155" cy="158" r="${r}" fill="${colors[i]}" stroke="${active===i+1?'#087884':'#6f573d'}" stroke-width="${active===i+1?5:1.4}"/>`);[28,43,59,87,100].forEach(r=>b+=`<circle cx="155" cy="158" r="${r}" fill="none" stroke="#96764f" stroke-width=".7"/>`);[[243,69,60],[270,151,104],[244,202,148],[207,202,220],[155,158,276]].forEach((v,i)=>{b+=`<path d="M${v[0]} ${v[1]} L330 ${v[2]}" stroke="#586f67" fill="none"/>`+text(342,v[2]+6,String(i+1),24);});return svg(b,'Sección del tronco con cinco zonas numeradas desde fuera hacia el centro');}
+ function trunk(active=0){
+  const radii=[125,115,109,76,12],colors=['#7b563a','#d7aa70','#f2e3b8','#ba8c60','#6c4d36'];
+  const names=['Corteza','Cámbium','Albura','Duramen','Médula'];
+  let b='';
+  radii.forEach((r,i)=>b+=`<circle cx="155" cy="158" r="${r}" fill="${active?'#e5dfd2':colors[i]}" stroke="${active?'#a69e8d':'#6f573d'}" stroke-width="1.4"/>`);
+  [28,43,59,87,100].forEach(r=>b+=`<circle cx="155" cy="158" r="${r}" fill="none" stroke="#96764f" stroke-width=".7"/>`);
+  if(!active){
+   [[243,69,60],[270,151,104],[244,202,148],[207,202,220],[155,158,276]].forEach((v,i)=>b+=`<path d="M${v[0]} ${v[1]} L330 ${v[2]}" stroke="#586f67" fill="none"/>`+text(342,v[2]+6,String(i+1),24));
+  }else{
+   const outer=radii[active-1],inner=radii[active]||0;
+   const circlePath=r=>`M${155-r} 158a${r} ${r} 0 1 0 ${r*2} 0a${r} ${r} 0 1 0 -${r*2} 0`;
+   b+=`<path d="${circlePath(outer)} ${inner?circlePath(inner):''}" fill="#ffce63" fill-rule="evenodd" stroke="#075968" stroke-width="3"/>`;
+   b+=`<circle cx="155" cy="158" r="${outer+4}" fill="none" stroke="#075968" stroke-width="2.5" stroke-dasharray="7 5"/>`;
+   const x=155+(outer+inner)/2;
+   b+=`<path d="M${x} 158H300V124H321" fill="none" stroke="#075968" stroke-width="4"/><circle cx="${x}" cy="158" r="5" fill="#075968"/><rect x="320" y="82" width="171" height="63" rx="12" fill="#075968"/>`;
+   b+=`<text x="332" y="105" fill="#fff" font-family="system-ui,sans-serif" font-size="14">ZONA SELECCIONADA</text><text x="332" y="131" fill="#fff" font-family="system-ui,sans-serif" font-size="23" font-weight="750">${active}. ${names[active-1]}</text>`;
+   if(active===2)b+=text(314,189,'Detalle ampliado',16)+`<rect x="320" y="201" width="42" height="56" fill="#b9aa95"/><rect x="362" y="201" width="16" height="56" fill="#ffce63" stroke="#075968" stroke-width="3"/><rect x="378" y="201" width="100" height="56" fill="#e5dfd2"/>`+text(309,282,'Una capa muy fina',16);
+   b+=text(42,311,'El color destaca solo la parte elegida.',16);
+  }
+  return svg(b,active?`Tronco: ${names[active-1]} resaltada en amarillo, con contorno y señalador`:'Sección del tronco con cinco zonas numeradas desde fuera hacia el centro');
+ }
+ function processStage(stage){
+  const names=['Tala y desramado','Transporte','Descortezado','Aserrado','Secado','Cepillado y lijado','Tratamientos y acabados'];
+  const arrow=(x,y)=>`<path d="M${x} ${y}h42m-12-10 12 10-12 10" fill="none" stroke="#146b74" stroke-width="5"/>`;
+  const log=(x,y,w=180)=>`<rect x="${x}" y="${y}" width="${w}" height="57" rx="8" fill="#9c704b" stroke="#5f4936" stroke-width="3"/><ellipse cx="${x+w}" cy="${y+28}" rx="17" ry="28" fill="#e3bd85" stroke="#5f4936" stroke-width="3"/><ellipse cx="${x+w}" cy="${y+28}" rx="9" ry="18" fill="none" stroke="#9b754a"/>`;
+  const board=(x,y,w=220)=>`<rect x="${x}" y="${y}" width="${w}" height="25" rx="2" fill="#e0b67b" stroke="#80603f" stroke-width="2"/><path d="M${x+8} ${y+12}h${w-16}" stroke="#b28752" stroke-width="2"/>`;
+  const scenes=[
+   `<path d="M70 185V95" stroke="#87613c" stroke-width="20"/><path d="M70 40 27 124h86Z" fill="#92b691" stroke="#4d7657" stroke-width="3"/><path d="M55 185h31v20H55Z" fill="#d7b17b" stroke="#80603f" stroke-width="2"/>`+arrow(122,145)+log(211,154,190)+`<path d="m235 146 25-30m40 30 26-34" stroke="#82603e" stroke-width="8"/><path d="M345 215l40 12m-8-12 25 18" stroke="#82603e" stroke-width="5"/>`+text(34,248,'Árbol seleccionado',17)+text(239,248,'Tronco sin ramas',17),
+   `<path d="M67 180h365v35H67Z" fill="#b3c5bf" stroke="#496963" stroke-width="3"/><path d="M352 112h55l45 48v55H352Z" fill="#83b3ba" stroke="#496963" stroke-width="3"/><path d="M366 124h34l29 33h-63Z" fill="#e9f3f2" stroke="#496963" stroke-width="2"/><circle cx="119" cy="218" r="22" fill="#465654"/><circle cx="322" cy="218" r="22" fill="#465654"/><circle cx="419" cy="218" r="22" fill="#465654"/>`+log(77,119,235)+log(91,61,219)+`<path d="M145 66v116m116-116v116" stroke="#d8b44e" stroke-width="7"/>`+text(101,270,'Los troncos se trasladan',21),
+   log(40,137,133)+arrow(207,164)+`<rect x="276" y="137" width="156" height="57" rx="7" fill="#e4bd84" stroke="#80603f" stroke-width="3"/><ellipse cx="432" cy="165" rx="17" ry="28" fill="#efd3a9" stroke="#80603f" stroke-width="2"/><path d="m295 120 80-17 16 22-66 13Z" fill="#9c704b" stroke="#5f4936" stroke-width="3"/><path d="m300 212 53 10 30-10" fill="none" stroke="#9c704b" stroke-width="9"/>`+text(42,249,'Con corteza',19)+text(278,249,'Sin corteza',19),
+   log(34,126,143)+`<path d="M230 63v161" stroke="#788885" stroke-width="15"/><path d="m237 70 10 8-10 8 10 8-10 8 10 8-10 8 10 8-10 8 10 8-10 8 10 8-10 8 10 8-10 8 10 8-10 8" stroke="#415956" fill="none" stroke-width="3"/>`+board(285,113,175)+board(285,156,175)+board(285,199,175)+text(50,266,'Corte con sierra',20)+text(302,266,'Piezas aserradas',18),
+   board(99,114,300)+board(99,161,300)+board(99,208,300)+`<path d="M140 139v21m220-21v21m-220 26v21m220-21v21" stroke="#8a6741" stroke-width="12"/><path d="M40 101q35-25 65 0m-15-13 15 13-19 6M408 147q25-23 54-5m-13-12 13 12-18 5M49 202q21-23 44-8m-13-12 13 12-17 5" fill="none" stroke="#247b88" stroke-width="4"/><path d="M235 58c-26 27-18 44 0 44s26-17 0-44Z" fill="#a8d4db" stroke="#247b88" stroke-width="2"/>`+text(102,275,'Aire entre las tablas',22),
+   board(44,185,412)+`<path d="m82 166 75-38 91 26-40 30H82Z" fill="#719da1" stroke="#425f62" stroke-width="3"/><path d="M139 138v-28h38v23" fill="none" stroke="#425f62" stroke-width="8"/><path d="M235 175q24-40 41-11t31-7" fill="none" stroke="#b4864e" stroke-width="5"/><path d="m327 143 83 6 20 31-103-5Z" fill="#d2b084" stroke="#71563d" stroke-width="3"/><path d="m342 135 43-6m-43-1 43-6" stroke="#146b74" stroke-width="3"/>`+text(49,263,'Cepillo y virutas',20)+text(319,263,'Lija',20),
+   board(61,180,378)+`<path d="M76 181h221v24H76Z" fill="#b37b47"/><path d="m267 164 39-36 34 34-39 37Z" fill="#b67c40" stroke="#71563d" stroke-width="3"/><path d="m306 128 30-30 34 33-30 31Z" fill="#d6dedd" stroke="#597471" stroke-width="2"/><path d="m346 114 56-60" stroke="#7b613d" stroke-width="18"/><rect x="78" y="91" width="79" height="74" rx="5" fill="#8cb8ac" stroke="#456a5f" stroke-width="3"/><ellipse cx="117" cy="91" rx="39" ry="10" fill="#d6e8df" stroke="#456a5f" stroke-width="2"/>`+text(73,267,'Se protege o acaba la superficie',21)
+  ];
+  return svg(text(24,33,`${stage}. ${names[stage-1]}`,23)+scenes[stage-1],`Etapa ${stage}: ${names[stage-1]}. Ilustración de la operación sobre la madera`);
+ }
  function board(kind){let b='';if(kind==='plywood'){for(let i=0;i<7;i++){const y=105+i*14;b+=`<rect x="55" y="${y}" width="380" height="14" fill="${i%2?'#c0925b':'#e4c397'}" stroke="#826c4b"/>`;b+=i%2?Array.from({length:20},(_,j)=>`<path d="M${65+j*18} ${y+2} v10" stroke="#826c4b" stroke-width=".7"/>`).join(''):`<path d="M65 ${y+7} h355" stroke="#9a794e"/>`;}}
  else{const y=kind==='hardboard'?148:100,h=kind==='hardboard'?26:108;b+=`<rect x="55" y="${y}" width="380" height="${h}" rx="2" fill="${kind==='mdf'?'#c5a47b':'#dcc399'}" stroke="#7c684d" stroke-width="2"/>`;for(let i=0;i<(kind==='particle'?95:170);i++){let x=60+(i*47%365),yy=y+5+(i*31%(h-10));b+=kind==='particle'?`<path d="M${x} ${yy} l12 -3 6 5 -11 4Z" fill="${i%2?'#a07a4c':'#c49b62'}"/>`:`<path d="M${x} ${yy} l5 1" stroke="#9b805e" stroke-width=".8"/>`;}}
  return svg(b+text(55,260,'Observa la estructura del canto',18),'Esquema del canto de un tablero; identifica su estructura');}
  function visual(type,active=0){
  if(type==='trunk'||type==='rings')return trunk(active);
+ if(type==='process'&&active>=1&&active<=7)return processStage(active);
  if(['plywood','particle','mdf','hardboard'].includes(type))return board(type);
  if(type==='boards')return svg(`<g transform="translate(20 40)"><rect width="200" height="95" fill="#ead0a3" stroke="#7f6c4f"/><path d="M0 20h200M0 40h200M0 60h200M0 80h200" stroke="#91663d"/><g fill="#a98353"><path d="M245 5h180v90H245Z"/></g><path d="M255 15l15 5m24 6 14-2m30 20 15 4m-90 20 20 3m57 10 20-2m-12-60 15 4" stroke="#efd4a8" stroke-width="7"/></g>`+text(60,235,'Chapas o partículas',24),'Comparación de un canto por capas y otro con partículas');
  if(type==='density')return svg(`<rect x="60" y="110" width="140" height="90" fill="#d9b982" stroke="#7f6745" stroke-width="2"/><rect x="290" y="110" width="140" height="90" fill="#c59c65" stroke="#7f6745" stroke-width="2"/>`+text(62,85,'Taco A: 60 g')+text(288,85,'Taco B: 80 g')+text(77,240,'100 cm³')+text(308,240,'100 cm³'),'Dos tacos de igual volumen con masas distintas');
@@ -24,3 +61,4 @@
  }
  root.MaderaVisual={visual};
 })(window);
+
