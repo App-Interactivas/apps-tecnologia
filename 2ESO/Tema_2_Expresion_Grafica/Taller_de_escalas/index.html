@@ -42,6 +42,7 @@ header h1{letter-spacing:-.035em}main{max-width:1120px}
 #hint summary,#hintDetails summary{font-weight:800;color:#865900;cursor:pointer}
 @media(max-width:640px){#entryScreen{margin:8px auto 30px}.mode-grid{grid-template-columns:1fr}.mode-card{min-height:190px}header{padding:16px 20px}}
 
+.student-bar.test-mode{background:#fff5da;border:2px solid #b77900}.student-bar.test-mode strong{color:#6e4500}
 </style></head><body data-app="escalas"><header><div class="brand">TECNOLOGÍA Y DIGITALIZACIÓN · 2.º ESO</div><div class="tag">TEMA 2 · EXPRESIÓN GRÁFICA</div><h1>Taller de escalas</h1><p>Cambia el dibujo sin cambiar la pieza</p></header><main><section id="entryScreen"><section class="registro" aria-labelledby="registroTitulo">
 <div><h2 id="registroTitulo">Introduce tu ID para comenzar</h2><p class="note" id="conexionInfo"></p></div>
 <div class="reg-controls"><label for="alumnoID">ID del alumnado</label><input id="alumnoID" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="El código que te da el profesor" maxlength="32"><details class="partner-field"><summary>¿Trabajáis en pareja? Añade el segundo ID</summary><label for="alumnoID2">ID del compañero o compañera</label><input id="alumnoID2" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="Solo si trabajáis en pareja" maxlength="32"></details><button id="comprobarID">Comprobar ID</button><button id="cambiarAlumno" hidden>Cambiar de alumno</button></div>
@@ -99,22 +100,28 @@ header h1{letter-spacing:-.035em}main{max-width:1120px}
     $('alumnoID2').value = id2;
     if (!id1) { $('registroMensaje').textContent = 'Introduce el primer ID.'; return; }
     if (id2 && id1 === id2) { $('registroMensaje').textContent = 'Los dos ID deben ser diferentes.'; return; }
+    if (id2 === 'NX-01') { $('registroMensaje').textContent = 'Para probar la app, escribe NX-01 en el primer campo y deja el segundo vacío.'; return; }
     verifying = true;
     $('comprobarID').disabled = true;
     $('registroMensaje').textContent = 'Comprobando ID en el registro del profesor…';
     try {
-      const ids = [id1, id2].filter(Boolean);
+      // NX-01 es un ID técnico que confirma el Apps Script. Nunca se mezcla con un ID real.
+      const testRequested = id1 === 'NX-01';
+      const ids = testRequested ? [id1] : [id1, id2].filter(Boolean);
+      if (testRequested) $('alumnoID2').value = '';
       const students = await Promise.all(ids.map(lookup));
-      if (students.some(x => course(x.curso) !== '2ESO')) throw new Error('Uno de los ID no corresponde a 2.º ESO.');
-      if (students.length === 2 && String(students[0].grupo) !== String(students[1].grupo)) {
+      const testMode = testRequested && students[0]?.modo_prueba === true;
+      if (testRequested && !testMode) throw new Error('El servidor no ha confirmado el modo de prueba.');
+      if (!testMode && students.some(x => course(x.curso) !== '2ESO')) throw new Error('Uno de los ID no corresponde a 2.º ESO.');
+      if (!testMode && students.length === 2 && String(students[0].grupo) !== String(students[1].grupo)) {
         throw new Error('Para trabajar en pareja, ambos alumnos deben pertenecer al mismo grupo.');
       }
-      identity = { ids, group: String(students[0].grupo), names: students.map(x => String(x.nombre || 'Alumno/a')) };
+      identity = { ids, group: String(students[0].grupo), names: students.map(x => String(x.nombre || 'Alumno/a')), testMode };
       $('alumnoID').disabled = true;
       $('alumnoID2').disabled = true;
       $('comprobarID').hidden = true;
       $('cambiarAlumno').hidden = false;
-      $('registroMensaje').textContent = 'Identidad confirmada: ' + identity.names.join(' y ') + ' · 2.º ESO · Grupo ' + identity.group + '.';
+      $('registroMensaje').textContent = testMode ? 'MODO PRUEBA · NX-01 · USUARIO DE PRUEBA' : 'Identidad confirmada: ' + identity.names.join(' y ') + ' · 2.º ESO · Grupo ' + identity.group + '.';
       document.dispatchEvent(new Event('pdi-session'));
       showActivityHome();
     } catch (error) {
@@ -226,7 +233,8 @@ header h1{letter-spacing:-.035em}main{max-width:1120px}
   function showActivityHome() {
     $('entryScreen').hidden = true;
     $('activityScreen').hidden = false;
-    $('studentGreeting').textContent = 'Hola, ' + identity.names.join(' y ') + ' · Grupo ' + identity.group;
+    $('studentGreeting').textContent = identity.testMode ? 'MODO PRUEBA · NX-01 · USUARIO DE PRUEBA' : 'Hola, ' + identity.names.join(' y ') + ' · Grupo ' + identity.group;
+    $('studentGreeting').parentElement.classList.toggle('test-mode', identity.testMode);
     $('modeHub').hidden = false;
     $('activityContent').hidden = true;
     $('envioPanel').hidden = !queue.length;
