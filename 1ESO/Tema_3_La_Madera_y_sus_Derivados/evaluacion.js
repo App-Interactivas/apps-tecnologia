@@ -18,11 +18,24 @@
  }
  function validateStudents(students){
   if(!Array.isArray(students)||students.length<1||students.length>2)throw Error('Introduce uno o dos ID.');
+  const test=students.filter(x=>normId(x.id)==='NX-01');
+  if(test.length){
+   if(students.length!==1)throw Error('NX-01 se utiliza solo, sin un segundo ID.');
+   if(test[0].modo_prueba!==true)throw Error('El servidor no ha confirmado el modo de prueba de NX-01.');
+   return students;
+  }
+  if(students.some(x=>x.modo_prueba===true))throw Error('El modo de prueba solo está disponible para NX-01.');
   if(students.some(x=>!x.id||!x.name||!x.group||norm(x.course)!=='1ESO'))throw Error('Cada ID debe estar activo y tener nombre, curso de 1.º ESO y grupo.');
   if(new Set(students.map(x=>normId(x.id))).size!==students.length)throw Error('Los dos ID deben ser distintos.');
   if(students.length===2&&norm(students[0].group)!==norm(students[1].group))throw Error('Los dos ID deben pertenecer al mismo grupo.');
   return students;
  }
- const api={normId,norm,number,complete,evaluate,validateStudents};
+ function applyHint(record,used,evaluable){
+  const rawScore=record.score,score=evaluable&&used?rawScore*.5:rawScore;
+  return {...record,rawScore,score,hintUsed:!!used,hintDeduction:rawScore-score,hintMaximum:evaluable&&used?.5:1};
+ }
+
+ const api={normId,norm,number,complete,evaluate,validateStudents,applyHint};
  if(typeof module!=='undefined'&&module.exports)module.exports=api;else root.MaderaEval=api;
 })(typeof globalThis!=='undefined'?globalThis:this);
+
