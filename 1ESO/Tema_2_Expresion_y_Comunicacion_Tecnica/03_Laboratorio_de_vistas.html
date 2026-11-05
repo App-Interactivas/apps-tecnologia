@@ -18,6 +18,14 @@ body{background:var(--paper)}.wrap{max-width:1160px}.top{background:white}.hero{
 .volume-view{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start}
 .volume-view>*{min-width:0}.volume-view h3{margin:.3rem 0;text-align:center}
 @media(max-width:650px){.volume-view{grid-template-columns:1fr}}
+/* Visor de práctica del Taller de vistas de 2.º ESO, adaptado a 1.º ESO. */
+.vp-controls,.vp-legend{display:flex;flex-wrap:wrap;gap:12px;align-items:end;margin:16px 0}.vp-controls select{display:block;width:100%;margin-top:4px}.vp-check{display:flex;align-items:center;gap:8px;min-height:48px}
+.vp-workspace{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:18px}.vp-card,.vp-view{min-width:0;border:1px solid var(--line);border-radius:12px;background:#fff;padding:14px}
+.vp-canvas{background-color:#f8fcfc;background-image:linear-gradient(#e7eff0 1px,transparent 1px),linear-gradient(90deg,#e7eff0 1px,transparent 1px);background-size:22px 22px;border-radius:8px}
+#vp-model{display:block;width:100%;height:auto;touch-action:none;cursor:grab}#vp-model:active{cursor:grabbing}.vp-sliders,.vp-views{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.vp-front{grid-area:1/1}.vp-left{grid-area:1/2}.vp-top{grid-area:2/1}.vp-view{text-align:center;padding:8px}.vp-view svg{display:block;width:100%;height:auto}.vp-view h3{font-size:1rem}.vp-view p{margin:0}
+.vp-legend{gap:8px}.vp-legend span{display:inline-flex;align-items:center;gap:6px;font-size:.8rem}.vp-swatch{display:inline-block;width:12px;height:12px;border:1px solid #526173;border-radius:3px}
+@media(max-width:820px){.vp-workspace{grid-template-columns:minmax(0,1fr)}}@media(max-width:480px){.vp-sliders{grid-template-columns:1fr}.vp-card{padding:10px}}
 </style></head><body>
 <header class="top"><div class="wrap"><div class="brand"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M9 9H3V31H9M31 9H37V31H31" fill="none" stroke="#126680" stroke-width="2.5"/><path d="M13 28L16 18L27 7L33 13L22 24Z" fill="#f3cb67" stroke="#20343b" stroke-width="1.5"/></svg>TECNOLOGÍA Y DIGITALIZACIÓN · 1.º ESO</div><a href="index.html">← Todas las apps del tema</a></div></header>
 <main class="wrap"><section class="hero"><div><div class="eyebrow">App 03 · Expresión y comunicación técnica</div><h1>Laboratorio de vistas</h1><p>Explora cinco piezas, dibuja sobre cuadrícula y relaciona figuras y vistas.</p><div class="chips"><span class="chip">Alzado · Planta · Perfil izquierdo</span><span class="chip">10 de práctica · 10 evaluables</span><span class="chip">25–30 min</span></div></div><div class="hero-art"><img src="data:image/png;base64,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" alt="Pieza geométrica con el frente señalado"></div></section>
@@ -27,8 +35,8 @@ body{background:var(--paper)}.wrap{max-width:1160px}.top{background:white}.hero{
 <label class="pair-toggle"><input id="pairMode" type="checkbox"> Trabajamos en pareja</label>
 <div class="actions"><button id="verifyIds" class="primary" data-action="verifyIds">Confirmar ID y continuar →</button></div><p id="identityMessage" class="status" role="status" aria-live="polite"></p>
 </section>
-<section id="modeStage" class="panel" hidden aria-labelledby="modeTitle"><div class="menu-header"><p id="verifiedNames" class="student-name"></p><button data-action="changeStudent">Cambiar de alumno</button></div><h2 id="modeTitle">¿Qué quieres hacer?</h2><div class="mode-grid"><button class="mode-card practice" data-action="practiceMode"><em>SIN NOTA</em><strong>PRACTICAR SIN NOTA</strong><span>Explora y ensaya diez retos distintos de los evaluables. La práctica no envía resultados.</span></button><button id="evaluateMode" class="mode-card evaluable" data-action="evaluateMode"><em>CUENTA PARA LA NOTA</em><strong>ACTIVIDAD EVALUABLE</strong><span>Diez retos · 10 puntos. Al finalizar se enviará el resultado de cada ID validado.</span></button></div><p class="note">En la actividad evaluable, un consejo reduce a la mitad la puntuación de ese reto: un acierto completo pasa de 1 a 0,5 puntos. Un error vale 0.</p><p id="modeMessage" class="status" role="status" aria-live="polite"></p></section>
-<nav id="sessionBar" class="flow-bar" hidden aria-label="Actividad actual"><div><div id="flowLabel" class="flow-label"></div><div id="sessionName" class="session-name"></div></div><div class="actions"><button id="backExplore" data-action="backExplore" hidden>← Volver a Explorar</button><button data-action="backMenu">← Elegir modo</button></div></nav>
+<section id="modeStage" class="panel" hidden aria-labelledby="modeTitle"><div class="menu-header"><p id="verifiedNames" class="student-name"></p><button data-action="changeStudent">Cambiar de alumno</button></div><h2 id="modeTitle">¿Qué quieres hacer?</h2><div class="mode-grid"><button class="mode-card practice" data-action="practiceMode"><em>SIN NOTA</em><strong>PRACTICAR SIN NOTA</strong><span>Gira siete piezas y compara sus tres vistas. La práctica no puntúa ni envía resultados.</span></button><button id="evaluateMode" class="mode-card evaluable" data-action="evaluateMode"><em>CUENTA PARA LA NOTA</em><strong>ACTIVIDAD EVALUABLE</strong><span>Diez retos · 10 puntos. Al finalizar se enviará el resultado de cada ID validado.</span></button></div><p class="note">En la actividad evaluable, un consejo reduce a la mitad la puntuación de ese reto: un acierto completo pasa de 1 a 0,5 puntos. Un error vale 0.</p><p id="modeMessage" class="status" role="status" aria-live="polite"></p></section>
+<nav id="sessionBar" class="flow-bar" hidden aria-label="Actividad actual"><div><div id="flowLabel" class="flow-label"></div><div id="sessionName" class="session-name"></div></div><div class="actions"><button data-action="backMenu">← Elegir modo</button></div></nav>
 <section id="explore" aria-label="Práctica sin nota" hidden></section>
 <section id="retos" aria-label="Retos autocorregibles" hidden><section id="quizStage" class="panel" hidden><div class="quiz-top"><div><div id="sessionLabel" class="note"></div><strong id="progressText">0 de 10 comprobados</strong></div><progress id="progress" max="10" value="0" aria-label="Retos comprobados"></progress></div><div id="quizContent"></div><div class="quiz-nav"><button id="prevButton" data-action="prev">← Reto anterior</button><button id="nextButton" class="primary" data-action="next">Siguiente reto →</button></div></section><section id="resultStage" aria-label="Resultado y envío" hidden></section></section>
 <noscript><p class="panel">Activa JavaScript en el navegador para usar las actividades y la autocorrección.</p></noscript></main><footer><div class="wrap"><span>UD 2 · Expresión y comunicación técnica · 26/27</span><span>Cuaderno Técnico Ilustrado · Práctica visual</span></div></footer>
@@ -246,457 +254,7 @@ APPS.forEach(a=>a.questions.forEach((q,i)=>{q.id=`${a.id}_R${String(i+1).padStar
 
 const APP=APPS.find(a=>a.id===APP_ID);
 
-const PRACTICE_QUESTIONS = [
-  {
-    "title": "Reconoce el alzado del bloque",
-    "prompt": "Desde el frente se ve la anchura y la altura. El bloque mide 60 mm de ancho, 40 mm de fondo y 30 mm de alto. Elige el alzado.",
-    "visual": {
-      "type": "model",
-      "kind": "block"
-    },
-    "options": [
-      {
-        "label": "A",
-        "visual": {
-          "type": "view",
-          "shape": {
-            "k": "rect",
-            "w": 40,
-            "h": 30
-          }
-        }
-      },
-      {
-        "label": "B",
-        "visual": {
-          "type": "view",
-          "shape": {
-            "k": "rect",
-            "w": 60,
-            "h": 40
-          }
-        }
-      },
-      {
-        "label": "C",
-        "visual": {
-          "type": "view",
-          "shape": {
-            "k": "rect",
-            "w": 60,
-            "h": 30
-          }
-        }
-      }
-    ],
-    "answer": 2,
-    "explain": "El alzado es el rectángulo de 60 × 30 mm.",
-    "hint": "La profundidad no se ve de frente."
-  },
-  {
-    "kind": "draw",
-    "title": "Dibuja el perfil del bloque",
-    "prompt": "Desde la izquierda se ven 40 mm de fondo y 30 mm de alto. El punto azul marca la esquina superior izquierda. Traza el contorno.",
-    "visual": {
-      "type": "model",
-      "kind": "block"
-    },
-    "shape": {
-      "k": "rect",
-      "w": 40,
-      "h": 30
-    },
-    "explain": "El perfil es un rectángulo de 8 × 6 casillas.",
-    "hint": "Divide fondo y altura entre 5."
-  },
-  {
-    "title": "La planta del escalón",
-    "prompt": "Mira la pieza desde arriba. Elige la planta que mantiene la misma dirección del escalón.",
-    "visual": {
-      "type": "model",
-      "kind": "step30"
-    },
-    "options": [
-      {
-        "label": "A",
-        "visual": {
-          "type": "view",
-          "shape": {
-            "k": "rect",
-            "w": 60,
-            "h": 40,
-            "v": [
-              30
-            ]
-          }
-        }
-      },
-      {
-        "label": "B",
-        "visual": {
-          "type": "view",
-          "shape": {
-            "k": "rect",
-            "w": 60,
-            "h": 40
-          }
-        }
-      },
-      {
-        "label": "C",
-        "visual": {
-          "type": "view",
-          "shape": {
-            "k": "rect",
-            "w": 60,
-            "h": 40,
-            "hor": [
-              20
-            ]
-          }
-        }
-      }
-    ],
-    "answer": 0,
-    "explain": "El cambio de nivel se ve como una línea vertical en la planta.",
-    "hint": "La separación entre los dos niveles recorre toda la pieza de delante hacia detrás."
-  },
-  {
-    "kind": "draw",
-    "title": "Dibuja la planta del escalón",
-    "prompt": "La planta mide 60 × 40 mm. Dibuja su contorno y la línea que separa las dos mitades de 30 mm de anchura. El punto azul marca la esquina superior izquierda.",
-    "visual": {
-      "type": "model",
-      "kind": "step30"
-    },
-    "shape": {
-      "k": "rect",
-      "w": 60,
-      "h": 40,
-      "v": [
-        30
-      ]
-    },
-    "explain": "Dibuja un rectángulo de 12 × 8 casillas con una línea vertical a 6 casillas del borde izquierdo.",
-    "hint": "Coloca primero el contorno y luego marca la mitad de la anchura."
-  },
-  {
-    "title": "Un perfil con otra proporción",
-    "prompt": "La pieza escalonada mide 40 mm de fondo y 30 mm de alto. Elige su perfil izquierdo sin aristas ocultas.",
-    "visual": {
-      "type": "model",
-      "kind": "stairs"
-    },
-    "options": [
-      {
-        "label": "A",
-        "visual": {
-          "type": "view",
-          "shape": {
-            "k": "rect",
-            "w": 60,
-            "h": 30
-          }
-        }
-      },
-      {
-        "label": "B",
-        "visual": {
-          "type": "view",
-          "shape": {
-            "k": "rect",
-            "w": 40,
-            "h": 30
-          }
-        }
-      },
-      {
-        "label": "C",
-        "visual": {
-          "type": "view",
-          "shape": {
-            "k": "rect",
-            "w": 60,
-            "h": 40
-          }
-        }
-      }
-    ],
-    "answer": 1,
-    "explain": "Desde la izquierda se ve el rectángulo de 40 × 30 mm. El escalón más alto tapa a los demás.",
-    "hint": "Para el perfil usa fondo y altura."
-  },
-  {
-    "kind": "draw",
-    "title": "Traza el alzado de tres escalones",
-    "prompt": "Traza el contorno con tres tramos de 20 mm de anchura. Sus alturas, de izquierda a derecha, son 30, 20 y 10 mm. El punto azul es la esquina superior izquierda.",
-    "visual": {
-      "type": "model",
-      "kind": "stairs"
-    },
-    "shape": {
-      "k": "stairs",
-      "w": 60,
-      "h": 30
-    },
-    "explain": "Cada tramo ocupa 4 casillas. Las alturas son de 6, 4 y 2 casillas y comparten la base.",
-    "hint": "Sitúa primero la línea inferior común. Cada escalón baja 2 casillas."
-  },
-  {
-    "title": "Vista de la abertura",
-    "prompt": "¿En qué vista aparece el contorno interior de la caja abierta?",
-    "visual": {
-      "type": "model",
-      "kind": "open"
-    },
-    "options": [
-      "Alzado",
-      "Planta",
-      "Perfil izquierdo"
-    ],
-    "answer": 1,
-    "explain": "La abertura se ve desde arriba, en la planta.",
-    "hint": "Piensa desde qué mirada puedes ver el interior."
-  },
-  {
-    "title": "El resalte de frente",
-    "prompt": "Desde el frente se ve la anchura total de la base y el resalte centrado. Elige el contorno del alzado.",
-    "visual": {
-      "type": "model",
-      "kind": "tower"
-    },
-    "options": [
-      {
-        "label": "A",
-        "visual": {
-          "type": "view",
-          "shape": {
-            "k": "tower",
-            "w": 40,
-            "h": 30
-          }
-        }
-      },
-      {
-        "label": "B",
-        "visual": {
-          "type": "view",
-          "shape": {
-            "k": "rect",
-            "w": 60,
-            "h": 30
-          }
-        }
-      },
-      {
-        "label": "C",
-        "visual": {
-          "type": "view",
-          "shape": {
-            "k": "tower",
-            "w": 60,
-            "h": 30
-          }
-        }
-      }
-    ],
-    "answer": 2,
-    "explain": "El alzado mide 60 mm de ancho y 30 mm de alto, con un resalte centrado.",
-    "hint": "El perfil de esta pieza también tiene un resalte, pero muestra el fondo de 40 mm."
-  },
-  {
-    "kind": "fields",
-    "title": "Alinea dos vistas",
-    "prompt": "Escoge qué medida se comparte entre cada pareja de vistas.",
-    "visual": {
-      "type": "triad",
-      "kind": "open"
-    },
-    "fields": [
-      {
-        "label": "Alzado y planta",
-        "options": [
-          "Anchura",
-          "Fondo",
-          "Altura"
-        ],
-        "answer": "Anchura"
-      },
-      {
-        "label": "Planta y perfil",
-        "options": [
-          "Anchura",
-          "Fondo",
-          "Altura"
-        ],
-        "answer": "Fondo"
-      },
-      {
-        "label": "Alzado y perfil",
-        "options": [
-          "Anchura",
-          "Fondo",
-          "Altura"
-        ],
-        "answer": "Altura"
-      }
-    ],
-    "explain": "Las vistas alineadas conservan la medida que tienen en común.",
-    "hint": "Para cada vista recuerda qué dos medidas puedes observar."
-  },
-  {
-    "title": "Un detalle que delata la pieza",
-    "prompt": "¿Cuál de estas plantas corresponde a la caja abierta?",
-    "visual": {
-      "type": "model",
-      "kind": "open"
-    },
-    "options": [
-      {
-        "label": "A",
-        "visual": {
-          "type": "view",
-          "shape": {
-            "k": "rect",
-            "w": 60,
-            "h": 40,
-            "inner": [
-              5,
-              5,
-              50,
-              30
-            ]
-          }
-        }
-      },
-      {
-        "label": "B",
-        "visual": {
-          "type": "view",
-          "shape": {
-            "k": "rect",
-            "w": 60,
-            "h": 40,
-            "inner": [
-              20,
-              10,
-              20,
-              20
-            ]
-          }
-        }
-      },
-      {
-        "label": "C",
-        "visual": {
-          "type": "view",
-          "shape": {
-            "k": "rect",
-            "w": 60,
-            "h": 40,
-            "v": [
-              20,
-              40
-            ]
-          }
-        }
-      }
-    ],
-    "answer": 0,
-    "explain": "El rectángulo interior recorre la abertura de la caja. Un cuadrado pequeño encajaría con el resalte central.",
-    "hint": "Compara el tamaño del contorno interior con el de la pieza completa."
-  }
-];
-const DRAWING_QUESTIONS = [
-  {
-    "kind": "draw",
-    "title": "Nivel 1 · Alzado de un bloque",
-    "prompt": "Dibuja el contorno de 60 mm de ancho y 30 mm de alto desde el punto azul hacia abajo y a la derecha.",
-    "visual": {
-      "type": "model",
-      "kind": "block"
-    },
-    "shape": {
-      "k": "rect",
-      "w": 60,
-      "h": 30
-    },
-    "explain": "El rectángulo ocupa 12 × 6 casillas.",
-    "hint": "Cada casilla son 5 mm."
-  },
-  {
-    "kind": "draw",
-    "title": "Nivel 2 · Escalón desplazado",
-    "prompt": "Traza el alzado. La parte alta ocupa los primeros 20 mm de anchura y alcanza 30 mm de altura. La parte baja ocupa los otros 40 mm y alcanza 15 mm. Ambas comparten la base. El punto azul marca la esquina superior izquierda.",
-    "visual": {
-      "type": "model",
-      "kind": "step"
-    },
-    "shape": {
-      "k": "step",
-      "w": 60,
-      "h": 30,
-      "t": 20,
-      "lo": 15
-    },
-    "explain": "La parte alta ocupa 4 casillas, y la parte baja 8. Sus alturas son 6 y 3 casillas.",
-    "hint": "Empieza por la base común, de 12 casillas."
-  },
-  {
-    "kind": "draw",
-    "title": "Nivel 3 · Planta de la caja abierta",
-    "prompt": "Dibuja el contorno exterior de 60 × 40 mm y el interior de 50 × 30 mm. Deja 5 mm por cada lado. El punto azul marca la esquina superior izquierda exterior.",
-    "visual": {
-      "type": "model",
-      "kind": "open"
-    },
-    "shape": {
-      "k": "rect",
-      "w": 60,
-      "h": 40,
-      "inner": [
-        5,
-        5,
-        50,
-        30
-      ]
-    },
-    "explain": "El exterior ocupa 12 × 8 casillas y el interior 10 × 6, a una casilla de cada borde.",
-    "hint": "Dibuja el rectángulo exterior y luego desplázate una casilla desde cada lado."
-  },
-  {
-    "kind": "draw",
-    "title": "Nivel 4 · Alzado del resalte",
-    "prompt": "Dibuja el alzado de una base de 60 mm de ancho y 10 mm de alto. El resalte centrado mide 20 mm de ancho y sube 20 mm por encima de la base. Añade la arista horizontal que separa la base del resalte. El punto azul está sobre la esquina superior izquierda del resalte.",
-    "visual": {
-      "type": "model",
-      "kind": "tower"
-    },
-    "shape": {
-      "k": "tower",
-      "w": 60,
-      "h": 30,
-      "towerSeam": true
-    },
-    "explain": "La base ocupa 12 × 2 casillas y el resalte 4 × 4. La línea entre ambos completa el alzado.",
-    "hint": "Cuenta 4 casillas desde el borde izquierdo de la base hasta el comienzo del resalte.",
-    "originNote": true
-  }
-];
-
-function preparePracticeBank(questions, prefix){
- questions.forEach((q,index)=>{
-  q.id=APP.id+'_'+prefix+String(index+1).padStart(2,'0');
-  q.kind=q.kind||'choice';
- });
-}
-preparePracticeBank(PRACTICE_QUESTIONS,'P');
-preparePracticeBank(DRAWING_QUESTIONS,'D');
-
-function questionsForMode(){
- if(S.mode==='registered')return APP.questions;
- return S.mode==='drawing'?DRAWING_QUESTIONS:PRACTICE_QUESTIONS;
-}
+function questionsForMode(){return APP.questions;}
 
 const DEFAULT_ENDPOINT="https://script.google.com/macros/s/AKfycbzYhutDT6EZ7meQq2KfVdKq0h8JH9GYnOmZVqjW_IkmOvdMdjS7FxWQWezmx8SfWQf9/exec";
 const S={screen:'entry',identifying:false,reviewing:false,testMode:false,tab:'explore',mode:'',students:[],generation:0,index:0,drafts:[],records:[],hints:[],point:null,kbPoint:[2,2],history:{},tool:'draw',submissionId:'',startedAt:'',result:null,pending:null,sending:false,confirmed:new Set(),endpoint:'',manualEndpoint:false,lab:{doc:'boceto',angle:50,line:'parallel',direction:15,piece:'block',view:'iso',w:100,d:60,h:40}};
@@ -722,34 +280,179 @@ function download(textValue,type,name){const blob=new Blob([textValue],{type}),u
 function selectTab(tab){
  if(!S.students.length){showScreen('entry');return;}S.tab=tab;
  if(tab==='explore'){showScreen('explore');return;}
- if(!S.mode){showScreen('menu');return;}
+ if(S.mode!=='registered'){showScreen('menu');return;}
  if(S.result&&!S.reviewing){showScreen('results');return;}
  showScreen('quiz');renderQuiz();
 }
 function renderExplore(){
- let controls='',note='';
- if(APP.n===1){controls='<label>Documento<select id="labDoc"><option value="boceto">Boceto</option><option value="croquis">Croquis</option><option value="plano">Plano</option></select></label>';note='Compara qué información añade cada documento. El dibujo con volumen es una ilustración; no medimos sobre él para obtener cotas.';}
- if(APP.n===2){controls='<label>Ángulo <output id="labAngleValue">50°</output><input id="labAngle" type="range" min="10" max="170" value="50" aria-label="Abertura del ángulo"></label><label>Relación entre líneas<select id="labLine"><option value="parallel">Paralelas</option><option value="perp">Perpendiculares</option></select></label><label>Dirección de las líneas<input id="labDirection" type="range" min="0" max="80" value="15" aria-label="Dirección de las líneas"></label>';note='También puedes mover el extremo del ángulo sobre el transportador. Las paralelas mantienen la dirección; las perpendiculares forman 90°.';}
- if(APP.n===3){controls='<label>Pieza<select id="labPiece"><option value="block">Bloque</option><option value="step30">Escalón</option><option value="stairs">Tres escalones</option><option value="tower">Resalte central</option><option value="open">Caja abierta</option></select></label><label>Mirada<select id="labView"><option value="iso">Volumen con frente</option><option value="0">Alzado</option><option value="2">Planta</option><option value="1">Perfil izquierdo</option><option value="all">Las tres vistas</option></select></label>';note='Cambiar de mirada no cambia el frente del objeto. Alzado y planta comparten anchura; alzado y perfil, altura; planta y perfil, fondo.';}
- if(APP.n===4){controls='<label>Anchura en mm<input id="labW" type="number" min="10" max="120" step="5" value="100"></label><label>Fondo en mm<input id="labD" type="number" min="10" max="80" step="5" value="60"></label><label>Altura en mm<input id="labH" type="number" min="10" max="60" step="5" value="40"></label>';note='Diseña una caja abierta de un compartimento. El máximo es 120 × 80 × 60 mm. La separación del contorno interior es ilustrativa: no define el espesor ni un despiece.';}
- $('explore').innerHTML=`<div class="panel"><div class="eyebrow">Laboratorio libre</div><h2>Explora antes de resolver</h2><p>${esc(APP.intro)}</p><div class="lab-controls">${controls}</div><div id="labStage" class="sketch"></div><p class="note">${note}</p><div class="actions">${APP.n===4?'<button data-action="exportBox">Descargar mis vistas en SVG</button>':''}<button class="primary" data-action="goQuiz">Ensayar los diez retos sin nota →</button></div><p id="labMessage" role="status" class="status"></p></div><section class="panel" style="margin-top:20px" aria-labelledby="drawLabTitle"><div class="eyebrow">Práctica guiada · Sin nota</div><h2 id="drawLabTitle">Dibuja las vistas de cuatro piezas</h2><p>Empieza por un bloque, sigue con un escalón y acaba con una abertura interior y un resalte. Dibuja en la cuadrícula y compara tu trazado con la solución.</p><button data-action="drawingMode">Abrir la cuadrícula →</button></section>`;
- labRefresh();
+ const root=$('explore');
+ root.innerHTML="<section class=\"panel\" aria-labelledby=\"vp-title\"><div class=\"eyebrow\">PRÁCTICA SIN NOTA</div><h2 id=\"vp-title\">Explora las vistas de siete piezas</h2><p>Elige una pieza y gírala. Compara su volumen con el alzado, la planta y el perfil izquierdo. Empieza por el prisma y continúa con las piezas más complejas.</p>\n<div class=\"vp-controls\"><label for=\"vp-piece\">Pieza<select id=\"vp-piece\"><option value=\"prism\">Prisma rectangular</option><option value=\"step\" selected>Pieza escalonada</option><option value=\"roof\">Pieza con plano inclinado</option><option value=\"rear\">Escalón alto hacia atrás</option><option value=\"l\">Pieza con base en L</option><option value=\"u\">Pieza en U abierta al frente</option><option value=\"tunnel\">Bloque con túnel rectangular</option></select></label><button id=\"vp-reset\" type=\"button\">Restablecer giro</button><label class=\"vp-check\"><input type=\"checkbox\" id=\"vp-colors\" checked> Caras de colores</label><label id=\"vp-hidden-control\" class=\"vp-check\" hidden><input type=\"checkbox\" id=\"vp-hidden-edges\" checked> Aristas ocultas en el volumen</label></div>\n<div class=\"vp-workspace\"><div class=\"vp-card\"><h3>Volumen que puedes girar</h3><p class=\"note\" id=\"vp-dimensions\" aria-live=\"polite\"></p><div class=\"vp-canvas\"><svg id=\"vp-model\" viewBox=\"0 0 440 340\" role=\"img\" aria-label=\"Modelo de la pieza seleccionada\"><g id=\"vp-faces\"></g></svg></div><p class=\"note\">Arrastra la pieza o utiliza los controles. Al activar los colores, la cara azul identifica el frente.</p>\n<div class=\"vp-sliders\"><label for=\"vp-yaw\">Giro horizontal<input id=\"vp-yaw\" type=\"range\" min=\"-180\" max=\"180\" step=\"1\" value=\"30\"></label><label for=\"vp-pitch\">Giro vertical<input id=\"vp-pitch\" type=\"range\" min=\"-90\" max=\"90\" step=\"1\" value=\"25\"></label></div>\n<div class=\"actions\"><button type=\"button\" data-vp-camera=\"front\">Mirar de frente</button><button type=\"button\" data-vp-camera=\"top\">Mirar desde arriba</button><button type=\"button\" data-vp-camera=\"left\">Mirar desde la izquierda</button><button type=\"button\" data-vp-camera=\"right\">Mirar desde la derecha</button></div><div id=\"vp-legend\" class=\"vp-legend\" aria-label=\"Colores de las caras\"></div></div>\n<div class=\"vp-card\"><h3>Vistas en sistema europeo</h3><p class=\"note\">Las vistas mantienen el frente de referencia aunque gires la pieza.</p><div class=\"vp-views\"><div class=\"vp-view vp-front\"><h3>Alzado</h3><svg id=\"vp-front\" viewBox=\"0 0 200 140\" role=\"img\" aria-label=\"Alzado\"></svg><p class=\"note\">Anchura × altura</p></div><div class=\"vp-view vp-left\"><h3>Perfil izquierdo</h3><svg id=\"vp-left\" viewBox=\"0 0 200 140\" role=\"img\" aria-label=\"Perfil izquierdo\"></svg><p class=\"note\">Fondo × altura</p></div><div class=\"vp-view vp-top\"><h3>Planta</h3><svg id=\"vp-top\" viewBox=\"0 0 200 140\" role=\"img\" aria-label=\"Planta\"></svg><p class=\"note\">Anchura × fondo</p></div></div>\n<p class=\"note\">Coloca la planta debajo del alzado y el perfil izquierdo a su derecha. Compara las dimensiones que comparten.</p><p id=\"vp-cavity\" class=\"hint\" hidden><strong>Ampliación: aristas ocultas.</strong> El túnel de 24 × 16 mm atraviesa la pieza. Las líneas discontinuas muestran sus bordes cuando el material los tapa.</p></div></div></section>";
+ const get=id=>root.querySelector('#vp-'+id);
+ const NS='http://www.w3.org/2000/svg';
+const palette={front:'#65b9dc',back:'#b4a0da',bottom:'#bdc9ce',right:'#efa25d',left:'#91bf91',top:'#f2d56c',topLow:'#a2d9d1',riser:'#de9db3',innerLeft:'#81b4c7',innerTop:'#e6b288',innerRight:'#b3bc80',innerBottom:'#c99dbf',innerBack:'#ceba94'};
+const names={front:'Frente',back:'Trasera',bottom:'Base',right:'Derecha',left:'Izquierda',top:'Superior',topLow:'Superior baja',riser:'Escalón vertical',innerLeft:'Pared interior izquierda',innerTop:'Techo interior',innerRight:'Pared interior derecha',innerBottom:'Suelo interior',innerBack:'Fondo de la cavidad'};
+function makePrism(w=60,d=40,h=30){return {w,d,h,type:'prism',poly:[[0,0],[w,0],[w,h],[0,h]]}}
+function makeStep(w=60,d=40,h=30,low=15,split=30){return {w,d,h,low,split,type:'step',poly:[[0,0],[w,0],[w,low],[split,low],[split,h],[0,h]]}}
+function makeRoof(w=60,d=40,h=30,low=15){return {w,d,h,low,type:'roof',poly:[[0,0],[w,0],[w,low],[0,h]]}}
+function makeTunnel(end=null){return {...makePrism(60,40,40),type:'tunnel',hole:{x0:18,x1:42,y0:12,y1:28,end}}}
+function heightPiece(rows,unit=15){
+ const cells=[];rows.forEach((row,z)=>row.forEach((h,x)=>{for(let y=0;y<h;y++)cells.push([x,y,z]);}));
+ return {type:'voxel',cells,unit,w:rows[0].length*unit,d:rows.length*unit,h:Math.max(...rows.flat())*unit};
 }
-function labRefresh(){
- const l=S.lab;let html='';
- if(APP.n===1){const descriptions={boceto:'Boceto: compara ideas con trazos rápidos.',croquis:'Croquis: añade las dimensiones reales a mano alzada.',plano:'Plano: utiliza precisión, vistas y datos para comunicar.'};html=docSvg(l.doc)+`<p style="text-align:center">${descriptions[l.doc]}</p>`;}
- if(APP.n===2){html=`<div class="grid"><div id="angleLab" data-lab-angle="true">${angleSvg(l.angle,true)}</div><div>${linesSvg(l.line,l.direction)}</div></div>`;if($('labAngleValue'))$('labAngleValue').textContent=l.angle+'°';if($('labAngle'))$('labAngle').value=l.angle;}
- if(APP.n===3){
-  const volume=renderVisual({type:'model',kind:l.piece});
-  const title=l.view==='all'?'Las tres vistas':['Alzado','Perfil izquierdo','Planta'][Number(l.view)];
-  const projection=l.view==='all'?triadSvg(l.piece):l.view==='iso'?'':viewSvg(VIEWS[l.piece][Number(l.view)],title);
-  html=projection?`<div class="volume-view"><div><h3>Volumen con frente</h3>${volume}</div><div><h3>${title}</h3>${projection}</div></div>`:volume;
+function loopsOf(edges){
+ const remaining=edges.map(e=>e.map(p=>[...p])),loops=[];
+ while(remaining.length){const e=remaining.shift(),loop=[e[0]],start=e[0].join(','),next=e[1];let cur=next;
+  while(cur.join(',')!==start){loop.push(cur);const j=remaining.findIndex(x=>x[0].join(',')===cur.join(','));if(j<0)throw Error('Contorno abierto');cur=remaining.splice(j,1)[0][1];}
+  let changed=true;while(changed&&loop.length>3){changed=false;for(let i=0;i<loop.length;i++){const a=loop[(i+loop.length-1)%loop.length],b=loop[i],c=loop[(i+1)%loop.length];if(Math.abs((b[0]-a[0])*(c[1]-b[1])-(b[1]-a[1])*(c[0]-b[0]))<1e-8){loop.splice(i,1);changed=true;break;}}}loops.push(loop);
+ }return loops;
+}
+function voxelGeometry(p){
+ const set=new Set(p.cells.map(c=>c.join(','))),groups=new Map();
+ const specs=[{n:[0,0,-1],color:'front',axis:2,uv:[0,1]},{n:[0,0,1],color:'back',axis:2,uv:[0,1]},{n:[1,0,0],color:'right',axis:0,uv:[2,1]},{n:[-1,0,0],color:'left',axis:0,uv:[2,1]},{n:[0,1,0],color:'top',axis:1,uv:[0,2]},{n:[0,-1,0],color:'bottom',axis:1,uv:[0,2]}];
+ for(const cell of p.cells)for(const spec of specs){if(set.has(cell.map((v,i)=>v+spec.n[i]).join(',')))continue;
+  const plane=cell[spec.axis]+(spec.n[spec.axis]>0?1:0),key=spec.color+plane;let g=groups.get(key);if(!g){g={...spec,plane,squares:[]};groups.set(key,g);}g.squares.push(spec.uv.map(i=>cell[i]));
  }
- if(APP.n===4){const vals=['labW','labD','labH'].map(id=>Number($(id)?.value));if(!vals.every(Number.isFinite)||vals.some(x=>x<10)||vals[0]>120||vals[1]>80||vals[2]>60){setStatus('labMessage','Usa dimensiones entre 10 y los máximos 120, 80 y 60 mm.',true);return;}[l.w,l.d,l.h]=vals;html=boxCleanSVG(l.w,l.d,l.h);setStatus('labMessage','Alzado: anchura y altura. Planta: anchura y fondo. Perfil: fondo y altura.');}
- $('labStage').innerHTML=html;
+ const faces=[];for(const g of groups.values()){
+  const squares=new Set(g.squares.map(c=>c.join(','))),edges=[];
+  for(const [u,v]of g.squares){if(!squares.has([u,v-1].join(',')))edges.push([[u,v],[u+1,v]]);if(!squares.has([u+1,v].join(',')))edges.push([[u+1,v],[u+1,v+1]]);if(!squares.has([u,v+1].join(',')))edges.push([[u+1,v+1],[u,v+1]]);if(!squares.has([u-1,v].join(',')))edges.push([[u,v+1],[u,v]]);}
+  for(const loop of loopsOf(edges)){const points=loop.map(q=>{const v=[0,0,0];v[g.axis]=g.plane;g.uv.forEach((i,j)=>v[i]=q[j]);return v.map((a,i)=>a*p.unit-[p.w,p.h,p.d][i]/2);});faces.push({points,n:g.n,color:g.color});}
+ }return faces;
+}
+function voxelView(p,kind){
+ const axes=kind==='front'?[0,1,2]:kind==='top'?[0,2,1]:[2,1,0],surf=new Map();
+ for(const cell of p.cells){
+  const u=kind==='left'?Math.round(p.d/p.unit)-1-cell[2]:cell[axes[0]];
+  const key=[u,cell[axes[1]]].join(','),d=cell[axes[2]];
+  surf.set(key,surf.has(key)?(['front','left'].includes(kind)?Math.min(surf.get(key),d):Math.max(surf.get(key),d)):d);
+ }
+ const edges=[],inside=new Map();for(const [k,d] of surf){const [u,v]=k.split(',').map(Number);const sides=[[[u,v-1],[u,v],[u+1,v]],[[u+1,v],[u+1,v],[u+1,v+1]],[[u,v+1],[u+1,v+1],[u,v+1]],[[u-1,v],[u,v+1],[u,v]]];for(const [q,a,b]of sides){const other=q.join(',');if(!surf.has(other))edges.push([a,b]);else if(surf.get(other)!==d){const key=[a.join(','),b.join(',')].sort().join('|');inside.set(key,[a,b]);}}}
+ const loops=loopsOf(edges).map(loop=>loop.map(q=>q.map(n=>n*p.unit))),segments=[...inside.values()];
+ // Join contiguous unit segments; unit boundaries are not physical edges.
+ let changed=true;while(changed){changed=false;outer:for(let i=0;i<segments.length;i++)for(let j=i+1;j<segments.length;j++){const a=segments[i],b=segments[j];for(const [ai,bi]of [[0,0],[0,1],[1,0],[1,1]])if(a[ai].join(',')===b[bi].join(',')){const x=a[1-ai],m=a[ai],z=b[1-bi];if((m[0]-x[0])*(z[1]-m[1])===(m[1]-x[1])*(z[0]-m[0])){segments[i]=[x,z];segments.splice(j,1);changed=true;break outer;}}}}
+ return {w:['right','left'].includes(kind)?p.d:p.w,h:kind==='top'?p.d:p.h,outline:loops[0],holes:[],lines:segments.map(e=>line(e[0].map(n=>n*p.unit),e[1].map(n=>n*p.unit)))};
+}
+
+const pieces={prism:makePrism(55,35,25),step:makeStep(65,35,35,20,25),roof:makeRoof(),tunnel:makeTunnel(),rear:heightPiece([[1,1,1,1],[3,3,3,3]]),l:heightPiece([[2,2,2,2],[2,2,2,2],[2,0,0,0]]),u:heightPiece([[3,0,0,3],[3,0,0,3],[3,3,3,3]])};
+function dot(a,b){return a.reduce((sum,v,i)=>sum+v*b[i],0)}
+function project(v,ya,pi){return [dot(v,[Math.cos(ya),0,Math.sin(ya)]),dot(v,[-Math.sin(pi)*Math.sin(ya),Math.cos(pi),Math.sin(pi)*Math.cos(ya)])]}
+function geometry(p){
+ if(p.cells)return voxelGeometry(p);
+ const center=v=>[v[0]-p.w/2,v[1]-p.h/2,v[2]-p.d/2];
+ const front=p.poly.map(v=>center([...v,0])),back=p.poly.map(v=>center([...v,p.d]));
+ const faces=[{points:front,n:[0,0,-1],color:'front'},{points:back,n:[0,0,1],color:'back'}];
+ p.poly.forEach((a,i)=>{const b=p.poly[(i+1)%p.poly.length],dx=b[0]-a[0],dy=b[1]-a[1];
+  let color=dy>0?'right':dy<0?'left':dx>0?'bottom':'top';
+  if(dy>0&&a[0]!==p.w)color='riser';if(dx<0&&dy>0)color='top';
+  if(p.type==='step'&&dx<0&&a[1]<p.h)color='topLow';
+  faces.push({points:[center([...a,0]),center([...b,0]),center([...b,p.d]),center([...a,p.d])],n:[dy,-dx,0],color});
+ });
+ if(p.hole){const h=p.hole,end=h.end??p.d,loop=[[h.x0,h.y0],[h.x0,h.y1],[h.x1,h.y1],[h.x1,h.y0]];
+  faces[0].holes=[loop.map(v=>center([...v,0]))];
+  if(h.end===null)faces[1].holes=[loop.map(v=>center([...v,p.d]))];
+  loop.forEach((a,i)=>{const b=loop[(i+1)%4],dx=b[0]-a[0],dy=b[1]-a[1];
+   faces.push({points:[center([...a,0]),center([...b,0]),center([...b,end]),center([...a,end])],n:[dy,-dx,0],color:['innerLeft','innerTop','innerRight','innerBottom'][i]});
+  });
+  if(h.end!==null)faces.push({points:loop.map(v=>center([...v,end])),n:[0,0,-1],color:'innerBack'});
+ }
+ return faces;
+}
+function svgNode(type,attrs,parent){const el=document.createElementNS(NS,type);Object.entries(attrs).forEach(([k,v])=>el.setAttribute(k,v));if(parent)parent.append(el);return el}
+function svgPath(points,transform){return points.map((p,i)=>`${i?'L':'M'}${transform(p).join(',')}`).join(' ')+' Z'}
+function rayOccluded(v,n,p){
+ const point=[v[0]+p.w/2,v[1]+p.h/2,v[2]+p.d/2],h=p.hole;
+ const planes=[[0,p.w,h.x0,h.x1],[0,p.h,h.y0,h.y1],[0,p.d,h.end??p.d]];
+ const times=[0];planes.forEach((a,i)=>{if(Math.abs(n[i])<1e-9)return;a.forEach(c=>{const t=(c-point[i])/n[i];if(t>1e-7)times.push(t)})});
+ times.sort((a,b)=>a-b);
+ for(let i=0;i<times.length-1;i++){
+  const t=(times[i]+times[i+1])/2,x=point.map((c,j)=>c+t*n[j]);
+  const inBox=x[0]>1e-7&&x[0]<p.w-1e-7&&x[1]>1e-7&&x[1]<p.h-1e-7&&x[2]>1e-7&&x[2]<p.d-1e-7;
+  const inVoid=x[0]>h.x0-1e-7&&x[0]<h.x1+1e-7&&x[1]>h.y0-1e-7&&x[1]<h.y1+1e-7&&x[2]<(h.end??p.d)+1e-7;
+  if(inBox&&!inVoid)return true;
+ }
+ return false;
+}
+function cavityEdges(p){const h=p.hole,end=h.end??p.d,loop=[[h.x0,h.y0],[h.x1,h.y0],[h.x1,h.y1],[h.x0,h.y1]],center=v=>[v[0]-p.w/2,v[1]-p.h/2,v[2]-p.d/2],edges=[];
+ loop.forEach((a,i)=>{const b=loop[(i+1)%4];for(const z of [0,end])edges.push([center([...a,z]),center([...b,z])]);edges.push([center([...a,0]),center([...a,end])])});return edges;
+}
+function drawModel(target,p,ya,pi,{colors=true,hidden=false,scale=3.6}={}){
+ target.replaceChildren();const camera=[Math.sin(ya)*Math.cos(pi),Math.sin(pi),-Math.cos(ya)*Math.cos(pi)];
+ const transform=v=>{const [x,y]=project(v,ya,pi);return [220+x*scale,170-y*scale]};
+ const depth=f=>dot(f.points.reduce((t,v)=>t.map((n,i)=>n+v[i]/f.points.length),[0,0,0]),camera);
+ const faces=geometry(p).filter(f=>dot(f.n,camera)>1e-7).sort((a,b)=>depth(a)-depth(b));
+ faces.forEach(f=>{let attrs={fill:colors?palette[f.color]:'#e0e8ea',stroke:'#263b45','stroke-width':1.5,'stroke-linejoin':'round'};
+  let el;if(f.holes){attrs.d=svgPath(f.points,transform)+f.holes.map(h=>svgPath(h,transform)).join(' ');attrs['fill-rule']='evenodd';el=svgNode('path',attrs,target)}
+  else{attrs.points=f.points.map(transform).map(v=>v.join(',')).join(' ');el=svgNode('polygon',attrs,target)}
+  const title=svgNode('title',{},el);title.textContent=names[f.color];
+ });
+ if(p.hole&&hidden){const group=svgNode('g',{'aria-label':'Aristas interiores ocultas',stroke:'#344651','stroke-width':1.3,'stroke-dasharray':'5 4',fill:'none'},target);
+  cavityEdges(p).forEach(([a,b])=>{let start=null;const point=t=>a.map((v,i)=>v+(b[i]-v)*t);
+   for(let i=0;i<40;i++){
+    const isHidden=rayOccluded(point((i+.5)/40),camera,p);
+    if(isHidden&&start===null)start=i/40;
+    if(start!==null&&(!isHidden||i===39)){const end=isHidden&&i===39?1:i/40;const [x1,y1]=transform(point(start)),[x2,y2]=transform(point(end));svgNode('line',{x1,y1,x2,y2},group);start=null}
+   }
+  });
+ }
+}
+function line(a,b,hidden=false){return {type:'line',a,b,hidden}}
+function viewSpec(p,kind){
+ if(p.cells)return voxelView(p,kind);
+ const rect=(w,h)=>({w,h,outline:[[0,0],[w,0],[w,h],[0,h]],lines:[],holes:[]});let v;
+ if(kind==='front'){v=rect(p.w,p.h);v.outline=p.poly.map(x=>[...x]);if(p.hole){const h=p.hole;v.holes.push({x:h.x0,y:h.y0,w:h.x1-h.x0,h:h.y1-h.y0})}}
+ if(kind==='top'){v=rect(p.w,p.d);if(p.type==='step'){v.lines.push(line([p.split,0],[p.split,p.d]));v.regions=[{outline:[[p.split,0],[p.w,0],[p.w,p.d],[p.split,p.d]],color:'topLow'}]}if(p.hole){const h=p.hole,end=h.end??p.d;v.lines.push(line([h.x0,0],[h.x0,end],true),line([h.x1,0],[h.x1,end],true));if(h.end!==null)v.lines.push(line([h.x0,end],[h.x1,end],true))}}
+ if(kind==='right'){v=rect(p.d,p.h);if(p.type==='step'||p.type==='roof'){v.lines.push(line([0,p.low],[p.d,p.low]));v.regions=[{outline:[[0,p.low],[p.d,p.low],[p.d,p.h],[0,p.h]],color:p.type==='step'?'riser':'top'}]}if(p.hole){const h=p.hole,end=h.end??p.d;v.lines.push(line([0,h.y0],[end,h.y0],true),line([0,h.y1],[end,h.y1],true));if(h.end!==null)v.lines.push(line([end,h.y0],[end,h.y1],true))}}
+ if(kind==='left'){
+  v=rect(p.d,p.h);
+  if(p.hole){const h=p.hole,end=h.end??p.d;v.lines.push(line([p.d, h.y0],[p.d-end,h.y0],true),line([p.d,h.y1],[p.d-end,h.y1],true));if(h.end!==null)v.lines.push(line([p.d-end,h.y0],[p.d-end,h.y1],true));}
+ }
+ return v;
+}
+function drawView(target,v,{cx=100,cy=70,scale=2.1,color=null}={}){
+ const transform=([x,y])=>[cx+(x-v.w/2)*scale,cy-(y-v.h/2)*scale];
+ const stroke={stroke:'#263b45','stroke-width':1.6,'stroke-linecap':'butt','stroke-linejoin':'round'};
+ svgNode('polygon',{points:v.outline.map(transform).map(x=>x.join(',')).join(' '),fill:color??'#fff',...stroke},target);
+ if(color)(v.regions??[]).forEach(r=>svgNode('polygon',{points:r.outline.map(transform).map(x=>x.join(',')).join(' '),fill:palette[r.color],...stroke},target));
+ v.holes.forEach(h=>{if(h.circle){const [x,y]=transform([h.x,h.y]);svgNode('circle',{cx:x,cy:y,r:h.r*scale,fill:'#fff',...stroke,...(h.hidden?{'stroke-dasharray':'5 4'}:{})},target)}
+  else{const [x,y]=transform([h.x,h.y+h.h]);svgNode('rect',{x,y,width:h.w*scale,height:h.h*scale,fill:'#fff',...stroke,...(h.hidden?{'stroke-dasharray':'5 4'}:{})},target)}});
+ v.lines.forEach(l=>{const [x1,y1]=transform(l.a),[x2,y2]=transform(l.b);svgNode('line',{x1,y1,x2,y2,...stroke,...(l.hidden?{'stroke-dasharray':'5 4'}:{})},target)});
+}
+
+ let key='step',yaw=Math.PI/6,pitch=25*Math.PI/180,drag=null;
+ const model=get('model'),rad=Math.PI/180;
+ function render(){
+  const p=pieces[key];
+  drawModel(get('faces'),p,yaw,pitch,{colors:get('colors').checked,hidden:get('hidden-edges').checked,scale:Math.min(3.6,320/Math.hypot(p.w,p.h,p.d))});
+  get('yaw').value=Math.round(yaw/rad);get('pitch').value=Math.round(pitch/rad);
+ }
+ function views(){
+  const p=pieces[key],color=get('colors').checked;
+  for(const [kind,c] of [['front','front'],['top','top'],['left','left']]){
+   const target=get(kind),v=viewSpec(p,kind);target.replaceChildren();
+   drawView(target,v,{color:color?palette[c]:null,scale:Math.min(2.1,172/v.w,112/v.h)});
+  }
+  get('dimensions').textContent=[p.w+' mm de ancho',p.d+' mm de fondo',p.h+' mm de alto'].join(' · ');
+  get('cavity').hidden=!p.hole;get('hidden-control').hidden=!p.hole;
+  const legend=get('legend');legend.hidden=!color;legend.replaceChildren();
+  for(const k of new Set(geometry(p).map(f=>f.color))){
+   const tag=document.createElement('span'),swatch=document.createElement('i');
+   swatch.className='vp-swatch';swatch.style.background=palette[k];swatch.setAttribute('aria-hidden','true');
+   tag.append(swatch,document.createTextNode(names[k]));legend.append(tag);
+  }
+ }
+ function reset(){
+  yaw=(key==='tunnel'?20:30)*rad;pitch=(key==='tunnel'?15:25)*rad;render();
+ }
+ get('piece').onchange=e=>{key=e.target.value;views();reset();};
+ get('colors').onchange=()=>{views();render();};get('hidden-edges').onchange=render;get('reset').onclick=reset;
+ get('yaw').oninput=e=>{yaw=Number(e.target.value)*rad;render();};get('pitch').oninput=e=>{pitch=Number(e.target.value)*rad;render();};
+ root.querySelectorAll('[data-vp-camera]').forEach(b=>b.onclick=()=>{const v=b.dataset.vpCamera;yaw=v==='right'?Math.PI/2:v==='left'?-Math.PI/2:0;pitch=v==='top'?Math.PI/2:0;render();});
+ model.onpointerdown=e=>{if(drag||e.button!==0)return;drag={id:e.pointerId,x:e.clientX,y:e.clientY,yaw,pitch};model.setPointerCapture(e.pointerId);};
+ model.onpointermove=e=>{if(drag?.id!==e.pointerId)return;const angle=drag.yaw-(e.clientX-drag.x)*.01;yaw=Math.atan2(Math.sin(angle),Math.cos(angle));pitch=Math.max(-Math.PI/2,Math.min(Math.PI/2,drag.pitch+(e.clientY-drag.y)*.01));render();};
+ model.onpointerup=model.onpointercancel=model.onlostpointercapture=e=>{if(drag?.id===e.pointerId)drag=null;};
+ views();reset();
 }
 function startAttempt(){
- S.index=0;S.drafts=[];S.records=[];S.hints=[];S.history={};S.point=null;S.kbPoint=[2,2];S.tool='draw';S.submissionId=uuid();S.startedAt=new Date().toISOString();S.result=null;S.pending=null;S.reviewing=false;S.confirmed=new Set();S.sending=false;$('resultStage').innerHTML='';renderQuiz();
+ S.index=0;S.drafts=[];S.records=[];S.hints=[];S.history={};S.point=null;S.kbPoint=[2,2];S.tool='draw';S.submissionId=uuid();S.startedAt=new Date().toISOString();S.result=null;S.pending=null;S.reviewing=false;S.confirmed=new Set();S.sending=false;$('resultStage').innerHTML='';if(S.mode==='registered')renderQuiz();
 }
 function fieldHtml(f,j,d,detail){
  const locked=!!detail;
@@ -778,12 +481,12 @@ function solutionValue(expected){
  return `<p class="solution-value">✓ Solución: ${esc(expected)}</p>`;
 }
 function renderQuiz(){
- const active=!!S.mode;if(!active)return;if(S.result&&!S.reviewing){showScreen('results');return;}showScreen('quiz');$('quizStage').className='panel '+(S.mode==='registered'?'quiz-stage-evaluable':'quiz-stage-free');
+ if(S.mode!=='registered')return;if(S.result&&!S.reviewing){showScreen('results');return;}showScreen('quiz');$('quizStage').className='panel '+(S.mode==='registered'?'quiz-stage-evaluable':'quiz-stage-free');
  const bank=questionsForMode(),total=bank.length;
  const q=bank[S.index],d=draft(q),record=S.records[S.index],locked=!!record;
  const completed=S.records.filter(Boolean).length;
  $('progress').max=total;$('progress').value=completed;$('progressText').textContent=`${completed} de ${total} comprobados`;
- $('sessionLabel').textContent=S.mode==='registered'?'Diez retos · Hasta 10 puntos':S.mode==='drawing'?'Dibujo guiado · Sin nota ni envío':'Diez retos propios de práctica · Sin nota ni envío';
+ $('sessionLabel').textContent='Diez retos · Hasta 10 puntos';
  let response='';
  if(q.kind==='choice')response=`<fieldset style="border:0;padding:0;margin:0"><legend class="note">Elige una respuesta.</legend><div class="choices ${q.options.every(x=>typeof x==='string')?'text-only':''}">${q.options.map((o,j)=>`<label class="choice ${locked&&j===q.answer?'correct':''} ${locked&&d===j&&d!==q.answer?'wrong':''}"><input type="radio" name="choice" data-choice="${j}" value="${j}" ${d===j?'checked':''} ${locked?'disabled':''}><span>${typeof o==='string'?esc(o):esc(o.label)}</span>${typeof o==='object'?renderVisual(o.visual):''}${locked&&j===q.answer?'<strong class="answer-badge">✓ Respuesta correcta</strong>':locked&&d===j?'<strong class="answer-badge">× Tu respuesta</strong>':''}</label>`).join('')}</div></fieldset>`;
  else if(q.kind==='fields')response=q.fields.map((f,j)=>fieldHtml(f,j,d,record?.details[j])).join('');
@@ -802,7 +505,7 @@ function feedbackHtml(q,record){
  return `<div class="feedback ${correct?'':'incomplete'}" role="status"><strong>${correct?'Bien resuelto':'Revisa la solución'} · ${fmt(record.score)} / 1 punto</strong><p>${esc(q.explain)}</p>${details}${record.hintPenalty>0?`<p class="advice-discount">Consejo aplicado: ${fmt(record.rawScore)} × 0,5 = ${fmt(record.score)} puntos.</p>`:''}</div>`;
 }
 function checkQuestion(){
- if(!S.mode||S.result)return;const q=questionsForMode()[S.index];if(S.records[S.index])return;
+ if(S.mode!=='registered'||S.result)return;const q=questionsForMode()[S.index];if(S.records[S.index])return;
  const d=draft(q);if(!complete(q,d)){setStatus('questionMessage',q.kind==='draw'?'Dibuja al menos un segmento antes de comprobar.':'Completa todas las respuestas antes de comprobar.',true);return;}
  const r=evaluate(q,d),hint=!!S.hints[S.index],factor=S.mode==='registered'&&hint?0.5:1;
  S.records[S.index]={id:q.id,title:q.title,...r,rawScore:r.score,score:r.score*factor,maxPoints:factor,hintPenalty:r.score*(1-factor),hintCostMaximum:factor===0.5?0.5:0,response:structuredClone(d),hint,hintText:hint?hintFor(q):'',checkedAt:new Date().toISOString()};S.point=null;
@@ -815,6 +518,7 @@ function applySegment(a,b){
 }
 function choosePoint(point){S.kbPoint=point;if(S.point)applySegment(S.point,point);else {S.point=point;$('drawArea').innerHTML=drawingSVG(questionsForMode()[S.index]);}document.querySelector(`[data-point="${point.join(',')}"]`)?.focus();}
 function finish(){
+ if(S.mode!=='registered')return;
  if(S.result){S.reviewing=false;showScreen('results');return;}
  if(S.records.filter(Boolean).length!==questionsForMode().length)return;
  const maximo=questionsForMode().length,score=scoreTotal(S.records),penalty=S.records.reduce((n,r)=>n+r.hintPenalty,0);
@@ -908,9 +612,6 @@ function actions(action,target){
  else if(action==='practiceMode')void chooseMode('free');
  else if(action==='evaluateMode')void chooseMode('registered');
  else if(action==='backMenu'){if(S.pending||S.sending){S.reviewing=false;showScreen('results');}else showScreen(S.students.length?'menu':'entry');}
- else if(action==='goQuiz')void chooseMode('free','retos');
- else if(action==='drawingMode'&&APP.n===3)void chooseMode('drawing');
- else if(action==='backExplore'&&S.mode==='drawing')selectTab('explore');
  else if(action==='check')checkQuestion();
  else if(action==='hint')requestHint();
  else if(action==='reviewAttempt'){if(S.result){S.reviewing=true;S.index=0;selectTab('retos');}}
@@ -923,7 +624,6 @@ function actions(action,target){
  else if(action==='retrySend')void transmit();
  else if(action==='changeStudent')resetStudent();
  else if(action==='downloadResult'){if(S.result)download(JSON.stringify({...S.result,studentIds:S.students.map(x=>x.studentId),registered:S.mode==='registered',confirmedIds:[...S.confirmed],pending:!!S.pending},null,2),'application/json',APP.id+'_resultado.json');}
- else if(action==='exportBox'){labRefresh();const l=S.lab;if([$ ('labW'),$('labD'),$('labH')].map(e=>Number(e.value)).some((v,i)=>!Number.isFinite(v)||v<10||v>[120,80,60][i]))return;download(boxCleanSVG(l.w,l.d,l.h,true),'image/svg+xml','UD2_Mi_caja_vistas.svg');setStatus('labMessage','SVG descargado. Para comprobar 1:1 imprime al 100 % y mide una dimensión conocida.');}
 }
 function drawingPointAt(e,canvas){
  // SVG meet scaling can leave margins inside its CSS box. Use the actual
@@ -941,21 +641,16 @@ function boot(){
   if(t.dataset.choice!==undefined&&!S.records[S.index])S.drafts[S.index]=Number(t.dataset.choice);
   if(t.dataset.field!==undefined&&!S.records[S.index])draft(questionsForMode()[S.index])[Number(t.dataset.field)]=t.value;
   if(t.id==='protractor'){const q=questionsForMode()[S.index];$('questionFigure').innerHTML=angleSvg(q.visual.deg,t.checked)+`<label class="note"><input id="protractor" type="checkbox" ${t.checked?'checked':''}> Mostrar transportador</label>`;}
-  const map={labDoc:'doc',labPiece:'piece',labView:'view',labLine:'line'};if(map[t.id]){S.lab[map[t.id]]=t.value;labRefresh();}
-  if(['labW','labD','labH'].includes(t.id))labRefresh();
  });
  document.addEventListener('input',e=>{const t=e.target;
   if(t.dataset.field!==undefined&&!S.records[S.index])draft(questionsForMode()[S.index])[Number(t.dataset.field)]=t.value;
   if(t.id==='adjustAngle'&&!S.records[S.index]){S.drafts[S.index]=Number(t.value);$('questionFigure').innerHTML=angleSvg(Number(t.value),true);}
-  if(t.id==='labAngle'){S.lab.angle=Number(t.value);labRefresh();}if(t.id==='labDirection'){S.lab.direction=Number(t.value);labRefresh();}
  });
  document.addEventListener('keydown',e=>{const t=e.target.closest('[data-point]');if(t&&['Enter',' '].includes(e.key)){e.preventDefault();choosePoint(t.dataset.point.split(',').map(Number));}if(t&&['ArrowUp','ArrowDown','ArrowLeft','ArrowRight'].includes(e.key)){e.preventDefault();let[x,y]=t.dataset.point.split(',').map(Number);if(e.key==='ArrowUp')y--;if(e.key==='ArrowDown')y++;if(e.key==='ArrowLeft')x--;if(e.key==='ArrowRight')x++;x=Math.max(0,Math.min(16,x));y=Math.max(0,Math.min(12,y));t.setAttribute('tabindex','-1');S.kbPoint=[x,y];const next=document.querySelector(`[data-point="${x},${y}"]`);next?.setAttribute('tabindex','0');next?.focus();}if(['id1','id2'].includes(e.target.id)&&e.key==='Enter'){e.preventDefault();verifyIds();}});
- let down=null,labDragging=false;
- function labPointer(e){const box=$('angleLab')?.getBoundingClientRect();if(!box||box.width===0)return;let x=(e.clientX-box.left)*420/box.width,y=(e.clientY-box.top)*255/box.height;S.lab.angle=Math.max(10,Math.min(170,Math.round(Math.atan2(210-y,x-200)*180/Math.PI)));labRefresh();}
- document.addEventListener('pointerdown',e=>{const canvas=e.target.closest('#drawCanvas');if(canvas&&!S.records[S.index]){e.preventDefault();down=drawingPointAt(e,canvas);}if(e.target.closest('#angleLab')){e.preventDefault();labDragging=true;labPointer(e);}});
- document.addEventListener('pointermove',e=>{if(labDragging)labPointer(e);});
- document.addEventListener('pointerup',e=>{labDragging=false;if(!down)return;const canvas=$('drawCanvas');if(canvas){const end=drawingPointAt(e,canvas);if(!end){down=null;return;}if(down[0]===end[0]&&down[1]===end[1])choosePoint(end);else applySegment(down,end);}down=null;});
- document.addEventListener('pointercancel',()=>{down=null;labDragging=false;});
+ let down=null;
+ document.addEventListener('pointerdown',e=>{const canvas=e.target.closest('#drawCanvas');if(canvas&&!S.records[S.index]){e.preventDefault();down=drawingPointAt(e,canvas);}});
+ document.addEventListener('pointerup',e=>{if(!down)return;const canvas=$('drawCanvas');if(canvas){const end=drawingPointAt(e,canvas);if(!end){down=null;return;}if(down[0]===end[0]&&down[1]===end[1])choosePoint(end);else applySegment(down,end);}down=null;});
+ document.addEventListener('pointercancel',()=>{down=null;});
  window.addEventListener('beforeunload',e=>{if(S.pending){e.preventDefault();e.returnValue='';}});
  window.addEventListener('pageshow',e=>{if(e.persisted)resetStudent(true);});
 }
@@ -967,9 +662,9 @@ function showScreen(screen){
  S.screen=screen;const identified=S.students.length>0;document.body.classList.toggle('is-identified',identified);
  $('testBanner').hidden=!identified||!S.testMode;
  $('registration').hidden=screen!=='entry';$('modeStage').hidden=screen!=='menu';$('sessionBar').hidden=!identified||!['explore','quiz','results'].includes(screen);
- $('backExplore').hidden=S.mode!=='drawing'||screen==='explore';
+ 
  $('explore').hidden=screen!=='explore';$('retos').hidden=!['quiz','results'].includes(screen);$('quizStage').hidden=screen!=='quiz';$('resultStage').hidden=screen!=='results';
- $('flowLabel').textContent=S.mode==='registered'?(S.testMode?'ACTIVIDAD EVALUABLE · Envío de prueba':'ACTIVIDAD EVALUABLE · Cuenta para la nota'):S.mode==='drawing'?'DIBUJO GUIADO · Sin nota':'PRACTICAR SIN NOTA';$('flowLabel').className='flow-label'+(S.mode==='registered'?' evaluable':'');
+ $('flowLabel').textContent=S.mode==='registered'?(S.testMode?'ACTIVIDAD EVALUABLE · Envío de prueba':'ACTIVIDAD EVALUABLE · Cuenta para la nota'):'PRACTICAR SIN NOTA';$('flowLabel').className='flow-label'+(S.mode==='registered'?' evaluable':'');
  $('evaluateMode').querySelector('em').textContent=S.testMode?'PRUEBA TÉCNICA · NO CUENTA PARA LA NOTA':'CUENTA PARA LA NOTA';$('evaluateMode').querySelector('span').textContent=S.testMode?'Recorre los diez retos y comprueba el envío con NX-01. El resultado se marcará como prueba.':'Diez retos · 10 puntos. Al finalizar se enviará el resultado de cada ID validado.';
  $('sessionName').textContent=S.students.map(s=>s.name+' · Grupo '+s.group).join(' / ');
  if(screen==='entry')$('id1').focus();
