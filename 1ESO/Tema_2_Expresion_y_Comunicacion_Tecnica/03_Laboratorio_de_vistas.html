@@ -7,17 +7,28 @@ body{background:var(--paper)}.wrap{max-width:1160px}.top{background:white}.hero{
 @media(max-width:820px){.hero{grid-template-columns:1fr}.hero-art{display:none}.hero h1{font-size:2.25rem}.mode-grid{gap:16px}.mode-card{padding:22px}.q-layout{grid-template-columns:1fr}.flow-bar{padding:12px}}
 @media(max-width:580px){.mode-grid{grid-template-columns:1fr}.mode-card{min-height:175px}.wrap{padding:16px}.hero{padding-top:23px}.panel{padding:19px}.hero h1{font-size:2rem}.registration .actions>button{width:100%}.mode-card strong{font-size:1.2rem}.ids{grid-template-columns:1fr}.flow-bar .button{padding:9px 12px}.quiz-top{gap:11px}.qtitle{font-size:1.4rem}.results-table th,.results-table td{padding:9px}.choices:not(.text-only){grid-template-columns:1fr 1fr}footer .wrap{display:block}.top .wrap{display:block}}
 @media(max-width:360px){.wrap{padding:12px}.panel{padding:15px}.choices:not(.text-only){grid-template-columns:1fr}.board-models{grid-template-columns:repeat(2,1fr)}.board-views{grid-template-columns:repeat(3,1fr)}}
-.is-identified .hero{padding-top:18px;padding-bottom:12px;display:block}.is-identified .hero h1{font-size:clamp(1.5rem,3vw,2.05rem);margin:.35rem 0 .4rem}.is-identified .hero-art,.is-identified .hero p,.is-identified .hero .chips{display:none}.is-identified .hero .eyebrow{font-size:.7rem}@media(max-width:580px){.board-models{grid-template-columns:repeat(2,1fr)}.board-views{grid-template-columns:repeat(3,1fr)}.board-models .mini-model{max-height:135px}}@media(max-width:580px){footer .wrap span{display:block;margin-bottom:6px}}.test-banner{padding:13px 18px;background:#eee6fb;border:2px solid #7555a5;border-radius:12px;color:#503078;font-size:1.05rem;font-weight:850;margin:0 0 20px}.test-banner small{display:block;color:#503078;font-weight:500}</style></head><body>
+.is-identified .hero{padding-top:18px;padding-bottom:12px;display:block}.is-identified .hero h1{font-size:clamp(1.5rem,3vw,2.05rem);margin:.35rem 0 .4rem}.is-identified .hero-art,.is-identified .hero p,.is-identified .hero .chips{display:none}.is-identified .hero .eyebrow{font-size:.7rem}@media(max-width:580px){.board-models{grid-template-columns:repeat(2,1fr)}.board-views{grid-template-columns:repeat(3,1fr)}.board-models .mini-model{max-height:135px}}@media(max-width:580px){footer .wrap span{display:block;margin-bottom:6px}}.test-banner{padding:13px 18px;background:#eee6fb;border:2px solid #7555a5;border-radius:12px;color:#503078;font-size:1.05rem;font-weight:850;margin:0 0 20px}.test-banner small{display:block;color:#503078;font-weight:500}
+.choice.correct,.choice.correct:has(input:checked){border:3px solid #126e43;background:#e3f7eb;color:#0b4f30}
+.choice.wrong,.choice.wrong:has(input:checked){border:3px solid #a22c38;background:#fff0ef;color:#7e202c}
+.answer-badge{display:block;width:fit-content;margin:.55rem 0 0;padding:.23rem .6rem;border-radius:7px;background:#126e43;color:white;font-size:.86rem;font-weight:800}
+.choice.wrong .answer-badge{background:#a22c38}
+.field-wrong{padding:12px;border:2px solid #a22c38;border-radius:10px;background:#fff6f5}
+.solution-value{flex:0 0 100%;margin:6px 0 0;padding:8px 12px;border-left:4px solid #126e43;border-radius:7px;background:#e3f7eb;color:#0b4f30;font-weight:750}
+.feedback.incomplete{border-left-width:5px}
+.volume-view{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start}
+.volume-view>*{min-width:0}.volume-view h3{margin:.3rem 0;text-align:center}
+@media(max-width:650px){.volume-view{grid-template-columns:1fr}}
+</style></head><body>
 <header class="top"><div class="wrap"><div class="brand"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M9 9H3V31H9M31 9H37V31H31" fill="none" stroke="#126680" stroke-width="2.5"/><path d="M13 28L16 18L27 7L33 13L22 24Z" fill="#f3cb67" stroke="#20343b" stroke-width="1.5"/></svg>TECNOLOGÍA Y DIGITALIZACIÓN · 1.º ESO</div><a href="index.html">← Todas las apps del tema</a></div></header>
-<main class="wrap"><section class="hero"><div><div class="eyebrow">App 03 · Expresión y comunicación técnica</div><h1>Laboratorio de vistas</h1><p>Explora cinco piezas, dibuja sobre cuadrícula y relaciona figuras y vistas.</p><div class="chips"><span class="chip">Alzado · Planta · Perfil izquierdo</span><span class="chip">10 retos</span><span class="chip">25–30 min</span></div></div><div class="hero-art"><img src="data:image/png;base64,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" alt="Pieza geométrica con el frente señalado"></div></section>
+<main class="wrap"><section class="hero"><div><div class="eyebrow">App 03 · Expresión y comunicación técnica</div><h1>Laboratorio de vistas</h1><p>Explora cinco piezas, dibuja sobre cuadrícula y relaciona figuras y vistas.</p><div class="chips"><span class="chip">Alzado · Planta · Perfil izquierdo</span><span class="chip">10 de práctica · 10 evaluables</span><span class="chip">25–30 min</span></div></div><div class="hero-art"><img src="data:image/png;base64,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" alt="Pieza geométrica con el frente señalado"></div></section>
 <p id="testBanner" class="test-banner" role="status" hidden>MODO PRUEBA · NX-01<small>Prueba técnica. No cuenta como resultado del alumnado.</small></p><section id="registration" class="panel registration" aria-labelledby="entryTitle">
 <h2 id="entryTitle">Introduce tu ID</h2><p class="note entry-note">Usa el ID que te ha dado tu profesor o profesora.</p>
 <div class="ids"><div><label for="id1">Tu ID</label><input id="id1" type="text" autocomplete="off" spellcheck="false" autocapitalize="characters" maxlength="32" placeholder="Escribe tu ID" aria-describedby="identityMessage"></div><div id="secondId" hidden><label for="id2">ID de tu pareja</label><input id="id2" type="text" autocomplete="off" spellcheck="false" autocapitalize="characters" maxlength="32" placeholder="Segundo ID del mismo grupo"></div></div>
 <label class="pair-toggle"><input id="pairMode" type="checkbox"> Trabajamos en pareja</label>
 <div class="actions"><button id="verifyIds" class="primary" data-action="verifyIds">Confirmar ID y continuar →</button></div><p id="identityMessage" class="status" role="status" aria-live="polite"></p>
 </section>
-<section id="modeStage" class="panel" hidden aria-labelledby="modeTitle"><div class="menu-header"><p id="verifiedNames" class="student-name"></p><button data-action="changeStudent">Cambiar de alumno</button></div><h2 id="modeTitle">¿Qué quieres hacer?</h2><div class="mode-grid"><button class="mode-card practice" data-action="practiceMode"><em>SIN NOTA</em><strong>PRACTICAR SIN NOTA</strong><span>Explora y ensaya los diez retos. Tus pruebas no envían ninguna calificación.</span></button><button id="evaluateMode" class="mode-card evaluable" data-action="evaluateMode"><em>CUENTA PARA LA NOTA</em><strong>ACTIVIDAD EVALUABLE</strong><span>Diez retos · 10 puntos. Al finalizar se enviará el resultado de cada ID validado.</span></button></div><p class="note">En la actividad evaluable, un consejo reduce a la mitad la puntuación de ese reto: un acierto completo pasa de 1 a 0,5 puntos. Un error vale 0.</p><p id="modeMessage" class="status" role="status" aria-live="polite"></p></section>
-<nav id="sessionBar" class="flow-bar" hidden aria-label="Actividad actual"><div><div id="flowLabel" class="flow-label"></div><div id="sessionName" class="session-name"></div></div><button data-action="backMenu">← Elegir modo</button></nav>
+<section id="modeStage" class="panel" hidden aria-labelledby="modeTitle"><div class="menu-header"><p id="verifiedNames" class="student-name"></p><button data-action="changeStudent">Cambiar de alumno</button></div><h2 id="modeTitle">¿Qué quieres hacer?</h2><div class="mode-grid"><button class="mode-card practice" data-action="practiceMode"><em>SIN NOTA</em><strong>PRACTICAR SIN NOTA</strong><span>Explora y ensaya diez retos distintos de los evaluables. La práctica no envía resultados.</span></button><button id="evaluateMode" class="mode-card evaluable" data-action="evaluateMode"><em>CUENTA PARA LA NOTA</em><strong>ACTIVIDAD EVALUABLE</strong><span>Diez retos · 10 puntos. Al finalizar se enviará el resultado de cada ID validado.</span></button></div><p class="note">En la actividad evaluable, un consejo reduce a la mitad la puntuación de ese reto: un acierto completo pasa de 1 a 0,5 puntos. Un error vale 0.</p><p id="modeMessage" class="status" role="status" aria-live="polite"></p></section>
+<nav id="sessionBar" class="flow-bar" hidden aria-label="Actividad actual"><div><div id="flowLabel" class="flow-label"></div><div id="sessionName" class="session-name"></div></div><div class="actions"><button id="backExplore" data-action="backExplore" hidden>← Volver a Explorar</button><button data-action="backMenu">← Elegir modo</button></div></nav>
 <section id="explore" aria-label="Práctica sin nota" hidden></section>
 <section id="retos" aria-label="Retos autocorregibles" hidden><section id="quizStage" class="panel" hidden><div class="quiz-top"><div><div id="sessionLabel" class="note"></div><strong id="progressText">0 de 10 comprobados</strong></div><progress id="progress" max="10" value="0" aria-label="Retos comprobados"></progress></div><div id="quizContent"></div><div class="quiz-nav"><button id="prevButton" data-action="prev">← Reto anterior</button><button id="nextButton" class="primary" data-action="next">Siguiente reto →</button></div></section><section id="resultStage" aria-label="Resultado y envío" hidden></section></section>
 <noscript><p class="panel">Activa JavaScript en el navegador para usar las actividades y la autocorrección.</p></noscript></main><footer><div class="wrap"><span>UD 2 · Expresión y comunicación técnica · 26/27</span><span>Cuaderno Técnico Ilustrado · Práctica visual</span></div></footer>
@@ -97,7 +108,14 @@ function toolSvg(kind){
 }
 function sheetSvg(){return svg('<rect x="20" y="12" width="210" height="297" fill="#fff"/><rect x="30" y="22" width="190" height="277" stroke="#819ba3"/><rect x="140" y="279" width="80" height="20" fill="#e4f0f2"/>'+text(180,293,'CAJETÍN',9)+text(125,150,'A4 VERTICAL',13),'0 0 250 322','Hoja A4 vertical con marco y cajetín');}
 function docSvg(mode='croquis',missing=false){
- if(mode==='plano')return svg('<rect x="22" y="12" width="376" height="236" fill="#fff"/><rect x="34" y="24" width="352" height="212" stroke="#b1c2c6"/><rect x="52" y="52" width="160" height="80"/><rect x="255" y="52" width="90" height="80"/><rect x="52" y="160" width="160" height="45"/>'+dimH(52,212,145,135,'120')+dimV(232,52,132,215,'60')+'<rect x="268" y="211" width="118" height="25"/>'+text(327,228,'Caja · 1:1',12),'0 0 420 260','Plano realizado con trazos precisos y cajetín');
+ if(mode==='plano'){
+  const frame='<rect x="22" y="12" width="376" height="272" fill="#fff"/><rect x="34" y="24" width="352" height="248" stroke="#b1c2c6"/>';
+  const views='<rect x="65" y="55" width="120" height="60"/><rect x="243" y="55" width="80" height="60"/><rect x="65" y="170" width="120" height="80"/>';
+  const dims=dimH(65,185,137,118,'120')+dimV(350,55,115,326,'60')+dimV(210,170,250,188,'80');
+  const labels=text(125,46,'Alzado',13)+text(283,46,'Perfil izquierdo',13)+text(125,161,'Planta',13);
+  const title='<rect x="250" y="229" width="136" height="43"/>'+text(318,247,'Caja · Escala 1:1',12)+text(318,263,'Cotas en mm',12);
+  return svg(frame+views+dims+labels+title,'0 0 420 296','Plano de una caja de 120 mm de ancho, 80 mm de fondo y 60 mm de alto');
+ }
  let b=mode==='boceto'?'<path d="M79 106L208 176L340 101L211 31L78 105 M80 109L81 171L211 241L340 166L339 102 M210 177L211 240" stroke-width="2.4"/>':'<path d="M80 92L210 158L335 92L205 26Z M80 92V155L210 222L335 155V92 M210 158V222" stroke-width="2.4"/>';
  if(mode==='croquis')b+=text(120,205,'120 mm',13,'#23768b')+text(302,198,'80 mm',13,'#23768b')+(missing?'':text(361,134,'60 mm',13,'#23768b'));
  return svg(b,'0 0 420 260',mode==='boceto'?'Boceto rápido sin dimensiones':'Croquis a mano alzada con dimensiones');
@@ -146,7 +164,21 @@ function splitSegment(a,b){
  const dx=Math.sign(b[0]-a[0]),dy=Math.sign(b[1]-a[1]);
  return Array.from({length:n},(_,i)=>unitKey([a[0]+i*dx,a[1]+i*dy],[a[0]+(i+1)*dx,a[1]+(i+1)*dy]));
 }
-function expectedEdges(q){const s=q.shape,pts=contour(s).map(([x,y])=>[2+x/5,2+y/5]);let edges=[];for(let i=0;i<pts.length;i++)edges.push(...splitSegment(pts[i],pts[(i+1)%pts.length]));(s.v||[]).forEach(x=>edges.push(...splitSegment([2+x/5,2],[2+x/5,2+s.h/5])));(s.hor||[]).forEach(y=>edges.push(...splitSegment([2,2+y/5],[2+s.w/5,2+y/5])));return [...new Set(edges)];}
+function drawingOrigin(q){return [q.originNote?2+(q.shape.w/2-10)/5:2,2];}
+function expectedEdges(q){
+ const shape=q.shape,origin=[2,2],edges=[];
+ const add=(a,b)=>edges.push(...splitSegment(...[a,b].map(([x,y])=>[origin[0]+x/5,origin[1]+y/5])));
+ const outline=points=>points.forEach((point,index)=>add(point,points[(index+1)%points.length]));
+ outline(contour(shape));
+ (shape.v||[]).forEach(x=>add([x,0],[x,shape.h]));
+ (shape.hor||[]).forEach(y=>add([0,y],[shape.w,y]));
+ if(shape.inner){
+  const [x,y,w,h]=shape.inner;
+  outline([[x,y],[x+w,y],[x+w,y+h],[x,y+h]]);
+ }
+ if(shape.towerSeam)add([shape.w/2-10,20],[shape.w/2+10,20]);
+ return [...new Set(edges)];
+}
 function drawingScore(actual,expected){const a=new Set(actual||[]),e=new Set(expected);let right=0,extra=0;for(let x of a)e.has(x)?right++:extra++;return e.size?right/(e.size+extra):0;}
 
 const APPS=[
@@ -174,7 +206,7 @@ const APPS=[
   {kind:'fields',title:'Reconoce el tamaño del dibujo',prompt:'Elige natural, reducción o ampliación. No necesitas calcular una escala numérica.',visual:{type:'sheet'},fields:[{label:'Una moneda dibujada del mismo tamaño',options:['Natural','Reducción','Ampliación'],answer:'Natural'},{label:'Un edificio completo en una hoja',options:['Natural','Reducción','Ampliación'],answer:'Reducción'},{label:'Una pieza diminuta dibujada más grande',options:['Natural','Reducción','Ampliación'],answer:'Ampliación'}],explain:'La escala modifica el tamaño de representación. Las cotas siguen comunicando medidas reales.'},
   {kind:'fields',title:'Identifica tu lámina',prompt:'Completa los datos que deben acompañar a estos dos documentos.',visual:{type:'document',mode:'plano'},fields:[{label:'Escala en un croquis a mano alzada',options:['Sin escala','1:1 sin comprobar','La que tenga el zoom'],answer:'Sin escala'},{label:'Escala en una lámina dibujada a tamaño real',options:['1:1','Siempre reducción','Sin datos'],answer:'1:1'},{label:'Datos básicos del cajetín',options:['Nombre, grupo, fecha y título','Solo un dibujo decorativo','Solo la nota'],answer:'Nombre, grupo, fecha y título'}],explain:'La lámina también necesita escala y número cuando corresponda. La impresión a tamaño real debe comprobarse.'}
  ]},
- {id:'UD2_1ESO_APP03',file:'03_Laboratorio_de_vistas.html',n:3,title:'Laboratorio de vistas',subtitle:'Mira desde cada lado, dibuja en la cuadrícula y conecta las vistas con sus figuras.',focus:'Alzado · Planta · Perfil izquierdo',minutes:'25–30 minutos',model:'stairs',block:'C',intro:'Mantén el frente señalado. Usamos planta debajo del alzado y perfil izquierdo a su derecha. Cada cuadrícula representa 5 mm. Los cuatro dibujos reciben puntuación parcial por los segmentos correctos.',questions:[
+ {id:'UD2_1ESO_APP03',file:'03_Laboratorio_de_vistas.html',n:3,title:'Laboratorio de vistas',subtitle:'Mira desde cada lado, dibuja en la cuadrícula y conecta las vistas con sus figuras.',focus:'Alzado · Planta · Perfil izquierdo',minutes:'25–30 minutos',model:'stairs',block:'C',intro:'Mantén el frente señalado. Usamos planta debajo del alzado y perfil izquierdo a su derecha. Cada casilla representa 5 mm. Cambia de mirada para comparar la pieza en volumen con sus vistas.',questions:[
   {title:'Mira desde arriba',prompt:'El bloque mide 60 de ancho, 40 de fondo y 30 de alto. Elige su planta.',visual:{type:'model',kind:'block'},options:[{label:'A',visual:{type:'view',shape:VIEWS.block[0]}},{label:'B',visual:{type:'view',shape:VIEWS.block[2]}},{label:'C',visual:{type:'view',shape:VIEWS.block[1]}}],answer:1,explain:'La planta muestra anchura 60 y fondo 40, sin divisiones interiores.'},
   {kind:'draw',title:'Dibuja la planta del bloque',prompt:'Dibuja el contorno de su planta: 60 mm de anchura y 40 mm de fondo. Empieza en el punto azul y extiende el dibujo hacia la derecha y hacia abajo.',visual:{type:'model',kind:'block'},shape:VIEWS.block[2],explain:'La planta ocupa 12 casillas de anchura y 8 de fondo. Es un rectángulo sin líneas interiores.'},
   {title:'Conserva el frente',prompt:'Elige el alzado de la pieza escalonada. La zona alta queda a la izquierda.',visual:{type:'model',kind:'step30'},options:[{label:'A',visual:{type:'view',shape:{...VIEWS.step30[0],rev:true}}},{label:'B',visual:{type:'view',shape:VIEWS.block[0]}},{label:'C',visual:{type:'view',shape:VIEWS.step30[0]}}],answer:2,explain:'El alzado conserva la zona de 30 mm a la izquierda y la de 15 mm a la derecha.'},
@@ -213,6 +245,459 @@ const APPS=[
 APPS.forEach(a=>a.questions.forEach((q,i)=>{q.id=`${a.id}_R${String(i+1).padStart(2,'0')}`;q.kind=q.kind||'choice';q.hint=q.hint||'Compara la forma, las dimensiones y el frente antes de comprobar. Puedes volver a Explorar sin perder el intento.';}));
 
 const APP=APPS.find(a=>a.id===APP_ID);
+
+const PRACTICE_QUESTIONS = [
+  {
+    "title": "Reconoce el alzado del bloque",
+    "prompt": "Desde el frente se ve la anchura y la altura. El bloque mide 60 mm de ancho, 40 mm de fondo y 30 mm de alto. Elige el alzado.",
+    "visual": {
+      "type": "model",
+      "kind": "block"
+    },
+    "options": [
+      {
+        "label": "A",
+        "visual": {
+          "type": "view",
+          "shape": {
+            "k": "rect",
+            "w": 40,
+            "h": 30
+          }
+        }
+      },
+      {
+        "label": "B",
+        "visual": {
+          "type": "view",
+          "shape": {
+            "k": "rect",
+            "w": 60,
+            "h": 40
+          }
+        }
+      },
+      {
+        "label": "C",
+        "visual": {
+          "type": "view",
+          "shape": {
+            "k": "rect",
+            "w": 60,
+            "h": 30
+          }
+        }
+      }
+    ],
+    "answer": 2,
+    "explain": "El alzado es el rectángulo de 60 × 30 mm.",
+    "hint": "La profundidad no se ve de frente."
+  },
+  {
+    "kind": "draw",
+    "title": "Dibuja el perfil del bloque",
+    "prompt": "Desde la izquierda se ven 40 mm de fondo y 30 mm de alto. El punto azul marca la esquina superior izquierda. Traza el contorno.",
+    "visual": {
+      "type": "model",
+      "kind": "block"
+    },
+    "shape": {
+      "k": "rect",
+      "w": 40,
+      "h": 30
+    },
+    "explain": "El perfil es un rectángulo de 8 × 6 casillas.",
+    "hint": "Divide fondo y altura entre 5."
+  },
+  {
+    "title": "La planta del escalón",
+    "prompt": "Mira la pieza desde arriba. Elige la planta que mantiene la misma dirección del escalón.",
+    "visual": {
+      "type": "model",
+      "kind": "step30"
+    },
+    "options": [
+      {
+        "label": "A",
+        "visual": {
+          "type": "view",
+          "shape": {
+            "k": "rect",
+            "w": 60,
+            "h": 40,
+            "v": [
+              30
+            ]
+          }
+        }
+      },
+      {
+        "label": "B",
+        "visual": {
+          "type": "view",
+          "shape": {
+            "k": "rect",
+            "w": 60,
+            "h": 40
+          }
+        }
+      },
+      {
+        "label": "C",
+        "visual": {
+          "type": "view",
+          "shape": {
+            "k": "rect",
+            "w": 60,
+            "h": 40,
+            "hor": [
+              20
+            ]
+          }
+        }
+      }
+    ],
+    "answer": 0,
+    "explain": "El cambio de nivel se ve como una línea vertical en la planta.",
+    "hint": "La separación entre los dos niveles recorre toda la pieza de delante hacia detrás."
+  },
+  {
+    "kind": "draw",
+    "title": "Dibuja la planta del escalón",
+    "prompt": "La planta mide 60 × 40 mm. Dibuja su contorno y la línea que separa las dos mitades de 30 mm de anchura. El punto azul marca la esquina superior izquierda.",
+    "visual": {
+      "type": "model",
+      "kind": "step30"
+    },
+    "shape": {
+      "k": "rect",
+      "w": 60,
+      "h": 40,
+      "v": [
+        30
+      ]
+    },
+    "explain": "Dibuja un rectángulo de 12 × 8 casillas con una línea vertical a 6 casillas del borde izquierdo.",
+    "hint": "Coloca primero el contorno y luego marca la mitad de la anchura."
+  },
+  {
+    "title": "Un perfil con otra proporción",
+    "prompt": "La pieza escalonada mide 40 mm de fondo y 30 mm de alto. Elige su perfil izquierdo sin aristas ocultas.",
+    "visual": {
+      "type": "model",
+      "kind": "stairs"
+    },
+    "options": [
+      {
+        "label": "A",
+        "visual": {
+          "type": "view",
+          "shape": {
+            "k": "rect",
+            "w": 60,
+            "h": 30
+          }
+        }
+      },
+      {
+        "label": "B",
+        "visual": {
+          "type": "view",
+          "shape": {
+            "k": "rect",
+            "w": 40,
+            "h": 30
+          }
+        }
+      },
+      {
+        "label": "C",
+        "visual": {
+          "type": "view",
+          "shape": {
+            "k": "rect",
+            "w": 60,
+            "h": 40
+          }
+        }
+      }
+    ],
+    "answer": 1,
+    "explain": "Desde la izquierda se ve el rectángulo de 40 × 30 mm. El escalón más alto tapa a los demás.",
+    "hint": "Para el perfil usa fondo y altura."
+  },
+  {
+    "kind": "draw",
+    "title": "Traza el alzado de tres escalones",
+    "prompt": "Traza el contorno con tres tramos de 20 mm de anchura. Sus alturas, de izquierda a derecha, son 30, 20 y 10 mm. El punto azul es la esquina superior izquierda.",
+    "visual": {
+      "type": "model",
+      "kind": "stairs"
+    },
+    "shape": {
+      "k": "stairs",
+      "w": 60,
+      "h": 30
+    },
+    "explain": "Cada tramo ocupa 4 casillas. Las alturas son de 6, 4 y 2 casillas y comparten la base.",
+    "hint": "Sitúa primero la línea inferior común. Cada escalón baja 2 casillas."
+  },
+  {
+    "title": "Vista de la abertura",
+    "prompt": "¿En qué vista aparece el contorno interior de la caja abierta?",
+    "visual": {
+      "type": "model",
+      "kind": "open"
+    },
+    "options": [
+      "Alzado",
+      "Planta",
+      "Perfil izquierdo"
+    ],
+    "answer": 1,
+    "explain": "La abertura se ve desde arriba, en la planta.",
+    "hint": "Piensa desde qué mirada puedes ver el interior."
+  },
+  {
+    "title": "El resalte de frente",
+    "prompt": "Desde el frente se ve la anchura total de la base y el resalte centrado. Elige el contorno del alzado.",
+    "visual": {
+      "type": "model",
+      "kind": "tower"
+    },
+    "options": [
+      {
+        "label": "A",
+        "visual": {
+          "type": "view",
+          "shape": {
+            "k": "tower",
+            "w": 40,
+            "h": 30
+          }
+        }
+      },
+      {
+        "label": "B",
+        "visual": {
+          "type": "view",
+          "shape": {
+            "k": "rect",
+            "w": 60,
+            "h": 30
+          }
+        }
+      },
+      {
+        "label": "C",
+        "visual": {
+          "type": "view",
+          "shape": {
+            "k": "tower",
+            "w": 60,
+            "h": 30
+          }
+        }
+      }
+    ],
+    "answer": 2,
+    "explain": "El alzado mide 60 mm de ancho y 30 mm de alto, con un resalte centrado.",
+    "hint": "El perfil de esta pieza también tiene un resalte, pero muestra el fondo de 40 mm."
+  },
+  {
+    "kind": "fields",
+    "title": "Alinea dos vistas",
+    "prompt": "Escoge qué medida se comparte entre cada pareja de vistas.",
+    "visual": {
+      "type": "triad",
+      "kind": "open"
+    },
+    "fields": [
+      {
+        "label": "Alzado y planta",
+        "options": [
+          "Anchura",
+          "Fondo",
+          "Altura"
+        ],
+        "answer": "Anchura"
+      },
+      {
+        "label": "Planta y perfil",
+        "options": [
+          "Anchura",
+          "Fondo",
+          "Altura"
+        ],
+        "answer": "Fondo"
+      },
+      {
+        "label": "Alzado y perfil",
+        "options": [
+          "Anchura",
+          "Fondo",
+          "Altura"
+        ],
+        "answer": "Altura"
+      }
+    ],
+    "explain": "Las vistas alineadas conservan la medida que tienen en común.",
+    "hint": "Para cada vista recuerda qué dos medidas puedes observar."
+  },
+  {
+    "title": "Un detalle que delata la pieza",
+    "prompt": "¿Cuál de estas plantas corresponde a la caja abierta?",
+    "visual": {
+      "type": "model",
+      "kind": "open"
+    },
+    "options": [
+      {
+        "label": "A",
+        "visual": {
+          "type": "view",
+          "shape": {
+            "k": "rect",
+            "w": 60,
+            "h": 40,
+            "inner": [
+              5,
+              5,
+              50,
+              30
+            ]
+          }
+        }
+      },
+      {
+        "label": "B",
+        "visual": {
+          "type": "view",
+          "shape": {
+            "k": "rect",
+            "w": 60,
+            "h": 40,
+            "inner": [
+              20,
+              10,
+              20,
+              20
+            ]
+          }
+        }
+      },
+      {
+        "label": "C",
+        "visual": {
+          "type": "view",
+          "shape": {
+            "k": "rect",
+            "w": 60,
+            "h": 40,
+            "v": [
+              20,
+              40
+            ]
+          }
+        }
+      }
+    ],
+    "answer": 0,
+    "explain": "El rectángulo interior recorre la abertura de la caja. Un cuadrado pequeño encajaría con el resalte central.",
+    "hint": "Compara el tamaño del contorno interior con el de la pieza completa."
+  }
+];
+const DRAWING_QUESTIONS = [
+  {
+    "kind": "draw",
+    "title": "Nivel 1 · Alzado de un bloque",
+    "prompt": "Dibuja el contorno de 60 mm de ancho y 30 mm de alto desde el punto azul hacia abajo y a la derecha.",
+    "visual": {
+      "type": "model",
+      "kind": "block"
+    },
+    "shape": {
+      "k": "rect",
+      "w": 60,
+      "h": 30
+    },
+    "explain": "El rectángulo ocupa 12 × 6 casillas.",
+    "hint": "Cada casilla son 5 mm."
+  },
+  {
+    "kind": "draw",
+    "title": "Nivel 2 · Escalón desplazado",
+    "prompt": "Traza el alzado. La parte alta ocupa los primeros 20 mm de anchura y alcanza 30 mm de altura. La parte baja ocupa los otros 40 mm y alcanza 15 mm. Ambas comparten la base. El punto azul marca la esquina superior izquierda.",
+    "visual": {
+      "type": "model",
+      "kind": "step"
+    },
+    "shape": {
+      "k": "step",
+      "w": 60,
+      "h": 30,
+      "t": 20,
+      "lo": 15
+    },
+    "explain": "La parte alta ocupa 4 casillas, y la parte baja 8. Sus alturas son 6 y 3 casillas.",
+    "hint": "Empieza por la base común, de 12 casillas."
+  },
+  {
+    "kind": "draw",
+    "title": "Nivel 3 · Planta de la caja abierta",
+    "prompt": "Dibuja el contorno exterior de 60 × 40 mm y el interior de 50 × 30 mm. Deja 5 mm por cada lado. El punto azul marca la esquina superior izquierda exterior.",
+    "visual": {
+      "type": "model",
+      "kind": "open"
+    },
+    "shape": {
+      "k": "rect",
+      "w": 60,
+      "h": 40,
+      "inner": [
+        5,
+        5,
+        50,
+        30
+      ]
+    },
+    "explain": "El exterior ocupa 12 × 8 casillas y el interior 10 × 6, a una casilla de cada borde.",
+    "hint": "Dibuja el rectángulo exterior y luego desplázate una casilla desde cada lado."
+  },
+  {
+    "kind": "draw",
+    "title": "Nivel 4 · Alzado del resalte",
+    "prompt": "Dibuja el alzado de una base de 60 mm de ancho y 10 mm de alto. El resalte centrado mide 20 mm de ancho y sube 20 mm por encima de la base. Añade la arista horizontal que separa la base del resalte. El punto azul está sobre la esquina superior izquierda del resalte.",
+    "visual": {
+      "type": "model",
+      "kind": "tower"
+    },
+    "shape": {
+      "k": "tower",
+      "w": 60,
+      "h": 30,
+      "towerSeam": true
+    },
+    "explain": "La base ocupa 12 × 2 casillas y el resalte 4 × 4. La línea entre ambos completa el alzado.",
+    "hint": "Cuenta 4 casillas desde el borde izquierdo de la base hasta el comienzo del resalte.",
+    "originNote": true
+  }
+];
+
+function preparePracticeBank(questions, prefix){
+ questions.forEach((q,index)=>{
+  q.id=APP.id+'_'+prefix+String(index+1).padStart(2,'0');
+  q.kind=q.kind||'choice';
+ });
+}
+preparePracticeBank(PRACTICE_QUESTIONS,'P');
+preparePracticeBank(DRAWING_QUESTIONS,'D');
+
+function questionsForMode(){
+ if(S.mode==='registered')return APP.questions;
+ return S.mode==='drawing'?DRAWING_QUESTIONS:PRACTICE_QUESTIONS;
+}
+
 const DEFAULT_ENDPOINT="https://script.google.com/macros/s/AKfycbzYhutDT6EZ7meQq2KfVdKq0h8JH9GYnOmZVqjW_IkmOvdMdjS7FxWQWezmx8SfWQf9/exec";
 const S={screen:'entry',identifying:false,reviewing:false,testMode:false,tab:'explore',mode:'',students:[],generation:0,index:0,drafts:[],records:[],hints:[],point:null,kbPoint:[2,2],history:{},tool:'draw',submissionId:'',startedAt:'',result:null,pending:null,sending:false,confirmed:new Set(),endpoint:'',manualEndpoint:false,lab:{doc:'boceto',angle:50,line:'parallel',direction:15,piece:'block',view:'iso',w:100,d:60,h:40}};
 const $=id=>document.getElementById(id);
@@ -247,81 +732,95 @@ function renderExplore(){
  if(APP.n===2){controls='<label>Ángulo <output id="labAngleValue">50°</output><input id="labAngle" type="range" min="10" max="170" value="50" aria-label="Abertura del ángulo"></label><label>Relación entre líneas<select id="labLine"><option value="parallel">Paralelas</option><option value="perp">Perpendiculares</option></select></label><label>Dirección de las líneas<input id="labDirection" type="range" min="0" max="80" value="15" aria-label="Dirección de las líneas"></label>';note='También puedes mover el extremo del ángulo sobre el transportador. Las paralelas mantienen la dirección; las perpendiculares forman 90°.';}
  if(APP.n===3){controls='<label>Pieza<select id="labPiece"><option value="block">Bloque</option><option value="step30">Escalón</option><option value="stairs">Tres escalones</option><option value="tower">Resalte central</option><option value="open">Caja abierta</option></select></label><label>Mirada<select id="labView"><option value="iso">Volumen con frente</option><option value="0">Alzado</option><option value="2">Planta</option><option value="1">Perfil izquierdo</option><option value="all">Las tres vistas</option></select></label>';note='Cambiar de mirada no cambia el frente del objeto. Alzado y planta comparten anchura; alzado y perfil, altura; planta y perfil, fondo.';}
  if(APP.n===4){controls='<label>Anchura en mm<input id="labW" type="number" min="10" max="120" step="5" value="100"></label><label>Fondo en mm<input id="labD" type="number" min="10" max="80" step="5" value="60"></label><label>Altura en mm<input id="labH" type="number" min="10" max="60" step="5" value="40"></label>';note='Diseña una caja abierta de un compartimento. El máximo es 120 × 80 × 60 mm. La separación del contorno interior es ilustrativa: no define el espesor ni un despiece.';}
- $('explore').innerHTML=`<div class="panel"><div class="eyebrow">Laboratorio libre</div><h2>Explora antes de resolver</h2><p>${esc(APP.intro)}</p><div class="lab-controls">${controls}</div><div id="labStage" class="sketch"></div><p class="note">${note}</p><div class="actions">${APP.n===4?'<button data-action="exportBox">Descargar mis vistas en SVG</button>':''}<button class="primary" data-action="goQuiz">Ensayar los diez retos sin nota →</button></div><p id="labMessage" role="status" class="status"></p></div>`;
+ $('explore').innerHTML=`<div class="panel"><div class="eyebrow">Laboratorio libre</div><h2>Explora antes de resolver</h2><p>${esc(APP.intro)}</p><div class="lab-controls">${controls}</div><div id="labStage" class="sketch"></div><p class="note">${note}</p><div class="actions">${APP.n===4?'<button data-action="exportBox">Descargar mis vistas en SVG</button>':''}<button class="primary" data-action="goQuiz">Ensayar los diez retos sin nota →</button></div><p id="labMessage" role="status" class="status"></p></div><section class="panel" style="margin-top:20px" aria-labelledby="drawLabTitle"><div class="eyebrow">Práctica guiada · Sin nota</div><h2 id="drawLabTitle">Dibuja las vistas de cuatro piezas</h2><p>Empieza por un bloque, sigue con un escalón y acaba con una abertura interior y un resalte. Dibuja en la cuadrícula y compara tu trazado con la solución.</p><button data-action="drawingMode">Abrir la cuadrícula →</button></section>`;
  labRefresh();
 }
 function labRefresh(){
  const l=S.lab;let html='';
  if(APP.n===1){const descriptions={boceto:'Boceto: compara ideas con trazos rápidos.',croquis:'Croquis: añade las dimensiones reales a mano alzada.',plano:'Plano: utiliza precisión, vistas y datos para comunicar.'};html=docSvg(l.doc)+`<p style="text-align:center">${descriptions[l.doc]}</p>`;}
  if(APP.n===2){html=`<div class="grid"><div id="angleLab" data-lab-angle="true">${angleSvg(l.angle,true)}</div><div>${linesSvg(l.line,l.direction)}</div></div>`;if($('labAngleValue'))$('labAngleValue').textContent=l.angle+'°';if($('labAngle'))$('labAngle').value=l.angle;}
- if(APP.n===3){html=l.view==='iso'?renderVisual({type:'model',kind:l.piece}):l.view==='all'?triadSvg(l.piece):viewSvg(VIEWS[l.piece][Number(l.view)],['Alzado','Perfil izquierdo','Planta'][Number(l.view)]);}
+ if(APP.n===3){
+  const volume=renderVisual({type:'model',kind:l.piece});
+  const title=l.view==='all'?'Las tres vistas':['Alzado','Perfil izquierdo','Planta'][Number(l.view)];
+  const projection=l.view==='all'?triadSvg(l.piece):l.view==='iso'?'':viewSvg(VIEWS[l.piece][Number(l.view)],title);
+  html=projection?`<div class="volume-view"><div><h3>Volumen con frente</h3>${volume}</div><div><h3>${title}</h3>${projection}</div></div>`:volume;
+ }
  if(APP.n===4){const vals=['labW','labD','labH'].map(id=>Number($(id)?.value));if(!vals.every(Number.isFinite)||vals.some(x=>x<10)||vals[0]>120||vals[1]>80||vals[2]>60){setStatus('labMessage','Usa dimensiones entre 10 y los máximos 120, 80 y 60 mm.',true);return;}[l.w,l.d,l.h]=vals;html=boxCleanSVG(l.w,l.d,l.h);setStatus('labMessage','Alzado: anchura y altura. Planta: anchura y fondo. Perfil: fondo y altura.');}
  $('labStage').innerHTML=html;
 }
 function startAttempt(){
  S.index=0;S.drafts=[];S.records=[];S.hints=[];S.history={};S.point=null;S.kbPoint=[2,2];S.tool='draw';S.submissionId=uuid();S.startedAt=new Date().toISOString();S.result=null;S.pending=null;S.reviewing=false;S.confirmed=new Set();S.sending=false;$('resultStage').innerHTML='';renderQuiz();
 }
-function fieldHtml(f,j,d,locked){
+function fieldHtml(f,j,d,detail){
+ const locked=!!detail;
  const label=`<label for="f${j}">${esc(f.label)}</label>`;
  const input=f.number?`<input id="f${j}" data-field="${j}" type="text" inputmode="decimal" maxlength="12" value="${esc(d[j])}" autocomplete="off" ${locked?'disabled':''}>`:`<select id="f${j}" data-field="${j}" ${locked?'disabled':''}><option value="">Selecciona…</option>${f.options.map(x=>`<option value="${esc(x)}" ${d[j]===x?'selected':''}>${esc(x)}</option>`).join('')}</select>`;
- return `<div class="field">${label}${input}</div>`;
+ return `<div class="field${detail&&!detail.correct?' field-wrong':''}">${label}${input}${detail&&!detail.correct?solutionValue(detail.expected):''}</div>`;
 }
 function drawingSVG(q){
- const d=draft(q),locked=!!S.records[S.index],origin=q.originNote?[4,2]:[2,2];let b='';
+ const d=draft(q),locked=!!S.records[S.index],origin=drawingOrigin(q);let b='';
  for(let col=0;col<=16;col++)b+=`<path d="M${28+col*22} 30V294" stroke="#e0e9e8" stroke-width="1"/>`;
  for(let row=0;row<=12;row++)b+=`<path d="M28 ${30+row*22}H380" stroke="#e0e9e8" stroke-width="1"/>`;
  const edge=(key,color,width=3,dash='')=>{const[[x1,y1],[x2,y2]]=key.split('|').map(p=>p.split(',').map(Number));return `<path d="M${28+x1*22} ${30+y1*22}L${28+x2*22} ${30+y2*22}" stroke="${color}" stroke-width="${width}" ${dash?'stroke-dasharray="5 4"':''}/>`;};
- for(const x of d)b+=edge(x,'#126680');
- if(locked&&S.records[S.index].rawScore<1)for(const x of expectedEdges(q))b+=edge(x,'#18633d',2,true);
+ const showSolution=locked&&S.records[S.index].rawScore<1;
+ for(const x of d)b+=edge(x,showSolution?'#9b4050':'#126680',3);
+ if(showSolution){
+  const solution=expectedEdges(q);
+  for(const x of solution)b+=edge(x,'#126e43',5);
+ }
  if(S.point)b+=`<circle cx="${28+S.point[0]*22}" cy="${30+S.point[1]*22}" r="6" fill="#ce791e" stroke="none"/>`;
  b+=`<circle cx="${28+origin[0]*22}" cy="${30+origin[1]*22}" r="5" fill="#126680" stroke="white" stroke-width="1"/>`;
  if(!locked)for(let x=0;x<=16;x++)for(let y=0;y<=12;y++)b+=`<g role="button" tabindex="${S.kbPoint[0]===x&&S.kbPoint[1]===y?0:-1}" data-point="${x},${y}" aria-label="Punto columna ${x} fila ${y}"><circle cx="${28+x*22}" cy="${30+y*22}" r="8" fill="transparent" stroke="none"/></g>`;
  b+=text(204,322,'Una casilla = 5 mm · Trazos horizontales y verticales',11);
  return `<svg id="drawCanvas" class="draw-svg" viewBox="0 0 410 336" aria-label="Cuadrícula para dibujar la vista" xmlns="http://www.w3.org/2000/svg">${b}</svg>`;
 }
+function solutionValue(expected){
+ return `<p class="solution-value">✓ Solución: ${esc(expected)}</p>`;
+}
 function renderQuiz(){
  const active=!!S.mode;if(!active)return;if(S.result&&!S.reviewing){showScreen('results');return;}showScreen('quiz');$('quizStage').className='panel '+(S.mode==='registered'?'quiz-stage-evaluable':'quiz-stage-free');
- const q=APP.questions[S.index],d=draft(q),record=S.records[S.index],locked=!!record;
- $('progress').value=S.records.filter(Boolean).length;$('progressText').textContent=`${S.records.filter(Boolean).length} de 10 comprobados`;
- $('sessionLabel').textContent=S.mode==='registered'?'Diez retos · Hasta 10 puntos':'Ensayo de diez retos · Sin envío';
+ const bank=questionsForMode(),total=bank.length;
+ const q=bank[S.index],d=draft(q),record=S.records[S.index],locked=!!record;
+ const completed=S.records.filter(Boolean).length;
+ $('progress').max=total;$('progress').value=completed;$('progressText').textContent=`${completed} de ${total} comprobados`;
+ $('sessionLabel').textContent=S.mode==='registered'?'Diez retos · Hasta 10 puntos':S.mode==='drawing'?'Dibujo guiado · Sin nota ni envío':'Diez retos propios de práctica · Sin nota ni envío';
  let response='';
- if(q.kind==='choice')response=`<fieldset style="border:0;padding:0;margin:0"><legend class="note">Elige una respuesta.</legend><div class="choices ${q.options.every(x=>typeof x==='string')?'text-only':''}">${q.options.map((o,j)=>`<label class="choice ${locked&&j===q.answer?'correct':''} ${locked&&d===j&&d!==q.answer?'wrong':''}"><input type="radio" name="choice" data-choice="${j}" value="${j}" ${d===j?'checked':''} ${locked?'disabled':''}><span>${typeof o==='string'?esc(o):esc(o.label)}</span>${typeof o==='object'?renderVisual(o.visual):''}</label>`).join('')}</div></fieldset>`;
- else if(q.kind==='fields')response=q.fields.map((f,j)=>fieldHtml(f,j,d,locked)).join('');
- else if(q.kind==='adjust')response=`<label for="adjustAngle">Ajusta la abertura de la línea</label><input id="adjustAngle" type="range" min="10" max="170" step="1" value="${d}" ${locked?'disabled':''}><p class="note">Objetivo: ${q.target}°. El transportador muestra los grados desde el lado horizontal.</p>`;
+ if(q.kind==='choice')response=`<fieldset style="border:0;padding:0;margin:0"><legend class="note">Elige una respuesta.</legend><div class="choices ${q.options.every(x=>typeof x==='string')?'text-only':''}">${q.options.map((o,j)=>`<label class="choice ${locked&&j===q.answer?'correct':''} ${locked&&d===j&&d!==q.answer?'wrong':''}"><input type="radio" name="choice" data-choice="${j}" value="${j}" ${d===j?'checked':''} ${locked?'disabled':''}><span>${typeof o==='string'?esc(o):esc(o.label)}</span>${typeof o==='object'?renderVisual(o.visual):''}${locked&&j===q.answer?'<strong class="answer-badge">✓ Respuesta correcta</strong>':locked&&d===j?'<strong class="answer-badge">× Tu respuesta</strong>':''}</label>`).join('')}</div></fieldset>`;
+ else if(q.kind==='fields')response=q.fields.map((f,j)=>fieldHtml(f,j,d,record?.details[j])).join('');
+ else if(q.kind==='adjust')response=`<label for="adjustAngle">Ajusta la abertura de la línea</label><input id="adjustAngle" type="range" min="10" max="170" step="1" value="${d}" ${locked?'disabled':''}><p class="note">Objetivo: ${q.target}°. El transportador muestra los grados desde el lado horizontal.</p>${record?.rawScore===0?solutionValue(record.details[0].expected):''}`;
  else response=`<div id="drawArea">${drawingSVG(q)}</div><div class="actions draw-tools"><button data-action="drawTool" data-tool="draw" aria-pressed="${S.tool==='draw'}" ${locked?'disabled':''}>Dibujar</button><button data-action="drawTool" data-tool="erase" aria-pressed="${S.tool==='erase'}" ${locked?'disabled':''}>Borrar trazo</button><button data-action="undoDraw" ${locked?'disabled':''}>Deshacer</button><button data-action="clearDraw" ${locked?'disabled':''}>Limpiar</button></div><p class="note">Arrastra entre dos puntos de una misma fila o columna, o toca dos puntos. Con teclado: Tab para entrar, flechas para moverte y Enter para elegir extremos. El punto azul es la referencia indicada.</p>`;
  let figure=renderVisual(q.visual);
  if(q.kind==='adjust')figure=angleSvg(Number(d),true);
  if(q.protractor)figure+=`<label class="note"><input id="protractor" type="checkbox"> Mostrar transportador</label>`;
  const board=q.board;
- $('quizContent').innerHTML=`<div class="question-label">Reto ${S.index+1} de 10 · ${q.kind==='draw'?'Dibujo en cuadrícula':q.kind==='fields'?'Relaciona o completa':'Observa y resuelve'}</div><h2 class="qtitle">${esc(q.title)}</h2><p>${esc(q.prompt)}</p><div class="q-layout">${board?`<div class="sketch board-full">${figure}</div><div class="board-full">${response}</div>`:`<div id="questionFigure" class="sketch">${figure}</div><div>${response}</div>`}</div>${!locked?`<p class="cost-note">${S.mode==='registered'?'Consejo opcional: este reto pasará de un máximo de 1 a 0,5 puntos. La puntuación parcial también se reduce a la mitad; un error vale 0.':'Puedes pedir un consejo sin coste: estás practicando sin nota.'}</p>`:''}<div class="actions" style="margin-top:20px"><button id="checkButton" class="primary" data-action="check" ${locked?'disabled':''}>${locked?'Respuesta comprobada':S.index===APP.questions.length-1?(S.mode==='registered'?'Finalizar actividad':'Finalizar práctica'):'Comprobar respuesta'}</button><button class="hint-button" data-action="hint" ${locked||S.hints[S.index]?'disabled':''}>${S.hints[S.index]?'Consejo abierto':S.mode==='registered'?'Abrir consejo · máximo 0,5 puntos':'Ver consejo · sin coste'}</button></div><div id="questionMessage" role="status" aria-live="polite"></div>${S.hints[S.index]?`<div class="hint">${esc(hintFor(q))}</div>`:''}${record?feedbackHtml(q,record):''}${S.reviewing?'<p class="review-tag">Revisión: la puntuación de este intento está cerrada.</p>':''}`;
- $('prevButton').disabled=S.index===0;$('nextButton').disabled=!locked;$('nextButton').hidden=S.index===APP.questions.length-1&&!S.reviewing;$('nextButton').textContent=S.index===APP.questions.length-1?'Volver al resultado':'Siguiente reto →';
+ $('quizContent').innerHTML=`<div class="question-label">Reto ${S.index+1} de ${total} · ${q.kind==='draw'?'Dibujo en cuadrícula':q.kind==='fields'?'Relaciona o completa':'Observa y resuelve'}</div><h2 class="qtitle">${esc(q.title)}</h2><p>${esc(q.prompt)}</p><div class="q-layout">${!figure?`<div class="board-full">${response}</div>`:board?`<div class="sketch board-full">${figure}</div><div class="board-full">${response}</div>`:`<div id="questionFigure" class="sketch">${figure}</div><div>${response}</div>`}</div>${!locked?`<p class="cost-note">${S.mode==='registered'?'Consejo opcional: este reto pasará de un máximo de 1 a 0,5 puntos. La puntuación parcial también se reduce a la mitad; un error vale 0.':'Puedes pedir un consejo sin coste: estás practicando sin nota.'}</p>`:''}<div class="actions" style="margin-top:20px"><button id="checkButton" class="primary" data-action="check" ${locked?'disabled':''}>${locked?'Respuesta comprobada':'Comprobar respuesta'}</button><button class="hint-button" data-action="hint" ${locked||S.hints[S.index]?'disabled':''}>${S.hints[S.index]?'Consejo abierto':S.mode==='registered'?'Abrir consejo · máximo 0,5 puntos':'Ver consejo · sin coste'}</button></div><div id="questionMessage" role="status" aria-live="polite"></div>${S.hints[S.index]?`<div class="hint">${esc(hintFor(q))}</div>`:''}${record?feedbackHtml(q,record):''}${S.reviewing?'<p class="review-tag">Revisión: la puntuación de este intento está cerrada.</p>':''}`;
+ $('prevButton').disabled=S.index===0;$('nextButton').disabled=!locked;$('nextButton').textContent=S.index===total-1?(S.reviewing?'Volver al resultado':S.mode==='registered'?'Finalizar y guardar':'Ver resultado'):'Siguiente reto →';
 }
 function feedbackHtml(q,record){
  const correct=record.rawScore===1;let details='';
- if(q.kind==='draw')details='<p>El trazado verde discontinuo muestra la solución cuando falta algo. La puntuación compara segmentos correctos con los que faltan o sobran.</p>';
- else if(record.rawScore<1)details='<ul>'+record.details.filter(x=>!x.correct).map(x=>`<li>${esc(x.label)}: ${esc(x.expected)}</li>`).join('')+'</ul>';
+ if(q.kind==='draw'&&!correct)details='<p class="solution-value">✓ El trazo verde grueso muestra la solución. Los segmentos sobrantes de tu dibujo aparecen en rojo.</p>';
  return `<div class="feedback ${correct?'':'incomplete'}" role="status"><strong>${correct?'Bien resuelto':'Revisa la solución'} · ${fmt(record.score)} / 1 punto</strong><p>${esc(q.explain)}</p>${details}${record.hintPenalty>0?`<p class="advice-discount">Consejo aplicado: ${fmt(record.rawScore)} × 0,5 = ${fmt(record.score)} puntos.</p>`:''}</div>`;
 }
 function checkQuestion(){
- if(!S.mode||S.result)return;const q=APP.questions[S.index];if(S.records[S.index])return;
+ if(!S.mode||S.result)return;const q=questionsForMode()[S.index];if(S.records[S.index])return;
  const d=draft(q);if(!complete(q,d)){setStatus('questionMessage',q.kind==='draw'?'Dibuja al menos un segmento antes de comprobar.':'Completa todas las respuestas antes de comprobar.',true);return;}
  const r=evaluate(q,d),hint=!!S.hints[S.index],factor=S.mode==='registered'&&hint?0.5:1;
  S.records[S.index]={id:q.id,title:q.title,...r,rawScore:r.score,score:r.score*factor,maxPoints:factor,hintPenalty:r.score*(1-factor),hintCostMaximum:factor===0.5?0.5:0,response:structuredClone(d),hint,hintText:hint?hintFor(q):'',checkedAt:new Date().toISOString()};S.point=null;
- if(S.index===APP.questions.length-1&&S.records.filter(Boolean).length===APP.questions.length){finish();return;}renderQuiz();
+ renderQuiz();
 }
 function applySegment(a,b){
- const q=APP.questions[S.index];if(q.kind!=='draw'||S.records[S.index])return;
+ const q=questionsForMode()[S.index];if(q.kind!=='draw'||S.records[S.index])return;
  const seg=splitSegment(a,b);if(!seg.length){setStatus('questionMessage','Selecciona dos puntos distintos de una misma fila o columna.',true);return;}
  (S.history[S.index]??=[]).push([...draft(q)]);let set=new Set(draft(q));for(let x of seg)S.tool==='erase'?set.delete(x):set.add(x);S.drafts[S.index]=[...set];S.point=null;$('drawArea').innerHTML=drawingSVG(q);setStatus('questionMessage','Trazo actualizado. Puedes deshacer antes de comprobar.');
 }
-function choosePoint(point){S.kbPoint=point;if(S.point)applySegment(S.point,point);else {S.point=point;$('drawArea').innerHTML=drawingSVG(APP.questions[S.index]);}document.querySelector(`[data-point="${point.join(',')}"]`)?.focus();}
+function choosePoint(point){S.kbPoint=point;if(S.point)applySegment(S.point,point);else {S.point=point;$('drawArea').innerHTML=drawingSVG(questionsForMode()[S.index]);}document.querySelector(`[data-point="${point.join(',')}"]`)?.focus();}
 function finish(){
  if(S.result){S.reviewing=false;showScreen('results');return;}
- if(S.records.filter(Boolean).length!==APP.questions.length)return;
- const score=scoreTotal(S.records),penalty=S.records.reduce((n,r)=>n+r.hintPenalty,0);
- S.result=deepFreeze({submissionId:S.submissionId,modo_prueba:!!S.testMode,theme:'UD2 Expresión y comunicación técnica',activity:APP.id,title:APP.title,score:Number(score.toFixed(4)),scores:S.records.map(r=>Number((r.score*10).toFixed(4))),maximo:10,percentage:score*10,hints:APP.questions.map((_,i)=>!!S.hints[i]),attempts:APP.questions.map(()=>1),startedAt:S.startedAt,finishedAt:new Date().toISOString(),appVersion:'2.1.0-flujo-pdi-nx01',hintPolicy:{maximumWithoutHint:1,maximumWithHint:0.5,penaltyApplied:penalty},evidence:{course:S.testMode?'PRUEBA':'1ESO',modo_prueba:!!S.testMode,block:APP.block,questions:structuredClone(S.records),hintPenaltyTotal:penalty}});
+ if(S.records.filter(Boolean).length!==questionsForMode().length)return;
+ const maximo=questionsForMode().length,score=scoreTotal(S.records),penalty=S.records.reduce((n,r)=>n+r.hintPenalty,0);
+ S.result=deepFreeze({submissionId:S.submissionId,modo_prueba:!!S.testMode,theme:'UD2 Expresión y comunicación técnica',activity:APP.id,title:APP.title,score:Number(score.toFixed(4)),scores:S.records.map(r=>Number((r.score*10).toFixed(4))),maximo,percentage:score*100/maximo,hints:questionsForMode().map((_,i)=>!!S.hints[i]),attempts:questionsForMode().map(()=>1),startedAt:S.startedAt,finishedAt:new Date().toISOString(),appVersion:'2.2.0-retos-y-soluciones',hintPolicy:{maximumWithoutHint:1,maximumWithHint:0.5,penaltyApplied:penalty},evidence:{course:S.testMode?'PRUEBA':'1ESO',modo_prueba:!!S.testMode,block:APP.block,questions:structuredClone(S.records),hintPenaltyTotal:penalty}});
  S.reviewing=false;showScreen('results');
- $('resultStage').innerHTML=`<div class="panel"><div class="eyebrow">${S.testMode?'MODO PRUEBA · NX-01':S.mode==='registered'?'Actividad evaluable terminada':'Práctica terminada · Sin nota'}</div><h2>${S.mode==='registered'?'Tu resultado':'Resultado de práctica'}</h2><div class="score">${fmt(score)} <small>/ 10</small></div><p>${S.mode==='registered'?'Diez retos de un punto. Con consejo, cada reto puntúa la mitad. Las relaciones y los dibujos conservan la puntuación parcial.':'Este ensayo no cuenta para la nota y no envía ningún resultado.'}</p><div id="sendMessage" role="status" aria-live="polite" aria-atomic="true"></div><div class="actions"><button class="primary" data-action="retrySend" id="retrySend" hidden>Reintentar envío</button><button data-action="reviewAttempt">Revisar respuestas</button><button data-action="downloadResult">Descargar resultado</button><button data-action="changeStudent">Cambiar de alumno</button></div><div class="results-scroll"><table class="results-table"><thead><tr><th>Reto</th><th>Trabajo</th><th>Puntos</th></tr></thead><tbody>${S.records.map((r,i)=>`<tr><td>${i+1}</td><td>${esc(r.title)}${r.hint?' · Con consejo':''}</td><td>${fmt(r.score)} / 1</td></tr>`).join('')}</tbody></table></div><p class="note">La revisión conserva la puntuación cerrada de este intento.</p></div>`;
+ $('resultStage').innerHTML=`<div class="panel"><div class="eyebrow">${S.testMode?'MODO PRUEBA · NX-01':S.mode==='registered'?'Actividad evaluable terminada':'Práctica terminada · Sin nota'}</div><h2>${S.mode==='registered'?'Tu resultado':'Resultado de práctica'}</h2><div class="score">${fmt(score)} <small>/ ${maximo}</small></div><p>${S.mode==='registered'?'Diez retos de un punto. Con consejo, cada reto puntúa la mitad. Las relaciones y los dibujos conservan la puntuación parcial.':'Este ensayo no cuenta para la nota y no envía ningún resultado.'}</p><div id="sendMessage" role="status" aria-live="polite" aria-atomic="true"></div><div class="actions"><button class="primary" data-action="retrySend" id="retrySend" hidden>Reintentar envío</button><button data-action="reviewAttempt">Revisar respuestas</button><button data-action="downloadResult">Descargar resultado</button><button data-action="changeStudent">Cambiar de alumno</button></div><div class="results-scroll"><table class="results-table"><thead><tr><th>Reto</th><th>Trabajo</th><th>Puntos</th></tr></thead><tbody>${S.records.map((r,i)=>`<tr><td>${i+1}</td><td>${esc(r.title)}${r.hint?' · Con consejo':''}</td><td>${fmt(r.score)} / 1</td></tr>`).join('')}</tbody></table></div><p class="note">La revisión conserva la puntuación cerrada de este intento.</p></div>`;
  if(S.mode==='registered'){
   const students=S.students.map(x=>({...x}));S.pending={result:S.result,students,endpoint:S.endpoint,payloads:students.map(s=>deepFreeze(centralPayload(S.result,s)))};void transmit();
  }else sendStatus('waiting','SIN ENVÍO','Has terminado una práctica sin nota. Puedes repasar o elegir la actividad evaluable.');
@@ -409,16 +908,18 @@ function actions(action,target){
  else if(action==='practiceMode')void chooseMode('free');
  else if(action==='evaluateMode')void chooseMode('registered');
  else if(action==='backMenu'){if(S.pending||S.sending){S.reviewing=false;showScreen('results');}else showScreen(S.students.length?'menu':'entry');}
- else if(action==='goQuiz'){if(S.mode==='free')selectTab('retos');}
+ else if(action==='goQuiz')void chooseMode('free','retos');
+ else if(action==='drawingMode'&&APP.n===3)void chooseMode('drawing');
+ else if(action==='backExplore'&&S.mode==='drawing')selectTab('explore');
  else if(action==='check')checkQuestion();
  else if(action==='hint')requestHint();
  else if(action==='reviewAttempt'){if(S.result){S.reviewing=true;S.index=0;selectTab('retos');}}
  else if(action==='prev'){if(S.index>0){S.index--;S.point=null;renderQuiz();}}
- else if(action==='next'){if(!S.records[S.index])return;if(S.index===APP.questions.length-1)finish();else {S.index++;S.point=null;renderQuiz();}}
+ else if(action==='next'){if(!S.records[S.index])return;if(S.index===questionsForMode().length-1)finish();else {S.index++;S.point=null;renderQuiz();}}
  else if(action==='endReview'){S.reviewing=false;showScreen('results');}
  else if(action==='drawTool'){if(S.result||S.records[S.index])return;S.tool=target.dataset.tool;renderQuiz();}
  else if(action==='undoDraw'){if(S.result||S.records[S.index])return;const h=S.history[S.index];if(h?.length){S.drafts[S.index]=h.pop();S.point=null;renderQuiz();}}
- else if(action==='clearDraw'){if(S.result||S.records[S.index])return;(S.history[S.index]??=[]).push([...draft(APP.questions[S.index])]);S.drafts[S.index]=[];S.point=null;renderQuiz();}
+ else if(action==='clearDraw'){if(S.result||S.records[S.index])return;(S.history[S.index]??=[]).push([...draft(questionsForMode()[S.index])]);S.drafts[S.index]=[];S.point=null;renderQuiz();}
  else if(action==='retrySend')void transmit();
  else if(action==='changeStudent')resetStudent();
  else if(action==='downloadResult'){if(S.result)download(JSON.stringify({...S.result,studentIds:S.students.map(x=>x.studentId),registered:S.mode==='registered',confirmedIds:[...S.confirmed],pending:!!S.pending},null,2),'application/json',APP.id+'_resultado.json');}
@@ -438,13 +939,13 @@ function boot(){
  document.addEventListener('change',e=>{const t=e.target;
   if(t.id==='pairMode'){$('secondId').hidden=!t.checked;if(!t.checked)$('id2').value='';}
   if(t.dataset.choice!==undefined&&!S.records[S.index])S.drafts[S.index]=Number(t.dataset.choice);
-  if(t.dataset.field!==undefined&&!S.records[S.index])draft(APP.questions[S.index])[Number(t.dataset.field)]=t.value;
-  if(t.id==='protractor'){const q=APP.questions[S.index];$('questionFigure').innerHTML=angleSvg(q.visual.deg,t.checked)+`<label class="note"><input id="protractor" type="checkbox" ${t.checked?'checked':''}> Mostrar transportador</label>`;}
+  if(t.dataset.field!==undefined&&!S.records[S.index])draft(questionsForMode()[S.index])[Number(t.dataset.field)]=t.value;
+  if(t.id==='protractor'){const q=questionsForMode()[S.index];$('questionFigure').innerHTML=angleSvg(q.visual.deg,t.checked)+`<label class="note"><input id="protractor" type="checkbox" ${t.checked?'checked':''}> Mostrar transportador</label>`;}
   const map={labDoc:'doc',labPiece:'piece',labView:'view',labLine:'line'};if(map[t.id]){S.lab[map[t.id]]=t.value;labRefresh();}
   if(['labW','labD','labH'].includes(t.id))labRefresh();
  });
  document.addEventListener('input',e=>{const t=e.target;
-  if(t.dataset.field!==undefined&&!S.records[S.index])draft(APP.questions[S.index])[Number(t.dataset.field)]=t.value;
+  if(t.dataset.field!==undefined&&!S.records[S.index])draft(questionsForMode()[S.index])[Number(t.dataset.field)]=t.value;
   if(t.id==='adjustAngle'&&!S.records[S.index]){S.drafts[S.index]=Number(t.value);$('questionFigure').innerHTML=angleSvg(Number(t.value),true);}
   if(t.id==='labAngle'){S.lab.angle=Number(t.value);labRefresh();}if(t.id==='labDirection'){S.lab.direction=Number(t.value);labRefresh();}
  });
@@ -466,24 +967,25 @@ function showScreen(screen){
  S.screen=screen;const identified=S.students.length>0;document.body.classList.toggle('is-identified',identified);
  $('testBanner').hidden=!identified||!S.testMode;
  $('registration').hidden=screen!=='entry';$('modeStage').hidden=screen!=='menu';$('sessionBar').hidden=!identified||!['explore','quiz','results'].includes(screen);
+ $('backExplore').hidden=S.mode!=='drawing'||screen==='explore';
  $('explore').hidden=screen!=='explore';$('retos').hidden=!['quiz','results'].includes(screen);$('quizStage').hidden=screen!=='quiz';$('resultStage').hidden=screen!=='results';
- $('flowLabel').textContent=S.mode==='registered'?(S.testMode?'ACTIVIDAD EVALUABLE · Envío de prueba':'ACTIVIDAD EVALUABLE · Cuenta para la nota'):'PRACTICAR SIN NOTA';$('flowLabel').className='flow-label'+(S.mode==='registered'?' evaluable':'');
+ $('flowLabel').textContent=S.mode==='registered'?(S.testMode?'ACTIVIDAD EVALUABLE · Envío de prueba':'ACTIVIDAD EVALUABLE · Cuenta para la nota'):S.mode==='drawing'?'DIBUJO GUIADO · Sin nota':'PRACTICAR SIN NOTA';$('flowLabel').className='flow-label'+(S.mode==='registered'?' evaluable':'');
  $('evaluateMode').querySelector('em').textContent=S.testMode?'PRUEBA TÉCNICA · NO CUENTA PARA LA NOTA':'CUENTA PARA LA NOTA';$('evaluateMode').querySelector('span').textContent=S.testMode?'Recorre los diez retos y comprueba el envío con NX-01. El resultado se marcará como prueba.':'Diez retos · 10 puntos. Al finalizar se enviará el resultado de cada ID validado.';
  $('sessionName').textContent=S.students.map(s=>s.name+' · Grupo '+s.group).join(' / ');
  if(screen==='entry')$('id1').focus();
 }
-async function chooseMode(mode){
+async function chooseMode(mode,tab=mode==='free'?'explore':'retos'){
  if(!S.students.length){showScreen('entry');return;}
  if(S.pending||S.sending){showScreen('results');sendStatus('failed','RESULTADO PENDIENTE','Pulsa Reintentar para confirmar el envío antes de empezar otra actividad.');return;}
- if(S.mode===mode&&!S.result){selectTab(mode==='free'?'explore':'retos');return;}
+ if(S.mode===mode&&!S.result){selectTab(tab);return;}
  if(S.mode&&S.records.some(Boolean)&&!S.result&&!confirm('El intento actual quedará sin enviar. ¿Cambiar de modo y empezar desde el principio?'))return;
  if(mode==='registered'){
   const gen=S.generation;$('evaluateMode').disabled=true;setStatus('modeMessage','Comprobando que el registro está disponible…');
-  try{const data=await centralGet({action:'ping'});if(gen!==S.generation)return;if(data?.ok!==true||data?.idempotencia!==true||data?.protocolo!=='pdi-intentos-v1')throw Error('Tu profesor o profesora debe activar el registro de esta actividad. Mientras tanto puedes practicar sin nota.');}
+  try{const data=await centralGet({action:'ping'});if(gen!==S.generation||S.screen!=='menu')return;if(data?.ok!==true||data?.idempotencia!==true||data?.protocolo!=='pdi-intentos-v1')throw Error('Tu profesor o profesora debe activar el registro de esta actividad. Mientras tanto puedes practicar sin nota.');}
   catch(e){if(gen===S.generation)setStatus('modeMessage',e.message,true);return;}
   finally{if(gen===S.generation)$('evaluateMode').disabled=false;}
  }
- setStatus('modeMessage','');S.mode=mode;startAttempt();selectTab(mode==='free'?'explore':'retos');
+ setStatus('modeMessage','');S.mode=mode;startAttempt();selectTab(tab);
 }
 function requestHint(){
  if(!S.mode||S.result||S.records[S.index]||S.hints[S.index])return;

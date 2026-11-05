@@ -7,17 +7,28 @@ body{background:var(--paper)}.wrap{max-width:1160px}.top{background:white}.hero{
 @media(max-width:820px){.hero{grid-template-columns:1fr}.hero-art{display:none}.hero h1{font-size:2.25rem}.mode-grid{gap:16px}.mode-card{padding:22px}.q-layout{grid-template-columns:1fr}.flow-bar{padding:12px}}
 @media(max-width:580px){.mode-grid{grid-template-columns:1fr}.mode-card{min-height:175px}.wrap{padding:16px}.hero{padding-top:23px}.panel{padding:19px}.hero h1{font-size:2rem}.registration .actions>button{width:100%}.mode-card strong{font-size:1.2rem}.ids{grid-template-columns:1fr}.flow-bar .button{padding:9px 12px}.quiz-top{gap:11px}.qtitle{font-size:1.4rem}.results-table th,.results-table td{padding:9px}.choices:not(.text-only){grid-template-columns:1fr 1fr}footer .wrap{display:block}.top .wrap{display:block}}
 @media(max-width:360px){.wrap{padding:12px}.panel{padding:15px}.choices:not(.text-only){grid-template-columns:1fr}.board-models{grid-template-columns:repeat(2,1fr)}.board-views{grid-template-columns:repeat(3,1fr)}}
-.is-identified .hero{padding-top:18px;padding-bottom:12px;display:block}.is-identified .hero h1{font-size:clamp(1.5rem,3vw,2.05rem);margin:.35rem 0 .4rem}.is-identified .hero-art,.is-identified .hero p,.is-identified .hero .chips{display:none}.is-identified .hero .eyebrow{font-size:.7rem}@media(max-width:580px){.board-models{grid-template-columns:repeat(2,1fr)}.board-views{grid-template-columns:repeat(3,1fr)}.board-models .mini-model{max-height:135px}}@media(max-width:580px){footer .wrap span{display:block;margin-bottom:6px}}.test-banner{padding:13px 18px;background:#eee6fb;border:2px solid #7555a5;border-radius:12px;color:#503078;font-size:1.05rem;font-weight:850;margin:0 0 20px}.test-banner small{display:block;color:#503078;font-weight:500}</style></head><body>
+.is-identified .hero{padding-top:18px;padding-bottom:12px;display:block}.is-identified .hero h1{font-size:clamp(1.5rem,3vw,2.05rem);margin:.35rem 0 .4rem}.is-identified .hero-art,.is-identified .hero p,.is-identified .hero .chips{display:none}.is-identified .hero .eyebrow{font-size:.7rem}@media(max-width:580px){.board-models{grid-template-columns:repeat(2,1fr)}.board-views{grid-template-columns:repeat(3,1fr)}.board-models .mini-model{max-height:135px}}@media(max-width:580px){footer .wrap span{display:block;margin-bottom:6px}}.test-banner{padding:13px 18px;background:#eee6fb;border:2px solid #7555a5;border-radius:12px;color:#503078;font-size:1.05rem;font-weight:850;margin:0 0 20px}.test-banner small{display:block;color:#503078;font-weight:500}
+.choice.correct,.choice.correct:has(input:checked){border:3px solid #126e43;background:#e3f7eb;color:#0b4f30}
+.choice.wrong,.choice.wrong:has(input:checked){border:3px solid #a22c38;background:#fff0ef;color:#7e202c}
+.answer-badge{display:block;width:fit-content;margin:.55rem 0 0;padding:.23rem .6rem;border-radius:7px;background:#126e43;color:white;font-size:.86rem;font-weight:800}
+.choice.wrong .answer-badge{background:#a22c38}
+.field-wrong{padding:12px;border:2px solid #a22c38;border-radius:10px;background:#fff6f5}
+.solution-value{flex:0 0 100%;margin:6px 0 0;padding:8px 12px;border-left:4px solid #126e43;border-radius:7px;background:#e3f7eb;color:#0b4f30;font-weight:750}
+.feedback.incomplete{border-left-width:5px}
+.volume-view{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start}
+.volume-view>*{min-width:0}.volume-view h3{margin:.3rem 0;text-align:center}
+@media(max-width:650px){.volume-view{grid-template-columns:1fr}}
+</style></head><body>
 <header class="top"><div class="wrap"><div class="brand"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M9 9H3V31H9M31 9H37V31H31" fill="none" stroke="#126680" stroke-width="2.5"/><path d="M13 28L16 18L27 7L33 13L22 24Z" fill="#f3cb67" stroke="#20343b" stroke-width="1.5"/></svg>TECNOLOGÍA Y DIGITALIZACIÓN · 1.º ESO</div><a href="index.html">← Todas las apps del tema</a></div></header>
-<main class="wrap"><section class="hero"><div><div class="eyebrow">App 02 · Expresión y comunicación técnica</div><h1>Taller de instrumentos</h1><p>Mide y construye ángulos, compara líneas y prepara tu lámina.</p><div class="chips"><span class="chip">Instrumentos · Ángulos · Formato</span><span class="chip">10 retos</span><span class="chip">20–25 min</span></div></div><div class="hero-art"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAmwAAAHqCAIAAAA29oUqAAAV/klEQVR42u3df7CldUHH8ecuC+Ous0sShFtpaFxAt8xsVwazZoPY0Nokm3GGGMzB1DF1TEeriYYmTAZGFlYUgXBWBFvLUVMRS8hkBmTLxalxvGluAgND21isARIMsXv64zhnT/fec+/58X2+z/fH6/XX9eJylmfP3Pd+vs895871er0GAJjcGpcAAEQUAEQUAEQUAEQUABBRABBRABBRABBRABBRAEBEAUBEAUBEAUBEAUBEAQARBQARBQARBQARBQBEFABEFABEFABEFABEFAAQUQAQUQAQUQAQUQAQUQBARAFARAFARAFARAEAEQUAEQUAEQUAEQUAEQUARBQARBQARBQARBQARBQAEFEAEFEAEFEAEFEAQEQBQEQBQEQBQEQBQEQBABEFABEFABEFABEFABEFAEQUAEQUAEQUAEQUABBRABBRABBRABBRABBRAEBEAUBEAUBEAUBEAUBEAQARBQARBQARBQARBQARBQBEFABEFABEFDKyaX7zpvnNrgMwprler+cqwNJ2Hti/4LIAlihMXNBRnwSwRGFkKb99141N05zy8teZpICIwgTrs1/QvuGOSikgojBWPodJKSCiMLKgo/I5KqU6Cogo8jlWPqUUEFHks5mxoEs7KqWAiCKfUgqIKKxW0NnzOSqlOgoiCvIppYCIIp9RCrq0o1IKIgoGqJQCIop8xuV0F0QUMs5nhwWVUhBRkM/AHZVSEFFIuqDp5FNKQURBPltJqY6CiEIS+cyioFIKIgryGbijUgoiCh0UNMd8SimIKMhnKynVURBRaDGfhRVUSkFEwQAN3FEpBREF+ZRSEFHoLp9VFXTZlOooiCjIp5SCiEKUglaez2U7KqUgoiCfUgoiCqHzqaDjp1RHQUSRT/mUUhBRmKGg8jlLR6UURBT5xCQFEYXx8qmgUgoiCgaolAIiinwW1FEpBRGlqHwqqEkKIgryKaWAiBKloPKZQkelFEQU+URKQUQpPZ8KmnJKdRREFPlESkFEKaig8plXR6UURBT5REpBRMkznwpaRkp1FEQUAxQpBRFFPumoo1IKIkqL+VRQKQVEFPlklZTqKIgoYQoqn1IKiCjyycQdlVIQUSbOp4IipSCiyCfBUqqjIKKsVFD5REpBRJFPWuyolIKIyqeCIqUgohigdJdSHQURlU+QUhBRxsingtJGR6UUEUU+QUpBRBXU+S3dpVRHEVHkE6QURLTifCoo3XZUShFR5BOkFES0moLKJwmmVEcRUeQTpBREtLh8Kig6Cp1Y6xIYoBCnoCCiyCfIJ4hozvlUUDLK5y2337bj7O0uCyKKfMJk+XRNEFFSKah8kktB5RMRRT5BPkFEc86ngpJLPhUUEUU+QT5BRDMvqHySS0HlExFFPkE+QURzzqeCkks+FRRE1AAF+QQRlU+IUlD5BBFNKJ8KinyCiCKfFJtPBQURTaug8ol8goginxRbUPkEEU0onwqKfIKIIp8Um08FBRFNq6DyiXyCiCKfFFtQ+QQRTYuCIp9QgzUuQdtfpyCdp6WCgiWaU0dNUgxQEFGkFPkERLRl9+zb2zTNlq1nSClJ5VNBQUSzT6mOIp8gokyZUpOUyAWVTxDR7FPqdBf5BBEl2CSVUtrLp4KCiFaUUh1FPkFEmTKlJilBCiqfIKIVpdTpLvIJufO2f112tL9KR31lhFH5VFCwRPlBShunu0y+PuUTRJQjKXW6y/gFlU8QUVaZpFKKfELi3BNNLqVulDL8R6+gYIky6yo1SWten/IJIso0KXW6q6DyCSJKsEkqpfIJpMM90TxS6kZpDflUULBEibdKTVIDFBBRJkup0135BESUYJO08dNg5BMQUWZJqUmaYz4VFESULlPqdNcABUSUYJNUSuUTiMNLXMpJqZfBpJxPBQVLlPxWqUmazvqUTxBR8kip093UCiqfIKJkPEmlVD6B4NwTLTylbpTGz6eCgiVKyavUJG17fconiCilpdTpbpyCyieIKFVM0sb7BconIKLMklKTdPZ8KiiIKHWl1OmufAIiSrBJKqWTFlQ+QUSRUjdK5RMQUcKl1CQdlU8FBUSU5VPqdFc+AREl2CStOaXObwERJVhK6+mofAIiSuCU1jBJnd8C45vr9Xquwuw2zW8eDk9hFk3SviJTaoC2YcfZ2xd95sD+BZcFEaWWiI5KaUkdlc9oBdVRRJQaI1pqSp3fRshn/0my9MfwSSkiSl0RbQo63ZXPOOtz+Lmx7I+zlVJEVEQrimgZKXV+GzmfK/z1RUoRURGtLqKjUpp+R+UzQkHHeRo43UVEqT2ieaXU+W0i+ZRSRBQRXaWjSaVUPiPkc+o/cae7iKiI1h7RlFPq/DbZfEopIoqIrp7SrjoqnxEKGvYP1+kuIiqidJ9S57fZ5VNKEVERFdFVOhohpfIZIZ/x/xylFBEVUSmNumDkM9N8mqSIqIgSO6XyGaGgKdzbllJEVER1NGRKnd8WnM8VOiqliKiISulMX6PlM0I+m4Rf7yuliKiISumUX6md31aVz5VTqqOIqIhK6bhfteUzQkHzeg9kKUVERVRHV0+p81v5XLmjUoqIiqiULvPVXD4j5LMp4ufCSikiKqJS+v++pju/lc8pUqqjiKiISqn12XpBc8+nlCKiIsoqHVVQ+Zy6o1KKiIpo1SlV0OD5LLWgJimRrXUJwAAtz9K76f2/6UopIgrI57gpXTRJpRQRBSbOZ4UFHTVJpRQRBeQzQEp1FBEFRhZUPldOqUmKiALyOVlKne4iosDy+VTQKSaplCKiIJ/yGSClOoqIQnUFlc9QKTVJEVGQTyZLqdNdRBTqyqeCtjpJG6e7iCjIJ7Ok1CRlBWtcAsiuoN++60YFjZDSRZN08HMmwBKFXPPpgnQ1Sa1SRBRyzaeCJpVSHUVEQT6ZMqUmKX3uiULSBXX7M7WULpqkbpRaokCi+XRB0p+kVqmIAmnlU0EzTamOiihggDJlSk1SEQXkk8lS6nRXRAH5JNgkbZzuiigQIZ8KWnBKTdIaeIkLdDlAFbTIlC6apF4GY4kCgfPpgtQzSa1SEQXC5FNBK0+pjoooIJ9MmVKTtDDuiUKMgrr9KaWLJqkbpZYoMFY+XRDcKBVRYLJ8KihjplRHRRTkUz6ZMqUmab7cE4XABXX7k/FTumiSulFqiULV+XRBmGWSNk53RRQqzKeCEjClTndFFOQTJkup790VUairoPJJq5NUSkUU5BMCpFRHRRRKyKeC0klKTVIRBfmEyVLqdFdECeYf3/uypmlOv+hulyJ+QeWTRCaplIooU+Zz8LGOyidS6kapiDJBO4mfTwUl8ZSapCLKxOE0Qw1QKk/pokmKiDLu6FRQ+aRyCiqijFVKZ7nx86mgyCcimnc7VximZqh8Ip+IKNMUlPYKKp/klc9bbr9t6d8CEVGWyefpF93t5aHyiYIO5xMRZbKCEjyfCop8IqLFFnTR7jRD5ZNq86mgIsqUBTVDgxdUPpFPRLSiDWqGyid1FlQ+RZSZCmqGhsqngiKfiGjh+WzcB5VPqs+ngooosw5QQhVUPjFAEVEFRT6RT0QUBW0/nwpKXvlUUBFFQeUT5FNEiZhPBQ1bUPkkr4LKp4iioPIJ8imixC2ofIbKp4KSVz4VVERRUPkE+UREFTTbgsoneRVUPkWUWfOpoEHIJ/KJiBZuy9Yzrjl3TkEVlJrzqaD1mOv1eq5CEJvmNzdNs6ig8jn7X0p0FAN0WYPbHAf2L/iDENESfPrdP6WgUop8iqiIMmtB3/KZH1zYe/btdXHCdlRKSS2fTRfntyIqomXms2maV7/vG/3T3QEplVLkU0RFlLEKOvh4OKU62kZKdZQOC9rtdw+JqIiWVtDhfA6TUilFPkVURJmmoEs7KqVtdFRKiZPPJpmXr4ioiNZSUCmVUuRTREWUZfI5fkGXTamOtpFSHSV4QRN88wQRFdEaCyqlUop8iqiIKuj0+Vy2o1LaRkellFny2aT97n0iKqJVF1RKpRQDVERFVEHDp1RH20ipjlJMPkVURBVUSqWU5PLZZPXTV0RURDPLZ9sFXdpRKW2jo1JKGT+8TERF1AA1SaWU7gua6c/+FFERVVAp7TilOiqf+f7niKiIKuhkHZVSKSVUPnMvqIiKqIJKaUIdlVL5FFFENGQ+0ynosinVUSllioKWkU8RFVEFldJ0U6qj8imiiOj0BU02n8t2VEqllJXzWWRBRVREFVRKU++olBqgIoqIllnQZVOqo1IqnzXkU0RFNLl8ZlpQKY2WUh3NKJ81FFRERVRBW+yolEqpfIooIhqjoAXkU0pjdlRKky1oPfkUURFV0Hgp1VEplU8RRUQVVEqTS6mOdp7PagsqoiLaZT5rKOjSjkqplMqniCKiCiqlyXVUSiMXtPJ8iqiIdlbQ2vI5KqU6apLKp4giogoqpVJaSz4VVERFVEGT66iUSqkBKqKI6Er5VFCTtJOOSql8iqiIKqiUYpJ2k08FFVER7big8jlpR6VUSuVTRKk0ogoqpSl3VErHLKh8iqiIKmgJKdVRKZVPEaWKiCqolOaV0so76vxWREU00XwqaBsdlVIplU8RpcCIGqBSmntHq0qp81sRFVEFrT2lOiql8imiZB9RBZXS8lJaZEed37aaTxEVUQXNtaNSKqUGaAoFFVERnT6fCiqlRXa0gJTKp3yKqIIybkp1VEpXyKeCtpFPBRXRmQoqn1JaSUoz6qh8yqeIKigzdVRKq02p89s4BZVPEVVQk5RpOppsSuVTPkU0j3wqqJRKaVIpdX4bJ58KKqIKWmlHpbSllHbeUfmUT5KOqCNcKSXZlDq/jVNQ+RRRBZVSp7vtdjRySuVTPkk9ogoqpSSYUue3cfKpoCIaLJ8KWmpHpbSllLbXUQPUACX1iCqolJJgSuVTPskgoo5wq02pjrbR0SApdX4bJ58KKqIKipQWlVL5lE+yiaiC6qiUtprSSTvq/DZOQeVTRAPnU0GlVEq7Tal8yifZRFRBWSGlOtpGR1dIqfPbOPlUUBFtpaDyiZR2lVL5lE8yi6iCMn5HpbSllPY76vw2TkHlU0QVFJO0zFUqn/JJNhFVUKQ0zY4qaPB8KqiItphPBUVKE+mofBqgzGitAUriDuxfGHS0/9VfSpFPqoioghKqo8OTdMvWM3SUpPKpoCKqoOSUUpMU+SQFaxSUHFM6mKSjvt0UIhT0wP4FBbVE282ngtLqJLVK6SqfLgvhI6qgdJhSHSVCPhWUtiLqCJduU2qSIp9EFuyeqILSeUoHk9SNUoIX1O1PWlyiCkpSk9QqJWw+XRbaiqiboCSeUh1l6nwqKO1GVEFJP6UmKQYoKUbUES7pp9TpLvJJq2Z6A/pBRxWUlPkZpYt4A/pR+VRQoka031EFJbuUVt5REZVPUokoSKmI5l5Q+WRqa10CquJGac3kExGFAB1tvAym+nwqKCIKYVJqksonTGeNS4CUDiap9wssvqDevQ9LFNqapFZp2fl0WRBRiJRSHS0mnwqKiELslJqkBiiIKEyTUqe78gkiCgEmqZRml08FRUQhxZTqqHyCiMKUKTVJUy6ofCKikG5Kne7KJ4goBJikUppIPhUUEYW8U6qj8omIAlOm1CSNX1D5REShhJQ63ZVPRBQIMEkbp7tt5lNBEVEoP6UmqQGKiALTpNTprnwiokCASSqlM+ZTQRFRkFI3SuUTEQVmSKlJOn5B5RMRBY4kwemufCKiQIBJKqWN81tEFJg9pRV2VD4RUSBMSmubpM5vEVEgTEqrOt2VT0QUaGuSFpxS57eUbY1LAN2mdLgo/ZSWPUAVFEsUaGuVljFJnd8iokDslBZwuuv8FhEFup+k2aVUPqmQe6KQYkqzu1Hq9ieWKJDoKk15krr9iYgC6aY02dNd57cgopDTJG3SeL9A+QQRhVxT2u0kdX4LIgq5prTD0135BBGFciZptJQ6v4VleYkL5JrSaC+D8fIVsESh8FXaxiR1fgsiCuWnNPjprvNbEFGocZLOmFL5hPG5JwpFpXTGG6Vuf4IlClbpxDdK3f4EEQWOJHDM013ntzC1uV6v5ypAwQYp7btn396Vj3nlE0qI6O6b91x0yXvH+X++5GdedOsnPz7OL1y37hnHbtj4vJN+YutLXnzur73yBaee0vZDb/uFn//47j9f9KsefOihl2478nf/k577nL1f+tumac4465z7H3hw0gu1ft2673z9nll+21SYUvmEIOr6xqInnnjyP7773b1f3Xf1dTectePVf/gn7zl06FCrj3jHnV+58+5/8Dyjcyt/f5DvHgIRnUyv1/vonr+89IpdbT/Qn73vSmfmpJNSAxRENJgbbrzp0ccea/Uhvv6Nhc/e+jeeaiQ4SQ1QmFE235176vzJd3zhs7P8wv954onv3HvfpTt33XHnVwb/9H+ffnrf1/7prG2/2MZDD1x+1dW/es72o9eucrX7d0aHHfze9za/9OXDn/m7z31q8wtOa/WKUe0kBSzRkdavW/fTm194/ft3HnXUUcOf/6+DB9t+6PsfePCmPX/l2QYgonnbuGHD8ccdN/yZ4571rJYe66TnPmfw8VXXXPf9xx/3hAMQ0Yw9+uhj//nww8Ofmf/J57f0WGf/0rYtP/vi/scPHzz4oRt2e8IBlCSbe6L/uv/fRr3Q7VMfu/Flp29d9d8wuCd6+PDhwSe3n7lteC8Gf+g//v13nnvea/sfX7/7o687/7wfOeH4XK4YAIVEtI2WnPz85132pxe3+uinb/m57Wduu+3v7+hXfOcHPnT5JRd72gGUodKXuGzcsOGtb3z9LZ/4i03PPrHtx/qjd71j8K1Mez7xyXvvu9/TDkBEM3b48OFDhw8/c/36CI916vzJr/mNV/U/fvrQoUt37vK0AyhD+a8TXdb3H3/82g9/5N777v/ItR+Ym5tr+6Hf/fa3/vXnv/Dkk082TXPrF2/f8Ypfye6KAVDjEj11/uQD+xce+Jd//vKtn/n1V54z/I+++KUv7755T4Tfw6Znn/g7rz1/8D8vu/L9nnkAIpqNo48++rRT5q/bdcU5v3zm8OevuPqaRx55NMJv4G1vesMPHXts/+MpflQLACLasbm5ucsuuXj4Vuh/P/LIrmuvj/DQGzduePub3+gJB1CStbX9B594wglvuvC3r/zgtYPP7L55z+svOP/Hf+xHR/2SFV4k0zTNwlfvGvM9jy684Lc+fNPHHvr3A3H+S0P9tgGwRI/43TdcePwPH3nnv6eeeuqyq66O8LjHHHPMH/ze2zznAEQ0Y89cv/4db3nz8Gc+/bnPL3zzWxEe+jdfteOFp53iaQcgohm74LzXDL/bX6/Xe8/lO2Nc7jVrLnrXOz3tAMow1+v1XAUAsEQBQEQBQEQBQEQBABEFABEFABEFABEFABEFAEQUAEQUAEQUAEQUAEQUABBRABBRABBRABBRAEBEAUBEAUBEAUBEAUBEAQARBQARBQARBQARBQARBQBEFABEFABEFABEFAAQUQAQUQAQUQAQUQAQUQBARAFARAEgBf8HgADRcJHd2j0AAAAASUVORK5CYII=" alt="Pieza geométrica con el frente señalado"></div></section>
+<main class="wrap"><section class="hero"><div><div class="eyebrow">App 02 · Expresión y comunicación técnica</div><h1>Taller de instrumentos</h1><p>Mide y construye ángulos, compara líneas y prepara tu lámina.</p><div class="chips"><span class="chip">Instrumentos · Ángulos · Formato</span><span class="chip">10 de práctica · 10 evaluables</span><span class="chip">20–25 min</span></div></div><div class="hero-art"><img src="data:image/png;base64,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" alt="Pieza geométrica con el frente señalado"></div></section>
 <p id="testBanner" class="test-banner" role="status" hidden>MODO PRUEBA · NX-01<small>Prueba técnica. No cuenta como resultado del alumnado.</small></p><section id="registration" class="panel registration" aria-labelledby="entryTitle">
 <h2 id="entryTitle">Introduce tu ID</h2><p class="note entry-note">Usa el ID que te ha dado tu profesor o profesora.</p>
 <div class="ids"><div><label for="id1">Tu ID</label><input id="id1" type="text" autocomplete="off" spellcheck="false" autocapitalize="characters" maxlength="32" placeholder="Escribe tu ID" aria-describedby="identityMessage"></div><div id="secondId" hidden><label for="id2">ID de tu pareja</label><input id="id2" type="text" autocomplete="off" spellcheck="false" autocapitalize="characters" maxlength="32" placeholder="Segundo ID del mismo grupo"></div></div>
 <label class="pair-toggle"><input id="pairMode" type="checkbox"> Trabajamos en pareja</label>
 <div class="actions"><button id="verifyIds" class="primary" data-action="verifyIds">Confirmar ID y continuar →</button></div><p id="identityMessage" class="status" role="status" aria-live="polite"></p>
 </section>
-<section id="modeStage" class="panel" hidden aria-labelledby="modeTitle"><div class="menu-header"><p id="verifiedNames" class="student-name"></p><button data-action="changeStudent">Cambiar de alumno</button></div><h2 id="modeTitle">¿Qué quieres hacer?</h2><div class="mode-grid"><button class="mode-card practice" data-action="practiceMode"><em>SIN NOTA</em><strong>PRACTICAR SIN NOTA</strong><span>Explora y ensaya los diez retos. Tus pruebas no envían ninguna calificación.</span></button><button id="evaluateMode" class="mode-card evaluable" data-action="evaluateMode"><em>CUENTA PARA LA NOTA</em><strong>ACTIVIDAD EVALUABLE</strong><span>Diez retos · 10 puntos. Al finalizar se enviará el resultado de cada ID validado.</span></button></div><p class="note">En la actividad evaluable, un consejo reduce a la mitad la puntuación de ese reto: un acierto completo pasa de 1 a 0,5 puntos. Un error vale 0.</p><p id="modeMessage" class="status" role="status" aria-live="polite"></p></section>
-<nav id="sessionBar" class="flow-bar" hidden aria-label="Actividad actual"><div><div id="flowLabel" class="flow-label"></div><div id="sessionName" class="session-name"></div></div><button data-action="backMenu">← Elegir modo</button></nav>
+<section id="modeStage" class="panel" hidden aria-labelledby="modeTitle"><div class="menu-header"><p id="verifiedNames" class="student-name"></p><button data-action="changeStudent">Cambiar de alumno</button></div><h2 id="modeTitle">¿Qué quieres hacer?</h2><div class="mode-grid"><button class="mode-card practice" data-action="practiceMode"><em>SIN NOTA</em><strong>PRACTICAR SIN NOTA</strong><span>Explora y ensaya diez retos distintos de los evaluables. La práctica no envía resultados.</span></button><button id="evaluateMode" class="mode-card evaluable" data-action="evaluateMode"><em>CUENTA PARA LA NOTA</em><strong>ACTIVIDAD EVALUABLE</strong><span>Diez retos · 10 puntos. Al finalizar se enviará el resultado de cada ID validado.</span></button></div><p class="note">En la actividad evaluable, un consejo reduce a la mitad la puntuación de ese reto: un acierto completo pasa de 1 a 0,5 puntos. Un error vale 0.</p><p id="modeMessage" class="status" role="status" aria-live="polite"></p></section>
+<nav id="sessionBar" class="flow-bar" hidden aria-label="Actividad actual"><div><div id="flowLabel" class="flow-label"></div><div id="sessionName" class="session-name"></div></div><div class="actions"><button id="backExplore" data-action="backExplore" hidden>← Volver a Explorar</button><button data-action="backMenu">← Elegir modo</button></div></nav>
 <section id="explore" aria-label="Práctica sin nota" hidden></section>
 <section id="retos" aria-label="Retos autocorregibles" hidden><section id="quizStage" class="panel" hidden><div class="quiz-top"><div><div id="sessionLabel" class="note"></div><strong id="progressText">0 de 10 comprobados</strong></div><progress id="progress" max="10" value="0" aria-label="Retos comprobados"></progress></div><div id="quizContent"></div><div class="quiz-nav"><button id="prevButton" data-action="prev">← Reto anterior</button><button id="nextButton" class="primary" data-action="next">Siguiente reto →</button></div></section><section id="resultStage" aria-label="Resultado y envío" hidden></section></section>
 <noscript><p class="panel">Activa JavaScript en el navegador para usar las actividades y la autocorrección.</p></noscript></main><footer><div class="wrap"><span>UD 2 · Expresión y comunicación técnica · 26/27</span><span>Cuaderno Técnico Ilustrado · Práctica visual</span></div></footer>
@@ -97,7 +108,14 @@ function toolSvg(kind){
 }
 function sheetSvg(){return svg('<rect x="20" y="12" width="210" height="297" fill="#fff"/><rect x="30" y="22" width="190" height="277" stroke="#819ba3"/><rect x="140" y="279" width="80" height="20" fill="#e4f0f2"/>'+text(180,293,'CAJETÍN',9)+text(125,150,'A4 VERTICAL',13),'0 0 250 322','Hoja A4 vertical con marco y cajetín');}
 function docSvg(mode='croquis',missing=false){
- if(mode==='plano')return svg('<rect x="22" y="12" width="376" height="236" fill="#fff"/><rect x="34" y="24" width="352" height="212" stroke="#b1c2c6"/><rect x="52" y="52" width="160" height="80"/><rect x="255" y="52" width="90" height="80"/><rect x="52" y="160" width="160" height="45"/>'+dimH(52,212,145,135,'120')+dimV(232,52,132,215,'60')+'<rect x="268" y="211" width="118" height="25"/>'+text(327,228,'Caja · 1:1',12),'0 0 420 260','Plano realizado con trazos precisos y cajetín');
+ if(mode==='plano'){
+  const frame='<rect x="22" y="12" width="376" height="272" fill="#fff"/><rect x="34" y="24" width="352" height="248" stroke="#b1c2c6"/>';
+  const views='<rect x="65" y="55" width="120" height="60"/><rect x="243" y="55" width="80" height="60"/><rect x="65" y="170" width="120" height="80"/>';
+  const dims=dimH(65,185,137,118,'120')+dimV(350,55,115,326,'60')+dimV(210,170,250,188,'80');
+  const labels=text(125,46,'Alzado',13)+text(283,46,'Perfil izquierdo',13)+text(125,161,'Planta',13);
+  const title='<rect x="250" y="229" width="136" height="43"/>'+text(318,247,'Caja · Escala 1:1',12)+text(318,263,'Cotas en mm',12);
+  return svg(frame+views+dims+labels+title,'0 0 420 296','Plano de una caja de 120 mm de ancho, 80 mm de fondo y 60 mm de alto');
+ }
  let b=mode==='boceto'?'<path d="M79 106L208 176L340 101L211 31L78 105 M80 109L81 171L211 241L340 166L339 102 M210 177L211 240" stroke-width="2.4"/>':'<path d="M80 92L210 158L335 92L205 26Z M80 92V155L210 222L335 155V92 M210 158V222" stroke-width="2.4"/>';
  if(mode==='croquis')b+=text(120,205,'120 mm',13,'#23768b')+text(302,198,'80 mm',13,'#23768b')+(missing?'':text(361,134,'60 mm',13,'#23768b'));
  return svg(b,'0 0 420 260',mode==='boceto'?'Boceto rápido sin dimensiones':'Croquis a mano alzada con dimensiones');
@@ -133,6 +151,7 @@ function renderVisual(v){
  if(v.type==='angle')return angleSvg(v.deg,!!v.protractor);
  if(v.type==='lines')return linesSvg(v.mode,v.deg||15);
  if(v.type==='tool')return toolSvg(v.kind);
+ if(v.type==='squareSetup')return svg('<path d="M55 195H365" stroke-width="3"/><circle cx="218" cy="85" r="5" fill="#126680" stroke="none"/>'+text(234,88,'P',19)+text(210,225,'Borde de referencia',16),'0 0 420 260','Un punto P por encima de un borde horizontal de referencia');
  if(v.type==='sheet')return sheetSvg();
  if(v.type==='dimensions')return v.mode==='step'?steppedDimension():dimensionSvg(v.mode);
  if(v.type==='box')return boxCleanSVG(...(v.dims||[100,60,40]));
@@ -146,7 +165,21 @@ function splitSegment(a,b){
  const dx=Math.sign(b[0]-a[0]),dy=Math.sign(b[1]-a[1]);
  return Array.from({length:n},(_,i)=>unitKey([a[0]+i*dx,a[1]+i*dy],[a[0]+(i+1)*dx,a[1]+(i+1)*dy]));
 }
-function expectedEdges(q){const s=q.shape,pts=contour(s).map(([x,y])=>[2+x/5,2+y/5]);let edges=[];for(let i=0;i<pts.length;i++)edges.push(...splitSegment(pts[i],pts[(i+1)%pts.length]));(s.v||[]).forEach(x=>edges.push(...splitSegment([2+x/5,2],[2+x/5,2+s.h/5])));(s.hor||[]).forEach(y=>edges.push(...splitSegment([2,2+y/5],[2+s.w/5,2+y/5])));return [...new Set(edges)];}
+function drawingOrigin(q){return [q.originNote?2+(q.shape.w/2-10)/5:2,2];}
+function expectedEdges(q){
+ const shape=q.shape,origin=[2,2],edges=[];
+ const add=(a,b)=>edges.push(...splitSegment(...[a,b].map(([x,y])=>[origin[0]+x/5,origin[1]+y/5])));
+ const outline=points=>points.forEach((point,index)=>add(point,points[(index+1)%points.length]));
+ outline(contour(shape));
+ (shape.v||[]).forEach(x=>add([x,0],[x,shape.h]));
+ (shape.hor||[]).forEach(y=>add([0,y],[shape.w,y]));
+ if(shape.inner){
+  const [x,y,w,h]=shape.inner;
+  outline([[x,y],[x+w,y],[x+w,y+h],[x,y+h]]);
+ }
+ if(shape.towerSeam)add([shape.w/2-10,20],[shape.w/2+10,20]);
+ return [...new Set(edges)];
+}
 function drawingScore(actual,expected){const a=new Set(actual||[]),e=new Set(expected);let right=0,extra=0;for(let x of a)e.has(x)?right++:extra++;return e.size?right/(e.size+extra):0;}
 
 const APPS=[
@@ -170,7 +203,7 @@ const APPS=[
   {title:'Un ángulo recto',prompt:'Elige la pareja de rectas perpendiculares.',visual:{type:'tool',kind:'cartabon'},options:[{label:'A',visual:{type:'lines',mode:'parallel'}},{label:'B',visual:{type:'lines',mode:'cross'}},{label:'C',visual:{type:'lines',mode:'perp'}}],answer:2,explain:'Las perpendiculares se cortan formando 90°. No basta con que dos líneas se crucen.'},
   {title:'Reconoce el instrumento',prompt:'Mira los ángulos del triángulo. ¿Qué instrumento es?',visual:{type:'tool',kind:'cartabon'},options:['Escuadra','Cartabón','Transportador'],answer:1,explain:'El cartabón tiene ángulos de 30°, 60° y 90°. La escuadra tiene 45°, 45° y 90°.'},
   {kind:'fields',title:'Escoge una herramienta',prompt:'Relaciona cada acción con el instrumento más adecuado de la lista.',visual:{type:'tool',kind:'protractor'},fields:[{label:'Medir una abertura de 110°',options:['Transportador','Goma','Regla'],answer:'Transportador'},{label:'Marcar 40 mm de longitud',options:['Regla','Goma','Solo la escuadra sin graduar'],answer:'Regla'},{label:'Deslizar un borde para paralelas',options:['Escuadra apoyada en cartabón','Goma sin apoyo','Transportador girado al azar'],answer:'Escuadra apoyada en cartabón'}],explain:'Cada instrumento tiene una función. Al deslizar la escuadra, el apoyo debe permanecer estable.'},
-  {kind:'fields',title:'Prepara una hoja A4',prompt:'Completa las dimensiones del formato y el lugar de los datos del dibujo.',visual:{type:'sheet'},fields:[{label:'Anchura de un A4 vertical en mm',number:true,answer:210},{label:'Altura de un A4 vertical en mm',number:true,answer:297},{label:'Zona de identificación',options:['Cajetín','Cifra de cota','Vértice'],answer:'Cajetín'}],explain:'El A4 mide 210 × 297 mm. El cajetín identifica el dibujo y sus datos.'},
+  {"kind":"fields","title":"Traza una perpendicular por un punto","prompt":"El dibujo muestra un borde horizontal y el punto P. Quieres trazar por P una línea perpendicular a ese borde. Decide cómo colocar la escuadra y qué abertura usarías para comprobar el resultado.","visual":{"type":"squareSetup"},"fields":[{"label":"Colocación de la escuadra","options":["Alinear un cateto con el borde y hacer pasar el otro por P","Alinear la hipotenusa con el borde y hacer pasar un cateto por P","Apoyar un cateto en el borde y trazar otro borde horizontal por P"],"answer":"Alinear un cateto con el borde y hacer pasar el otro por P"},{"label":"Ángulo que debe formar con el borde, en grados","number":true,"answer":90}],"explain":"Los dos catetos de la escuadra forman 90°. Al alinear uno con el borde, puedes deslizarla hasta que el otro pase por P y guíe el trazado.","hint":"Los catetos son los dos lados que forman el ángulo recto de la escuadra."},
   {kind:'fields',title:'Reconoce el tamaño del dibujo',prompt:'Elige natural, reducción o ampliación. No necesitas calcular una escala numérica.',visual:{type:'sheet'},fields:[{label:'Una moneda dibujada del mismo tamaño',options:['Natural','Reducción','Ampliación'],answer:'Natural'},{label:'Un edificio completo en una hoja',options:['Natural','Reducción','Ampliación'],answer:'Reducción'},{label:'Una pieza diminuta dibujada más grande',options:['Natural','Reducción','Ampliación'],answer:'Ampliación'}],explain:'La escala modifica el tamaño de representación. Las cotas siguen comunicando medidas reales.'},
   {kind:'fields',title:'Identifica tu lámina',prompt:'Completa los datos que deben acompañar a estos dos documentos.',visual:{type:'document',mode:'plano'},fields:[{label:'Escala en un croquis a mano alzada',options:['Sin escala','1:1 sin comprobar','La que tenga el zoom'],answer:'Sin escala'},{label:'Escala en una lámina dibujada a tamaño real',options:['1:1','Siempre reducción','Sin datos'],answer:'1:1'},{label:'Datos básicos del cajetín',options:['Nombre, grupo, fecha y título','Solo un dibujo decorativo','Solo la nota'],answer:'Nombre, grupo, fecha y título'}],explain:'La lámina también necesita escala y número cuando corresponda. La impresión a tamaño real debe comprobarse.'}
  ]},
@@ -213,6 +246,250 @@ const APPS=[
 APPS.forEach(a=>a.questions.forEach((q,i)=>{q.id=`${a.id}_R${String(i+1).padStart(2,'0')}`;q.kind=q.kind||'choice';q.hint=q.hint||'Compara la forma, las dimensiones y el frente antes de comprobar. Puedes volver a Explorar sin perder el intento.';}));
 
 const APP=APPS.find(a=>a.id===APP_ID);
+
+const PRACTICE_QUESTIONS = [
+  {
+    "kind": "fields",
+    "title": "Lee un ángulo agudo",
+    "prompt": "Muestra el transportador y lee la abertura desde el lado horizontal.",
+    "visual": {
+      "type": "angle",
+      "deg": 40
+    },
+    "fields": [
+      {
+        "label": "Medida en grados",
+        "number": true,
+        "answer": 40,
+        "tolerance": 2
+      }
+    ],
+    "explain": "El ángulo mide 40°. Se admiten de 38° a 42°.",
+    "hint": "Sigue la numeración que empieza en el lado horizontal.",
+    "protractor": true
+  },
+  {
+    "kind": "fields",
+    "title": "Lee un ángulo obtuso",
+    "prompt": "Mide la abertura marcada desde el lado horizontal hasta la línea inclinada.",
+    "visual": {
+      "type": "angle",
+      "deg": 130
+    },
+    "fields": [
+      {
+        "label": "Medida en grados",
+        "number": true,
+        "answer": 130,
+        "tolerance": 2
+      }
+    ],
+    "explain": "La abertura es de 130°. El otro número de la misma marca corresponde a medir desde el lado contrario.",
+    "hint": "Una abertura mayor que un ángulo recto supera los 90°.",
+    "protractor": true
+  },
+  {
+    "kind": "adjust",
+    "title": "Construye una abertura obtusa",
+    "prompt": "Mueve la línea móvil hasta formar 120° con el lado horizontal.",
+    "target": 120,
+    "tolerance": 2,
+    "initial": 75,
+    "visual": {
+      "type": "angle",
+      "deg": 75
+    },
+    "explain": "120° queda entre 90° y 180°. El lado fijo sigue en el cero derecho.",
+    "hint": "Pasa primero por la marca de 90° y continúa hasta 120°."
+  },
+  {
+    "title": "Misma dirección al inclinar",
+    "prompt": "¿Qué relación tienen las dos líneas del dibujo?",
+    "visual": {
+      "type": "lines",
+      "mode": "parallel",
+      "deg": 34
+    },
+    "options": [
+      "Se cortan a 90°",
+      "Son paralelas",
+      "Se cortan con un ángulo agudo"
+    ],
+    "answer": 1,
+    "explain": "Las dos tienen la misma dirección y conservan su separación.",
+    "hint": "Compara la inclinación de ambas líneas."
+  },
+  {
+    "title": "Detecta un cruce oblicuo",
+    "prompt": "¿Cómo clasificarías este par de líneas?",
+    "visual": {
+      "type": "lines",
+      "mode": "cross",
+      "deg": 15
+    },
+    "options": [
+      "Paralelas",
+      "Perpendiculares",
+      "Se cruzan sin formar 90°"
+    ],
+    "answer": 2,
+    "explain": "Las rectas se cruzan y forman un ángulo distinto de 90°.",
+    "hint": "Observa si el cruce forma una esquina de ángulo recto."
+  },
+  {
+    "title": "Distingue dos triángulos",
+    "prompt": "¿Qué instrumento tiene dos ángulos de 45°?",
+    "visual": {
+      "type": "tool",
+      "kind": "set"
+    },
+    "options": [
+      "Transportador",
+      "Cartabón",
+      "Escuadra"
+    ],
+    "answer": 2,
+    "explain": "La escuadra tiene dos ángulos de 45° y uno de 90°.",
+    "hint": "Compara las dos esquinas agudas del triángulo."
+  },
+  {
+    "kind": "fields",
+    "title": "Prepara el material",
+    "prompt": "Selecciona la herramienta para cada operación.",
+    "visual": null,
+    "fields": [
+      {
+        "label": "Medir una abertura de 125°",
+        "options": [
+          "Regla",
+          "Transportador",
+          "Compás"
+        ],
+        "answer": "Transportador"
+      },
+      {
+        "label": "Marcar un segmento de 55 mm",
+        "options": [
+          "Regla graduada",
+          "Transportador",
+          "Goma"
+        ],
+        "answer": "Regla graduada"
+      },
+      {
+        "label": "Trazar un lado perpendicular a una base",
+        "options": [
+          "Compás",
+          "Escuadra apoyada sobre la base",
+          "Goma"
+        ],
+        "answer": "Escuadra apoyada sobre la base"
+      }
+    ],
+    "explain": "Cada herramienta permite comprobar una magnitud o guiar un trazado distinto.",
+    "hint": "Distingue grados, milímetros y ángulos rectos."
+  },
+  {
+    "kind": "fields",
+    "title": "Lee el formato de la lámina",
+    "prompt": "Completa el tamaño de un A4 vertical e identifica el recuadro de datos.",
+    "visual": {
+      "type": "sheet"
+    },
+    "fields": [
+      {
+        "label": "Lado corto en mm",
+        "number": true,
+        "answer": 210
+      },
+      {
+        "label": "Lado largo en mm",
+        "number": true,
+        "answer": 297
+      },
+      {
+        "label": "Zona para el título",
+        "options": [
+          "Margen",
+          "Cajetín",
+          "Centro de la hoja"
+        ],
+        "answer": "Cajetín"
+      }
+    ],
+    "explain": "Un A4 vertical mide 210 mm de ancho y 297 mm de alto. El título va en el cajetín.",
+    "hint": "En vertical, el lado largo corresponde a la altura."
+  },
+  {
+    "kind": "fields",
+    "title": "Elige el tamaño de representación",
+    "prompt": "Relaciona cada caso con la escala que describe su tamaño.",
+    "visual": null,
+    "fields": [
+      {
+        "label": "Un tornillo que dibujas más grande para ver la rosca",
+        "options": [
+          "Natural",
+          "Reducción",
+          "Ampliación"
+        ],
+        "answer": "Ampliación"
+      },
+      {
+        "label": "Una mesa que representas más pequeña en el papel",
+        "options": [
+          "Natural",
+          "Reducción",
+          "Ampliación"
+        ],
+        "answer": "Reducción"
+      },
+      {
+        "label": "Una arandela que calcas a su tamaño real",
+        "options": [
+          "Natural",
+          "Reducción",
+          "Ampliación"
+        ],
+        "answer": "Natural"
+      }
+    ],
+    "explain": "Ampliación, reducción y escala natural se distinguen comparando el dibujo con el objeto.",
+    "hint": "Piensa qué tamaño tiene la imagen respecto al objeto real."
+  },
+  {
+    "title": "Comprueba la lámina de una compañera",
+    "prompt": "La lámina incluye título y autora, pero nadie sabe si la pieza está representada a tamaño real. ¿Qué dato se debe indicar tras comprobarlo?",
+    "visual": {
+      "type": "document",
+      "mode": "plano"
+    },
+    "options": [
+      "El tipo de lápiz",
+      "La escala",
+      "El número de líneas"
+    ],
+    "answer": 1,
+    "explain": "La escala indica la relación entre el tamaño dibujado y el real.",
+    "hint": "Busca el dato que explica si el dibujo se amplió o redujo."
+  }
+];
+const DRAWING_QUESTIONS = [];
+
+function preparePracticeBank(questions, prefix){
+ questions.forEach((q,index)=>{
+  q.id=APP.id+'_'+prefix+String(index+1).padStart(2,'0');
+  q.kind=q.kind||'choice';
+ });
+}
+preparePracticeBank(PRACTICE_QUESTIONS,'P');
+preparePracticeBank(DRAWING_QUESTIONS,'D');
+
+function questionsForMode(){
+ if(S.mode==='registered')return APP.questions;
+ return S.mode==='drawing'?DRAWING_QUESTIONS:PRACTICE_QUESTIONS;
+}
+
 const DEFAULT_ENDPOINT="https://script.google.com/macros/s/AKfycbzYhutDT6EZ7meQq2KfVdKq0h8JH9GYnOmZVqjW_IkmOvdMdjS7FxWQWezmx8SfWQf9/exec";
 const S={screen:'entry',identifying:false,reviewing:false,testMode:false,tab:'explore',mode:'',students:[],generation:0,index:0,drafts:[],records:[],hints:[],point:null,kbPoint:[2,2],history:{},tool:'draw',submissionId:'',startedAt:'',result:null,pending:null,sending:false,confirmed:new Set(),endpoint:'',manualEndpoint:false,lab:{doc:'boceto',angle:50,line:'parallel',direction:15,piece:'block',view:'iso',w:100,d:60,h:40}};
 const $=id=>document.getElementById(id);
@@ -261,67 +538,76 @@ function labRefresh(){
 function startAttempt(){
  S.index=0;S.drafts=[];S.records=[];S.hints=[];S.history={};S.point=null;S.kbPoint=[2,2];S.tool='draw';S.submissionId=uuid();S.startedAt=new Date().toISOString();S.result=null;S.pending=null;S.reviewing=false;S.confirmed=new Set();S.sending=false;$('resultStage').innerHTML='';renderQuiz();
 }
-function fieldHtml(f,j,d,locked){
+function fieldHtml(f,j,d,detail){
+ const locked=!!detail;
  const label=`<label for="f${j}">${esc(f.label)}</label>`;
  const input=f.number?`<input id="f${j}" data-field="${j}" type="text" inputmode="decimal" maxlength="12" value="${esc(d[j])}" autocomplete="off" ${locked?'disabled':''}>`:`<select id="f${j}" data-field="${j}" ${locked?'disabled':''}><option value="">Selecciona…</option>${f.options.map(x=>`<option value="${esc(x)}" ${d[j]===x?'selected':''}>${esc(x)}</option>`).join('')}</select>`;
- return `<div class="field">${label}${input}</div>`;
+ return `<div class="field${detail&&!detail.correct?' field-wrong':''}">${label}${input}${detail&&!detail.correct?solutionValue(detail.expected):''}</div>`;
 }
 function drawingSVG(q){
- const d=draft(q),locked=!!S.records[S.index],origin=q.originNote?[4,2]:[2,2];let b='';
+ const d=draft(q),locked=!!S.records[S.index],origin=drawingOrigin(q);let b='';
  for(let col=0;col<=16;col++)b+=`<path d="M${28+col*22} 30V294" stroke="#e0e9e8" stroke-width="1"/>`;
  for(let row=0;row<=12;row++)b+=`<path d="M28 ${30+row*22}H380" stroke="#e0e9e8" stroke-width="1"/>`;
  const edge=(key,color,width=3,dash='')=>{const[[x1,y1],[x2,y2]]=key.split('|').map(p=>p.split(',').map(Number));return `<path d="M${28+x1*22} ${30+y1*22}L${28+x2*22} ${30+y2*22}" stroke="${color}" stroke-width="${width}" ${dash?'stroke-dasharray="5 4"':''}/>`;};
- for(const x of d)b+=edge(x,'#126680');
- if(locked&&S.records[S.index].rawScore<1)for(const x of expectedEdges(q))b+=edge(x,'#18633d',2,true);
+ const showSolution=locked&&S.records[S.index].rawScore<1;
+ for(const x of d)b+=edge(x,showSolution?'#9b4050':'#126680',3);
+ if(showSolution){
+  const solution=expectedEdges(q);
+  for(const x of solution)b+=edge(x,'#126e43',5);
+ }
  if(S.point)b+=`<circle cx="${28+S.point[0]*22}" cy="${30+S.point[1]*22}" r="6" fill="#ce791e" stroke="none"/>`;
  b+=`<circle cx="${28+origin[0]*22}" cy="${30+origin[1]*22}" r="5" fill="#126680" stroke="white" stroke-width="1"/>`;
  if(!locked)for(let x=0;x<=16;x++)for(let y=0;y<=12;y++)b+=`<g role="button" tabindex="${S.kbPoint[0]===x&&S.kbPoint[1]===y?0:-1}" data-point="${x},${y}" aria-label="Punto columna ${x} fila ${y}"><circle cx="${28+x*22}" cy="${30+y*22}" r="8" fill="transparent" stroke="none"/></g>`;
  b+=text(204,322,'Una casilla = 5 mm · Trazos horizontales y verticales',11);
  return `<svg id="drawCanvas" class="draw-svg" viewBox="0 0 410 336" aria-label="Cuadrícula para dibujar la vista" xmlns="http://www.w3.org/2000/svg">${b}</svg>`;
 }
+function solutionValue(expected){
+ return `<p class="solution-value">✓ Solución: ${esc(expected)}</p>`;
+}
 function renderQuiz(){
  const active=!!S.mode;if(!active)return;if(S.result&&!S.reviewing){showScreen('results');return;}showScreen('quiz');$('quizStage').className='panel '+(S.mode==='registered'?'quiz-stage-evaluable':'quiz-stage-free');
- const q=APP.questions[S.index],d=draft(q),record=S.records[S.index],locked=!!record;
- $('progress').value=S.records.filter(Boolean).length;$('progressText').textContent=`${S.records.filter(Boolean).length} de 10 comprobados`;
- $('sessionLabel').textContent=S.mode==='registered'?'Diez retos · Hasta 10 puntos':'Ensayo de diez retos · Sin envío';
+ const bank=questionsForMode(),total=bank.length;
+ const q=bank[S.index],d=draft(q),record=S.records[S.index],locked=!!record;
+ const completed=S.records.filter(Boolean).length;
+ $('progress').max=total;$('progress').value=completed;$('progressText').textContent=`${completed} de ${total} comprobados`;
+ $('sessionLabel').textContent=S.mode==='registered'?'Diez retos · Hasta 10 puntos':S.mode==='drawing'?'Dibujo guiado · Sin nota ni envío':'Diez retos propios de práctica · Sin nota ni envío';
  let response='';
- if(q.kind==='choice')response=`<fieldset style="border:0;padding:0;margin:0"><legend class="note">Elige una respuesta.</legend><div class="choices ${q.options.every(x=>typeof x==='string')?'text-only':''}">${q.options.map((o,j)=>`<label class="choice ${locked&&j===q.answer?'correct':''} ${locked&&d===j&&d!==q.answer?'wrong':''}"><input type="radio" name="choice" data-choice="${j}" value="${j}" ${d===j?'checked':''} ${locked?'disabled':''}><span>${typeof o==='string'?esc(o):esc(o.label)}</span>${typeof o==='object'?renderVisual(o.visual):''}</label>`).join('')}</div></fieldset>`;
- else if(q.kind==='fields')response=q.fields.map((f,j)=>fieldHtml(f,j,d,locked)).join('');
- else if(q.kind==='adjust')response=`<label for="adjustAngle">Ajusta la abertura de la línea</label><input id="adjustAngle" type="range" min="10" max="170" step="1" value="${d}" ${locked?'disabled':''}><p class="note">Objetivo: ${q.target}°. El transportador muestra los grados desde el lado horizontal.</p>`;
+ if(q.kind==='choice')response=`<fieldset style="border:0;padding:0;margin:0"><legend class="note">Elige una respuesta.</legend><div class="choices ${q.options.every(x=>typeof x==='string')?'text-only':''}">${q.options.map((o,j)=>`<label class="choice ${locked&&j===q.answer?'correct':''} ${locked&&d===j&&d!==q.answer?'wrong':''}"><input type="radio" name="choice" data-choice="${j}" value="${j}" ${d===j?'checked':''} ${locked?'disabled':''}><span>${typeof o==='string'?esc(o):esc(o.label)}</span>${typeof o==='object'?renderVisual(o.visual):''}${locked&&j===q.answer?'<strong class="answer-badge">✓ Respuesta correcta</strong>':locked&&d===j?'<strong class="answer-badge">× Tu respuesta</strong>':''}</label>`).join('')}</div></fieldset>`;
+ else if(q.kind==='fields')response=q.fields.map((f,j)=>fieldHtml(f,j,d,record?.details[j])).join('');
+ else if(q.kind==='adjust')response=`<label for="adjustAngle">Ajusta la abertura de la línea</label><input id="adjustAngle" type="range" min="10" max="170" step="1" value="${d}" ${locked?'disabled':''}><p class="note">Objetivo: ${q.target}°. El transportador muestra los grados desde el lado horizontal.</p>${record?.rawScore===0?solutionValue(record.details[0].expected):''}`;
  else response=`<div id="drawArea">${drawingSVG(q)}</div><div class="actions draw-tools"><button data-action="drawTool" data-tool="draw" aria-pressed="${S.tool==='draw'}" ${locked?'disabled':''}>Dibujar</button><button data-action="drawTool" data-tool="erase" aria-pressed="${S.tool==='erase'}" ${locked?'disabled':''}>Borrar trazo</button><button data-action="undoDraw" ${locked?'disabled':''}>Deshacer</button><button data-action="clearDraw" ${locked?'disabled':''}>Limpiar</button></div><p class="note">Arrastra entre dos puntos de una misma fila o columna, o toca dos puntos. Con teclado: Tab para entrar, flechas para moverte y Enter para elegir extremos. El punto azul es la referencia indicada.</p>`;
  let figure=renderVisual(q.visual);
  if(q.kind==='adjust')figure=angleSvg(Number(d),true);
  if(q.protractor)figure+=`<label class="note"><input id="protractor" type="checkbox"> Mostrar transportador</label>`;
  const board=q.board;
- $('quizContent').innerHTML=`<div class="question-label">Reto ${S.index+1} de 10 · ${q.kind==='draw'?'Dibujo en cuadrícula':q.kind==='fields'?'Relaciona o completa':'Observa y resuelve'}</div><h2 class="qtitle">${esc(q.title)}</h2><p>${esc(q.prompt)}</p><div class="q-layout">${board?`<div class="sketch board-full">${figure}</div><div class="board-full">${response}</div>`:`<div id="questionFigure" class="sketch">${figure}</div><div>${response}</div>`}</div>${!locked?`<p class="cost-note">${S.mode==='registered'?'Consejo opcional: este reto pasará de un máximo de 1 a 0,5 puntos. La puntuación parcial también se reduce a la mitad; un error vale 0.':'Puedes pedir un consejo sin coste: estás practicando sin nota.'}</p>`:''}<div class="actions" style="margin-top:20px"><button id="checkButton" class="primary" data-action="check" ${locked?'disabled':''}>${locked?'Respuesta comprobada':S.index===APP.questions.length-1?(S.mode==='registered'?'Finalizar actividad':'Finalizar práctica'):'Comprobar respuesta'}</button><button class="hint-button" data-action="hint" ${locked||S.hints[S.index]?'disabled':''}>${S.hints[S.index]?'Consejo abierto':S.mode==='registered'?'Abrir consejo · máximo 0,5 puntos':'Ver consejo · sin coste'}</button></div><div id="questionMessage" role="status" aria-live="polite"></div>${S.hints[S.index]?`<div class="hint">${esc(hintFor(q))}</div>`:''}${record?feedbackHtml(q,record):''}${S.reviewing?'<p class="review-tag">Revisión: la puntuación de este intento está cerrada.</p>':''}`;
- $('prevButton').disabled=S.index===0;$('nextButton').disabled=!locked;$('nextButton').hidden=S.index===APP.questions.length-1&&!S.reviewing;$('nextButton').textContent=S.index===APP.questions.length-1?'Volver al resultado':'Siguiente reto →';
+ $('quizContent').innerHTML=`<div class="question-label">Reto ${S.index+1} de ${total} · ${q.kind==='draw'?'Dibujo en cuadrícula':q.kind==='fields'?'Relaciona o completa':'Observa y resuelve'}</div><h2 class="qtitle">${esc(q.title)}</h2><p>${esc(q.prompt)}</p><div class="q-layout">${!figure?`<div class="board-full">${response}</div>`:board?`<div class="sketch board-full">${figure}</div><div class="board-full">${response}</div>`:`<div id="questionFigure" class="sketch">${figure}</div><div>${response}</div>`}</div>${!locked?`<p class="cost-note">${S.mode==='registered'?'Consejo opcional: este reto pasará de un máximo de 1 a 0,5 puntos. La puntuación parcial también se reduce a la mitad; un error vale 0.':'Puedes pedir un consejo sin coste: estás practicando sin nota.'}</p>`:''}<div class="actions" style="margin-top:20px"><button id="checkButton" class="primary" data-action="check" ${locked?'disabled':''}>${locked?'Respuesta comprobada':'Comprobar respuesta'}</button><button class="hint-button" data-action="hint" ${locked||S.hints[S.index]?'disabled':''}>${S.hints[S.index]?'Consejo abierto':S.mode==='registered'?'Abrir consejo · máximo 0,5 puntos':'Ver consejo · sin coste'}</button></div><div id="questionMessage" role="status" aria-live="polite"></div>${S.hints[S.index]?`<div class="hint">${esc(hintFor(q))}</div>`:''}${record?feedbackHtml(q,record):''}${S.reviewing?'<p class="review-tag">Revisión: la puntuación de este intento está cerrada.</p>':''}`;
+ $('prevButton').disabled=S.index===0;$('nextButton').disabled=!locked;$('nextButton').textContent=S.index===total-1?(S.reviewing?'Volver al resultado':S.mode==='registered'?'Finalizar y guardar':'Ver resultado'):'Siguiente reto →';
 }
 function feedbackHtml(q,record){
  const correct=record.rawScore===1;let details='';
- if(q.kind==='draw')details='<p>El trazado verde discontinuo muestra la solución cuando falta algo. La puntuación compara segmentos correctos con los que faltan o sobran.</p>';
- else if(record.rawScore<1)details='<ul>'+record.details.filter(x=>!x.correct).map(x=>`<li>${esc(x.label)}: ${esc(x.expected)}</li>`).join('')+'</ul>';
+ if(q.kind==='draw'&&!correct)details='<p class="solution-value">✓ El trazo verde grueso muestra la solución. Los segmentos sobrantes de tu dibujo aparecen en rojo.</p>';
  return `<div class="feedback ${correct?'':'incomplete'}" role="status"><strong>${correct?'Bien resuelto':'Revisa la solución'} · ${fmt(record.score)} / 1 punto</strong><p>${esc(q.explain)}</p>${details}${record.hintPenalty>0?`<p class="advice-discount">Consejo aplicado: ${fmt(record.rawScore)} × 0,5 = ${fmt(record.score)} puntos.</p>`:''}</div>`;
 }
 function checkQuestion(){
- if(!S.mode||S.result)return;const q=APP.questions[S.index];if(S.records[S.index])return;
+ if(!S.mode||S.result)return;const q=questionsForMode()[S.index];if(S.records[S.index])return;
  const d=draft(q);if(!complete(q,d)){setStatus('questionMessage',q.kind==='draw'?'Dibuja al menos un segmento antes de comprobar.':'Completa todas las respuestas antes de comprobar.',true);return;}
  const r=evaluate(q,d),hint=!!S.hints[S.index],factor=S.mode==='registered'&&hint?0.5:1;
  S.records[S.index]={id:q.id,title:q.title,...r,rawScore:r.score,score:r.score*factor,maxPoints:factor,hintPenalty:r.score*(1-factor),hintCostMaximum:factor===0.5?0.5:0,response:structuredClone(d),hint,hintText:hint?hintFor(q):'',checkedAt:new Date().toISOString()};S.point=null;
- if(S.index===APP.questions.length-1&&S.records.filter(Boolean).length===APP.questions.length){finish();return;}renderQuiz();
+ renderQuiz();
 }
 function applySegment(a,b){
- const q=APP.questions[S.index];if(q.kind!=='draw'||S.records[S.index])return;
+ const q=questionsForMode()[S.index];if(q.kind!=='draw'||S.records[S.index])return;
  const seg=splitSegment(a,b);if(!seg.length){setStatus('questionMessage','Selecciona dos puntos distintos de una misma fila o columna.',true);return;}
  (S.history[S.index]??=[]).push([...draft(q)]);let set=new Set(draft(q));for(let x of seg)S.tool==='erase'?set.delete(x):set.add(x);S.drafts[S.index]=[...set];S.point=null;$('drawArea').innerHTML=drawingSVG(q);setStatus('questionMessage','Trazo actualizado. Puedes deshacer antes de comprobar.');
 }
-function choosePoint(point){S.kbPoint=point;if(S.point)applySegment(S.point,point);else {S.point=point;$('drawArea').innerHTML=drawingSVG(APP.questions[S.index]);}document.querySelector(`[data-point="${point.join(',')}"]`)?.focus();}
+function choosePoint(point){S.kbPoint=point;if(S.point)applySegment(S.point,point);else {S.point=point;$('drawArea').innerHTML=drawingSVG(questionsForMode()[S.index]);}document.querySelector(`[data-point="${point.join(',')}"]`)?.focus();}
 function finish(){
  if(S.result){S.reviewing=false;showScreen('results');return;}
- if(S.records.filter(Boolean).length!==APP.questions.length)return;
- const score=scoreTotal(S.records),penalty=S.records.reduce((n,r)=>n+r.hintPenalty,0);
- S.result=deepFreeze({submissionId:S.submissionId,modo_prueba:!!S.testMode,theme:'UD2 Expresión y comunicación técnica',activity:APP.id,title:APP.title,score:Number(score.toFixed(4)),scores:S.records.map(r=>Number((r.score*10).toFixed(4))),maximo:10,percentage:score*10,hints:APP.questions.map((_,i)=>!!S.hints[i]),attempts:APP.questions.map(()=>1),startedAt:S.startedAt,finishedAt:new Date().toISOString(),appVersion:'2.1.0-flujo-pdi-nx01',hintPolicy:{maximumWithoutHint:1,maximumWithHint:0.5,penaltyApplied:penalty},evidence:{course:S.testMode?'PRUEBA':'1ESO',modo_prueba:!!S.testMode,block:APP.block,questions:structuredClone(S.records),hintPenaltyTotal:penalty}});
+ if(S.records.filter(Boolean).length!==questionsForMode().length)return;
+ const maximo=questionsForMode().length,score=scoreTotal(S.records),penalty=S.records.reduce((n,r)=>n+r.hintPenalty,0);
+ S.result=deepFreeze({submissionId:S.submissionId,modo_prueba:!!S.testMode,theme:'UD2 Expresión y comunicación técnica',activity:APP.id,title:APP.title,score:Number(score.toFixed(4)),scores:S.records.map(r=>Number((r.score*10).toFixed(4))),maximo,percentage:score*100/maximo,hints:questionsForMode().map((_,i)=>!!S.hints[i]),attempts:questionsForMode().map(()=>1),startedAt:S.startedAt,finishedAt:new Date().toISOString(),appVersion:'2.2.0-retos-y-soluciones',hintPolicy:{maximumWithoutHint:1,maximumWithHint:0.5,penaltyApplied:penalty},evidence:{course:S.testMode?'PRUEBA':'1ESO',modo_prueba:!!S.testMode,block:APP.block,questions:structuredClone(S.records),hintPenaltyTotal:penalty}});
  S.reviewing=false;showScreen('results');
- $('resultStage').innerHTML=`<div class="panel"><div class="eyebrow">${S.testMode?'MODO PRUEBA · NX-01':S.mode==='registered'?'Actividad evaluable terminada':'Práctica terminada · Sin nota'}</div><h2>${S.mode==='registered'?'Tu resultado':'Resultado de práctica'}</h2><div class="score">${fmt(score)} <small>/ 10</small></div><p>${S.mode==='registered'?'Diez retos de un punto. Con consejo, cada reto puntúa la mitad. Las relaciones y los dibujos conservan la puntuación parcial.':'Este ensayo no cuenta para la nota y no envía ningún resultado.'}</p><div id="sendMessage" role="status" aria-live="polite" aria-atomic="true"></div><div class="actions"><button class="primary" data-action="retrySend" id="retrySend" hidden>Reintentar envío</button><button data-action="reviewAttempt">Revisar respuestas</button><button data-action="downloadResult">Descargar resultado</button><button data-action="changeStudent">Cambiar de alumno</button></div><div class="results-scroll"><table class="results-table"><thead><tr><th>Reto</th><th>Trabajo</th><th>Puntos</th></tr></thead><tbody>${S.records.map((r,i)=>`<tr><td>${i+1}</td><td>${esc(r.title)}${r.hint?' · Con consejo':''}</td><td>${fmt(r.score)} / 1</td></tr>`).join('')}</tbody></table></div><p class="note">La revisión conserva la puntuación cerrada de este intento.</p></div>`;
+ $('resultStage').innerHTML=`<div class="panel"><div class="eyebrow">${S.testMode?'MODO PRUEBA · NX-01':S.mode==='registered'?'Actividad evaluable terminada':'Práctica terminada · Sin nota'}</div><h2>${S.mode==='registered'?'Tu resultado':'Resultado de práctica'}</h2><div class="score">${fmt(score)} <small>/ ${maximo}</small></div><p>${S.mode==='registered'?'Diez retos de un punto. Con consejo, cada reto puntúa la mitad. Las relaciones y los dibujos conservan la puntuación parcial.':'Este ensayo no cuenta para la nota y no envía ningún resultado.'}</p><div id="sendMessage" role="status" aria-live="polite" aria-atomic="true"></div><div class="actions"><button class="primary" data-action="retrySend" id="retrySend" hidden>Reintentar envío</button><button data-action="reviewAttempt">Revisar respuestas</button><button data-action="downloadResult">Descargar resultado</button><button data-action="changeStudent">Cambiar de alumno</button></div><div class="results-scroll"><table class="results-table"><thead><tr><th>Reto</th><th>Trabajo</th><th>Puntos</th></tr></thead><tbody>${S.records.map((r,i)=>`<tr><td>${i+1}</td><td>${esc(r.title)}${r.hint?' · Con consejo':''}</td><td>${fmt(r.score)} / 1</td></tr>`).join('')}</tbody></table></div><p class="note">La revisión conserva la puntuación cerrada de este intento.</p></div>`;
  if(S.mode==='registered'){
   const students=S.students.map(x=>({...x}));S.pending={result:S.result,students,endpoint:S.endpoint,payloads:students.map(s=>deepFreeze(centralPayload(S.result,s)))};void transmit();
  }else sendStatus('waiting','SIN ENVÍO','Has terminado una práctica sin nota. Puedes repasar o elegir la actividad evaluable.');
@@ -409,16 +695,18 @@ function actions(action,target){
  else if(action==='practiceMode')void chooseMode('free');
  else if(action==='evaluateMode')void chooseMode('registered');
  else if(action==='backMenu'){if(S.pending||S.sending){S.reviewing=false;showScreen('results');}else showScreen(S.students.length?'menu':'entry');}
- else if(action==='goQuiz'){if(S.mode==='free')selectTab('retos');}
+ else if(action==='goQuiz')void chooseMode('free','retos');
+ else if(action==='drawingMode'&&APP.n===3)void chooseMode('drawing');
+ else if(action==='backExplore'&&S.mode==='drawing')selectTab('explore');
  else if(action==='check')checkQuestion();
  else if(action==='hint')requestHint();
  else if(action==='reviewAttempt'){if(S.result){S.reviewing=true;S.index=0;selectTab('retos');}}
  else if(action==='prev'){if(S.index>0){S.index--;S.point=null;renderQuiz();}}
- else if(action==='next'){if(!S.records[S.index])return;if(S.index===APP.questions.length-1)finish();else {S.index++;S.point=null;renderQuiz();}}
+ else if(action==='next'){if(!S.records[S.index])return;if(S.index===questionsForMode().length-1)finish();else {S.index++;S.point=null;renderQuiz();}}
  else if(action==='endReview'){S.reviewing=false;showScreen('results');}
  else if(action==='drawTool'){if(S.result||S.records[S.index])return;S.tool=target.dataset.tool;renderQuiz();}
  else if(action==='undoDraw'){if(S.result||S.records[S.index])return;const h=S.history[S.index];if(h?.length){S.drafts[S.index]=h.pop();S.point=null;renderQuiz();}}
- else if(action==='clearDraw'){if(S.result||S.records[S.index])return;(S.history[S.index]??=[]).push([...draft(APP.questions[S.index])]);S.drafts[S.index]=[];S.point=null;renderQuiz();}
+ else if(action==='clearDraw'){if(S.result||S.records[S.index])return;(S.history[S.index]??=[]).push([...draft(questionsForMode()[S.index])]);S.drafts[S.index]=[];S.point=null;renderQuiz();}
  else if(action==='retrySend')void transmit();
  else if(action==='changeStudent')resetStudent();
  else if(action==='downloadResult'){if(S.result)download(JSON.stringify({...S.result,studentIds:S.students.map(x=>x.studentId),registered:S.mode==='registered',confirmedIds:[...S.confirmed],pending:!!S.pending},null,2),'application/json',APP.id+'_resultado.json');}
@@ -430,13 +718,13 @@ function boot(){
  document.addEventListener('change',e=>{const t=e.target;
   if(t.id==='pairMode'){$('secondId').hidden=!t.checked;if(!t.checked)$('id2').value='';}
   if(t.dataset.choice!==undefined&&!S.records[S.index])S.drafts[S.index]=Number(t.dataset.choice);
-  if(t.dataset.field!==undefined&&!S.records[S.index])draft(APP.questions[S.index])[Number(t.dataset.field)]=t.value;
-  if(t.id==='protractor'){const q=APP.questions[S.index];$('questionFigure').innerHTML=angleSvg(q.visual.deg,t.checked)+`<label class="note"><input id="protractor" type="checkbox" ${t.checked?'checked':''}> Mostrar transportador</label>`;}
+  if(t.dataset.field!==undefined&&!S.records[S.index])draft(questionsForMode()[S.index])[Number(t.dataset.field)]=t.value;
+  if(t.id==='protractor'){const q=questionsForMode()[S.index];$('questionFigure').innerHTML=angleSvg(q.visual.deg,t.checked)+`<label class="note"><input id="protractor" type="checkbox" ${t.checked?'checked':''}> Mostrar transportador</label>`;}
   const map={labDoc:'doc',labPiece:'piece',labView:'view',labLine:'line'};if(map[t.id]){S.lab[map[t.id]]=t.value;labRefresh();}
   if(['labW','labD','labH'].includes(t.id))labRefresh();
  });
  document.addEventListener('input',e=>{const t=e.target;
-  if(t.dataset.field!==undefined&&!S.records[S.index])draft(APP.questions[S.index])[Number(t.dataset.field)]=t.value;
+  if(t.dataset.field!==undefined&&!S.records[S.index])draft(questionsForMode()[S.index])[Number(t.dataset.field)]=t.value;
   if(t.id==='adjustAngle'&&!S.records[S.index]){S.drafts[S.index]=Number(t.value);$('questionFigure').innerHTML=angleSvg(Number(t.value),true);}
   if(t.id==='labAngle'){S.lab.angle=Number(t.value);labRefresh();}if(t.id==='labDirection'){S.lab.direction=Number(t.value);labRefresh();}
  });
@@ -451,7 +739,7 @@ function boot(){
  window.addEventListener('beforeunload',e=>{if(S.pending){e.preventDefault();e.returnValue='';}});
  window.addEventListener('pageshow',e=>{if(e.persisted)resetStudent(true);});
 }
-const PDI_HINTS=[["Busca si hay cotas y si el trazo pretende explorar o definir.", "Fíjate en dos rasgos: está hecho a mano y comunica dimensiones reales.", "Busca precisión en los trazos, varias vistas y datos de identificación.", "Piensa en el orden del trabajo: imaginar, concretar las medidas y comunicar con precisión.", "Lee las cifras escritas junto a cada dimensión. No midas la imagen de la pantalla.", "Una caja tiene tres dimensiones exteriores distintas. Comprueba cuál no tiene su cifra.", "Busca el documento que comunica las tres dimensiones exteriores de la caja.", "Antes de elegir la forma definitiva conviene comparar varias propuestas.", "Las cifras de cota describen el objeto real, aunque la imagen se vea más pequeña.", "Relaciona cada necesidad con el documento o la observación que realmente ayuda a resolverla."], ["El centro del transportador debe coincidir con el vértice. Empieza en el cero del lado horizontal.", "La abertura es mayor que un ángulo recto: utiliza la escala que empieza en el lado horizontal.", "Localiza el cero del lado fijo y lleva el otro lado hasta la graduación pedida.", "Comprueba qué pareja conserva la misma dirección sin cortarse.", "Busca la pareja que forma una esquina de ángulo recto, no cualquier cruce.", "Compara los dos ángulos menores: ¿son iguales o diferentes?", "Piensa qué herramienta permite medir grados, cuál mide longitudes y cuál se desliza sobre un apoyo.", "Recuerda el formato A4 en milímetros y distingue los datos del dibujo de sus medidas.", "Compara el tamaño dibujado con el real: igual, menor o mayor.", "Distingue el croquis a mano alzada de la lámina a tamaño real; el cajetín identifica a quien dibuja."], ["La mirada desde arriba combina anchura y fondo, sin utilizar la altura.", "Divide cada dimensión pedida entre 5 para conocer el número de casillas. Mantén el punto azul como referencia.", "Mantén el frente indicado y compara en qué lado queda la parte alta.", "Convierte milímetros en casillas y coloca el cambio de altura a mitad de la anchura.", "Compara el contorno del alzado y la dirección de las divisiones que se ven desde arriba.", "Primero dibuja el contorno exterior y después sitúa las separaciones cada 20 mm.", "Mira si la figura interior deja el mismo espacio a ambos lados y también delante y detrás.", "Usa el punto azul como esquina del resalte. Comprueba el fondo total, la altura de la base y el centrado.", "La abertura se reconoce en la vista tomada desde arriba; las otras dos miradas muestran caras exteriores.", "Mantén el frente de cada figura y compara por separado contorno, proporciones y líneas interiores. Una vista puede repetirse."], ["Distingue la cifra, la línea que la acompaña, las auxiliares que llegan a la pieza y las flechas de los extremos.", "La cota vertical comunica la dimensión vertical real del rectángulo.", "El tramo que falta se obtiene comparando la medida total con la parte conocida.", "La altura total incluye la base y el resalte. Separa ambas partes antes de calcular.", "Comprueba si estás dando dos veces la misma información sobre la misma anchura.", "Cambiar el zoom no modifica el objeto: utiliza sus dimensiones reales.", "Cada cota debe indicar claramente qué dos extremos se están midiendo.", "Relaciona cada vista con las dos dimensiones que permite observar. No todas muestran las tres.", "Se conserva la dimensión real indicada en el enunciado y se evita repetirla sin necesidad.", "Cada vista comparte una dimensión con las demás: anchura, fondo o altura según desde dónde mires."]];
+const PDI_HINTS=[["Busca si hay cotas y si el trazo pretende explorar o definir.", "Fíjate en dos rasgos: está hecho a mano y comunica dimensiones reales.", "Busca precisión en los trazos, varias vistas y datos de identificación.", "Piensa en el orden del trabajo: imaginar, concretar las medidas y comunicar con precisión.", "Lee las cifras escritas junto a cada dimensión. No midas la imagen de la pantalla.", "Una caja tiene tres dimensiones exteriores distintas. Comprueba cuál no tiene su cifra.", "Busca el documento que comunica las tres dimensiones exteriores de la caja.", "Antes de elegir la forma definitiva conviene comparar varias propuestas.", "Las cifras de cota describen el objeto real, aunque la imagen se vea más pequeña.", "Relaciona cada necesidad con el documento o la observación que realmente ayuda a resolverla."], ["El centro del transportador debe coincidir con el vértice. Empieza en el cero del lado horizontal.", "La abertura es mayor que un ángulo recto: utiliza la escala que empieza en el lado horizontal.", "Localiza el cero del lado fijo y lleva el otro lado hasta la graduación pedida.", "Comprueba qué pareja conserva la misma dirección sin cortarse.", "Busca la pareja que forma una esquina de ángulo recto, no cualquier cruce.", "Compara los dos ángulos menores: ¿son iguales o diferentes?", "Piensa qué herramienta permite medir grados, cuál mide longitudes y cuál se desliza sobre un apoyo.", "Los catetos son los dos lados que forman el ángulo recto de la escuadra.", "Compara el tamaño dibujado con el real: igual, menor o mayor.", "Distingue el croquis a mano alzada de la lámina a tamaño real; el cajetín identifica a quien dibuja."], ["La mirada desde arriba combina anchura y fondo, sin utilizar la altura.", "Divide cada dimensión pedida entre 5 para conocer el número de casillas. Mantén el punto azul como referencia.", "Mantén el frente indicado y compara en qué lado queda la parte alta.", "Convierte milímetros en casillas y coloca el cambio de altura a mitad de la anchura.", "Compara el contorno del alzado y la dirección de las divisiones que se ven desde arriba.", "Primero dibuja el contorno exterior y después sitúa las separaciones cada 20 mm.", "Mira si la figura interior deja el mismo espacio a ambos lados y también delante y detrás.", "Usa el punto azul como esquina del resalte. Comprueba el fondo total, la altura de la base y el centrado.", "La abertura se reconoce en la vista tomada desde arriba; las otras dos miradas muestran caras exteriores.", "Mantén el frente de cada figura y compara por separado contorno, proporciones y líneas interiores. Una vista puede repetirse."], ["Distingue la cifra, la línea que la acompaña, las auxiliares que llegan a la pieza y las flechas de los extremos.", "La cota vertical comunica la dimensión vertical real del rectángulo.", "El tramo que falta se obtiene comparando la medida total con la parte conocida.", "La altura total incluye la base y el resalte. Separa ambas partes antes de calcular.", "Comprueba si estás dando dos veces la misma información sobre la misma anchura.", "Cambiar el zoom no modifica el objeto: utiliza sus dimensiones reales.", "Cada cota debe indicar claramente qué dos extremos se están midiendo.", "Relaciona cada vista con las dos dimensiones que permite observar. No todas muestran las tres.", "Se conserva la dimensión real indicada en el enunciado y se evita repetirla sin necesidad.", "Cada vista comparte una dimensión con las demás: anchura, fondo o altura según desde dónde mires."]];
 
 function hintFor(q){return PDI_HINTS[APP.n-1][APP.questions.indexOf(q)]||q.hint;}
 function deepFreeze(obj){if(obj&&typeof obj==='object'&&!Object.isFrozen(obj)){Object.freeze(obj);Object.values(obj).forEach(deepFreeze);}return obj;}
@@ -459,24 +747,25 @@ function showScreen(screen){
  S.screen=screen;const identified=S.students.length>0;document.body.classList.toggle('is-identified',identified);
  $('testBanner').hidden=!identified||!S.testMode;
  $('registration').hidden=screen!=='entry';$('modeStage').hidden=screen!=='menu';$('sessionBar').hidden=!identified||!['explore','quiz','results'].includes(screen);
+ $('backExplore').hidden=S.mode!=='drawing'||screen==='explore';
  $('explore').hidden=screen!=='explore';$('retos').hidden=!['quiz','results'].includes(screen);$('quizStage').hidden=screen!=='quiz';$('resultStage').hidden=screen!=='results';
- $('flowLabel').textContent=S.mode==='registered'?(S.testMode?'ACTIVIDAD EVALUABLE · Envío de prueba':'ACTIVIDAD EVALUABLE · Cuenta para la nota'):'PRACTICAR SIN NOTA';$('flowLabel').className='flow-label'+(S.mode==='registered'?' evaluable':'');
+ $('flowLabel').textContent=S.mode==='registered'?(S.testMode?'ACTIVIDAD EVALUABLE · Envío de prueba':'ACTIVIDAD EVALUABLE · Cuenta para la nota'):S.mode==='drawing'?'DIBUJO GUIADO · Sin nota':'PRACTICAR SIN NOTA';$('flowLabel').className='flow-label'+(S.mode==='registered'?' evaluable':'');
  $('evaluateMode').querySelector('em').textContent=S.testMode?'PRUEBA TÉCNICA · NO CUENTA PARA LA NOTA':'CUENTA PARA LA NOTA';$('evaluateMode').querySelector('span').textContent=S.testMode?'Recorre los diez retos y comprueba el envío con NX-01. El resultado se marcará como prueba.':'Diez retos · 10 puntos. Al finalizar se enviará el resultado de cada ID validado.';
  $('sessionName').textContent=S.students.map(s=>s.name+' · Grupo '+s.group).join(' / ');
  if(screen==='entry')$('id1').focus();
 }
-async function chooseMode(mode){
+async function chooseMode(mode,tab=mode==='free'?'explore':'retos'){
  if(!S.students.length){showScreen('entry');return;}
  if(S.pending||S.sending){showScreen('results');sendStatus('failed','RESULTADO PENDIENTE','Pulsa Reintentar para confirmar el envío antes de empezar otra actividad.');return;}
- if(S.mode===mode&&!S.result){selectTab(mode==='free'?'explore':'retos');return;}
+ if(S.mode===mode&&!S.result){selectTab(tab);return;}
  if(S.mode&&S.records.some(Boolean)&&!S.result&&!confirm('El intento actual quedará sin enviar. ¿Cambiar de modo y empezar desde el principio?'))return;
  if(mode==='registered'){
   const gen=S.generation;$('evaluateMode').disabled=true;setStatus('modeMessage','Comprobando que el registro está disponible…');
-  try{const data=await centralGet({action:'ping'});if(gen!==S.generation)return;if(data?.ok!==true||data?.idempotencia!==true||data?.protocolo!=='pdi-intentos-v1')throw Error('Tu profesor o profesora debe activar el registro de esta actividad. Mientras tanto puedes practicar sin nota.');}
+  try{const data=await centralGet({action:'ping'});if(gen!==S.generation||S.screen!=='menu')return;if(data?.ok!==true||data?.idempotencia!==true||data?.protocolo!=='pdi-intentos-v1')throw Error('Tu profesor o profesora debe activar el registro de esta actividad. Mientras tanto puedes practicar sin nota.');}
   catch(e){if(gen===S.generation)setStatus('modeMessage',e.message,true);return;}
   finally{if(gen===S.generation)$('evaluateMode').disabled=false;}
  }
- setStatus('modeMessage','');S.mode=mode;startAttempt();selectTab(mode==='free'?'explore':'retos');
+ setStatus('modeMessage','');S.mode=mode;startAttempt();selectTab(tab);
 }
 function requestHint(){
  if(!S.mode||S.result||S.records[S.index]||S.hints[S.index])return;
