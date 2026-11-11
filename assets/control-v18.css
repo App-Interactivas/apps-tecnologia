@@ -1,0 +1,2 @@
+/* Estado de guardado docente; conserva el diseño aprobado. */
+.shared-status{font-size:.65rem;color:#426f7d;padding:4px 7px;border-radius:7px;background:#eff8fa}.shared-status[hidden]{display:none}.course-shared-status{position:fixed;bottom:14px;left:14px;z-index:15;border:1px solid #cfe2e6}.star:disabled,[data-state-select]:disabled{cursor:wait;opacity:.6}.pref-pill{flex-wrap:wrap}

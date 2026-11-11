@@ -1,0 +1,3 @@
+/* v17: el mosaico llena la tarjeta como el de 2.º ESO, sin borde vertical interior. */
+.course-card[data-course="1ESO"] .visual .course-real-image{inset:0;width:100%;height:100%;object-fit:cover;object-position:center;opacity:1;filter:none;mask-image:none}
+.course-card[data-course="1ESO"] .visual:before,.course-card[data-course="1ESO"] .visual:after{display:none;content:none}

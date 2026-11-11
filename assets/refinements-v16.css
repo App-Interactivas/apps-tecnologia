@@ -1,0 +1,18 @@
+/* v16: capítulo identificado y acceso QR sin velos en 1.º ESO. */
+.course-card[data-course="1ESO"],.course-card[data-course="1ESO"]:hover{background:#fff;box-shadow:none}
+.course-card[data-course="1ESO"] .visual:before,.course-card[data-course="1ESO"] .visual:after{display:none;content:none;background:none;box-shadow:none;filter:none}
+.course-card[data-course="1ESO"] h3,.course-card[data-course="1ESO"] p{background:transparent;text-shadow:none;box-shadow:none;filter:none}
+.course-card[data-course="1ESO"] .visual .course-real-image{opacity:1;filter:none;mask-image:none;box-shadow:none}
+.course-card .course-qr{position:absolute;right:10px;bottom:9px;z-index:4;display:flex;flex-direction:column;align-items:center;gap:1px;padding:4px;border:1px solid #dce4ea;border-radius:9px;background:white;color:#33586a;font-size:.56rem;font-weight:850;line-height:1.2;cursor:pointer;box-shadow:0 2px 7px #162c3c13}
+.course-qr img{display:block;width:48px;height:48px;image-rendering:pixelated}.course-card .course-qr:hover{border-color:var(--accent)}
+.course-card .course-qr:focus-visible{outline:3px solid #258d9d;outline-offset:3px}
+.course-card p,.course-card[data-course="1ESO"] p{max-width:calc(100% - 100px)}.course-card .star{right:79px}
+.catalog .course-card{opacity:1;filter:none}.catalog .course-card .visual,.catalog .course-card .label,.catalog .course-card h3,.catalog .course-card p,.catalog .course-card .status{opacity:.6;filter:saturate(.55)}
+.course-qr-dialog{width:min(760px,calc(100vw - 24px));max-width:none;max-height:calc(100dvh - 24px);padding:0;border:1px solid #d9e3e7;border-radius:20px;background:#fffdf8;color:#24384b;box-shadow:0 22px 85px #142d4540;overflow:auto}
+.course-qr-dialog::backdrop{background:#122d4555;backdrop-filter:blur(2px)}
+.course-qr-dialog header{display:flex;align-items:center;justify-content:space-between;gap:15px;padding:17px 22px;border-bottom:1px solid #e4e9e8;background:linear-gradient(115deg,#f0faff,#fff4d9)}
+.qr-kicker{font-size:.64rem;text-transform:uppercase;letter-spacing:.08em;font-weight:850;color:#29758a}.course-qr-dialog h2{font-size:1.12rem;margin:6px 0 0}.course-qr-dialog button{flex-shrink:0;border:1px solid #cbdbe3;background:#fff;color:#33586a;border-radius:9px;padding:9px 12px;font:inherit;font-weight:800;font-size:.75rem;cursor:pointer}
+.course-qr-content{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:22px;align-items:center;padding:22px}.course-qr-content>img{width:100%;height:auto;max-height:45dvh;object-fit:contain;image-rendering:pixelated}.course-qr-content h3{font-size:1.12rem;margin:0 0 12px}.course-qr-content p{font-size:.85rem;line-height:1.6;color:#5f7183}.course-qr-content a{display:block;font-size:.73rem;line-height:1.5;overflow-wrap:anywhere;color:#176e85}.course-qr-content .qr-status{font-size:.73rem;padding-top:12px;border-top:1px solid #e3e9e8}
+.chapter-number{margin:0 0 7px;color:#436172;font-size:.75rem;font-weight:850;letter-spacing:.02em;text-align:center;width:100%;line-height:1.25}
+@media(max-width:580px){.course-qr-dialog header{padding:13px 15px}.course-qr-dialog h2{font-size:.95rem}.course-qr-content{grid-template-columns:1fr;gap:12px;padding:14px 18px}.course-qr-content>img{max-height:29dvh}.course-qr-content h3{font-size:1rem;margin-bottom:6px}.course-qr-content p{font-size:.77rem;margin:7px 0}.course-qr-content .qr-status{font-size:.68rem;padding-top:9px}}
+@media(max-height:540px) and (min-width:581px){.course-qr-dialog header{padding:10px 18px}.course-qr-content{padding:12px 18px}.course-qr-content p{font-size:.75rem;line-height:1.4}.course-qr-content>img{max-height:55dvh}}
