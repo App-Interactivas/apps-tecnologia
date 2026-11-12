@@ -1,1330 +1,545 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<title>Detectives de Tecnología · 1.º ESO</title>
-<style>
-  :root{
-    --bg:#f5f7fb;
-    --card:#ffffff;
-    --ink:#172033;
-    --muted:#65708a;
-    --line:#dbe1ec;
-    --accent:#2f6fed;
-    --accent-2:#6c4ee3;
-    --ok:#138a5b;
-    --warn:#b96d00;
-    --danger:#c83c3c;
-    --soft:#eef3ff;
-    --shadow:0 10px 30px rgba(24,39,75,.10);
-    --radius:22px;
-  }
-  *{box-sizing:border-box}
-  html{scroll-behavior:smooth}
-  body{
-    margin:0;
-    font-family:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    color:var(--ink);
-    background:
-      radial-gradient(circle at top right, #e7efff 0, transparent 32%),
-      linear-gradient(180deg,#f7f9fd,#eef2f8);
-    min-height:100vh;
-  }
-  button,input,textarea,select{font:inherit}
-  button{touch-action:manipulation}
-  .app{max-width:980px;margin:auto;padding:18px 18px 40px}
-  .topbar{
-    position:sticky; top:0; z-index:20;
-    padding:10px 0 14px;
-    background:linear-gradient(180deg,rgba(245,247,251,.98),rgba(245,247,251,.88),rgba(245,247,251,0));
-    backdrop-filter:blur(8px);
-  }
-  .brand{
-    display:flex;align-items:center;justify-content:space-between;gap:14px;
-    background:rgba(255,255,255,.9); border:1px solid var(--line);
-    border-radius:18px;padding:12px 14px;box-shadow:var(--shadow)
-  }
-  .brand-left{display:flex;align-items:center;gap:12px}
-  .logo{
-    width:48px;height:48px;border-radius:15px;display:grid;place-items:center;
-    background:linear-gradient(135deg,var(--accent),var(--accent-2)); color:white;font-size:26px;
-  }
-  .brand h1{font-size:18px;margin:0}
-  .brand p{margin:3px 0 0;color:var(--muted);font-size:13px}
-  .teacher-btn{
-    border:0;border-radius:12px;padding:10px 12px;background:#111827;color:white;cursor:pointer;
-  }
-  .progress-wrap{margin-top:10px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:9px 12px}
-  .progress-line{height:10px;border-radius:99px;background:#e7ebf2;overflow:hidden}
-  .progress-bar{height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--accent-2));transition:.25s}
-  .progress-meta{display:flex;justify-content:space-between;color:var(--muted);font-size:12px;margin-top:6px}
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Tecnología en contexto · Tema 1 · 1.º ESO"><title>Tecnología en contexto · Tema 1 · 1.º ESO</title><style>:root{--ink:#20343b;--muted:#536972;--paper:#faf9f3;--blue:#126680;--accent:#08758c;--line:#d5e0df;--soft:#e9f3f3;--gold:#f3cb67;--good:#18633d;--bad:#963b29;font:17px/1.5 system-ui,-apple-system,Segoe UI,sans-serif;color:var(--ink);background:var(--paper)}*{box-sizing:border-box}body{margin:0}button,input,select{font:inherit}button,a,input,select{touch-action:manipulation}button{cursor:pointer}button,.button{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;border:1px solid #9db4bb;border-radius:10px;padding:.65rem 1rem;background:white;color:var(--ink);text-decoration:none;font-weight:650;min-height:46px}button:hover,.button:hover{background:var(--soft);border-color:var(--blue)}button.primary,.button.primary,button[aria-pressed=true]{background:var(--blue);color:white;border-color:var(--blue)}button:disabled{opacity:.6;cursor:default}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible,[tabindex]:focus-visible{outline:3px solid #b36c00;outline-offset:3px}input,select{border:1px solid #9db4bb;border-radius:8px;padding:.6rem;background:white;color:var(--ink);max-width:100%;min-height:44px}input[type=number]{width:145px}input[type=checkbox],input[type=radio]{width:20px;height:20px;min-height:0;accent-color:var(--blue)}input[type=range]{padding:0;width:100%;accent-color:var(--blue)}label{display:block}h1,h2,h3{line-height:1.18;letter-spacing:-.025em}h1{font-size:clamp(1.9rem,4vw,3.1rem);margin:.5rem 0 1rem}h2{font-size:1.5rem;margin:0 0 1rem}h3{font-size:1.1rem;margin:.2rem 0 .6rem}p{margin:.5rem 0 1rem}small,.note{font-size:.88rem;color:var(--muted)}[hidden]{display:none!important}.wrap{max-width:1220px;margin:auto;padding:22px}.top{border-bottom:1px solid var(--line);background:#fffdf8}.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:20px;padding-top:16px;padding-bottom:16px}.brand{font-weight:800;font-size:.8rem;letter-spacing:.07em}.brand svg{vertical-align:middle;width:35px;height:35px;margin-right:9px}.top a{color:var(--blue);font-size:.9rem}.hero{display:grid;grid-template-columns:1.45fr .55fr;gap:30px;align-items:center;padding-top:32px;padding-bottom:20px}.hero p{max-width:760px}.eyebrow{font-size:.8rem;letter-spacing:.09em;font-weight:800;text-transform:uppercase}.hero-art{background:linear-gradient(90deg,#dfebea 1px,transparent 1px),linear-gradient(#dfebea 1px,transparent 1px);background-size:20px 20px;border:1px solid var(--line);border-radius:24px;padding:16px;transform:rotate(2deg)}.hero-art img{width:100%;max-height:190px;object-fit:contain;mix-blend-mode:multiply}.chips,.actions,.tabs,.toolbar{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.chip{background:#fff;border:1px solid var(--line);border-radius:30px;padding:4px 12px;font-size:.78rem;font-weight:700}.tabs{border-bottom:1px solid var(--line);padding-bottom:12px;margin:15px 0 24px}.tabs button{border-radius:8px}.panel{background:white;border:1px solid var(--line);border-radius:16px;padding:24px;margin-bottom:20px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}.grid>*{min-width:0}.sketch{background:#fcfdfb;border:1px solid #e4eceb;border-radius:12px;padding:12px;overflow:hidden}.sketch svg{display:block;width:100%;height:auto;max-height:370px}.model{display:block;width:100%;max-height:300px;object-fit:contain;mix-blend-mode:multiply}.mini-model{width:100%;max-height:145px;object-fit:contain;mix-blend-mode:multiply}.doc-preview{width:100%;max-height:345px}.field{margin:14px 0;display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}.field label{font-weight:650;flex:1;min-width:150px}.field select{width:min(270px,100%)}.field input{flex:none}.status{padding:10px 0;min-height:34px;font-weight:600;white-space:pre-line}.status.ok{color:var(--good)}.status.error{color:var(--bad)}.registration{border-top:5px solid var(--gold)}.ids{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:16px 0}.ids input{width:100%;text-transform:uppercase}.teacher{font-size:.9rem;border-top:1px solid var(--line);margin-top:18px;padding-top:14px}.teacher input{width:100%;margin:8px 0}.teacher summary{cursor:pointer;font-weight:650}.student-name{font-weight:700;color:var(--good);margin:6px 0}.quiz-top{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:20px}.quiz-top progress{width:200px;height:12px;accent-color:var(--blue)}.question-label{font-size:.8rem;letter-spacing:.05em;font-weight:800;text-transform:uppercase;color:var(--muted)}.qtitle{font-size:clamp(1.3rem,2.6vw,1.8rem);margin-top:6px}.q-layout{display:grid;grid-template-columns:.9fr 1.1fr;gap:24px;align-items:start}.q-layout>*{min-width:0}.choices{display:grid;grid-template-columns:1fr 1fr;gap:12px}.choice{display:block;border:2px solid var(--line);border-radius:12px;padding:12px;cursor:pointer;background:white}.choice:hover{border-color:#809da6}.choice:has(input:checked){border-color:var(--blue);background:#f0f8f8}.choice.correct{border-color:var(--good)}.choice.wrong{border-color:var(--bad)}.choice span{font-weight:650}.choice svg{width:100%;height:auto;max-height:190px;display:block}.choice input{vertical-align:middle;margin-right:8px}.choices.text-only{grid-template-columns:1fr}.feedback{background:#f1f7f3;border-left:4px solid var(--good);padding:14px 18px;margin-top:20px;border-radius:0 10px 10px 0}.feedback.incomplete{background:#fff5ec;border-color:#b56b27}.feedback ul{padding-left:23px;margin-bottom:0}.hint{background:#fffae8;border:1px solid #e9d99e;border-radius:10px;padding:12px;margin-top:14px}.quiz-nav{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:24px;padding-top:18px;border-top:1px solid var(--line)}.order-item{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:12px;margin:12px 0}.order-item .num{border-radius:50%;width:36px;height:36px;display:grid;place-items:center;background:var(--soft);font-weight:800}.draw-svg{width:100%;display:block;background:#fff;touch-action:none;user-select:none;max-height:390px}.draw-svg [role=button]{cursor:crosshair;outline:none}.draw-svg [role=button]:focus circle{stroke:#b36c00;stroke-width:4}.draw-svg .line-target{stroke:#18713d;stroke-dasharray:5 4}.draw-tools button{font-size:.85rem;padding:.45rem .75rem}.score{font-size:3.5rem;line-height:1;font-weight:800;color:var(--blue);margin:14px 0}.results-table{width:100%;border-collapse:collapse;font-size:.9rem;margin:15px 0}.results-table th,.results-table td{padding:10px;text-align:left;border:1px solid var(--line)}.results-table th{background:var(--soft)}.results-table td:last-child{font-weight:700;width:110px}.board-models{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.board-models p{text-align:center;font-weight:800;margin:0}.board-views{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}.board-view{border:1px solid var(--line);border-radius:8px;text-align:center;font-weight:800;padding-top:5px}.board-view svg{width:100%;height:auto}.board-full{grid-column:1/-1}.lab-controls{display:flex;gap:12px;flex-wrap:wrap;margin:15px 0}.lab-controls label{min-width:140px;flex:1}.lab-controls input,.lab-controls select{display:block;width:100%;margin-top:6px}.home-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px}.app-card{display:grid;grid-template-columns:100px 1fr;gap:20px;align-items:center}.app-number{width:90px;height:90px;background:var(--soft);border-radius:24px;display:grid;place-items:center;font-size:2.4rem;font-weight:800}.app-card p{font-size:.95rem;color:var(--muted)}.app-card a{margin-top:8px}.notice{font-size:.9rem;color:var(--muted);max-width:950px}.guide{max-width:960px}.guide section{margin:28px 0}.guide li{margin:8px 0}.guide code{font-size:.86em;background:#eef3f2;padding:2px 5px;border-radius:4px}footer{border-top:1px solid var(--line);margin-top:30px;font-size:.8rem;color:var(--muted)}footer .wrap{display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap}a{color:var(--blue)}@media(max-width:820px){.hero{grid-template-columns:1fr}.hero-art{display:none}.q-layout,.grid,.home-grid{grid-template-columns:1fr}.wrap{padding:17px}.panel{padding:18px}.board-models{gap:0}.board-models .mini-model{max-height:105px}.top .wrap{align-items:start}.app-card{grid-template-columns:70px 1fr}.app-number{width:65px;height:65px;font-size:1.8rem}}@media(max-width:480px){.ids{grid-template-columns:1fr}.choices{gap:8px}.choice{padding:9px}.qtitle{font-size:1.3rem}.board-views{gap:3px}.board-view{font-size:.8rem}.field{display:block}.field label{margin-bottom:6px}.field input,.field select{width:100%}.quiz-nav>*{flex:1}.top .wrap{display:block}.top a{display:block;margin-top:8px}}@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}@media print{.tabs,.registration,.quiz-nav,button,.top a,.teacher,.actions{display:none!important}.panel{border:0;padding:0}.wrap{max-width:none}.q-layout,.grid{display:block}body{background:white}.hero-art{display:none}.sketch{break-inside:avoid}.guide{max-width:none}}
 
-  .screen{display:none}
-  .screen.active{display:block;animation:fade .25s ease}
-  @keyframes fade{from{opacity:.2;transform:translateY(8px)}to{opacity:1;transform:none}}
-
-  .hero,.card{
-    background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
-    box-shadow:var(--shadow)
-  }
-  .hero{padding:26px;margin-top:10px}
-  .hero h2{font-size:30px;margin:0 0 8px}
-  .hero p{color:var(--muted);line-height:1.55}
-  .badge{
-    display:inline-flex;align-items:center;gap:7px;padding:8px 11px;border-radius:999px;
-    background:var(--soft);color:#254aa5;font-size:13px;font-weight:700
-  }
-  .grid-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
-  .field label{display:block;font-weight:700;margin:0 0 7px}
-  .field input,.field select{
-    width:100%;padding:14px 15px;border:1px solid var(--line);border-radius:14px;background:white;
-    outline:none;font-size:16px
-  }
-  .field input:focus,.field select:focus{border-color:var(--accent);box-shadow:0 0 0 3px #dfe9ff}
-  .actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
-  .btn{
-    border:0;border-radius:14px;padding:13px 17px;font-weight:800;cursor:pointer;min-height:48px
-  }
-  .btn.primary{background:linear-gradient(135deg,var(--accent),var(--accent-2));color:white}
-  .btn.secondary{background:#edf1f7;color:var(--ink)}
-  .btn.ghost{background:white;border:1px solid var(--line);color:var(--ink)}
-  .btn.warn{background:#fff4dd;color:#8a5200}
-  .btn.success{background:#e6f7f0;color:#0a6a43}
-  .btn:disabled{opacity:.45;cursor:not-allowed}
-  .question-card{padding:24px;margin-top:10px}
-  .q-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
-  .q-num{font-size:13px;color:var(--muted);font-weight:800;text-transform:uppercase;letter-spacing:.06em}
-  .q-title{font-size:24px;margin:5px 0 6px}
-  .q-text{font-size:17px;line-height:1.55;color:#2d3748}
-  .remember{
-    margin:16px 0;padding:14px 16px;border-radius:15px;background:#f2f6ff;border-left:5px solid var(--accent)
-  }
-  .remember strong{display:block;margin-bottom:3px}
-  .options{display:grid;gap:10px;margin-top:18px}
-  .option{
-    display:flex;align-items:center;gap:12px;text-align:left;width:100%;
-    padding:15px;border:1px solid var(--line);border-radius:15px;background:white;cursor:pointer;
-    transition:.15s;min-height:58px
-  }
-  .option:hover{transform:translateY(-1px);box-shadow:0 5px 15px rgba(0,0,0,.06)}
-  .option.selected{border-color:var(--accent);background:#edf3ff;box-shadow:0 0 0 2px #d7e4ff}
-  .option .ico{font-size:24px;width:30px;text-align:center}
-  .hint-box{
-    display:none;margin-top:12px;padding:13px 15px;border-radius:14px;background:#fff8e9;border:1px solid #f2d49e;color:#6e4b0b
-  }
-  .hint-box.show{display:block}
-  .feedback-mini{font-size:13px;color:var(--muted);margin-top:9px}
-  .multi-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:16px}
-  .mini-card{
-    border:1px solid var(--line);background:white;border-radius:16px;padding:14px;cursor:pointer;
-  }
-  .mini-card.selected{border-color:var(--accent);background:#eef4ff}
-  .mini-card strong{display:block;margin-bottom:3px}
-  .statement{padding:15px;border:1px solid var(--line);border-radius:15px;margin-top:10px}
-  .statement p{margin:0 0 10px}
-  .tf-row{display:flex;gap:8px}
-  .tf-row button{flex:1}
-  textarea{
-    width:100%;min-height:120px;border:1px solid var(--line);border-radius:14px;padding:14px;resize:vertical
-  }
-  .summary{padding:26px}
-  .summary h2{font-size:28px;margin-top:0}
-  .summary-box{
-    padding:16px;border:1px solid var(--line);border-radius:16px;background:#fbfcff;margin-top:12px
-  }
-  .summary-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:14px}
-  .metric{padding:14px;border-radius:14px;background:#f3f6fb;text-align:center}
-  .metric strong{display:block;font-size:22px}
-  .metric span{font-size:12px;color:var(--muted)}
-  .hidden-score{font-weight:800;color:#34415c}
-  .footer-note{color:var(--muted);font-size:12px;margin-top:18px}
-  .modal{
-    position:fixed;inset:0;background:rgba(15,23,42,.58);display:none;align-items:center;justify-content:center;
-    padding:16px;z-index:50
-  }
-  .modal.show{display:flex}
-  .modal-card{
-    width:min(760px,100%);max-height:88vh;overflow:auto;background:white;border-radius:22px;padding:22px;
-    box-shadow:0 25px 80px rgba(0,0,0,.25)
-  }
-  .modal-head{display:flex;align-items:center;justify-content:space-between;gap:12px}
-  .close{border:0;background:#eef1f6;width:40px;height:40px;border-radius:12px;cursor:pointer}
-  .teacher-score{font-size:42px;font-weight:900;margin:10px 0}
-  table{width:100%;border-collapse:collapse;font-size:14px}
-  th,td{padding:10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
-  th{background:#f6f8fc;position:sticky;top:0}
-  .pill{display:inline-block;padding:4px 8px;border-radius:999px;font-size:12px;font-weight:800}
-  .pill.ok{background:#e7f7ef;color:#087247}
-  .pill.bad{background:#fdeaea;color:#a52727}
-  .pill.hint{background:#fff3d9;color:#875500}
-  .print-sheet{display:none}
-  .small{font-size:12px;color:var(--muted)}
-  .result-message{
-    padding:14px;border-radius:15px;background:#edf7ff;border:1px solid #cfe9ff;margin-top:14px
-  }
-
-  @media (max-width:720px){
-    .app{padding:10px 10px 30px}
-    .brand{align-items:flex-start}
-    .brand h1{font-size:16px}
-    .grid-2,.multi-grid,.summary-grid{grid-template-columns:1fr}
-    .hero{padding:20px}
-    .hero h2{font-size:25px}
-    .question-card{padding:19px}
-    .q-title{font-size:21px}
-    .teacher-btn{font-size:12px;padding:9px}
-  }
-
-  @media print{
-    body{background:white}
-    .app,.modal{display:none!important}
-    .print-sheet{display:block!important;padding:18mm;font-family:Arial,sans-serif;color:#111}
-    .print-sheet h1{margin-top:0}
-    .print-sheet .p-card{border:1px solid #bbb;border-radius:10px;padding:12px;margin:10px 0}
-    .print-sheet table{font-size:12px}
-  }
-
-  .pdi-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:14px 0}
-  .pdi-step{border:1px solid var(--line);border-radius:16px;padding:12px;background:#fff;text-align:center}
-  .pdi-step.active{border-color:var(--accent);background:#eef3ff}
-  .pdi-step.done{background:#edf9f1;border-color:#b9dfc5}
-  .pdi-step strong{display:block;margin-bottom:3px}
-  .check-row{display:flex;align-items:flex-start;gap:10px;padding:12px;border:1px solid var(--line);border-radius:14px;background:#fff;margin-top:14px}
-  .check-row input{width:22px;height:22px;margin-top:1px;flex:0 0 auto}
-  .feedback-box{display:none;margin-top:14px;padding:14px 16px;border-radius:16px;font-weight:700}
-  .feedback-box.show{display:block}
-  .feedback-box.good{background:#eaf8ef;color:#155d32;border:1px solid #bfe4cc}
-  .feedback-box.try{background:#fff4dd;color:#805400;border:1px solid #f2d28a}
-  .score-chip{display:inline-flex;align-items:center;gap:7px;border-radius:999px;padding:7px 10px;background:#f1f5f9;color:#334155;font-size:12px;font-weight:800}
-  .linked-sheet{border:1px dashed #90a4c4;background:#f7faff;border-radius:16px;padding:14px;margin-top:14px}
-  @media(max-width:650px){.pdi-strip{grid-template-columns:1fr}}
-</style>
-</head>
-<body>
-<div class="app">
-  <div class="topbar">
-    <div class="brand">
-      <div class="brand-left">
-        <div class="logo">🔎</div>
-        <div>
-          <h1>Detectives de Tecnología</h1>
-          <p>1.º ESO · Tecnología y Digitalización</p>
-        </div>
-      </div>
-      <button class="teacher-btn" id="teacherOpen">Modo docente</button>
-    </div>
-    <div class="progress-wrap">
-      <div class="progress-line"><div class="progress-bar" id="progressBar"></div></div>
-      <div class="progress-meta"><span id="progressText">Inicio</span><span id="timerTop">⏱ 00:00</span><span id="hintCountTop">Pistas: 0</span></div>
-    </div>
-  </div>
-
-  <section class="screen active" id="screen-start">
-    <div class="hero">
-      <span class="badge">🔎 PDI · TEMA 1 · BLOQUE 1</span>
-      <h2>A1 · Detectives de Tecnología</h2>
-      <p>Supera <strong>7 retos</strong> para demostrar que sabes reconocer la tecnología como una respuesta a problemas y necesidades humanas.</p>
-
-      <div class="pdi-strip">
-        <div class="pdi-step done"><strong>1 · Presentación</strong><span>¿Qué es la tecnología?</span></div>
-        <div class="pdi-step active"><strong>2 · A1 interactiva</strong><span>Detectives de Tecnología</span></div>
-        <div class="pdi-step"><strong>3 · F1 escrita</strong><span>Aplicar y explicar</span></div>
-      </div>
-
-      <div class="remember">
-        <strong>🧠 Recuerda</strong>
-        La tecnología no es solo electrónica: las personas crean soluciones para resolver problemas y satisfacer necesidades.
-      </div>
-
-      <div class="grid-2">
-        <div class="field">
-          <label for="studentId1">ID del alumno/a 1 *</label>
-          <input id="studentId1" autocomplete="off" autocapitalize="characters" maxlength="20" placeholder="Ej.: 1A-K7M4" />
-        </div>
-        <div class="field">
-          <label for="studentId2">ID del alumno/a 2 (opcional)</label>
-          <input id="studentId2" autocomplete="off" autocapitalize="characters" maxlength="20" placeholder="Solo si trabajáis en pareja" />
-        </div>
-      </div>
-      <div class="actions" style="margin-top:12px">
-        <button class="btn ghost" id="verifyIdsBtn" type="button">Comprobar ID/s</button>
-      </div>
-      <div id="identityStatus" class="linked-sheet" style="display:none;margin-top:12px"></div>
-
-      <div class="grid-2" style="margin-top:14px">
-        <div class="field">
-          <label for="studentDate">Fecha</label>
-          <input id="studentDate" type="date" />
-        </div>
-        <div class="field">
-          <label for="studentCode">Código de clase (opcional)</label>
-          <input id="studentCode" placeholder="Ej.: T1-A1" />
-        </div>
-      </div>
-
-      <label class="check-row">
-        <input id="sheetConfirm" type="checkbox" />
-        <span><strong>Tengo conmigo la ficha escrita F1 · Detectives de Tecnología.</strong><br>
-        <span class="small">La necesitarás después de terminar esta actividad interactiva.</span></span>
-      </label>
-
-      <div class="linked-sheet">
-        <strong>🎯 Cómo se puntúan los retos</strong>
-        <p class="small" style="margin-bottom:0">Comprueba tu respuesta. Si aciertas a la primera obtienes la puntuación completa; si necesitas nuevos intentos, podrás corregir y aprender, pero la puntuación máxima de ese reto será menor. Usar una pista queda registrado y aplica una pequeña reducción al reto.</p>
-      </div>
-
-      <div class="actions">
-        <button class="btn primary" id="startBtn">Comenzar misión</button>
-        <button class="btn ghost" id="resetAttemptBtn">🔐 Reinicio docente</button>
-      </div>
-      <p class="footer-note">El progreso se guarda en este navegador para poder continuar si la actividad se interrumpe. Al finalizar, la nota automática se envía también al registro central del profesor.</p>
-    </div>
-  </section>
-
-  <section class="screen" id="screen-questions">
-    <div class="card question-card" id="questionCard"></div>
-  </section>
-
-  <section class="screen" id="screen-end">
-    <div class="card summary">
-      <span class="badge">✅ A1 COMPLETADA · SIGUIENTE PASO: F1</span>
-      <h2>Misión terminada</h2>
-      <p>Has terminado la parte interactiva. Ahora debes completar la <strong>ficha F1 · Detectives de Tecnología</strong>.</p>
-
-      <div class="pdi-strip">
-        <div class="pdi-step done"><strong>1 · Presentación</strong><span>Completada</span></div>
-        <div class="pdi-step done"><strong>2 · A1 interactiva</strong><span>Completada</span></div>
-        <div class="pdi-step active"><strong>3 · F1 escrita</strong><span>Siguiente paso</span></div>
-      </div>
-
-      <div class="summary-box">
-        <strong id="endStudent"></strong>
-        <div class="summary-grid">
-          <div class="metric"><strong id="endAnswered">0</strong><span>Retos superados</span></div>
-          <div class="metric"><strong id="endHints">0</strong><span>Pistas utilizadas</span></div>
-          <div class="metric"><strong id="endScore">—</strong><span>Nota A1 / 10</span></div>
-        </div>
-      </div>
-
-      <div class="remember">
-        <strong>🧠 Lo que debes llevarte</strong>
-        1) La tecnología busca resolver problemas o necesidades. ·
-        2) Puede ser sencilla, antigua y no necesitar electricidad. ·
-        3) Un producto tecnológico ha sido creado o modificado por las personas con una finalidad.
-      </div>
-
-      <div class="summary-box">
-        <h3>🪞 Autoevaluación</h3>
-        <p>¿Cómo te encuentras después de la actividad?</p>
-        <div class="options" id="selfEvalOptions">
-          <button class="option" data-self="Lo entiendo bien"><span class="ico">🙂</span><span><strong>Lo entiendo bien</strong></span></button>
-          <button class="option" data-self="Tengo alguna duda"><span class="ico">😐</span><span><strong>Tengo alguna duda</strong></span></button>
-          <button class="option" data-self="Necesito repasarlo"><span class="ico">🆘</span><span><strong>Necesito repasarlo</strong></span></button>
-        </div>
-        <div class="field" style="margin-top:14px">
-          <label for="reflection">Antes de pasar a F1: ¿qué idea te parece más importante?</label>
-          <textarea id="reflection" placeholder="Escribe una o dos frases..."></textarea>
-        </div>
-      </div>
-
-      <div class="result-message">
-        <strong>Resultado de la A1: <span id="visibleScore">—</span> / 10.</strong><br>
-        <strong>F1 escrita: pendiente de realizar/valorar.</strong> La calificación global del bloque no se calcula todavía.
-      </div>
-
-      <div id="centralSyncStatus" class="linked-sheet" style="margin-top:14px">
-        <strong>Registro central:</strong> el resultado se enviará cuando pulses “Finalizar, guardar y enviar”.
-      </div>
-
-      <div class="actions">
-        <button class="btn primary" id="savePdfBtn">Guardar / imprimir en PDF</button>
-        <button class="btn secondary" id="savePngBtn">Guardar como imagen PNG</button>
-        <button class="btn success" id="finalizeBtn">Finalizar, guardar y enviar</button>
-      </div>
-      <p class="footer-note" id="finalizeNote">Después de guardar, completa la ficha F1 y entrégala según las indicaciones del profesor.</p>
-    </div>
-  </section>
-</div>
-
-<div class="modal" id="teacherModal" aria-hidden="true">
-  <div class="modal-card">
-    <div class="modal-head">
-      <div>
-        <span class="badge">🔐 MODO DOCENTE LOCAL</span>
-        <h2 style="margin:10px 0 0">Resultados de A1 · Detectives de Tecnología</h2>
-      </div>
-      <button class="close" id="teacherClose">✕</button>
-    </div>
-
-    <div id="teacherLock">
-      <p class="small">Introduce la clave docente configurada para este dispositivo.</p>
-      <div class="field">
-        <label for="teacherPin">Clave docente</label>
-        <input id="teacherPin" type="password" inputmode="numeric" placeholder="••••" />
-      </div>
-      <div class="actions">
-        <button class="btn primary" id="teacherUnlock">Abrir resultados</button>
-      </div>
-    </div>
-
-    <div id="teacherPanel" style="display:none">
-      <div class="summary-grid">
-        <div class="metric"><strong id="classCount">0</strong><span>Alumnos guardados</span></div>
-        <div class="metric"><strong id="classAverage">—</strong><span>Nota media</span></div>
-        <div class="metric"><strong id="classHints">0</strong><span>Pistas totales</span></div>
-      </div>
-
-      <div class="field" style="margin-top:16px">
-        <label for="teacherGroupFilter">Ver grupo</label>
-        <select id="teacherGroupFilter">
-          <option value="ALL">Todos los grupos</option>
-          <option value="1ºA">1.º A</option><option value="1ºB">1.º B</option>
-          <option value="1ºC">1.º C</option><option value="1ºD">1.º D</option>
-          <option value="1ºE">1.º E</option><option value="1ºF">1.º F</option>
-          <option value="1ºG">1.º G</option><option value="1ºH">1.º H</option>
-        </select>
-      </div>
-
-      <h3>Resultados guardados</h3>
-      <div style="overflow:auto;max-height:330px">
-        <table>
-          <thead><tr><th>Alumno</th><th>Grupo</th><th>Nota</th><th>Puntos</th><th>Pistas</th><th>Tiempo</th><th></th></tr></thead>
-          <tbody id="classResultsTable"></tbody>
-        </table>
-      </div>
-
-      <div id="studentDetailBlock" style="display:none;margin-top:18px">
-        <h3 id="studentDetailTitle">Detalle</h3>
-        <div class="teacher-score" id="teacherScore">—</div>
-        <div class="summary-grid">
-          <div class="metric"><strong id="teacherCorrect">0</strong><span>Puntos</span></div>
-          <div class="metric"><strong id="teacherHints">0</strong><span>Pistas</span></div>
-          <div class="metric"><strong id="teacherTime">0 min</strong><span>Tiempo</span></div>
-        </div>
-        <div style="overflow:auto;max-height:350px;margin-top:12px">
-          <table>
-            <thead><tr><th>#</th><th>Pregunta</th><th>Respuesta del alumno</th><th>Resultado</th><th>Pista</th></tr></thead>
-            <tbody id="teacherTable"></tbody>
-          </table>
-        </div>
-      </div>
-
-      <div class="actions">
-        <button class="btn secondary" id="teacherExcelBtn">Descargar Excel por grupos</button>
-        <button class="btn secondary" id="teacherPdfBtn">Guardar informe PDF</button>
-        <button class="btn ghost" id="changePinBtn">Cambiar contraseña</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="print-sheet" id="printSheet"></div>
-
+/* Flujo PDI · revisión 2026-11-04. Las figuras mantienen su código original. */
+:root{--ink:#172033;--muted:#526173;--paper:#f6f7f9;--blue:#153c63;--soft:#e8f6f6;--line:#d7dce4;--good:#126e43;--bad:#a22c38}
+body{background:var(--paper)}.wrap{max-width:1160px}.top{background:white}.hero{padding-top:28px;padding-bottom:15px;grid-template-columns:1.5fr .5fr}.hero h1{font-size:clamp(2rem,4.3vw,3.3rem)}.hero-art{transform:none;border-radius:18px;background:#edf5f8}.hero-art img{max-height:160px}.panel{border-radius:18px;box-shadow:0 10px 30px #1d2e4710}.registration{border-top:0;max-width:760px}.registration h2{font-size:1.6rem}.ids{margin:18px 0}.ids input{font-size:1.1rem;min-height:52px}.ids label{font-weight:750}.pair-toggle{display:flex;align-items:center;gap:10px;margin:18px 0;color:var(--muted)}button,.button{min-height:48px;border-radius:12px;font-weight:750}button.primary{background:#007f89;border-color:#007f89}.mode-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin:24px 0 10px}.mode-card{display:flex;flex-direction:column;align-items:flex-start;text-align:left;justify-content:flex-start;gap:12px;padding:26px;border:2px solid;min-height:215px;box-shadow:0 9px 25px #1720330a;white-space:normal}.mode-card strong{font-size:1.4rem;line-height:1.2}.mode-card span{font-weight:500;line-height:1.5}.mode-card em{font-style:normal;font-size:.85rem;font-weight:800;letter-spacing:.05em}.mode-card.practice{background:#e8f6f6;border-color:#007f89;color:#095c64}.mode-card.practice:hover{background:#def1f1}.mode-card.evaluable{background:#fff5da;border-color:#b77b0b;color:#684700}.mode-card.evaluable:hover{background:#ffefc4}.mode-card:focus-visible{outline:3px solid #153c63;outline-offset:4px}.student-name{color:var(--blue);font-size:1.25rem;margin-bottom:10px}.menu-header,.flow-bar{display:flex;gap:15px;justify-content:space-between;align-items:center;flex-wrap:wrap}.flow-bar{padding:13px 17px;border:1px solid var(--line);border-radius:12px;background:white;margin-bottom:22px}.flow-label{font-weight:750;color:#095c64}.flow-label.evaluable{color:#765000}.cost-note{color:#684700;background:#fff5da;border-radius:9px;padding:11px 14px;margin:16px 0 8px}.hint{color:#684700;background:#fff9e9}.hint-button{border-color:#b77b0b;color:#684700;background:#fffaee}.hint-button:hover{background:#fff1c9}.send-banner{border-radius:14px;padding:22px;margin:22px 0;font-size:1.05rem;white-space:pre-line}.send-banner strong{display:block;font-size:clamp(1.6rem,4vw,2.2rem);line-height:1.2;margin-bottom:8px}.send-banner.waiting{background:#edf3f9;color:#153c63;border:2px solid #b7c9dc}.send-banner.sent{background:#e5f7ed;color:#0a6038;border:3px solid #16794b}.send-banner.failed{background:#fff0ee;color:#8b2b24;border:2px solid #cc7b71}.results-scroll{overflow:auto}.results-table{min-width:300px}.quiz-top progress{max-width:100%}.quiz-nav{align-items:center}.q-layout .choices.text-only{grid-template-columns:1fr}.feedback.incomplete{color:#654409}.feedback .advice-discount{font-weight:650;margin:10px 0 0}.entry-note{max-width:660px}.session-name{font-size:.9rem;color:var(--muted)}#modeMessage:empty,#identityMessage:empty,#questionMessage:empty{display:none}.review-tag{background:#e9edf2;padding:7px 11px;border-radius:8px;color:var(--blue);font-weight:700}.quiz-stage-evaluable{border-top:5px solid #e8a317}.quiz-stage-free{border-top:5px solid #007f89}
+@media(max-width:820px){.hero{grid-template-columns:1fr}.hero-art{display:none}.hero h1{font-size:2.25rem}.mode-grid{gap:16px}.mode-card{padding:22px}.q-layout{grid-template-columns:1fr}.flow-bar{padding:12px}}
+@media(max-width:580px){.mode-grid{grid-template-columns:1fr}.mode-card{min-height:175px}.wrap{padding:16px}.hero{padding-top:23px}.panel{padding:19px}.hero h1{font-size:2rem}.registration .actions>button{width:100%}.mode-card strong{font-size:1.2rem}.ids{grid-template-columns:1fr}.flow-bar .button{padding:9px 12px}.quiz-top{gap:11px}.qtitle{font-size:1.4rem}.results-table th,.results-table td{padding:9px}.choices:not(.text-only){grid-template-columns:1fr 1fr}footer .wrap{display:block}.top .wrap{display:block}}
+@media(max-width:360px){.wrap{padding:12px}.panel{padding:15px}.choices:not(.text-only){grid-template-columns:1fr}.board-models{grid-template-columns:repeat(2,1fr)}.board-views{grid-template-columns:repeat(3,1fr)}}
+.is-identified .hero{padding-top:18px;padding-bottom:12px;display:block}.is-identified .hero h1{font-size:clamp(1.5rem,3vw,2.05rem);margin:.35rem 0 .4rem}.is-identified .hero-art,.is-identified .hero p,.is-identified .hero .chips{display:none}.is-identified .hero .eyebrow{font-size:.7rem}@media(max-width:580px){.board-models{grid-template-columns:repeat(2,1fr)}.board-views{grid-template-columns:repeat(3,1fr)}.board-models .mini-model{max-height:135px}}@media(max-width:580px){footer .wrap span{display:block;margin-bottom:6px}}.test-banner{padding:13px 18px;background:#eee6fb;border:2px solid #7555a5;border-radius:12px;color:#503078;font-size:1.05rem;font-weight:850;margin:0 0 20px}.test-banner small{display:block;color:#503078;font-weight:500}</style></head><body>
+<header class="top"><div class="wrap"><div class="brand">TECNOLOGÍA Y DIGITALIZACIÓN · 1.º ESO</div><span class="note">Tema 1 · Introducción a la Tecnología</span></div></header>
+<main class="wrap"><section class="hero"><div><div class="eyebrow">App 01 · Tema 1 · Introducción a la Tecnología</div><h1>Tecnología en contexto</h1><p>Bloque 1 · Tecnología: necesidades y soluciones</p><div class="chips"><span class="chip">8 retos</span><span class="chip">PRACTICAR / EVALUABLE</span></div></div></section>
+<p id="testBanner" class="test-banner" role="status" hidden>MODO PRUEBA · NX-01<small>Prueba técnica. No cuenta como resultado del alumnado.</small></p><section id="registration" class="panel registration" aria-labelledby="entryTitle">
+<h2 id="entryTitle">Introduce tu ID</h2><p class="note entry-note">Usa el ID que te ha dado tu profesor o profesora.</p>
+<div class="ids"><div><label for="id1">Tu ID</label><input id="id1" type="text" autocomplete="off" spellcheck="false" autocapitalize="characters" maxlength="32" placeholder="Escribe tu ID" aria-describedby="identityMessage"></div><div id="secondId" hidden><label for="id2">ID de tu pareja</label><input id="id2" type="text" autocomplete="off" spellcheck="false" autocapitalize="characters" maxlength="32" placeholder="Segundo ID del mismo grupo"></div></div>
+<label class="pair-toggle"><input id="pairMode" type="checkbox"> Trabajamos en pareja</label>
+<div class="actions"><button id="verifyIds" class="primary" data-action="verifyIds">Confirmar ID y continuar →</button></div><p id="identityMessage" class="status" role="status" aria-live="polite"></p>
+</section>
+<section id="modeStage" class="panel" hidden aria-labelledby="modeTitle"><div class="menu-header"><p id="verifiedNames" class="student-name"></p><button data-action="changeStudent">Cambiar de alumno</button></div><h2 id="modeTitle">¿Qué quieres hacer?</h2><div class="mode-grid"><button class="mode-card practice" data-action="practiceMode"><em>SIN NOTA</em><strong>PRACTICAR SIN NOTA</strong><span>Explora y ensaya los 8 retos. Tus pruebas no envían ninguna calificación.</span></button><button id="evaluateMode" class="mode-card evaluable" data-action="evaluateMode"><em>CUENTA PARA LA NOTA</em><strong>ACTIVIDAD EVALUABLE</strong><span>8 retos · 10 puntos. Al finalizar se enviará el resultado de cada ID validado.</span></button></div><p class="note">En la actividad evaluable, un consejo reduce a la mitad la puntuación de ese reto: un acierto completo pasa de 1 a 0,5 puntos. Un error vale 0.</p><p id="modeMessage" class="status" role="status" aria-live="polite"></p></section>
+<nav id="sessionBar" class="flow-bar" hidden aria-label="Actividad actual"><div><div id="flowLabel" class="flow-label"></div><div id="sessionName" class="session-name"></div></div><button data-action="backMenu">← Elegir modo</button></nav>
+<section id="explore" aria-label="Práctica sin nota" hidden></section>
+<section id="retos" aria-label="Retos autocorregibles" hidden><section id="quizStage" class="panel" hidden><div class="quiz-top"><div><div id="sessionLabel" class="note"></div><strong id="progressText">0 de 10 comprobados</strong></div><progress id="progress" max="8" value="0" aria-label="Retos comprobados"></progress></div><div id="quizContent"></div><div class="quiz-nav"><button id="prevButton" data-action="prev">← Reto anterior</button><button id="nextButton" class="primary" data-action="next">Siguiente reto →</button></div></section><section id="resultStage" aria-label="Resultado y envío" hidden></section></section>
+<noscript><p class="panel">Activa JavaScript en el navegador para usar las actividades y la autocorrección.</p></noscript></main><footer><div class="wrap"><span>UD 2 · Introducción a la Tecnología · 26/27</span><span>Cuaderno Técnico Ilustrado · Práctica visual</span></div></footer>
 <script>
-const DEFAULT_TEACHER_PIN = "2468";
-const APP_ID = "A1_DETECTIVES_TECNOLOGIA_PDI";
-const APP_TITLE = "A1 · Detectives de Tecnología";
-const RESULTS_API_URL = "https://script.google.com/macros/s/AKfycbzYhutDT6EZ7meQq2KfVdKq0h8JH9GYnOmZVqjW_IkmOvdMdjS7FxWQWezmx8SfWQf9/exec";
-const ACTIVITY_META = {tema:"Tema 1 · Introducción a la Tecnología", actividad:APP_TITLE};
-let identityVerified = null;
-
-const state = {
-  student:{name:"",group:"",date:"",code:""},
-  index:0,
-  answers:{},
-  hints:{},
-  attempts:{},
-  awarded:{},
-  passed:{},
-  optionOrders:{},
-  startedAt:null,
-  finishedAt:null,
-  selfEval:"",
-  reflection:"",
-  finalized:false,
-  timerHandle:null
+'use strict';
+const APP_ID="T1_1ESO_APP01";
+const MODELS={"block": "data:image/png;base64,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/wPnLll6x5139/7uf559dtUvf3XQwrfU8dA95190ybsOWbTN1tNc7e6d0X7r//GPBW84oP87P77xugWv3KPWK0a2kxSwRKc0a+bMVy941RUXL9lqq636v//39evrfugHH3r4muXf9mwDENG4zZk9e8cdduj/zg7Pe15Nj7XrS1/S+/qiSy//15NPesIBiGjEHn/8ib89+mj/d8ZfsVtNj3XwWxfu87q9ul8/un79l69c5gkHkJJo7on+ce2fpnqj23Vfv/qN++077T+hd09048aNvW8uOnBh/16s/KE/84mPH3r4Ud2vr1j2taOPOPwFO+0YyxUDIJGI1tGS3Xd7+XmfO7PWR99vn9cvOnDhrT+9o1vxJV/88vlnnelpB5CGTN/iMmf27JOO+/BN3/nG3F12rvuxPn3aqb2XMi3/znfvf+BBTzsAEY3Yxo0bN2zcuN2sWQ081vzx3T/wvvd2v352w4Zzlyz1tANIQ/rvE92sfz355GVXffX+Bx786mVfHBsbq/uhTz/lpO/d/P2nn366KIpbfnTb4ne8PborBkCOS3T++O7r1q556He/vv2WFe955yH9f+tHP7l92bXLG/g9zN1l548cdUTvL8+78GLPPAARjcY222yzx7zxy5decMjbDuz//gWXXPrYY4838Bs4+fhjn7v99t2vS/xRLQCIaMvGxsbOO+vM/luh/3zssaWXXdHAQ8+ZM/uUE47zhANIyda5/QvvvNNOxx/zoQu/dFnvO8uuXf7hI4948YteONUv2cKbZIqiWPOLuwb8zKNjjvzgVdd8/ZE/r2vm37Sq3zYAlugmHz32mB2fv+mT/5555pnzLrqkgcfddtttP/mxkz3nAEQ0YtvNmnXqiSf0f+f6G29e8/s/NPDQ73/v4lftMc/TDkBEI3bk4R/o/7S/Tqdz9vlLmrjcM2accdrHPe0A0jDW6XRcBQCwRAFARAFARAFARAEAEQUAEQUAEQUAEQUAEQUARBQARBQARBQARBQARBQAEFEAEFEAEFEAEFEAQEQBQEQBQEQBQEQBQEQBABEFABEFABEFABEFABEFAEQUAEQUAEQUAEQUABBRABBRABBRABBRABBRAEBEAUBEASAE/wXe2gsF56cdBgAAAABJRU5ErkJggg==", "step30": "data:image/png;base64,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", "step": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAmwAAAHqCAIAAAA29oUqAAAWQElEQVR42u3df6yddWHH8eeWQmxNiyIM66+howXtfvijlaBsqTA6dHaiJiaM4AhOjVPjj+hmxoIRJ4FIoaIIDFMRXHXG34ibMCcJSDfbZYux+2EVCARrVKqADMJoj38cc3py7z3nnnOe5/t9vs/3+3r9VS+W0z493Hc/3+eec+d6vV4FAExvmUsAACIKACIKACIKACIKAIgoAIgoAIgoAIgoAIgoACCiACCiACCiACCiACCiAICIAoCIAoCIAoCIAgAiCgAiCgAiCgAiCgAiCgCIKACIKACIKACIKACIKAAgogAgogAgogAgogCAiAKAiAKAiAKAiAKAiAIAIgoAIgoAIgoAIgoAIgoAiCgAiCgAiCgAiCgAIKIAIKIAIKIAIKIAIKIAgIgCgIgCgIgCgIgCgIgCACIKACIKACIKACIKAIgoAIgoAIgoAIgoAIgoACCiACCiACCiACCiACCiAICIAoCIAoCIAoCIAoCIAgAiCgAiCgAiCh2yZu36NWvXuw7AhOZ6vZ6rAAvbuW/vHpcFsERh6oKO+iCAJQojS/n926+rqmrdKeeapICIwhTrs1/QASkFRBSmzueiHZVSQERR0InyaZICIgq18imlgIgin1XNgkopIKLI5+z5XLSjUgoiCkUUtH4+TVJARJFPKQVEFJbKZ9CCSimIqIhigDbcUSkFEQX5NEkBEaWkfLZYUCkFEQX5lFJARCmpoEnlc9GOSimIKMinSQqIKN3PZycKKqUgoiCfUgqIKN0vaEfzuWhHpRREFOTTJAURhVTzmVlBpRREFAxQKQURBflMqaNSCiIKtfJZVEFNUhBRkE8pBRGF9gpaeD6lFEQU5LP5jkopiCg4vzVJQURBPqUURFREaaug8imlIKIgn611VEpBRCkonwpqkoKIggEqpYCIIp9SCogoaeZTQeN3VEpBRJFPTFIQUYosqHxKKYgoyKeUAiJK+HwqaModlVIQUeQTkxRElIwKKp9SCiIK8imlgIgSPp8KqqNAVVXLXQIM0DILCogo8ol8goiSdj4VNJt83njLzVtO3+yygIgin0yXT9cERJR4BZXPPAoqnyCiyCfyCSJK2vlU0DzyqaAgosgn8gkiSvIFlc88CiqfIKLIJ/IJIkra+VTQPPKpoCCiGKDIJ4go8kmUgsoniChR86mg8gmIKPJZaD4VFESU2AWVT/kERBT5LLSg8gkiStR8Kqh8AiKKfBaaTwUFESV2QeVTPgERRT4LLah8gogSNZ8KKp+AiGKAFppPBQURRT4xQEFEST6fCiqfgIgin4XmU0FBRIldUPmUT0BEkc9CCyqfIKJEzaeCyicgoshnoflUUBBRYhdUPuUTEFHks9CCyieIKFHzqaDyCYgoBmih+VRQEFHkE/kERDT5fCpoHgWVTxBR5BP5BEQ0+YLKZwb5VFBAROUT+QRENPl8KmgeBZVPQETlE/kERDT5gspnBvlUUEBE5RMDFBDRLlBQ+QRElNk/F+uofAIiSq1PylLarXwqKCCiUooBCohoB+3etbOqqg0bT5ZS+QSyt8wlCJTSfk1Hfdam3XwqKGCJdm+VmqTprE/5BES0Gyl1uptaQeUTENEOT1IplU8gA+6JRk2pG6Xx86mggCWa8yo1SUOvT/kERDS3lDrdjVNQ+QREtIhJWnm/QPkERJQ6KTVJ6+dTQQERLSulTnflExBRGpukUjptQeUTEFEpdaNUPgERpbmUmqSj8qmggIiyeEqd7sonIKI0NklLTqnzW0BEaSyl5XRUPgERpeGUljBJnd8CKZvr9XquQn1r1q4fTl1Q8yZpX5YpNUBD2HL65nkf2bd3j8sCIlpKREelNKeOyme0guooiGiJEc01pc5vI+Sz/yRZ+G34pBREtKyIVhmd7spnnPU5/NxY9NvZSimIaEERzSOlzm8j53PMX1+kFES0uIiOSmn6HZXPCAWd5GngdBdEtPSIdiulzm8TyaeUgoiK6BIdTSql8hkhnzP/iTvdBREtPaIpp9T5bbL5lFIQURFdOqVtdVQ+IxS02T9cp7sgoqVHNIWUOr/tXD6lFERURJfoaISUymeEfMb/c5RSENHiIhp/kjq/zSCfJimIqIjGTql8RihoCve2pRQRFdESI1oFO911fptxPsd0VEoRUcqKaOMplc8I+awSfr2vlCKiFBfRUSmt80438pl9PsenVEcRUcqKaJ2UymeEgnbrPZClFBGlxIhWU57uOr+Vz/EdlVJElLIiOmFK5TNCPqssvi+slCKiFBfRUSntf053fiufM6RURxFRyoromFUqn+EK2vV8Sikiiogu0VEFlc+ZOyqliChlRXReShW08XzmWlCTlOwtdwnAAA1t4d30/t87pRQRBeRz0pTOm6RSiogCU+ezwIKOmqRSiogC8tlASnUUEQVGFlQ+x6fUJEVEAfmcLqVOdxFRYPF8KugMk1RKEVGQT/lsIKU6iohCcQWVz6ZSapIioiCfTJdSp7uIKJSVTwUNOkkrp7uIKMgndVJqkpKUZS4B1Czo92+/TkEjpHTeJB181wewRKGr+XRB2pqkVikiCl3Np4ImlVIdRURBPpkxpSYpbXFPFKYoqNufqaV03iR1oxRLFBLNpwuS/iS1ShFRSCufCtrRlOooIgoGKDOm1CRFREE+mS6lTncRUZBPGpukldNdRBQi5FNBM06pSUoIXuKCgh76tKugWaZ03iT1MhgsUWg4ny5IOZPUKkVEoZl8KmjhKdVRRBTkkxlTapJSk3uilFhQtz+ldN4kdaMUSxQmyqcLghuliChMl08FZcKU6igiinzKJzOm1CRlcu6JknlB3f5k8pTOm6RulGKJUnQ+XRDqTNLK6S4iSoH5VFAaTKnTXUQU+YTpUuprdxFRyiqofBJ0kkopIop8QgMp1VFElBzyqaC0klKTFBFFPmG6lDrdRUTJoaDySSKTVEpFFOQTGkipjooopJtPBSXxlJqkBfK2f3RmgCooyaZ03iT1foGWKCSUTxeEbk3SyumuiELr+VRQOp1Sp7siCvIJ06XU1+6KKLRZUPkks0kqpSIK8gkNpFRHRRSaz6eCUkhKTVIRBfmE6VLqdFdEofmCyifFTlIpFVGQT2ggpToqojBpPhUUKa3cKBVRkE+ok1KnuyIKkxZUPmHJSVo53RVRkE+ok1KTVESRTwWF6VLqdFdEkU/5hMYmqZSKKCUWVD6h8ZTqqIgin8CMKTVJRZSc86mgECKlTndFlMb824deUlXVSeffIZ9Q7CSV0qTM9Xo9V6G+/nO6qqrdu3aGy+dAKx3dsPHkUf+FAxHMS6mOWqJM184E/4IMtLhKTVIRZepwpnCcq6DQ4n99CycpIqqdE43OFgu6e9fOwYnuulPO1VFohYKKKBOVMsGz3P4d335K+/8lSynIp4iSUDvHDNMUDnIXTlIpBfkUUVIvaLKTVEohcj5vvOXmasErzRBRFsnnSeffkc7LQ5dMqY5C0IL284mIMl1Bu7JKTVKQTxGl/YLO250JztCFKXW6CyHyqaAiyowFTX+GjpqkUgryKaK0v0E7MUPHp1RHYYaCyqeIUqug3ZqhY1JqkoJ85sob0DdjhjegX/TLiPK7MvPetl5KYUw+pyro4CUu3jvXEjVA78j1d+pGKRigIoqCNpxSHUU+5VNEUdAZU2qSIp8KKqIo6CwpdbqLfMqniDJ7Post6MJJKqUUWFD5FFEUtPmU6ijyiYgyrqDyOSalJikZ51NBRRQFDZhSp7vIJyKKgjYwSaWUbAoqnyJK3XwqaJ2U6ijySbK87V8zBm/7V1XVlWfOKWgjht8yUErpUD7jFNTb/olohh2dV1D5bLCjUooBKqIimrMvvve3FdQkRT5FVESpW9C3fvnXF3by7+uClNLRfFZt3AEVURHNM59VVb3mw98bvksqpSE6KqUUm08RFdHMCzr48XBKdVRKyayg7X79rYiKaG4FHc7nMCkNnVIdpah8iqiIFlTQhR2VUimlu/msknkBqIiKaCkFldJoHZVSSsiniIpoPvmcvKCLplRHpZROFDTBtx8SUREtsaBSGi2lOkqu+RRREc2hoDPnc9GOSqmUklo+q7Tf/1ZERbTogkpptI5KKTkNUBEVUQVdIqU6KqXIp4iKqIJKaXIp1VHG5LPq1PcvE1ER7Vg+Qxd0YUelVEqRTxEVUQPUJE2uo1KqoN3Np4iKqIJKqZQinyIqogoasaNSGiilOlpgPrteUBEVUQWVUilFPkVURDPNZzoFXTSlOhqio1KafUHzyKeIiqiCSqlJinyKqIjmWNBk87loR6VUShmfzywLKqIiqqBSKqUYoCIqogqaTEp1NERHpVQ+RRQRXSKfHS2olJqklHN+K6IiqqCROiqlUiqfIoqIxihoBvmU0pgdldJkC1pOPkVURBU0Xkp1VErlU0QRUQWV0uRSqqOt57PYgoqoiLaZzxIKurCjUiql8imiiKiCSmlyHZXSyAUtPJ8iKqKtFbS0fI5KqY5KqXyKKCKqoFKaXEp1NFA+FVRERVRBk+uolEqpASqiiOi4fCqoSdpKR6VUPkVURBVUSpHSdvKpoCIqoi0XVD6n7aiUBkqpjsqniIqogkopUhq8oPIpoiKqoDmkVEdDdFRK5VNERVRBpRQpbTKfCiqiIppEPhU0REelNFBKC+yofIqoiBqgUoqUNlNQ+RRREVXQslKqoyE6mn1K5VNERVRBpVRKTdIG8qmgDeZTREVUQbvaUSmVUgM0hYKKqIjOnk8FldIsO5pBSuVTPkVUQZk0pToqpWPyqaAh8qmgIlqroPIppYWktEMdlU/5FFEFpVZHpbTYlDq/jVNQ+RRRBTVJmaWjyaZUPuVTRLuRTwWVUilNKqXOb+PkU0FFVEEL7aiUBkpp6x2VT/kk6Yg6wpVSkk2p89s4BZVPEVVQKXW6G7ajkVMqn/JJ6hFVUCklwZQ6v42TTwUV0cbyqaC5dlRKA6U0XEcNUAOU1COqoFJKgimVT/mkAxF1hFtsSnU0REcbSanz2zj5VFARVVCkNKuUyqd80pmIKqiOSmnQlE7bUee3cQoqnyLacD4VVEqltN2Uyqd80pmIKihjUqqjITo6JqXOb+PkU0FFNEhB5RMpbSul8imfdCyiCsrkHZXSQCntd9T5bZyCyqeIKigmaZ6rVD7lk85EVEGR0jQ7qqCN51NBRTRgPhUUKU2ko/JpgFLTcgOUxO3bu2fQ0f5nfylFPikiogpKUx0dnqQbNp6soySVTwUVUQWlSyk1SZFPUrBMQeliSgeTdNSXm0KEgu7bu0dBLdGw+VRQgk5Sq5S28umy0HxEFZQWU6qjRMinghIqoo5waTelJinySWSN3RNVUFpP6WCSulFK4wV1+5OAS1RBSWqSWqU0m0+XhVARdROUxFOqo8ycTwUlbEQVlPRTapJigJJiRB3hkn5Kne4inwRV6w3oBx1VUFLme5TO4w3oR+VTQYka0X5HFZTOpbTwjoqofJJKREFKRbTrBZVPZrbcJaAobpSWTD4RUWigo5WXwRSfTwVFRKGZlJqk8gmzWeYSIKWDSer9ArMvqHfvwxKFUJPUKs07ny4LIgqRUqqj2eRTQRFRiJ1Sk9QABRGFWVLqdFc+QUShgUkqpZ3Lp4IiopBiSnVUPkFEYcaUmqQpF1Q+EVFIN6VOd+UTRBQamKRSmkg+FRQRhW6nVEflExEFZkypSRq/oPKJiEIOKXW6K5+IKNDAJK2c7obMp4IiopB/Sk1SAxQRBWZJqdNd+UREgQYmqZTWzKeCIqIgpW6UyiciCtRIqUk6eUHlExEFDiXB6a58IqJAA5NUSivnt4goUD+lBXZUPhFRoJmUljZJnd8iokAzKS3qdFc+EVEg1CTNOKXOb8nbMpcA2k3pcFH6Kc17gCooligQapXmMUmd3yKiQOyUZnC66/wWEQXan6SdS6l8UiD3RCHFlHbuRqnbn1iiQKKrNOVJ6vYnIgqkm9JkT3ed34KIQpcmaZXG+wXKJ4godDWl7U5S57cgotDVlLZ4uiufIKKQzySNllLnt7AoL3GBrqY02stgvHwFLFHIfJWGmKTOb0FEIf+UNn666/wWRBRKnKQ1UyqfMDn3RCGrlNa8Uer2J1iiYJVOfaPU7U8QUeBQAic83XV+CzOb6/V6rgJkbJDSvt27do4/5pVPyCGi22/Ycf6FH5rk//nC3/vdmz7/mUl+4ooVTzhy1epnH/ebG1/4/DNf+YrnnrAu9ENv+v2Xfmb73837Wffed9+LNx36u/9xz3rmzm/+U1VVJ592xt333DvthVq5YsUPv7u7zi+bAlMqn9CIsr6w6JFHHv3xT36y8zu7rrj62tO2vOZ97//ggQMHgj7irbd9+7Y7/tXzjNaN//ogXz0EIjqdXq/3qR2fvejSbaEf6G8/fJkzc9JJqQEKItqYa6+7/sGHHgr6EN/93p6v3PSPnmokOEkNUKipM1+de8La42/9+lfq/MT/e+SRH95510Vbt91627cH//T/H39817//x2mb/iDEQw9ccvkVf3zG5sOXL3G1+3dGh+3/+c/Xv/iU4Y/881e/sP65Jwa9YhQ7SQFLdKSVK1b8zvrnXfORrYcddtjwx3+2f3/oh777nnuv3/EPnm0AItptq1etOvqoo4Y/ctSTnxzosY571jMHP778yqt/+fDDnnAAItphDz740E/vv3/4I2t/6zmBHuv0l23a8ILn9398//79H792uyccQE46c0/0f/f+YNQL3b7w6etectLGJf8Ng3uiBw8eHHxw86mbhvdi4w/9N3/57jPPen3/x9ds/9S5Z5/1G8cc3ZUrBkAmEQ3RkuOf8+yLP3BB0Ec/acOLNp+66eZ/ubVf8a0f/fglF17gaQeQh0Jf4rJ61aq3vekNN37u79c89djQj/XX73nX4EuZdnzu83fedbenHYCIdtjBgwcPHDz4xJUrIzzWCWuPf92rX9X/8eMHDly0dZunHUAe8n+d6KJ++fDDV33ik3fedfcnr/ro3Nxc6Id+7zve9qWvff3RRx+tquqmb9yy5eV/1LkrBkCJS/SEtcfv27vnnv/6z2/d9OU/ecUZw//oG9/81vYbdkT4Nax56rF//vqzB//z4ss+4pkHIKKdcfjhh5+4bu3V2y494w9PHf74pVdc+cADD0b4Bbz9zW980pFH9n88w7dqAUBEWzY3N3fxhRcM3wr9xQMPbLvqmggPvXr1qne85U2ecAA5WV7ab/jYY45583l/dtnHrhp8ZPsNO95wztnPePrTRv2UMS+Sqapqz3dun/A9j847508/cf2n7/vRvji/06Z+2QBYoof8xRvPO/oph97577HHHrv48isiPO4RRxzxV+98u+ccgIh22BNXrnzXW98y/JEvfvVre/77fyI89GtfteV5J67ztAMQ0Q4756zXDb/bX6/X++AlW2Nc7mXLzn/Puz3tAPIw1+v1XAUAsEQBQEQBQEQBQEQBABEFABEFABEFABEFABEFAEQUAEQUAEQUAEQUAEQUABBRABBRABBRABBRAEBEAUBEAUBEAUBEAUBEAQARBQARBQARBQARBQARBQBEFABEFABEFABEFAAQUQAQUQAQUQAQUQAQUQBARAFARAEgBb8C3xHTYm2chrIAAAAASUVORK5CYII=", "stairs": "data:image/png;base64,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", "tower": "data:image/png;base64,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NlxwyWWHrnjPZ79w+tatW2t9j7fc+stbb/+V+4zW9f/8IJ89BCI6mE6nc8W6b515zuq639GXvnyuM3PCSakBCiJamcvWXvnoY4/V+i7+cOfGH173E7caAU5SAxRGFM1n5+69aK9brv/hKP/hf5944u577j1z1epbbv1l75/+7+mnN/z2d4cue2Md77rn7PMuePvhy7efO8PV7j4ZLdvy8MNLDlhafsvPf/TdJS/bp9YrRraTFLBEpzV/3rxXLnn5peev2m677cpv/9eWLXW/6/vuf+DKdd92twGIaNwWLliw8047ld+y07OfXdP72mP3F/V+fN5Fl/zn8cfdcAAiGrFHH33snw89VH7Lope+pKb3ddiblu33mn27P35oy5avXrbGDQeQkmieif5l01+n+0K3735j7cEH7j/j/0Pvmei2bdt6b1x+yLLyXqz8XX/+05844qj3d3986ZorVh591HN32TmWKwZAIhGtoyV7vWTPs754aq3v/cD9Xrf8kGU3/OKWbsVXXfjVs0871W0HkIZMv8Rl4YIFJ37ouGuv+eZuz9u17vf1uU+e3PtUpnXXfOeee+9z2wGIaMS2bdu2ddu2Z86f38D72nvRXke++13dHz+9deuZq1a77QDSkP7XiU7pP48/fvHXL7/n3vsuv/jCsbGxut/1p0468fs/vv7JJ58siuK6n9244q1vie6KAZDjEt170V6bN228/4+/v/m6H7zzbYeX/9HPbrp5zVXrGvg57Pa8XT/4/qN7//Osc8935wGIaDS23377fRYvumT1OYe/+ZDy28+54KJHHnm0gZ/Ax044/lk77tj98RB/VQsAItqysbGxs047tfwo9N+PPLL64ksbeNcLFy446cMfcsMBpGRubr/gXXfZ5YRjP3DuVy7uvWXNVeuOO+boF77g+dP9J32+SKYoio2/uW2W3/Po2GPe9/Urv/Hg3zY38yut6qcNgCU67iPHH7vzc8a/899TTz111nkXNPB+d9hhh898/GPuOQARjdgz588/+aMfLr/lez/68cY//bmBd/3ed614+T6L3XYAIhqxY446svzd/jqdzulnr2rics+Zc8onP+G2A0jDWKfTcRUAwBIFABEFABEFABEFAEQUAEQUAEQUAEQUAEQUABBRABBRABBRABBRABBRAEBEAUBEAUBEAUBEAQARBQARBQARBQARBQARBQBEFABEFABEFABEFABEFAAQUQAQUQAQUQAQUQBARAFARAFARAFARAFARAEAEQUAEQWAEPwfM0Cf8KTQJjQAAAAASUVORK5CYII=", "open": "data:image/png;base64,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"};
+'use strict';
+const VIEWS={
+ block:[{k:'rect',w:60,h:30},{k:'rect',w:40,h:30},{k:'rect',w:60,h:40}],
+ step30:[{k:'step',w:60,h:30,t:30,lo:15},{k:'rect',w:40,h:30},{k:'rect',w:60,h:40,v:[30]}],
+ step:[{k:'step',w:60,h:30,t:20,lo:15},{k:'rect',w:40,h:30},{k:'rect',w:60,h:40,v:[20]}],
+ stairs:[{k:'stairs',w:60,h:30},{k:'rect',w:40,h:30},{k:'rect',w:60,h:40,v:[20,40]}],
+ tower:[{k:'tower',w:60,h:30},{k:'tower',w:40,h:30},{k:'rect',w:60,h:40,inner:[20,10,20,20]}],
+ open:[{k:'rect',w:60,h:30},{k:'rect',w:40,h:30},{k:'rect',w:60,h:40,inner:[5,5,50,30]}]
 };
+const esc=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const svg=(body,box='0 0 420 260',label='Dibujo del ejercicio')=>`<svg viewBox="${box}" role="img" aria-label="${esc(label)}" xmlns="http://www.w3.org/2000/svg"><g fill="none" stroke="#20343b" stroke-width="2" stroke-linejoin="round" stroke-linecap="round">${body}</g></svg>`;
+const text=(x,y,t,size=14,color='#20343b',anchor='middle')=>`<text x="${x}" y="${y}" fill="${color}" stroke="none" font-family="system-ui,sans-serif" font-size="${size}" text-anchor="${anchor}">${esc(t)}</text>`;
+function contour(s){
+ const {w,h}=s;
+ if(s.k==='step')return [[0,h],[w,h],[w,h-(s.lo??15)],[s.t??30,h-(s.lo??15)],[s.t??30,0],[0,0]].map(([x,y])=>[s.rev?w-x:x,y]);
+ if(s.k==='stairs')return [[0,h],[w,h],[w,h-10],[40,h-10],[40,h-20],[20,h-20],[20,0],[0,0]].map(([x,y])=>[s.rev?w-x:x,y]);
+ if(s.k==='tower')return [[0,h],[w,h],[w,20],[w/2+10,20],[w/2+10,0],[w/2-10,0],[w/2-10,20],[0,20]];
+ return [[0,0],[w,0],[w,h],[0,h]];
+}
+function drawShape(s,cx=85,cy=55,scale=1.7){
+ const ox=cx-s.w*scale/2,oy=cy-s.h*scale/2,pt=(x,y)=>`${ox+x*scale},${oy+y*scale}`;
+ let body=`<path d="M${contour(s).map(([x,y])=>pt(x,y)).join('L')}Z" fill="#fff"/>`;
+ const line=(x1,y1,x2,y2)=>`<line x1="${ox+x1*scale}" y1="${oy+y1*scale}" x2="${ox+x2*scale}" y2="${oy+y2*scale}"/>`;
+ (s.v||[]).forEach(x=>body+=line(x,0,x,s.h));(s.hor||[]).forEach(y=>body+=line(0,y,s.w,y));
+ if(s.inner){let[x,y,w,h]=s.inner;body+=`<rect x="${ox+x*scale}" y="${oy+y*scale}" width="${w*scale}" height="${h*scale}"/>`;}
+ if(s.k==='tower')body+=line(0,20,s.w,20);
+ return body;
+}
+function viewSvg(s,label='Opción gráfica'){return svg(drawShape(s),'0 0 170 110',label);}
+function triadSvg(kind,replace={}){
+ const v=structuredClone(VIEWS[kind]);Object.keys(replace).forEach(k=>v[k]=replace[k]);
+ return svg(drawShape(v[0],73,49,1.35)+drawShape(v[1],184,49,1.35)+drawShape(v[2],73,137,1.35)+text(73,17,'Alzado',11)+text(184,17,'Perfil izq.',11)+text(73,103,'Planta',11),'0 0 240 183','Conjunto de alzado planta y perfil izquierdo');
+}
+function dimH(x1,x2,y,base,label){
+ return `<g stroke="#23768b" stroke-width="1.4"><path d="M${x1},${base}V${y+5} M${x2},${base}V${y+5} M${x1},${y}H${x2} M${x1+5},${y-3}L${x1},${y}L${x1+5},${y+3} M${x2-5},${y-3}L${x2},${y}L${x2-5},${y+3}"/></g><rect x="${(x1+x2)/2-20}" y="${y-10}" width="40" height="20" fill="white" stroke="none"/>${text((x1+x2)/2,y+5,label,15,'#23768b')}`;
+}
+function dimV(x,y1,y2,base,label){
+ return `<g stroke="#23768b" stroke-width="1.4"><path d="M${base},${y1}H${x+5} M${base},${y2}H${x+5} M${x},${y1}V${y2} M${x-3},${y1+5}L${x},${y1}L${x+3},${y1+5} M${x-3},${y2-5}L${x},${y2}L${x+3},${y2-5}"/></g><rect x="${x-10}" y="${(y1+y2)/2-19}" width="20" height="38" fill="white" stroke="none"/><text x="${x+5}" y="${(y1+y2)/2}" transform="rotate(-90 ${x+5} ${(y1+y2)/2})" fill="#23768b" stroke="none" font-family="system-ui,sans-serif" font-size="15" text-anchor="middle">${esc(label)}</text>`;
+}
+function dimensionSvg(mode='normal'){
+ let b='<rect x="80" y="45" width="180" height="90" stroke-width="2.5"/>';
+ b+=dimH(80,260,176,138,mode==='labels'?'A':'60')+dimV(305,45,135,263,mode==='missing'?'?':'30');
+ if(mode==='labels')b+=`<path d="M330,208L240,176 M48,210L80,157 M370,37L305,45" stroke="#b17412"/>${text(338,224,'B')+text(39,224,'C')+text(378,28,'D')}`;
+ b+=text(210,246,'Cotas en mm',12);
+ return svg(b,'0 0 420 260','Rectángulo con cotas de anchura y altura');
+}
+function steppedDimension(){return svg('<path d="M85 170H325V110H235V50H85Z" stroke-width="2.5"/>'+dimH(85,325,215,173,'80')+dimH(85,235,22,47,'50')+dimH(235,325,85,108,'?')+dimV(48,50,170,82,'40')+dimV(355,110,170,328,'20')+text(210,250,'Cotas en mm',12));}
+function angleSvg(deg,protractor=false){
+ let b='',cx=200,cy=210,r=155;
+ if(protractor){
+  b+=`<path d="M${cx-r} ${cy}A${r} ${r} 0 0 1 ${cx+r} ${cy}Z" fill="#e5f1f2" fill-opacity=".65" stroke="#769ba7" stroke-width="1"/>`;
+  for(let a=0;a<=180;a+=5){let z=a*Math.PI/180,rr=r-(a%10===0?13:7);b+=`<path stroke="#6f8b95" stroke-width="1" d="M${cx+rr*Math.cos(z)},${cy-rr*Math.sin(z)}L${cx+r*Math.cos(z)},${cy-r*Math.sin(z)}"/>`;if(a%20===0||a===90)b+=text(cx+(r-27)*Math.cos(z),cy-(r-27)*Math.sin(z)+4,a,10,'#375d6c');}
+ }
+ let a=deg*Math.PI/180;b+=`<path d="M${cx} ${cy}H${cx+140} M${cx} ${cy}L${cx+140*Math.cos(a)} ${cy-140*Math.sin(a)}" stroke-width="3"/><circle cx="${cx}" cy="${cy}" r="4" fill="#b66b22" stroke="none"/>`+text(cx-12,cy+23,'V',12);
+ b+=`<path d="M${cx+35} ${cy}A35 35 0 0 0 ${cx+35*Math.cos(a)} ${cy-35*Math.sin(a)}" stroke="#b66b22"/>`;
+ return svg(b,'0 0 420 255','Ángulo que se mide desde el lado horizontal hacia arriba');
+}
+function linesSvg(mode='parallel',deg=15){
+ let rad=deg*Math.PI/180,dx=120*Math.cos(rad),dy=120*Math.sin(rad),b='';
+ if(mode==='perp'){b=`<path d="M${210-dx} ${130+dy}L${210+dx} ${130-dy} M${210-dy} ${130-dx}L${210+dy} ${130+dx}"/>`;}
+ else if(mode==='cross')b='<path d="M50 190L360 60 M50 60L360 190"/>';
+ else b=`<path d="M${210-dx} ${100+dy}L${210+dx} ${100-dy} M${210-dx} ${160+dy}L${210+dx} ${160-dy}"/>`;
+ return svg(b,'0 0 420 260','Pareja de rectas para comparar sus direcciones');
+}
+function toolSvg(kind){
+ if(kind==='protractor')return angleSvg(60,true);
+ if(kind==='set')return svg('<path d="M110 215H290V35Z" fill="#edf5f5"/><path d="M165 190H265V90Z" fill="white"/>'+text(141,203,'45°',13)+text(268,203,'90°',13)+text(278,79,'45°',13));
+ if(kind==='cartabon')return svg('<path d="M60 195H340V33Z" fill="#fff5d8"/><path d="M130 172H300V75Z" fill="white"/>'+text(75,219,'30°',13)+text(315,181,'90°',13)+text(326,75,'60°',13));
+ return svg('<rect x="40" y="110" width="340" height="55" fill="#fff5d8"/>'+Array.from({length:21},(_,i)=>`<path d="M${50+i*16} 110v${i%5===0?25:12}"/>${i%5===0?text(50+i*16,153,i,10):''}`).join(''));
+}
+function sheetSvg(){return svg('<rect x="20" y="12" width="210" height="297" fill="#fff"/><rect x="30" y="22" width="190" height="277" stroke="#819ba3"/><rect x="140" y="279" width="80" height="20" fill="#e4f0f2"/>'+text(180,293,'CAJETÍN',9)+text(125,150,'A4 VERTICAL',13),'0 0 250 322','Hoja A4 vertical con marco y cajetín');}
+function docSvg(mode='croquis',missing=false){
+ if(mode==='plano')return svg('<rect x="22" y="12" width="376" height="236" fill="#fff"/><rect x="34" y="24" width="352" height="212" stroke="#b1c2c6"/><rect x="52" y="52" width="160" height="80"/><rect x="255" y="52" width="90" height="80"/><rect x="52" y="160" width="160" height="45"/>'+dimH(52,212,145,135,'120')+dimV(232,52,132,215,'60')+'<rect x="268" y="211" width="118" height="25"/>'+text(327,228,'Caja · 1:1',12),'0 0 420 260','Plano realizado con trazos precisos y cajetín');
+ let b=mode==='boceto'?'<path d="M79 106L208 176L340 101L211 31L78 105 M80 109L81 171L211 241L340 166L339 102 M210 177L211 240" stroke-width="2.4"/>':'<path d="M80 92L210 158L335 92L205 26Z M80 92V155L210 222L335 155V92 M210 158V222" stroke-width="2.4"/>';
+ if(mode==='croquis')b+=text(120,205,'120 mm',13,'#23768b')+text(302,198,'80 mm',13,'#23768b')+(missing?'':text(361,134,'60 mm',13,'#23768b'));
+ return svg(b,'0 0 420 260',mode==='boceto'?'Boceto rápido sin dimensiones':'Croquis a mano alzada con dimensiones');
+}
+function boxSVG(w=100,d=60,h=40,download=false){
+ const ax=22,ay=22,px=ax+w+24,py=ay+h+22;
+ let body=`<rect x="${ax}" y="${ay}" width="${w}" height="${h}"/><rect x="${px}" y="${ay}" width="${d}" height="${h}"/><rect x="${ax}" y="${py}" width="${w}" height="${d}"/><rect x="${ax+4}" y="${py+4}" width="${w-8}" height="${d-8}"/>`;
+ body+=text(ax+w/2,ay-6,'Alzado',5)+text(px+d/2,ay-6,'Perfil izquierdo',5)+text(ax+w/2,py-6,'Planta',5);
+ body+=dimH(ax,ax+w,ay+h+9,ay+h+1,w)+dimV(px+d+11,ay,ay+h,px+d+1,h)+dimV(ax+w+11,py,py+d,ax+w+1,d);
+ body+=text(148,197,'Mi caja organizadora · Cotas en mm · Escala 1:1 a tamaño real',4.2);
+ let s=svg(body,'0 0 297 210','Vistas acotadas de la caja organizadora');
+ s=s.replace('stroke-width="2"','stroke-width="0.6"').replaceAll('stroke-width="1.4"','stroke-width="0.35"').replaceAll('font-size="15"','font-size="4.5"').replaceAll('width="40" height="20"','width="13" height="7"');
+ // Las cotas se dibujan aparte en milímetros para conservar proporciones al exportar.
+ if(download)s=s.replace('<svg ','<svg width="297mm" height="210mm" ');
+ return s;
+}
+function boxCleanSVG(w=100,d=60,h=40,download=false){
+ const ax=22,ay=22,px=ax+w+24,py=ay+h+23;
+ const dh=(x1,x2,y,base,n)=>`<path d="M${x1} ${base}V${y+1} M${x2} ${base}V${y+1} M${x1} ${y}H${x2} M${x1+2} ${y-1}L${x1} ${y}L${x1+2} ${y+1} M${x2-2} ${y-1}L${x2} ${y}L${x2-2} ${y+1}" stroke="#23768b"/>`+text((x1+x2)/2,y-1.5,n,4.5,'#23768b');
+ const dv=(x,y1,y2,base,n)=>`<path d="M${base} ${y1}H${x+1} M${base} ${y2}H${x+1} M${x} ${y1}V${y2} M${x-1} ${y1+2}L${x} ${y1}L${x+1} ${y1+2} M${x-1} ${y2-2}L${x} ${y2}L${x+1} ${y2-2}" stroke="#23768b"/>`+`<text x="${x-1.5}" y="${(y1+y2)/2}" transform="rotate(-90 ${x-1.5} ${(y1+y2)/2})" fill="#23768b" stroke="none" font-size="4.5" font-family="system-ui" text-anchor="middle">${esc(n)}</text>`;
+ let b=`<rect x="${ax}" y="${ay}" width="${w}" height="${h}"/><rect x="${px}" y="${ay}" width="${d}" height="${h}"/><rect x="${ax}" y="${py}" width="${w}" height="${d}"/><rect x="${ax+4}" y="${py+4}" width="${w-8}" height="${d-8}"/>`;
+ b+=text(ax+w/2,ay-6,'Alzado',5)+text(px+d/2,ay-6,'Perfil izquierdo',5)+text(ax+w/2,py-6,'Planta',5)+dh(ax,ax+w,ay+h+9,ay+h+1,w)+dv(px+d+10,ay,ay+h,px+d+1,h)+dv(ax+w+10,py,py+d,ax+w+1,d);
+ b+=text(148,197,'Mi caja organizadora · Cotas en mm · 1:1 solo al imprimir a tamaño real',4.2);
+ let s=svg(b,'0 0 297 210','Vistas acotadas de la caja organizadora').replace('stroke-width="2"','stroke-width="0.6"');
+ return download?s.replace('<svg ','<svg width="297mm" height="210mm" '):s;
+}
+function renderVisual(v){
+ if(!v)return '';
+ if(v.type==='model')return `<img class="model" src="${MODELS[v.kind]}" alt="Pieza ${esc(v.name||v.kind)} con el frente marcado por una flecha"><p class="note">La flecha fija el frente. Se omiten las aristas ocultas.</p>`;
+ if(v.type==='view')return viewSvg(v.shape);
+ if(v.type==='triad')return triadSvg(v.kind,v.replace||{});
+ if(v.type==='document')return docSvg(v.mode,v.missing);
+ if(v.type==='angle')return angleSvg(v.deg,!!v.protractor);
+ if(v.type==='lines')return linesSvg(v.mode,v.deg||15);
+ if(v.type==='tool')return toolSvg(v.kind);
+ if(v.type==='sheet')return sheetSvg();
+ if(v.type==='dimensions')return v.mode==='step'?steppedDimension():dimensionSvg(v.mode);
+ if(v.type==='box')return boxCleanSVG(...(v.dims||[100,60,40]));
+ if(v.type==='board')return `<div class="board-models">${v.kinds.map((k,i)=>`<div><p>F${i+1}</p><img class="mini-model" src="${MODELS[k]}" alt="Figura F${i+1} con frente marcado"></div>`).join('')}</div><div class="board-views">${v.shapes.map((s,i)=>`<div class="board-view">${i+1}${viewSvg(s,'Vista número '+(i+1))}</div>`).join('')}</div><p class="note">Todas las vistas están a la misma escala. Una misma vista puede servir para varias figuras.</p>`;
+ return '';
+}
+function unitKey(a,b){const p=[a.join(','),b.join(',')].sort();return p.join('|');}
+function splitSegment(a,b){
+ if(a[0]!==b[0]&&a[1]!==b[1])return [];
+ const n=Math.max(Math.abs(a[0]-b[0]),Math.abs(a[1]-b[1]));if(!n)return [];
+ const dx=Math.sign(b[0]-a[0]),dy=Math.sign(b[1]-a[1]);
+ return Array.from({length:n},(_,i)=>unitKey([a[0]+i*dx,a[1]+i*dy],[a[0]+(i+1)*dx,a[1]+(i+1)*dy]));
+}
+function expectedEdges(q){const s=q.shape,pts=contour(s).map(([x,y])=>[2+x/5,2+y/5]);let edges=[];for(let i=0;i<pts.length;i++)edges.push(...splitSegment(pts[i],pts[(i+1)%pts.length]));(s.v||[]).forEach(x=>edges.push(...splitSegment([2+x/5,2],[2+x/5,2+s.h/5])));(s.hor||[]).forEach(y=>edges.push(...splitSegment([2,2+y/5],[2+s.w/5,2+y/5])));return [...new Set(edges)];}
+function drawingScore(actual,expected){const a=new Set(actual||[]),e=new Set(expected);let right=0,extra=0;for(let x of a)e.has(x)?right++:extra++;return e.size?right/(e.size+extra):0;}
 
-const questions = [
+const ORIGINAL_QUESTIONS=[
   {
-    id:"q1", title:"Tecnología a tu alrededor",
-    text:"¿Cuál de estas opciones puede considerarse un producto tecnológico?",
+    id:"q1", title:"Necesidad y solución",
+    text:"En un día de lluvia, un grupo propone cuatro razones para considerar tecnológico un paraguas. ¿Cuál es la explicación más completa?",
     type:"single",
     options:[
-      ["📱","Un teléfono móvil"],
-      ["☂️","Un paraguas"],
-      ["🪡","Una aguja de coser"],
-      ["🧰","Todos los anteriores"]
+      ["A", "Porque está fabricado con varios materiales."],
+      ["B", "Porque es un objeto diseñado para responder a una necesidad concreta de protección."],
+      ["C", "Porque puede fabricarse de forma industrial."],
+      ["D", "Porque es un objeto que se vende y se compra."]
     ],
-    correct:3,
-    hint:"No pienses solo en electricidad. Pregúntate si el objeto fue creado para resolver una necesidad."
+    correct:1,
+    hint:"No basta con que un objeto esté fabricado: busca la relación directa entre una necesidad y una solución intencionada."
   },
   {
-    id:"q2", title:"Problema → solución",
-    text:"Necesitas protegerte de la lluvia. ¿Qué relación representa mejor una solución tecnológica?",
+    id:"q2", title:"Ciencia, técnica y tecnología",
+    text:"Un equipo estudia por qué un material resiste la humedad, aprende a unir sus piezas y después diseña una cubierta para proteger bicicletas. ¿Qué relación describe mejor el proceso?",
     type:"single",
     options:[
-      ["🌧️","Lluvia → paraguas"],
-      ["📘","Lluvia → cuaderno"],
-      ["🎵","Lluvia → altavoz"],
-      ["🥄","Lluvia → cuchara"]
+      ["A", "Ciencia: estudiar el material · Técnica: aprender a unirlo · Tecnología: diseñar la solución."],
+      ["B", "Técnica: estudiar el material · Tecnología: unirlo · Ciencia: diseñar la solución."],
+      ["C", "Tecnología: estudiar el material · Ciencia: unirlo · Técnica: diseñar la solución."],
+      ["D", "Las tres acciones son únicamente tecnología porque terminan en un producto."]
     ],
     correct:0,
-    hint:"Busca el objeto cuya finalidad responde directamente al problema."
+    hint:"Distingue comprender, saber hacer y aplicar de manera organizada para resolver una necesidad."
   },
   {
-    id:"q3", title:"Tecnología sin enchufe",
-    text:"Un compañero afirma: «Si no usa electricidad, no es tecnología». ¿Qué respuesta es correcta?",
+    id:"q3", title:"Tecnología antigua",
+    text:"Una cabaña prehistórica hecha con ramas y piedras puede considerarse tecnología principalmente porque…",
     type:"single",
     options:[
-      ["⚡","Tiene razón: toda tecnología necesita electricidad."],
-      ["🧠","No: existen soluciones tecnológicas sencillas que no necesitan electricidad."],
-      ["📱","Solo los objetos modernos son tecnología."],
-      ["💻","Solo los dispositivos digitales son tecnología."]
+      ["A", "utiliza materiales naturales que también se usan hoy."],
+      ["B", "fue construida antes de que existiera la ciencia moderna."],
+      ["C", "es una solución creada para responder a la necesidad de refugio y protección."],
+      ["D", "su construcción necesita necesariamente herramientas complejas."]
     ],
-    correct:1,
-    hint:"Piensa en objetos como una aguja, un arco, un anzuelo o un paraguas."
+    correct:2,
+    hint:"La antigüedad y el tipo de material no deciden por sí solos si algo es tecnología."
   },
   {
-    id:"q4", title:"Detective de necesidades",
-    text:"¿Qué necesidad ayudaba a resolver principalmente un anzuelo?",
+    id:"q4", title:"Ensayo y error",
+    text:"La agricultura se desarrolló durante mucho tiempo mediante experiencia y ensayo-error antes de existir conocimientos científicos modernos sobre Biología. ¿Qué demuestra mejor este ejemplo?",
     type:"single",
     options:[
-      ["🎨","Decorar una vivienda"],
-      ["🐟","Obtener alimento mediante la pesca"],
-      ["🎮","Entretenerse"],
-      ["✍️","Escribir mensajes"]
-    ],
-    correct:1,
-    hint:"Relaciona el objeto con la función para la que fue creado."
-  },
-  {
-    id:"q5", title:"Tecnología desde hace miles de años",
-    text:"¿Cuál de estas afirmaciones explica mejor por qué una cabaña prehistórica puede considerarse tecnología?",
-    type:"single",
-    options:[
-      ["🏠","Porque fue creada por personas para responder a la necesidad de refugio y protección."],
-      ["⚡","Porque utilizaba electricidad."],
-      ["📡","Porque permitía conectarse con otras personas."],
-      ["🏭","Porque se fabricaba en una industria."]
+      ["A", "Que una solución tecnológica puede desarrollarse mediante experiencia práctica, aunque después se apoye en ciencia."],
+      ["B", "Que la ciencia no tiene ninguna relación con la tecnología."],
+      ["C", "Que la técnica y la tecnología son exactamente lo mismo."],
+      ["D", "Que solo las tecnologías antiguas se desarrollan por ensayo-error."]
     ],
     correct:0,
-    hint:"Busca la relación entre una necesidad humana y una solución creada por las personas."
+    hint:"La fuente explica que algunas tecnologías aparecieron antes que los conocimientos científicos que hoy las explican."
   },
   {
-    id:"q6", title:"El intruso",
-    text:"Tres opciones son soluciones creadas o modificadas por personas. ¿Cuál NO es un producto tecnológico?",
+    id:"q5", title:"Producto tecnológico",
+    text:"¿Cuál de estas parejas distingue mejor un elemento natural de un producto tecnológico?",
     type:"single",
     options:[
-      ["🌉","Un puente"],
-      ["👟","Unas zapatillas"],
-      ["🪑","Una silla"],
-      ["🌙","La Luna"]
+      ["A", "Río natural / canal construido para conducir agua."],
+      ["B", "Árbol / madera."],
+      ["C", "Piedra / arena."],
+      ["D", "Viento / lluvia."]
     ],
-    correct:3,
-    hint:"Un producto tecnológico ha sido creado o modificado por las personas con una finalidad."
+    correct:0,
+    hint:"Busca una pareja en la que el segundo elemento haya sido creado o modificado con una finalidad concreta."
   },
   {
-    id:"q7", title:"Reto final · Piensa como tecnólogo/a",
-    text:"Debes mover varios libros pesados sin cargarlos todos en brazos. ¿Qué opción representa mejor el pensamiento tecnológico?",
+    id:"q6", title:"Inventar o mejorar",
+    text:"Una mochila ya resuelve la necesidad de transportar material. Se rediseña para repartir mejor el peso y proteger el contenido de la lluvia. ¿Cómo se clasifica mejor el cambio?",
     type:"single",
     options:[
-      ["🤷","Aceptar el problema y no buscar ninguna solución."],
-      ["🛒","Analizar la necesidad y utilizar o idear un carro u otro sistema de transporte."],
-      ["🎧","Escuchar música mientras los transportas."],
-      ["📚","Moverlos igual aunque exista una opción más eficaz."]
+      ["A", "Es un invento porque cambia la forma del producto."],
+      ["B", "Es una mejora porque parte de una solución existente y añade ventajas."],
+      ["C", "Es ciencia porque se estudia el peso."],
+      ["D", "Es técnica porque cualquier modificación es una técnica."]
     ],
     correct:1,
-    hint:"Pensar tecnológicamente significa identificar un problema y buscar una solución útil."
+    hint:"Pregúntate si la necesidad ya estaba resuelta antes del cambio."
+  },
+  {
+    id:"q7", title:"Uso de la tecnología",
+    text:"Dos personas utilizan el mismo ordenador: una para analizar datos y otra para acceder sin permiso a información privada. ¿Qué conclusión encaja mejor con el tema?",
+    type:"single",
+    options:[
+      ["A", "El ordenador es una mala tecnología porque puede usarse mal."],
+      ["B", "El ordenador es una buena tecnología porque permite hacer cálculos."],
+      ["C", "Las consecuencias dependen también del uso que se haga de la tecnología."],
+      ["D", "Solo el segundo uso puede considerarse tecnología."]
+    ],
+    correct:2,
+    hint:"No juzgues el objeto de forma aislada: piensa también en la finalidad y el uso."
+  },
+  {
+    id:"q8", title:"Reto integrador",
+    text:"El alumnado deja las mochilas en un pasillo estrecho y se producen tropiezos. ¿Qué respuesta muestra mejor pensamiento tecnológico?",
+    type:"single",
+    options:[
+      ["A", "Comprar inmediatamente un armario sin analizar el espacio."],
+      ["B", "Identificar la necesidad, comparar varias formas de organizar las mochilas y elegir una solución adecuada al espacio."],
+      ["C", "Pedir que cada persona deje la mochila donde encuentre sitio."],
+      ["D", "Prohibir las mochilas porque son la causa del problema."]
+    ],
+    correct:1,
+    hint:"Pensar tecnológicamente implica comprender el problema antes de elegir una solución."
   }
 ];
+const APPS=[{id:'T1_1ESO_APP01',file:'A1 - Tecnología en contexto.html',n:0,title:'Tecnología en contexto',subtitle:'Bloque 1 · Tecnología: necesidades y soluciones',focus:'Bloque 1 · Tecnología: necesidades y soluciones',minutes:'15–20 minutos',model:'open',block:'A',intro:'Practica los mismos tipos de reto sin enviar ninguna calificación. Cuando estés preparado, vuelve al menú y entra en la actividad evaluable.',questions:ORIGINAL_QUESTIONS.map(q=>({title:q.title,prompt:q.text,options:q.options.map(o=>Array.isArray(o)?(o[0]+'. '+o[1]):String(o)),answer:q.correct,explain:q.hint,hint:q.hint}))}];
+APPS.forEach(a=>a.questions.forEach((q,i)=>{q.id=`${a.id}_R${String(i+1).padStart(2,'0')}`;q.kind=q.kind||'choice';q.hint=q.hint||'Compara la forma, las dimensiones y el frente antes de comprobar. Puedes volver a Explorar sin perder el intento.';}));
 
-const $ = s => document.querySelector(s);
-const $$ = s => [...document.querySelectorAll(s)];
+const APP=APPS.find(a=>a.id===APP_ID);
+const DEFAULT_ENDPOINT="https://script.google.com/macros/s/AKfycbzYhutDT6EZ7meQq2KfVdKq0h8JH9GYnOmZVqjW_IkmOvdMdjS7FxWQWezmx8SfWQf9/exec";
+const S={screen:'entry',identifying:false,reviewing:false,testMode:false,tab:'explore',mode:'',students:[],generation:0,index:0,drafts:[],records:[],hints:[],point:null,kbPoint:[2,2],history:{},tool:'draw',submissionId:'',startedAt:'',result:null,pending:null,sending:false,confirmed:new Set(),endpoint:'',manualEndpoint:false,lab:{doc:'boceto',angle:50,line:'parallel',direction:15,piece:'block',view:'iso',w:100,d:60,h:40}};
+const $=id=>document.getElementById(id);
+const normId=x=>String(x||'').trim().toUpperCase().replace(/\s+/g,'');
+const normCourse=x=>String(x||'').toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^A-Z0-9]/g,'');
+const normGroup=x=>String(x||'').trim().toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+const validEndpoint=x=>/^https:\/\/script\.google\.com\/macros\/s\/[A-Za-z0-9_-]+\/exec$/.test(x||'');
+const uuid=()=>globalThis.crypto?.randomUUID?.()||'ud2-'+Date.now()+'-'+Math.random().toString(36).slice(2);
+const fmt=x=>Number(x).toLocaleString('es-ES',{maximumFractionDigits:2});
+const scoreTotal=records=>records.reduce((n,r)=>n+(r?.score||0),0);
+function evaluate(q,response){
+ if(q.kind==='draw')return {score:drawingScore(response,expectedEdges(q)),details:[{label:'Segmentos correctos y sobrantes',expected:'Contorno y líneas pedidos en el enunciado',actual:response}]};
+ if(q.kind==='choice')return {score:response===q.answer?1:0,details:[{label:'Respuesta',correct:response===q.answer,expected:typeof q.options[q.answer]==='string'?q.options[q.answer]:q.options[q.answer].label,actual:response}]};
+ if(q.kind==='adjust'){let right=Number.isFinite(Number(response))&&Math.abs(Number(response)-q.target)<=q.tolerance;return {score:right?1:0,details:[{label:'Ángulo',correct:right,expected:q.target+'° (±'+q.tolerance+'°)',actual:response}]};}
+ const details=q.fields.map((f,i)=>{const raw=response[i],options=Array.isArray(f.answer)?f.answer:[f.answer];const correct=f.number?String(raw).trim()!==''&&Number.isFinite(Number(String(raw).replace(',','.')))&&Math.abs(Number(String(raw).replace(',','.'))-f.answer)<=(f.tolerance||0):options.includes(raw);return {label:f.label,correct,expected:options.join(' o ')+(f.tolerance?' (±'+f.tolerance+')':''),actual:raw};});
+ return {score:details.filter(x=>x.correct).length/details.length,details};
+}
+function complete(q,d){if(q.kind==='draw')return Array.isArray(d)&&d.length>0;if(q.kind==='fields')return Array.isArray(d)&&q.fields.every((_,i)=>String(d[i]??'').trim()!=='');if(q.kind==='adjust')return Number.isFinite(Number(d));return Number.isInteger(d)&&d>=0&&d<q.options.length;}
+function draft(q,i=S.index){if(S.drafts[i]===undefined)S.drafts[i]=q.kind==='draw'?[]:q.kind==='fields'?q.fields.map(()=> ''):q.kind==='adjust'?q.initial:null;return S.drafts[i];}
+function setStatus(id,message,error=false){const e=$(id);e.textContent=message;e.className='status'+(error?' error':'');}
+function download(textValue,type,name){const blob=new Blob([textValue],{type}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
+function selectTab(tab){
+ if(!S.students.length){showScreen('entry');return;}S.tab=tab;
+ if(tab==='explore'){showScreen('explore');return;}
+ if(!S.mode){showScreen('menu');return;}
+ if(S.result&&!S.reviewing){showScreen('results');return;}
+ showScreen('quiz');renderQuiz();
+}
+function renderExplore(){
+ $('explore').innerHTML=`<div class="panel"><div class="eyebrow">Práctica sin nota</div><h2>Explora y ensaya antes de evaluar</h2><p>${esc(APP.intro)}</p><p class="note">En práctica puedes abrir consejos sin penalización. Nada de lo que hagas aquí se envía como calificación.</p><div class="actions"><button class="primary" data-action="goQuiz">Ensayar los ${APP.questions.length} retos sin nota →</button></div><p id="labMessage" role="status" class="status"></p></div>`;
+}
+function labRefresh(){
+ const l=S.lab;let html='';
+ if(APP.n===1){const descriptions={boceto:'Boceto: compara ideas con trazos rápidos.',croquis:'Croquis: añade las dimensiones reales a mano alzada.',plano:'Plano: utiliza precisión, vistas y datos para comunicar.'};html=docSvg(l.doc)+`<p style="text-align:center">${descriptions[l.doc]}</p>`;}
+ if(APP.n===2){html=`<div class="grid"><div id="angleLab" data-lab-angle="true">${angleSvg(l.angle,true)}</div><div>${linesSvg(l.line,l.direction)}</div></div>`;if($('labAngleValue'))$('labAngleValue').textContent=l.angle+'°';if($('labAngle'))$('labAngle').value=l.angle;}
+ if(APP.n===3){html=l.view==='iso'?renderVisual({type:'model',kind:l.piece}):l.view==='all'?triadSvg(l.piece):viewSvg(VIEWS[l.piece][Number(l.view)],['Alzado','Perfil izquierdo','Planta'][Number(l.view)]);}
+ if(APP.n===4){const vals=['labW','labD','labH'].map(id=>Number($(id)?.value));if(!vals.every(Number.isFinite)||vals.some(x=>x<10)||vals[0]>120||vals[1]>80||vals[2]>60){setStatus('labMessage','Usa dimensiones entre 10 y los máximos 120, 80 y 60 mm.',true);return;}[l.w,l.d,l.h]=vals;html=boxCleanSVG(l.w,l.d,l.h);setStatus('labMessage','Alzado: anchura y altura. Planta: anchura y fondo. Perfil: fondo y altura.');}
+ $('labStage').innerHTML=html;
+}
+function startAttempt(){
+ S.index=0;S.drafts=[];S.records=[];S.hints=[];S.history={};S.point=null;S.kbPoint=[2,2];S.tool='draw';S.submissionId=uuid();S.startedAt=new Date().toISOString();S.result=null;S.pending=null;S.reviewing=false;S.confirmed=new Set();S.sending=false;$('resultStage').innerHTML='';renderQuiz();
+}
+function fieldHtml(f,j,d,locked){
+ const label=`<label for="f${j}">${esc(f.label)}</label>`;
+ const input=f.number?`<input id="f${j}" data-field="${j}" type="text" inputmode="decimal" maxlength="12" value="${esc(d[j])}" autocomplete="off" ${locked?'disabled':''}>`:`<select id="f${j}" data-field="${j}" ${locked?'disabled':''}><option value="">Selecciona…</option>${f.options.map(x=>`<option value="${esc(x)}" ${d[j]===x?'selected':''}>${esc(x)}</option>`).join('')}</select>`;
+ return `<div class="field">${label}${input}</div>`;
+}
+function drawingSVG(q){
+ const d=draft(q),locked=!!S.records[S.index],origin=q.originNote?[4,2]:[2,2];let b='';
+ for(let col=0;col<=16;col++)b+=`<path d="M${28+col*22} 30V294" stroke="#e0e9e8" stroke-width="1"/>`;
+ for(let row=0;row<=12;row++)b+=`<path d="M28 ${30+row*22}H380" stroke="#e0e9e8" stroke-width="1"/>`;
+ const edge=(key,color,width=3,dash='')=>{const[[x1,y1],[x2,y2]]=key.split('|').map(p=>p.split(',').map(Number));return `<path d="M${28+x1*22} ${30+y1*22}L${28+x2*22} ${30+y2*22}" stroke="${color}" stroke-width="${width}" ${dash?'stroke-dasharray="5 4"':''}/>`;};
+ for(const x of d)b+=edge(x,'#126680');
+ if(locked&&S.records[S.index].rawScore<1)for(const x of expectedEdges(q))b+=edge(x,'#18633d',2,true);
+ if(S.point)b+=`<circle cx="${28+S.point[0]*22}" cy="${30+S.point[1]*22}" r="6" fill="#ce791e" stroke="none"/>`;
+ b+=`<circle cx="${28+origin[0]*22}" cy="${30+origin[1]*22}" r="5" fill="#126680" stroke="white" stroke-width="1"/>`;
+ if(!locked)for(let x=0;x<=16;x++)for(let y=0;y<=12;y++)b+=`<g role="button" tabindex="${S.kbPoint[0]===x&&S.kbPoint[1]===y?0:-1}" data-point="${x},${y}" aria-label="Punto columna ${x} fila ${y}"><circle cx="${28+x*22}" cy="${30+y*22}" r="8" fill="transparent" stroke="none"/></g>`;
+ b+=text(204,322,'Una casilla = 5 mm · Trazos horizontales y verticales',11);
+ return `<svg id="drawCanvas" class="draw-svg" viewBox="0 0 410 336" aria-label="Cuadrícula para dibujar la vista" xmlns="http://www.w3.org/2000/svg">${b}</svg>`;
+}
+function renderQuiz(){
+ const active=!!S.mode;if(!active)return;if(S.result&&!S.reviewing){showScreen('results');return;}showScreen('quiz');$('quizStage').className='panel '+(S.mode==='registered'?'quiz-stage-evaluable':'quiz-stage-free');
+ const q=APP.questions[S.index],d=draft(q),record=S.records[S.index],locked=!!record;
+ $('progress').value=S.records.filter(Boolean).length;$('progressText').textContent=`${S.records.filter(Boolean).length} de ${APP.questions.length} comprobados`;
+ $('sessionLabel').textContent=S.mode==='registered'?`${APP.questions.length} retos · Hasta 10 puntos`:`Ensayo de ${APP.questions.length} retos · Sin envío`;
+ let response='';
+ if(q.kind==='choice')response=`<fieldset style="border:0;padding:0;margin:0"><legend class="note">Elige una respuesta.</legend><div class="choices ${q.options.every(x=>typeof x==='string')?'text-only':''}">${q.options.map((o,j)=>`<label class="choice ${locked&&j===q.answer?'correct':''} ${locked&&d===j&&d!==q.answer?'wrong':''}"><input type="radio" name="choice" data-choice="${j}" value="${j}" ${d===j?'checked':''} ${locked?'disabled':''}><span>${typeof o==='string'?esc(o):esc(o.label)}</span>${typeof o==='object'?renderVisual(o.visual):''}</label>`).join('')}</div></fieldset>`;
+ else if(q.kind==='fields')response=q.fields.map((f,j)=>fieldHtml(f,j,d,locked)).join('');
+ else if(q.kind==='adjust')response=`<label for="adjustAngle">Ajusta la abertura de la línea</label><input id="adjustAngle" type="range" min="10" max="170" step="1" value="${d}" ${locked?'disabled':''}><p class="note">Objetivo: ${q.target}°. El transportador muestra los grados desde el lado horizontal.</p>`;
+ else response=`<div id="drawArea">${drawingSVG(q)}</div><div class="actions draw-tools"><button data-action="drawTool" data-tool="draw" aria-pressed="${S.tool==='draw'}" ${locked?'disabled':''}>Dibujar</button><button data-action="drawTool" data-tool="erase" aria-pressed="${S.tool==='erase'}" ${locked?'disabled':''}>Borrar trazo</button><button data-action="undoDraw" ${locked?'disabled':''}>Deshacer</button><button data-action="clearDraw" ${locked?'disabled':''}>Limpiar</button></div><p class="note">Arrastra entre dos puntos de una misma fila o columna, o toca dos puntos. Con teclado: Tab para entrar, flechas para moverte y Enter para elegir extremos. El punto azul es la referencia indicada.</p>`;
+ let figure=renderVisual(q.visual);
+ if(q.kind==='adjust')figure=angleSvg(Number(d),true);
+ if(q.protractor)figure+=`<label class="note"><input id="protractor" type="checkbox"> Mostrar transportador</label>`;
+ const board=q.board;
+ $('quizContent').innerHTML=`<div class="question-label">Reto ${S.index+1} de ${APP.questions.length} · ${q.kind==='draw'?'Dibujo en cuadrícula':q.kind==='fields'?'Relaciona o completa':'Observa y resuelve'}</div><h2 class="qtitle">${esc(q.title)}</h2><p>${esc(q.prompt)}</p><div class="q-layout">${board?`<div class="sketch board-full">${figure}</div><div class="board-full">${response}</div>`:`<div id="questionFigure" class="sketch">${figure}</div><div>${response}</div>`}</div>${!locked?`<p class="cost-note">${S.mode==='registered'?'Consejo opcional: este reto pasará de un máximo de 1 a 0,5 puntos. La puntuación parcial también se reduce a la mitad; un error vale 0.':'Puedes pedir un consejo sin coste: estás practicando sin nota.'}</p>`:''}<div class="actions" style="margin-top:20px"><button id="checkButton" class="primary" data-action="check" ${locked?'disabled':''}>${locked?'Respuesta comprobada':S.index===APP.questions.length-1?(S.mode==='registered'?'Finalizar actividad':'Finalizar práctica'):'Comprobar respuesta'}</button><button class="hint-button" data-action="hint" ${locked||S.hints[S.index]?'disabled':''}>${S.hints[S.index]?'Consejo abierto':S.mode==='registered'?'Abrir consejo · máximo 0,5 puntos':'Ver consejo · sin coste'}</button></div><div id="questionMessage" role="status" aria-live="polite"></div>${S.hints[S.index]?`<div class="hint">${esc(hintFor(q))}</div>`:''}${record?feedbackHtml(q,record):''}${S.reviewing?'<p class="review-tag">Revisión: la puntuación de este intento está cerrada.</p>':''}`;
+ $('prevButton').disabled=S.index===0;$('nextButton').disabled=!locked;$('nextButton').hidden=S.index===APP.questions.length-1&&!S.reviewing;$('nextButton').textContent=S.index===APP.questions.length-1?'Volver al resultado':'Siguiente reto →';
+}
+function feedbackHtml(q,record){
+ const correct=record.rawScore===1;let details='';
+ if(q.kind==='draw')details='<p>El trazado verde discontinuo muestra la solución cuando falta algo. La puntuación compara segmentos correctos con los que faltan o sobran.</p>';
+ else if(record.rawScore<1)details='<ul>'+record.details.filter(x=>!x.correct).map(x=>`<li>${esc(x.label)}: ${esc(x.expected)}</li>`).join('')+'</ul>';
+ return `<div class="feedback ${correct?'':'incomplete'}" role="status"><strong>${correct?'Bien resuelto':'Revisa la solución'} · ${fmt(record.score)} / 1 punto</strong><p>${esc(q.explain)}</p>${details}${record.hintPenalty>0?`<p class="advice-discount">Consejo aplicado: ${fmt(record.rawScore)} × 0,5 = ${fmt(record.score)} puntos.</p>`:''}</div>`;
+}
+function checkQuestion(){
+ if(!S.mode||S.result)return;const q=APP.questions[S.index];if(S.records[S.index])return;
+ const d=draft(q);if(!complete(q,d)){setStatus('questionMessage',q.kind==='draw'?'Dibuja al menos un segmento antes de comprobar.':'Completa todas las respuestas antes de comprobar.',true);return;}
+ const r=evaluate(q,d),hint=!!S.hints[S.index],factor=S.mode==='registered'&&hint?0.5:1;
+ S.records[S.index]={id:q.id,title:q.title,...r,rawScore:r.score,score:r.score*factor,maxPoints:factor,hintPenalty:r.score*(1-factor),hintCostMaximum:factor===0.5?0.5:0,response:structuredClone(d),hint,hintText:hint?hintFor(q):'',checkedAt:new Date().toISOString()};S.point=null;
+ if(S.index===APP.questions.length-1&&S.records.filter(Boolean).length===APP.questions.length){finish();return;}renderQuiz();
+}
+function applySegment(a,b){
+ const q=APP.questions[S.index];if(q.kind!=='draw'||S.records[S.index])return;
+ const seg=splitSegment(a,b);if(!seg.length){setStatus('questionMessage','Selecciona dos puntos distintos de una misma fila o columna.',true);return;}
+ (S.history[S.index]??=[]).push([...draft(q)]);let set=new Set(draft(q));for(let x of seg)S.tool==='erase'?set.delete(x):set.add(x);S.drafts[S.index]=[...set];S.point=null;$('drawArea').innerHTML=drawingSVG(q);setStatus('questionMessage','Trazo actualizado. Puedes deshacer antes de comprobar.');
+}
+function choosePoint(point){S.kbPoint=point;if(S.point)applySegment(S.point,point);else {S.point=point;$('drawArea').innerHTML=drawingSVG(APP.questions[S.index]);}document.querySelector(`[data-point="${point.join(',')}"]`)?.focus();}
+function finish(){
+ if(S.result){S.reviewing=false;showScreen('results');return;}
+ if(S.records.filter(Boolean).length!==APP.questions.length)return;
+ const rawScore=scoreTotal(S.records),score=rawScore/APP.questions.length*10,penalty=S.records.reduce((n,r)=>n+r.hintPenalty,0);
+ S.result=deepFreeze({submissionId:S.submissionId,modo_prueba:!!S.testMode,theme:'Tema 1 · Introducción a la Tecnología',activity:APP.id,title:APP.title,score:Number(score.toFixed(4)),scores:S.records.map(r=>Number((r.score*10).toFixed(4))),maximo:10,percentage:score*10,hints:APP.questions.map((_,i)=>!!S.hints[i]),attempts:APP.questions.map(()=>1),startedAt:S.startedAt,finishedAt:new Date().toISOString(),appVersion:'3.0.2-entrada-funcional',hintPolicy:{maximumWithoutHint:1,maximumWithHint:0.5,penaltyApplied:penalty},evidence:{course:S.testMode?'PRUEBA':'1ESO',modo_prueba:!!S.testMode,block:APP.block,questions:structuredClone(S.records),hintPenaltyTotal:penalty}});
+ S.reviewing=false;showScreen('results');
+ $('resultStage').innerHTML=`<div class="panel"><div class="eyebrow">${S.testMode?'MODO PRUEBA · NX-01':S.mode==='registered'?'Actividad evaluable terminada':'Práctica terminada · Sin nota'}</div><h2>${S.mode==='registered'?'Tu resultado':'Resultado de práctica'}</h2><div class="score">${fmt(score)} <small>/ 10</small></div><p>${S.mode==='registered'?`${APP.questions.length} retos. La nota final se escala sobre 10. Con consejo, el máximo del reto se reduce a la mitad; un error vale 0.`:'Este ensayo no cuenta para la nota y no envía ningún resultado.'}</p><div id="sendMessage" role="status" aria-live="polite" aria-atomic="true"></div><div class="actions"><button class="primary" data-action="retrySend" id="retrySend" hidden>Reintentar envío</button><button data-action="reviewAttempt">Revisar respuestas</button><button data-action="downloadResult">Descargar resultado</button><button data-action="changeStudent">Cambiar de alumno</button></div><div class="results-scroll"><table class="results-table"><thead><tr><th>Reto</th><th>Trabajo</th><th>Puntos</th></tr></thead><tbody>${S.records.map((r,i)=>`<tr><td>${i+1}</td><td>${esc(r.title)}${r.hint?' · Con consejo':''}</td><td>${fmt(r.score)} / 1</td></tr>`).join('')}</tbody></table></div><p class="note">La revisión conserva la puntuación cerrada de este intento.</p></div>`;
+ if(S.mode==='registered'){
+  const students=S.students.map(x=>({...x}));S.pending={result:S.result,students,endpoint:S.endpoint,payloads:students.map(s=>deepFreeze(centralPayload(S.result,s)))};void transmit();
+ }else sendStatus('waiting','SIN ENVÍO','Has terminado una práctica sin nota. Puedes repasar o elegir la actividad evaluable.');
+}
+async function centralGet(params,endpoint=S.endpoint){
+ const u=new URL(endpoint);Object.entries(params).forEach(([k,v])=>u.searchParams.set(k,v));u.searchParams.set('_',Date.now());
+ const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),30000);
+ try{
+  const response=await fetch(u.href,{method:'GET',cache:'no-store',redirect:'follow',signal:controller.signal});
+  if(!response.ok)throw Error('No se pudo consultar el registro: HTTP '+response.status+'.');
+  return await response.json();
+ }catch(e){throw Error(e.name==='AbortError'?'La consulta al registro ha agotado el tiempo. Comprueba la conexión e inténtalo de nuevo.':e.message||'No se pudo consultar el registro central.');}
+ finally{clearTimeout(timer);}
+}
+function validateStudents(students){
+ if(students.length===1&&students[0].testMode===true){if(students[0].studentId!=='NX-01')throw Error('El modo de prueba no corresponde a NX-01.');return true;}
+ if(students.some(x=>x.studentId==='NX-01'||x.testMode))throw Error('El servidor no ha confirmado el modo de prueba de NX-01.');
+ if(students.length<1||students.length>2)throw Error('Introduce uno o dos ID.');
+ if(students.some(s=>normCourse(s.level)!=='1ESO'))throw Error('Los ID deben corresponder a 1.º ESO.');
+ if(students.some(s=>!s.group||!s.name||!s.studentId))throw Error('El registro debe incluir nombre, curso y grupo.');
+ if(students.length===2&&students[0].studentId===students[1].studentId)throw Error('La pareja necesita dos ID distintos.');
+ if(students.length===2&&normGroup(students[0].group)!==normGroup(students[1].group))throw Error('Los dos alumnos deben pertenecer al mismo grupo.');return true;
+}
+async function verifyIds(){
+ if(S.students.length||S.identifying)return;
+ let ids=[normId($('id1').value)];if($('pairMode').checked)ids.push(normId($('id2').value));if(ids.includes('NX-01'))ids=['NX-01'];
+ $('id1').value=ids[0];if(ids[1])$('id2').value=ids[1];
+ if(ids.some(x=>!x)){setStatus('identityMessage','Introduce los ID que ha facilitado el profesor.',true);return;}
+ if(new Set(ids).size!==ids.length){setStatus('identityMessage','La pareja necesita dos ID distintos.',true);return;}
+ if(!S.endpoint){setStatus('identityMessage','El registro no está disponible. Avisa a tu profesor o profesora.',true);return;}
+ const gen=++S.generation;S.identifying=true;['verifyIds','id1','id2','pairMode'].forEach(id=>$(id).disabled=true);setStatus('identityMessage','Comprobando tu ID…');
+ try{
+  const students=[];for(let i=0;i<ids.length;i++){
+   const r=await centralGet({action:'lookup',id:ids[i]});if(gen!==S.generation)return;
 
-function shuffledIndexes(n){
-  const a=Array.from({length:n},(_,i)=>i);
-  for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}
-  return a;
-}
-function init(){
-  const today = new Date();
-  const local = new Date(today.getTime()-today.getTimezoneOffset()*60000).toISOString().slice(0,10);
-  $("#studentDate").value = local;
-  questions.forEach(q=>{ state.optionOrders[q.id]=shuffledIndexes(q.options.length); });
-  updateProgress();
-}
-init();
-
-function draftKey(name,group){
-  return APP_ID+"_draft_"+normalizeStudentKey(name)+"__"+String(group||"");
-}
-function saveDraft(){
-  if(!state.student.name || state.finalized) return;
-  const payload={
-    student:state.student,index:state.index,answers:state.answers,hints:state.hints,
-    attempts:state.attempts,awarded:state.awarded,passed:state.passed,
-    optionOrders:state.optionOrders,startedAt:state.startedAt,selfEval:state.selfEval,
-    reflection:state.reflection,finalized:false
-  };
-  localStorage.setItem(draftKey(state.student.name,state.student.group),JSON.stringify(payload));
-}
-function loadDraft(name,group){
-  try{
-    const raw=localStorage.getItem(draftKey(name,group));
-    return raw?JSON.parse(raw):null;
-  }catch(e){return null;}
-}
-function clearDraft(name,group){
-  localStorage.removeItem(draftKey(name,group));
-}
-
-function getTeacherPin(){
-  return localStorage.getItem(APP_ID+"_teacher_pin") || DEFAULT_TEACHER_PIN;
-}
-function normalizeStudentKey(name){
-  return String(name||"").trim().toLowerCase()
-    .normalize("NFD").replace(/[\u0300-\u036f]/g,"")
-    .replace(/[^a-z0-9]+/g,"_");
-}
-function attemptKey(name,group){
-  return APP_ID+"_attempt_"+normalizeStudentKey(name)+"__"+String(group||"");
-}
-function hasCompletedAttempt(name,group){
-  try{
-    const raw = localStorage.getItem(attemptKey(name, group || state.student.group));
-    if(!raw) return false;
-    const data = JSON.parse(raw);
-    return !!data.finalized;
-  }catch(e){ return false; }
-}
-function saveCompletedAttempt(){
-  const payload = resultPayload();
-  payload.finalized = true;
-  payload.finalizedAt = new Date().toISOString();
-  localStorage.setItem(attemptKey(state.student.name,state.student.group), JSON.stringify(payload));
-  state.finalized = true;
-}
-function resultsKey(){
-  return APP_ID+"_all_results";
-}
-function loadAllResults(){
-  try{
-    const raw = localStorage.getItem(resultsKey());
-    const arr = raw ? JSON.parse(raw) : [];
-    return Array.isArray(arr) ? arr : [];
-  }catch(e){ return []; }
-}
-function saveResultToClassHistory(payload){
-  const all = loadAllResults();
-  const key = normalizeStudentKey(payload.student.name)+"__"+String(payload.student.group||"");
-  const idx = all.findIndex(r => normalizeStudentKey(r.student?.name)+"__"+String(r.student?.group||"") === key);
-  if(idx>=0) all[idx] = payload; else all.push(payload);
-  localStorage.setItem(resultsKey(), JSON.stringify(all));
-}
-
-function startTimer(){
-  if(state.timerHandle) clearInterval(state.timerHandle);
-  const paint=()=>{
-    if(!state.startedAt) return;
-    const end = state.finishedAt || Date.now();
-    const sec = Math.max(0, Math.floor((end-state.startedAt)/1000));
-    const mm = String(Math.floor(sec/60)).padStart(2,"0");
-    const ss = String(sec%60).padStart(2,"0");
-    $("#timerTop").textContent = `⏱ ${mm}:${ss}`;
-  };
-  paint();
-  state.timerHandle = setInterval(paint,1000);
-}
-function stopTimer(){
-  if(state.timerHandle){ clearInterval(state.timerHandle); state.timerHandle=null; }
-}
-
-function showScreen(id){
-  $$(".screen").forEach(x=>x.classList.remove("active"));
-  $("#"+id).classList.add("active");
-  window.scrollTo({top:0,behavior:"smooth"});
-}
-
-async function verifyStudentIds(){
-  const id1=String($("#studentId1").value||"").trim().toUpperCase();
-  const id2=String($("#studentId2").value||"").trim().toUpperCase();
-  const ids=[id1,id2].filter(Boolean);
-  if(!id1){alert("Introduce al menos el ID del primer alumno/a.");return null;}
-  if(id2 && id1===id2){alert("Los dos IDs no pueden ser iguales.");return null;}
-
-  const fingerprint=ids.join("|");
-  if(identityVerified?.fingerprint===fingerprint) return identityVerified;
-
-  const box=$("#identityStatus");
-  box.style.display="block";
-  box.innerHTML="<strong>Comprobando ID/s…</strong>";
-  try{
-    const results=await Promise.all(ids.map(async id=>{
-      const response=await fetch(RESULTS_API_URL+"?action=lookup&id="+encodeURIComponent(id)+"&_="+Date.now(),{method:"GET",cache:"no-store",redirect:"follow"});
-      if(!response.ok) throw new Error("No se pudo consultar el registro.");
-      return response.json();
-    }));
-    if(results.some(r=>!r?.ok||!r?.encontrado||!r?.alumno)){
-      identityVerified=null;
-      box.innerHTML="<strong>❌ ID no encontrado.</strong> Revisa el código.";
-      return null;
-    }
-    const students=results.map(r=>r.alumno);
-    if(students.some(a=>String(a.curso||"").replace(/[^0-9A-Z]/gi,"").toUpperCase()!=="1ESO")){
-      identityVerified=null;
-      box.innerHTML="<strong>❌ Curso incorrecto.</strong> Esta actividad corresponde a 1.º ESO.";
-      return null;
-    }
-    if(students.length===2 && String(students[0].grupo)!==String(students[1].grupo)){
-      identityVerified=null;
-      box.innerHTML="<strong>❌ Grupos distintos.</strong> Ambos IDs deben pertenecer al mismo grupo.";
-      return null;
-    }
-    identityVerified={fingerprint,ids,students};
-    box.innerHTML="<strong>✅ Identidad confirmada.</strong><br>"+students.map(a=>escapeHtml(a.nombre)+" · 1.º ESO "+escapeHtml(a.grupo)).join("<br>");
-    return identityVerified;
-  }catch(error){
-    identityVerified=null;
-    box.innerHTML="<strong>❌ No se pudo comprobar el ID.</strong> Revisa la conexión a Internet.";
-    return null;
-  }
-}
-
-$("#verifyIdsBtn").addEventListener("click",verifyStudentIds);
-["studentId1","studentId2"].forEach(id=>$("#"+id).addEventListener("input",()=>{
-  $("#"+id).value=String($("#"+id).value||"").toUpperCase();
-  identityVerified=null;
-  $("#identityStatus").style.display="none";
-}));
-
-$("#startBtn").addEventListener("click", async ()=>{
-  const verified=await verifyStudentIds();
-  if(!verified) return;
-  const name=verified.students.map(a=>a.nombre).join(" / ");
-  const group="1º"+verified.students[0].grupo;
-  if(!$("#sheetConfirm").checked){alert("Confirma que tienes disponible la ficha o documento indicado.");return;}
-  if(hasCompletedAttempt(name,group)){
-    alert("Esta actividad ya figura como finalizada en este dispositivo. Si necesitas repetirla, debe autorizarlo el profesor.");
-    return;
-  }
-  const draft=loadDraft(name,group);
-  state.student={name,group,date:$("#studentDate").value,code:$("#studentCode").value.trim(),ids:verified.ids};
-  if(draft && confirm("Hay una actividad sin finalizar guardada para este alumno/a o pareja. ¿Quieres continuar donde se quedó?")){
-    state.student=draft.student||state.student;
-    state.index=Number(draft.index||0);
-    state.answers=draft.answers||{};
-    state.hints=draft.hints||{};
-    state.attempts=draft.attempts||{};
-    state.awarded=draft.awarded||{};
-    state.passed=draft.passed||{};
-    state.optionOrders=draft.optionOrders||state.optionOrders;
-    state.startedAt=draft.startedAt||Date.now();
-    state.selfEval=draft.selfEval||"";
-    state.reflection=draft.reflection||"";
-  }else{
-    state.index=0;state.answers={};state.hints={};state.attempts={};state.awarded={};state.passed={};
-    questions.forEach(q=>{state.optionOrders[q.id]=shuffledIndexes(q.options.length);});
-    state.startedAt=Date.now();
-  }
-  state.finishedAt=null;
-  state.finalized=false;
-  startTimer();
-  renderQuestion();
-  showScreen("screen-questions");
-  saveDraft();
-});
-
-$("#resetAttemptBtn").addEventListener("click",async()=>{
-  const verified=await verifyStudentIds();
-  if(!verified) return;
-  const name=verified.students.map(a=>a.nombre).join(" / ");
-  const group="1º"+verified.students[0].grupo;
-  const pin=prompt("Clave docente para autorizar el reinicio:");
-  if(pin===null)return;
-  if(pin!==getTeacherPin()){alert("Clave incorrecta.");return;}
-  localStorage.removeItem(attemptKey(name,group));
-  clearDraft(name,group);
-  const all=loadAllResults();
-  const key=normalizeStudentKey(name)+"__"+String(group);
-  localStorage.setItem(resultsKey(),JSON.stringify(all.filter(r=>normalizeStudentKey(r.student?.name)+"__"+String(r.student?.group||"")!==key)));
-  alert("Intento reiniciado para este alumno/a o pareja en este dispositivo.");
-});
-
-function renderQuestion(){
-  const q=questions[state.index];
-  const wrap=$("#questionCard");
-  const answered=state.answers[q.id];
-  const passed=!!state.passed[q.id];
-  const attempts=Number(state.attempts[q.id]||0);
-  const awarded=state.awarded[q.id];
-
-  let html=`
-    <div class="q-head">
-      <div>
-        <div class="q-num">Reto ${state.index+1} de ${questions.length}</div>
-        <h2 class="q-title">${q.title}</h2>
-      </div>
-      <span class="score-chip">${passed ? "✓ Superado" : `Intentos: ${attempts}`}</span>
-    </div>
-    <p class="q-text">${q.text}</p>
-    <div class="options">`;
-
-  const order=state.optionOrders[q.id]||q.options.map((_,i)=>i);
-  order.forEach(idx=>{
-    const o=q.options[idx];
-    const sel=answered===idx?"selected":"";
-    html+=`<button class="option ${sel}" data-opt="${idx}" ${passed?"disabled":""}>
-      <span class="ico">${o[0]}</span><span>${o[1]}</span>
-    </button>`;
-  });
-  html+=`</div>`;
-
-  const used=!!state.hints[q.id];
-  const fb=passed
-    ? `<div class="feedback-box show good">✅ ¡Reto superado! Puntuación conseguida en este reto: ${Number(awarded||0).toFixed(2).replace(".",",")} / 1.</div>`
-    : attempts>0
-      ? `<div class="feedback-box show try">🔁 Esa respuesta no era correcta. Revisa la pista o vuelve a pensarlo y prueba otra vez. Puedes aprender y corregir, aunque la puntuación máxima del reto ya es menor.</div>`
-      : `<div class="feedback-box"></div>`;
-
-  html+=`
-    ${fb}
-    <div class="actions">
-      <button class="btn warn" id="hintBtn" ${passed?"disabled":""}>💡 ${used?"Pista utilizada":"Necesito una pista"}</button>
-      <button class="btn primary" id="checkBtn" ${passed||!Number.isInteger(answered)?"disabled":""}>Comprobar respuesta</button>
-    </div>
-    <div class="hint-box ${used?"show":""}" id="hintBox"><strong>Pista:</strong> ${q.hint}</div>
-    <div class="actions">
-      <button class="btn ghost" id="prevBtn" ${state.index===0?"disabled":""}>← Anterior</button>
-      <button class="btn primary" id="nextBtn" ${!passed?"disabled":""}>${state.index===questions.length-1?"Terminar A1":"Siguiente reto →"}</button>
-    </div>
-    <div class="feedback-mini">La primera respuesta correcta fija la puntuación del reto. Después puedes consultar los retos anteriores, pero no cambiar su resultado.</div>
-  `;
-  wrap.innerHTML=html;
-
-  wrap.querySelectorAll("[data-opt]").forEach(btn=>{
-    btn.addEventListener("click",()=>{
-      if(state.passed[q.id]) return;
-      state.answers[q.id]=Number(btn.dataset.opt);
-      saveDraft(); renderQuestion(); updateProgress();
+   // NX-01 se reconoce ANTES de aplicar la validación ordinaria de alumnado.
+   // El servidor debe confirmarlo expresamente con modo_prueba=true.
+   if(ids[i]==='NX-01'){
+    const a=r?.alumno||{};
+    if(r?.ok!==true||r?.encontrado!==true||(r?.modo_prueba!==true&&a?.modo_prueba!==true))
+      throw Error(r?.error||'El servidor no ha confirmado el modo de prueba de NX-01.');
+    students.push({
+      studentId:'NX-01',
+      name:String(a.nombre||'USUARIO DE PRUEBA').trim(),
+      level:String(a.curso||'PRUEBA').trim(),
+      group:String(a.grupo||'NX').trim(),
+      testMode:true
     });
-  });
+    continue;
+   }
 
-  $("#hintBtn").addEventListener("click",()=>{
-    if(state.passed[q.id]) return;
-    state.hints[q.id]=true;
-    saveDraft(); renderQuestion(); updateProgress();
-  });
-
-  $("#checkBtn").addEventListener("click",()=>{
-    if(!Number.isInteger(state.answers[q.id])){alert("Selecciona una respuesta.");return;}
-    state.attempts[q.id]=Number(state.attempts[q.id]||0)+1;
-    if(state.answers[q.id]===q.correct){
-      const n=state.attempts[q.id];
-      let pts=n===1?1:(n===2?0.75:0.5);
-      if(state.hints[q.id]) pts*=0.85;
-      state.awarded[q.id]=Math.round(pts*100)/100;
-      state.passed[q.id]=true;
-    }
-    saveDraft(); renderQuestion(); updateProgress();
-    if($("#teacherPanel").style.display==="block") renderTeacherDashboard();
-  });
-
-  $("#prevBtn").addEventListener("click",()=>{
-    if(state.index>0){state.index--;saveDraft();renderQuestion();updateProgress();}
-  });
-  $("#nextBtn").addEventListener("click",()=>{
-    if(!state.passed[q.id]){alert("Debes superar este reto antes de continuar.");return;}
-    if(state.index<questions.length-1){state.index++;saveDraft();renderQuestion();updateProgress();}
-    else finishActivity();
-  });
-
-  updateProgress();
-}
-
-function isAnswered(q){ return !!state.passed[q.id]; }
-
-function updateProgress(){
-  const done=questions.filter(isAnswered).length;
-  const pct=Math.round(done/questions.length*100);
-  $("#progressBar").style.width=pct+"%";
-  $("#progressText").textContent=done===0?"Inicio":`${done} de ${questions.length} retos`;
-  $("#hintCountTop").textContent="Pistas: "+Object.keys(state.hints).length;
-}
-
-function scoreActivity(){
-  const details=questions.map((q,idx)=>{
-    const pts=Number(state.awarded[q.id]||0);
-    return {
-      index:idx+1,id:q.id,title:q.title,correct:!!state.passed[q.id],
-      earned:pts,possible:1,hint:!!state.hints[q.id],answer:state.answers[q.id],
-      attempts:Number(state.attempts[q.id]||0)
-    };
-  });
-  const earned=details.reduce((s,d)=>s+d.earned,0);
-  const score=Math.round((earned/questions.length*10)*100)/100;
-  return {score,correctCount:Math.round(earned*100)/100,totalUnits:questions.length,details};
-}
-function finishActivity(){
-  state.finishedAt=Date.now();
-  stopTimer();
-  showScreen("screen-end");
-  $("#endStudent").textContent = `${state.student.name}${state.student.group ? " · "+state.student.group : ""}`;
-  $("#endAnswered").textContent = questions.filter(isAnswered).length;
-  const r=scoreActivity();
-  $("#endScore").textContent = r.score.toFixed(2).replace(".",",");
-  $("#visibleScore").textContent = r.score.toFixed(2).replace(".",",");
-  saveDraft();
-  $("#endHints").textContent = Object.keys(state.hints).length;
-  $("#progressBar").style.width="100%";
-  $("#progressText").textContent="Completada";
-  if($("#teacherPanel").style.display==="block") renderTeacherDashboard();
-}
-
-$$("[data-self]").forEach(btn=>{
-  btn.addEventListener("click",()=>{
-    state.selfEval=btn.dataset.self;
-    $$("#selfEvalOptions .option").forEach(b=>b.classList.remove("selected"));
-    btn.classList.add("selected");
-    if($("#teacherPanel").style.display==="block") renderTeacherDashboard();
-  });
-});
-
-$("#reflection").addEventListener("input",e=>{state.reflection=e.target.value; if($("#teacherPanel").style.display==="block") renderTeacherDashboard();});
-
-function resultPayload(){
-  state.reflection=$("#reflection").value.trim();
-  const result=scoreActivity();
-  const elapsed = state.startedAt && state.finishedAt ? Math.max(1,Math.round((state.finishedAt-state.startedAt)/60000)) : 0;
-  return {
-    schema:"gdactividad-v1",
-    appId:APP_ID,
-    appTitle:APP_TITLE,
-    subject:"Tecnología y Digitalización",
-    level:"1.º ESO",
-    student:state.student,
-    completedAt:new Date(state.finishedAt||Date.now()).toISOString(),
-    elapsedMinutes:elapsed,
-    score:result.score,
-    scoreScale:10,
-    linkedSheet:"F1 · Detectives de Tecnología",
-    scoringMethod:"1er acierto: 100%; 2º: 75%; 3º o posteriores: 50%; pista: -15% sobre el reto",
-    earnedUnits:result.correctCount,
-    totalUnits:result.totalUnits,
-    hintsUsed:Object.keys(state.hints).length,
-    hintQuestionIds:Object.keys(state.hints),
-    selfEvaluation:state.selfEval,
-    reflection:state.reflection,
-    details:result.details
-  };
-}
-
-function slug(s){
-  return s.normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-zA-Z0-9]+/g,"_").replace(/^_+|_+$/g,"");
-}
-
-function buildPrintSheet(includeTeacher=false){
-  const data=resultPayload();
-  const rows=data.details.map(d=>`
-    <tr><td>${d.index}</td><td>${d.title}</td><td>${d.attempts}</td>
-    <td>${Number(d.earned||0).toFixed(2).replace(".",",")} / 1</td><td>${d.hint?"Sí":"No"}</td></tr>`).join("");
-
-  $("#printSheet").innerHTML=`
-    <h1>🔎 A1 · Detectives de Tecnología</h1>
-    <div class="p-card">
-      <strong>Alumno/a:</strong> ${escapeHtml(data.student.name)}<br>
-      <strong>Grupo:</strong> ${escapeHtml(data.student.group||"—")}<br>
-      <strong>Fecha:</strong> ${escapeHtml(data.student.date||"—")}<br>
-      <strong>Tema:</strong> Tema 1 · Introducción a la Tecnología
-    </div>
-    <div class="p-card">
-      <strong>Nota A1:</strong> ${Number(data.score||0).toFixed(2).replace(".",",")} / 10<br>
-      <strong>Pistas utilizadas:</strong> ${data.hintsUsed}<br>
-      <strong>Autoevaluación:</strong> ${escapeHtml(data.selfEvaluation||"Sin seleccionar")}<br>
-      <strong>Idea clave:</strong> ${escapeHtml(data.reflection||"Sin respuesta")}<br>
-      <strong>Siguiente paso:</strong> F1 · Detectives de Tecnología (ficha escrita)
-    </div>
-    <h2>Resumen de los 7 retos</h2>
-    <table><thead><tr><th>#</th><th>Reto</th><th>Intentos</th><th>Puntuación</th><th>Pista</th></tr></thead><tbody>${rows}</tbody></table>
-    <p><strong>Resultado interactivo A1:</strong> ${Number(data.score||0).toFixed(2).replace(".",",")} / 10</p>
-    <p><strong>Ficha F1:</strong> pendiente de realizar/valorar. Este documento no calcula todavía una calificación global del bloque.</p>
-  `;
-}
-$("#savePdfBtn").addEventListener("click",()=>{
-  buildPrintSheet(false);
-  window.print();
-});
-
-
-async function sendCentralResults(){
-  const ids=Array.isArray(state.student?.ids)?state.student.ids:[];
-  const status=$("#centralSyncStatus");
-  if(!ids.length){
-    status.innerHTML="<strong>❌ No se pudo enviar.</strong> Esta sesión no tiene IDs asociados.";
-    return false;
+   // A partir de aquí solo se validan ID reales de alumnado.
+   if(r?.ok!==true||r.encontrado!==true||!r.alumno)throw Error(r?.error||`El ID ${i+1} no se ha encontrado o está inactivo.`);
+   if(r.alumno.activo===false||['NO','FALSE','INACTIVO','0'].includes(String(r.alumno.activo??'').trim().toUpperCase()))throw Error(`El ID ${i+1} está inactivo. Avisa a tu profesor o profesora.`);
+   if(r.alumno.id&&normId(r.alumno.id)!==ids[i])throw Error('El registro devolvió un ID diferente. Vuelve a comprobarlo.');
+   students.push({studentId:ids[i],name:String(r.alumno.nombre||'').trim(),level:String(r.alumno.curso||'').trim(),group:String(r.alumno.grupo||'').trim(),testMode:false});
   }
-  status.innerHTML="<strong>Enviando resultado al registro central…</strong>";
-  const result=resultPayload();
-  for(const id of ids){
-    try{
-      const payload={
-        id,
-        tema:ACTIVITY_META.tema,
-        actividad:ACTIVITY_META.actividad,
-        puntuacion:result.score,
-        maximo:10,
-        evidencia:JSON.stringify({puntosRetos:result.earnedUnits,totalRetos:result.totalUnits,pistasUsadas:result.hintsUsed,detalleRetos:result.details}),
-        detalle:JSON.stringify({inicio:state.startedAt?new Date(state.startedAt).toISOString():"",fin:state.finishedAt?new Date(state.finishedAt).toISOString():"",autoevaluacion:state.selfEval,reflexion:state.reflection})
-      };
-      const response=await fetch(RESULTS_API_URL,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(payload),redirect:"follow"});
-      const data=await response.json();
-      if(!data?.ok) throw new Error(data?.error||"No guardado");
-    }catch(error){
-      const detail=error?.message||String(error);
-      status.innerHTML='<strong>❌ No se pudo completar el envío.</strong><br><span class="small"><strong>Detalle:</strong> '+escapeHtml(detail)+'</span><div class="actions" style="margin-top:10px"><button class="btn ghost" id="retryCentralBtn" type="button">Reintentar envío</button></div>';
-      $("#retryCentralBtn")?.addEventListener("click",sendCentralResults);
-      return false;
-    }
+  validateStudents(students);S.students=students;S.testMode=students.length===1&&students[0].testMode===true;S.mode='';if(S.testMode){$('pairMode').checked=false;$('secondId').hidden=true;}$('id1').value='';$('id2').value='';$('verifiedNames').textContent='Hola, '+students.map(s=>s.name+' · Grupo '+s.group).join(' / ');setStatus('identityMessage','');setStatus('modeMessage','');showScreen('menu');
+ }catch(e){if(gen===S.generation){S.students=[];setStatus('identityMessage',e.message,true);}}
+ finally{if(gen===S.generation){S.identifying=false;['verifyIds','id1','id2','pairMode'].forEach(id=>$(id).disabled=false);}}
+}
+function centralPayload(result,student){
+ return {id:student.studentId,modo_prueba:!!student.testMode,tema:result.theme,actividad:result.activity,puntuacion:result.score,maximo:10,porcentaje:result.percentage,fecha:result.finishedAt,submissionId:result.submissionId,idempotencyKey:result.submissionId+':'+student.studentId,protocolo:'pdi-intentos-v1',cursoEsperado:student.level,grupoEsperado:student.group,
+ evidencia:JSON.stringify({puntuacionesRetos:result.scores,pistasUsadas:result.hints.filter(Boolean).length,descuentoConsejos:result.hintPolicy.penaltyApplied,politicaConsejos:result.hintPolicy,intentosTotales:result.attempts.reduce((a,b)=>a+b,0),resultado:result.evidence}),
+ detalle:JSON.stringify({inicio:result.startedAt,fin:result.finishedAt,intentos:result.attempts,pistas:result.hints,submissionId:result.submissionId,idempotencyKey:result.submissionId+':'+student.studentId,titulo:result.title,appVersion:result.appVersion,urlOrigen:location.href})};
+}
+async function postResult(payload,endpoint){
+ const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),30000);
+ try{
+  const response=await fetch(endpoint,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(payload),redirect:'follow',signal:controller.signal});
+  if(!response.ok)throw Error('Error HTTP '+response.status+' al enviar el resultado.');
+  const data=await response.json();
+  if(data?.ok!==true||data.guardado!==true)throw Error(data?.error||'El servidor no confirmó el guardado del resultado.');
+  if(data.idempotencia!==true||data.idempotencyKey!==payload.idempotencyKey||data.submissionId!==payload.submissionId||normId(data.id)!==payload.id)throw Error('La confirmación no corresponde a este intento. El resultado sigue pendiente.');
+  return data;
+ }finally{clearTimeout(timer);}
+}
+async function transmit(){
+ if(S.mode!=='registered'||!S.pending||S.sending)return;
+ const gen=S.generation,pending=S.pending;S.sending=true;$('retrySend').disabled=true;$('retrySend').hidden=true;sendStatus('waiting','ENVIANDO…','Espera a que se confirme el resultado.');
+ try{
+  for(let i=0;i<pending.students.length;i++){
+   const student=pending.students[i];if(gen!==S.generation)return;if(S.confirmed.has(student.studentId))continue;
+   const data=await postResult(pending.payloads[i],pending.endpoint);if(gen!==S.generation)return;
+   if(normCourse(data.curso)!==normCourse(student.level)||normGroup(data.grupo)!==normGroup(student.group))throw Error('El curso o grupo de la confirmación no coincide con tu identificación. Avisa al profesor.');
+   S.confirmed.add(student.studentId);
   }
-  status.innerHTML="<strong>✅ Resultado enviado correctamente.</strong> Ya está registrado para el profesorado.";
-  return true;
+  if(gen!==S.generation)return;
+  sendStatus('sent','ENVIADO',S.testMode?'El servidor ha confirmado un resultado de prueba de NX-01. No cuenta para la nota.':pending.students.length===2?'El servidor ha confirmado el resultado para los dos ID.':'El servidor ha confirmado tu resultado.');S.pending=null;
+ }catch(e){if(gen===S.generation){const message=e.name==='AbortError'?'Se agotó el tiempo de espera.':e.message||'No se pudo confirmar el envío.';sendStatus('failed','ENVÍO PENDIENTE',message+'\nConfirmados: '+S.confirmed.size+' de '+pending.students.length+'. Tu resultado se conserva en esta pestaña. Pulsa Reintentar sin repetir los retos.');$('retrySend').hidden=false;}}
+ finally{if(gen===S.generation){S.sending=false;$('retrySend').disabled=false;}}
 }
-
-$("#finalizeBtn").addEventListener("click",async()=>{
-  if(!state.selfEval){
-    alert("Selecciona primero tu autoevaluación.");
-    return;
+function resetStudent(force=false){
+ if(S.pending||S.sending){showScreen('results');return;}
+ if(!force&&S.mode&&!S.result&&S.records.some(Boolean)&&!confirm('El intento sin terminar se borrará. ¿Cambiar de alumno?'))return;
+ S.generation++;S.mode='';S.students=[];S.testMode=false;S.result=null;S.pending=null;S.sending=false;S.identifying=false;S.reviewing=false;S.records=[];S.drafts=[];S.hints=[];S.confirmed=new Set();$('id1').value='';$('id2').value='';$('verifiedNames').textContent='';$('identityMessage').textContent='';$('pairMode').checked=false;$('secondId').hidden=true;['verifyIds','id1','id2','pairMode'].forEach(id=>$(id).disabled=false);$('evaluateMode').disabled=false;$('resultStage').innerHTML='';showScreen('entry');
+}
+function loadEndpoint(){
+ const configured=window.RESULTADOS_CONFIG?.APPS_SCRIPT_URL||window.RESULTS_ENDPOINT||DEFAULT_ENDPOINT;S.endpoint=validEndpoint(configured)?configured:'';
+}
+function actions(action,target){
+ if(action==='verifyIds')void verifyIds();
+ else if(action==='practiceMode')void chooseMode('free');
+ else if(action==='evaluateMode')void chooseMode('registered');
+ else if(action==='backMenu'){if(S.pending||S.sending){S.reviewing=false;showScreen('results');}else showScreen(S.students.length?'menu':'entry');}
+ else if(action==='goQuiz'){if(S.mode==='free')selectTab('retos');}
+ else if(action==='check')checkQuestion();
+ else if(action==='hint')requestHint();
+ else if(action==='reviewAttempt'){if(S.result){S.reviewing=true;S.index=0;selectTab('retos');}}
+ else if(action==='prev'){if(S.index>0){S.index--;S.point=null;renderQuiz();}}
+ else if(action==='next'){if(!S.records[S.index])return;if(S.index===APP.questions.length-1)finish();else {S.index++;S.point=null;renderQuiz();}}
+ else if(action==='endReview'){S.reviewing=false;showScreen('results');}
+ else if(action==='drawTool'){if(S.result||S.records[S.index])return;S.tool=target.dataset.tool;renderQuiz();}
+ else if(action==='undoDraw'){if(S.result||S.records[S.index])return;const h=S.history[S.index];if(h?.length){S.drafts[S.index]=h.pop();S.point=null;renderQuiz();}}
+ else if(action==='clearDraw'){if(S.result||S.records[S.index])return;(S.history[S.index]??=[]).push([...draft(APP.questions[S.index])]);S.drafts[S.index]=[];S.point=null;renderQuiz();}
+ else if(action==='retrySend')void transmit();
+ else if(action==='changeStudent')resetStudent();
+ else if(action==='downloadResult'){if(S.result)download(JSON.stringify({...S.result,studentIds:S.students.map(x=>x.studentId),registered:S.mode==='registered',confirmedIds:[...S.confirmed],pending:!!S.pending},null,2),'application/json',APP.id+'_resultado.json');}
+ else if(action==='exportBox'){labRefresh();const l=S.lab;if([$ ('labW'),$('labD'),$('labH')].map(e=>Number(e.value)).some((v,i)=>!Number.isFinite(v)||v<10||v>[120,80,60][i]))return;download(boxCleanSVG(l.w,l.d,l.h,true),'image/svg+xml','UD2_Mi_caja_vistas.svg');setStatus('labMessage','SVG descargado. Para comprobar 1:1 imprime al 100 % y mide una dimensión conocida.');}
+}
+function boot(){
+ renderExplore();loadEndpoint();showScreen('entry');
+ document.addEventListener('click',e=>{
+  const t=e.target.closest('[data-action],[data-tab]');
+  if(!t||t.disabled)return;
+  if(t.dataset.tab)selectTab(t.dataset.tab);else actions(t.dataset.action,t);
+ });
+ document.addEventListener('change',e=>{
+  const t=e.target;
+  if(t.id==='pairMode'){
+   $('secondId').hidden=!t.checked;
+   if(!t.checked)$('id2').value='';
   }
-  saveCompletedAttempt();
-  clearDraft(state.student.name,state.student.group);
-  const payload=resultPayload();
-  payload.finalized=true;
-  payload.finalizedAt=new Date().toISOString();
-  saveResultToClassHistory(payload);
-  if($("#teacherPanel").style.display==="block")renderTeacherDashboard();
-  $("#finalizeBtn").disabled=true;
-  $("#finalizeBtn").textContent="✓ Finalizada, guardada y enviada";
-  $("#finalizeNote").innerHTML="<strong>Actividad guardada.</strong> Enviando el resultado al registro central…";
-  const sent=await sendCentralResults();
-  if(sent){
-    $("#finalizeNote").innerHTML="<strong>Actividad finalizada.</strong> El resultado está guardado y enviado al profesor.";
-    alert("Actividad finalizada, guardada y enviada correctamente.");
-  }else{
-    $("#finalizeBtn").textContent="✓ Actividad guardada";
-    $("#finalizeNote").innerHTML="<strong>Actividad guardada localmente.</strong> El envío central ha fallado; pulsa “Reintentar envío”.";
+  if(t.dataset.choice!==undefined&&!S.records[S.index])S.drafts[S.index]=Number(t.dataset.choice);
+ });
+ document.addEventListener('keydown',e=>{
+  if(['id1','id2'].includes(e.target.id)&&e.key==='Enter'){
+   e.preventDefault();
+   verifyIds();
   }
-});
-
-function csvEscape(v){
-  const s = String(v ?? "");
-  return `"${s.replace(/"/g,'""')}"`;
-}
-function downloadTeacherCsv(){
-  const data=resultPayload();
-  const headers = [
-    "Alumno","Grupo","Fecha","Actividad","Nota","Aciertos","Total","Pistas","Tiempo_min",
-    ...data.details.map(d=>`P${d.index}_${d.id}`),
-    "Autoevaluacion","Reflexion"
-  ];
-  const row = [
-    data.student.name,data.student.group,data.student.date,data.appTitle,
-    data.score,data.earnedUnits,data.totalUnits,data.hintsUsed,data.elapsedMinutes,
-    ...data.details.map(d=>d.correct ? "Correcta" : `${Number(d.earned||0).toFixed(2).replace(".",",")} / ${d.possible}`),
-    data.selfEvaluation,data.reflection
-  ];
-  const csv = "\ufeff" + headers.map(csvEscape).join(";") + "\n" + row.map(csvEscape).join(";");
-  const blob = new Blob([csv], {type:"text/csv;charset=utf-8"});
-  const a=document.createElement("a");
-  a.href=URL.createObjectURL(blob);
-  a.download=`${APP_ID}_${slug(state.student.name||"Alumno")}_resultado.csv`;
-  document.body.appendChild(a); a.click(); a.remove();
-  setTimeout(()=>URL.revokeObjectURL(a.href),500);
+ });
+ window.addEventListener('beforeunload',e=>{if(S.pending){e.preventDefault();e.returnValue='';}});
+ window.addEventListener('pageshow',e=>{if(e.persisted)resetStudent(true);});
 }
 
-
-$("#savePngBtn").addEventListener("click",async()=>{
-  const data=resultPayload();
-  const width=1200, height=1500;
-  const canvas=document.createElement("canvas");
-  canvas.width=width; canvas.height=height;
-  const ctx=canvas.getContext("2d");
-  ctx.fillStyle="#f6f8fc"; ctx.fillRect(0,0,width,height);
-  ctx.fillStyle="#ffffff"; roundRect(ctx,60,60,1080,1380,34); ctx.fill();
-  ctx.fillStyle="#172033"; ctx.font="bold 54px Arial"; ctx.fillText("🔎 A1 · Detectives de Tecnología",110,150);
-  ctx.font="28px Arial"; ctx.fillStyle="#334155";
-  drawText(ctx,`Alumno/a: ${data.student.name}`,110,220,950,38);
-  drawText(ctx,`Grupo: ${data.student.group||"—"}     Fecha: ${data.student.date||"—"}`,110,270,950,38);
-  ctx.fillStyle="#eef3ff"; roundRect(ctx,110,320,980,180,24); ctx.fill();
-  ctx.fillStyle="#172033"; ctx.font="bold 30px Arial"; ctx.fillText("Resumen PDI · Actividad A1",150,375);
-  ctx.font="26px Arial"; ctx.fillText(`Retos superados: ${questions.length}`,150,425);
-  ctx.fillText(`Pistas utilizadas: ${data.hintsUsed}`,150,468);
-  ctx.font="bold 34px Arial"; ctx.fillText(`Nota obtenida: ${Number(data.score||0).toFixed(2).replace(".",",")} / 10`,150,520);
-  ctx.font="bold 30px Arial"; ctx.fillText("Autoevaluación",110,610);
-  ctx.font="25px Arial"; drawText(ctx,data.selfEvaluation||"Sin seleccionar",110,660,980,35);
-  ctx.font="bold 30px Arial"; ctx.fillText("¿Qué he aprendido?",110,750);
-  ctx.font="24px Arial"; drawText(ctx,data.reflection||"Sin respuesta",110,800,980,34);
-  ctx.fillStyle="#eaf7ff"; roundRect(ctx,110,1050,980,170,24); ctx.fill();
-  ctx.fillStyle="#172033"; ctx.font="bold 28px Arial"; ctx.fillText("Actividad corregida internamente",150,1110);
-  ctx.font="24px Arial"; drawText(ctx,"Siguiente paso: completa la ficha escrita F1 · Detectives de Tecnología. La calificación global del bloque aún no se calcula.",150,1160,870,34);
-  ctx.fillStyle="#65708a"; ctx.font="20px Arial"; ctx.fillText("1.º ESO · Tecnología y Digitalización",110,1360);
-
-  const link=document.createElement("a");
-  link.download=`${APP_ID}_${slug(state.student.name||"Alumno")}.png`;
-  link.href=canvas.toDataURL("image/png");
-  link.click();
-});
-
-function roundRect(ctx,x,y,w,h,r){
-  ctx.beginPath();
-  ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);
-  ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath();
+function hintFor(q){return q.hint||q.explain||'Revisa los datos importantes del reto antes de responder.';}
+function deepFreeze(obj){if(obj&&typeof obj==='object'&&!Object.isFrozen(obj)){Object.freeze(obj);Object.values(obj).forEach(deepFreeze);}return obj;}
+function showScreen(screen){
+ S.screen=screen;const identified=S.students.length>0;document.body.classList.toggle('is-identified',identified);
+ $('testBanner').hidden=!identified||!S.testMode;
+ $('registration').hidden=screen!=='entry';$('modeStage').hidden=screen!=='menu';$('sessionBar').hidden=!identified||!['explore','quiz','results'].includes(screen);
+ $('explore').hidden=screen!=='explore';$('retos').hidden=!['quiz','results'].includes(screen);$('quizStage').hidden=screen!=='quiz';$('resultStage').hidden=screen!=='results';
+ $('flowLabel').textContent=S.mode==='registered'?(S.testMode?'ACTIVIDAD EVALUABLE · Envío de prueba':'ACTIVIDAD EVALUABLE · Cuenta para la nota'):'PRACTICAR SIN NOTA';$('flowLabel').className='flow-label'+(S.mode==='registered'?' evaluable':'');
+ $('evaluateMode').querySelector('em').textContent=S.testMode?'PRUEBA TÉCNICA · NO CUENTA PARA LA NOTA':'CUENTA PARA LA NOTA';$('evaluateMode').querySelector('span').textContent=S.testMode?'Recorre los 8 retos y comprueba el envío con NX-01. El resultado se marcará como prueba.':'8 retos · 10 puntos. Al finalizar se enviará el resultado de cada ID validado.';
+ $('sessionName').textContent=S.students.map(s=>s.name+' · Grupo '+s.group).join(' / ');
+ if(screen==='entry')$('id1').focus();
 }
-function drawText(ctx,text,x,y,maxWidth,lineHeight){
-  const words=String(text).split(" "); let line="", yy=y;
-  for(const word of words){
-    const test=line+word+" ";
-    if(ctx.measureText(test).width>maxWidth && line){
-      ctx.fillText(line,x,yy); line=word+" "; yy+=lineHeight;
-    }else line=test;
-  }
-  ctx.fillText(line,x,yy);
+async function chooseMode(mode){
+ if(!S.students.length){showScreen('entry');return;}
+ if(S.pending||S.sending){showScreen('results');sendStatus('failed','RESULTADO PENDIENTE','Pulsa Reintentar para confirmar el envío antes de empezar otra actividad.');return;}
+ if(S.mode===mode&&!S.result){selectTab(mode==='free'?'explore':'retos');return;}
+ if(S.mode&&S.records.some(Boolean)&&!S.result&&!confirm('El intento actual quedará sin enviar. ¿Cambiar de modo y empezar desde el principio?'))return;
+ if(mode==='registered'){
+  const gen=S.generation;$('evaluateMode').disabled=true;setStatus('modeMessage','Comprobando que el registro está disponible…');
+  try{const data=await centralGet({action:'ping'});if(gen!==S.generation)return;if(data?.ok!==true||data?.idempotencia!==true||data?.protocolo!=='pdi-intentos-v1')throw Error('Tu profesor o profesora debe activar el registro de esta actividad. Mientras tanto puedes practicar sin nota.');}
+  catch(e){if(gen===S.generation)setStatus('modeMessage',e.message,true);return;}
+  finally{if(gen===S.generation)$('evaluateMode').disabled=false;}
+ }
+ setStatus('modeMessage','');S.mode=mode;startAttempt();selectTab(mode==='free'?'explore':'retos');
 }
-function escapeHtml(s){
-  return String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));
+function requestHint(){
+ if(!S.mode||S.result||S.records[S.index]||S.hints[S.index])return;
+ S.hints[S.index]=true;renderQuiz();
 }
+function sendStatus(state,title,message){const e=$('sendMessage');if(!e)return;e.className='send-banner '+state;e.replaceChildren();const strong=document.createElement('strong');strong.textContent=title;e.append(strong,document.createTextNode(message));}
 
+if(typeof document!=='undefined')boot();
 
-function buildStoredTeacherPrintSheet(data){
-  const rows=(data.details||[]).map(d=>`
-    <tr><td>${d.index}</td><td>${questions[d.index-1]?.title||d.id}</td>
-    <td>${`${Number(d.earned||0).toFixed(2).replace(".",",")} pt · ${d.attempts||0} intento(s)`}</td><td>${d.hint?"Sí":"No"}</td></tr>`).join("");
-  $("#printSheet").innerHTML=`
-    <h1>Informe docente · A1 Detectives de Tecnología</h1>
-    <div class="p-card">
-      <strong>Alumno/a:</strong> ${escapeHtml(data.student?.name||"—")}<br>
-      <strong>Grupo:</strong> ${escapeHtml(data.student?.group||"—")}<br>
-      <strong>Nota:</strong> ${Number(data.score||0).toFixed(2).replace(".",",")} / 10<br>
-      <strong>Pistas:</strong> ${data.hintsUsed||0}<br>
-      <strong>Tiempo:</strong> ${data.elapsedMinutes||0} min
-    </div>
-    <table><thead><tr><th>#</th><th>Reto</th><th>Resultado</th><th>Pista</th></tr></thead><tbody>${rows}</tbody></table>`;
-}
-function buildClassPrintSheet(){
-  const filter = $("#teacherGroupFilter").value;
-  const all=loadAllResults();
-  const rows=(filter==="ALL"?all:all.filter(r=>r.student?.group===filter));
-  $("#printSheet").innerHTML=`
-    <h1>Resultados · A1 Detectives de Tecnología</h1>
-    <p><strong>Grupo:</strong> ${filter==="ALL"?"Todos":filter}</p>
-    <table><thead><tr><th>Alumno</th><th>Grupo</th><th>Nota</th><th>Puntos</th><th>Pistas</th><th>Tiempo</th></tr></thead>
-    <tbody>${rows.map(r=>`<tr><td>${escapeHtml(r.student?.name||"—")}</td><td>${escapeHtml(r.student?.group||"—")}</td><td>${Number(r.score||0).toFixed(2).replace(".",",")}</td><td>${r.earnedUnits}/${r.totalUnits}</td><td>${r.hintsUsed||0}</td><td>${r.elapsedMinutes||0} min</td></tr>`).join("")}</tbody></table>`;
-}
+</script></body></html>
 
-/* Minimal XLSX writer: ZIP store mode, no external libraries */
-function crc32(bytes){
-  let table=crc32.table;
-  if(!table){
-    table=crc32.table=new Uint32Array(256);
-    for(let n=0;n<256;n++){let c=n;for(let k=0;k<8;k++)c=(c&1)?0xEDB88320^(c>>>1):c>>>1;table[n]=c>>>0;}
-  }
-  let c=0xFFFFFFFF;
-  for(const b of bytes)c=table[(c^b)&0xFF]^(c>>>8);
-  return (c^0xFFFFFFFF)>>>0;
-}
-function u16(n){return new Uint8Array([n&255,(n>>>8)&255]);}
-function u32(n){return new Uint8Array([n&255,(n>>>8)&255,(n>>>16)&255,(n>>>24)&255]);}
-function concatArrays(arrs){
-  const len=arrs.reduce((s,a)=>s+a.length,0), out=new Uint8Array(len); let o=0;
-  for(const a of arrs){out.set(a,o);o+=a.length;} return out;
-}
-function zipStore(files){
-  const enc=new TextEncoder(); const locals=[], centrals=[]; let offset=0;
-  for(const f of files){
-    const name=enc.encode(f.name), data=f.data instanceof Uint8Array?f.data:enc.encode(f.data);
-    const crc=crc32(data);
-    const local=concatArrays([u32(0x04034b50),u16(20),u16(0),u16(0),u16(0),u16(0),u32(crc),u32(data.length),u32(data.length),u16(name.length),u16(0),name,data]);
-    locals.push(local);
-    const central=concatArrays([u32(0x02014b50),u16(20),u16(20),u16(0),u16(0),u16(0),u16(0),u32(crc),u32(data.length),u32(data.length),u16(name.length),u16(0),u16(0),u16(0),u16(0),u32(0),u32(offset),name]);
-    centrals.push(central); offset+=local.length;
-  }
-  const centralBlock=concatArrays(centrals);
-  const end=concatArrays([u32(0x06054b50),u16(0),u16(0),u16(files.length),u16(files.length),u32(centralBlock.length),u32(offset),u16(0)]);
-  return concatArrays([...locals,centralBlock,end]);
-}
-function xmlEsc(s){return String(s??"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
-function colName(n){let s="";while(n){n--;s=String.fromCharCode(65+n%26)+s;n=Math.floor(n/26);}return s;}
-function sheetXml(rows){
-  let xml='<?xml version="1.0" encoding="UTF-8" standalone="yes"?>';
-  xml+='<worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"><sheetData>';
-  rows.forEach((row,ri)=>{
-    xml+=`<row r="${ri+1}">`;
-    row.forEach((v,ci)=>{
-      const ref=colName(ci+1)+(ri+1);
-      if(typeof v==="number" && Number.isFinite(v)) xml+=`<c r="${ref}"><v>${v}</v></c>`;
-      else xml+=`<c r="${ref}" t="inlineStr"><is><t>${xmlEsc(v)}</t></is></c>`;
-    });
-    xml+='</row>';
-  });
-  xml+='</sheetData></worksheet>'; return xml;
-}
-function downloadExcelByGroups(){
-  const all=loadAllResults();
-  if(!all.length){alert("Todavía no hay resultados guardados.");return;}
-  const groups=["1ºA","1ºB","1ºC","1ºD","1ºE","1ºF","1ºG","1ºH"].filter(g=>all.some(r=>r.student?.group===g));
-  const sheets=groups.map((g,i)=>({g,id:i+1,rows:[
-    ["Alumno","Grupo","Fecha","Nota_A1","Puntos_retos","Total_retos","Pistas","Tiempo_min","Autoevaluacion","Reflexion",
-      ...questions.map((q,qi)=>`P${qi+1}`)],
-    ...all.filter(r=>r.student?.group===g).sort((a,b)=>(a.student?.name||"").localeCompare(b.student?.name||"")).map(r=>[
-      r.student?.name||"",r.student?.group||"",r.student?.date||"",Number(r.score||0),r.earnedUnits||0,r.totalUnits||0,
-      r.hintsUsed||0,r.elapsedMinutes||0,r.selfEvaluation||"",r.reflection||"",
-      ...(r.details||[]).map(d=>`${Number(d.earned||0).toFixed(2).replace(".",",")} pt · ${d.attempts||0} intento(s)`)
-    ])
-  ]}));
-  const workbook='<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
-    +'<workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"><sheets>'
-    +sheets.map(s=>`<sheet name="${xmlEsc(s.g)}" sheetId="${s.id}" r:id="rId${s.id}"/>`).join("")
-    +'</sheets></workbook>';
-  const rels='<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
-    +'<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">'
-    +sheets.map(s=>`<Relationship Id="rId${s.id}" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet${s.id}.xml"/>`).join("")
-    +'</Relationships>';
-  const rootRels='<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
-    +'<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="xl/workbook.xml"/></Relationships>';
-  const types='<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
-    +'<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/>'
-    +sheets.map(s=>`<Override PartName="/xl/worksheets/sheet${s.id}.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/>`).join("")
-    +'</Types>';
-  const files=[
-    {name:"[Content_Types].xml",data:types},
-    {name:"_rels/.rels",data:rootRels},
-    {name:"xl/workbook.xml",data:workbook},
-    {name:"xl/_rels/workbook.xml.rels",data:rels},
-    ...sheets.map(s=>({name:`xl/worksheets/sheet${s.id}.xml`,data:sheetXml(s.rows)}))
-  ];
-  const bytes=zipStore(files);
-  const blob=new Blob([bytes],{type:"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
-  const a=document.createElement("a");
-  a.href=URL.createObjectURL(blob); a.download=`${APP_ID}_resultados_por_grupos.xlsx`;
-  document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(a.href),500);
-}
-
-/* Teacher mode */
-$("#teacherOpen").addEventListener("click",()=>{
-  $("#teacherModal").classList.add("show");
-  $("#teacherModal").setAttribute("aria-hidden","false");
-  if($("#teacherPanel").style.display==="block"){
-    renderTeacherDashboard();
-  }else{
-    $("#teacherPin").focus();
-  }
-});
-$("#teacherClose").addEventListener("click",closeTeacher);
-$("#teacherModal").addEventListener("click",e=>{if(e.target.id==="teacherModal")closeTeacher()});
-function closeTeacher(){
-  $("#teacherModal").classList.remove("show");
-  $("#teacherModal").setAttribute("aria-hidden","true");
-}
-$("#teacherUnlock").addEventListener("click",()=>{
-  if($("#teacherPin").value!==getTeacherPin()){alert("Clave incorrecta.");return;}
-  renderTeacherDashboard();
-  $("#teacherLock").style.display="none";
-  $("#teacherPanel").style.display="block";
-});
-
-$("#teacherGroupFilter").addEventListener("change",()=>{ selectedTeacherResult=null; $("#studentDetailBlock").style.display="none"; renderTeacherDashboard(); });
-
-$("#teacherExcelBtn").addEventListener("click",downloadExcelByGroups);
-$("#teacherPdfBtn").addEventListener("click",()=>{
-  if(selectedTeacherResult){
-    buildStoredTeacherPrintSheet(selectedTeacherResult);
-  }else{
-    buildClassPrintSheet();
-  }
-  window.print();
-});
-$("#changePinBtn").addEventListener("click",()=>{
-  const current = prompt("Introduce la contraseña docente actual:");
-  if(current===null) return;
-  if(current!==getTeacherPin()){ alert("La contraseña actual no es correcta."); return; }
-  const next = prompt("Nueva contraseña docente (mínimo 4 caracteres):");
-  if(next===null) return;
-  if(next.trim().length<4){ alert("La nueva contraseña debe tener al menos 4 caracteres."); return; }
-  const confirmNext = prompt("Repite la nueva contraseña:");
-  if(confirmNext!==next){ alert("Las contraseñas no coinciden."); return; }
-  localStorage.setItem(APP_ID+"_teacher_pin", next);
-  $("#teacherPin").value="";
-  alert("Contraseña docente cambiada en este navegador.");
-});
-
-function getAnswerText(question, answer){
-  if(question.type==="single"){
-    if(!Number.isInteger(answer)) return "Sin responder";
-    return question.options[answer] ? question.options[answer][1] : "Sin responder";
-  }
-  if(question.type==="tf"){
-    if(!Array.isArray(answer)) return "Sin responder";
-    return answer.map((v,i)=>`${i+1}: ${v===true?"Verdadero":v===false?"Falso":"—"}`).join(" · ");
-  }
-  return "—";
-}
-
-let selectedTeacherResult = null;
-
-function renderTeacherDashboard(){
-  const all = loadAllResults();
-  const filter = $("#teacherGroupFilter") ? $("#teacherGroupFilter").value : "ALL";
-  const rows = filter==="ALL" ? all : all.filter(r=>r.student?.group===filter);
-
-  $("#classCount").textContent = rows.length;
-  const avg = rows.length ? rows.reduce((s,r)=>s+Number(r.score||0),0)/rows.length : 0;
-  $("#classAverage").textContent = rows.length ? avg.toFixed(2).replace(".",",") : "—";
-  $("#classHints").textContent = rows.reduce((s,r)=>s+Number(r.hintsUsed||0),0);
-
-  $("#classResultsTable").innerHTML = rows.length ? rows
-    .sort((a,b)=>(a.student?.group||"").localeCompare(b.student?.group||"") || (a.student?.name||"").localeCompare(b.student?.name||""))
-    .map((r,i)=>`
-      <tr>
-        <td>${escapeHtml(r.student?.name||"—")}</td>
-        <td>${escapeHtml(r.student?.group||"—")}</td>
-        <td><strong>${Number(r.score||0).toFixed(2).replace(".",",")}</strong></td>
-        <td>${r.earnedUnits}/${r.totalUnits}</td>
-        <td>${r.hintsUsed||0}</td>
-        <td>${r.elapsedMinutes||0} min</td>
-        <td><button class="btn ghost" style="padding:7px 10px;min-height:auto" data-view-result="${i}">Ver</button></td>
-      </tr>`).join("")
-    : `<tr><td colspan="7" class="small">Todavía no hay resultados guardados para este grupo en este dispositivo.</td></tr>`;
-
-  const sortedRows = rows
-    .sort((a,b)=>(a.student?.group||"").localeCompare(b.student?.group||"") || (a.student?.name||"").localeCompare(b.student?.name||""));
-  $$("#classResultsTable [data-view-result]").forEach(btn=>{
-    btn.addEventListener("click",()=>{
-      selectedTeacherResult = sortedRows[Number(btn.dataset.viewResult)];
-      renderStoredStudentDetail(selectedTeacherResult);
-    });
-  });
-}
-
-function renderStoredStudentDetail(data){
-  if(!data) return;
-  $("#studentDetailBlock").style.display="block";
-  $("#studentDetailTitle").textContent = `${data.student?.name||"Alumno"} · ${data.student?.group||""}`;
-  $("#teacherScore").textContent = `${Number(data.score||0).toFixed(2).replace(".",",")} / 10`;
-  $("#teacherCorrect").textContent = `${data.earnedUnits}/${data.totalUnits}`;
-  $("#teacherHints").textContent = data.hintsUsed||0;
-  $("#teacherTime").textContent = `${data.elapsedMinutes||0} min`;
-  $("#teacherTable").innerHTML = (data.details||[]).map(d=>{
-    const q = questions[d.index-1];
-    return `
-    <tr>
-      <td>${d.index}</td>
-      <td><strong>${q.title}</strong><br><span class="small">${q.text}</span></td>
-      <td>${getAnswerText(q, d.answer)}</td>
-      <td><span class="pill ${d.correct?'ok':'bad'}">${d.correct?'Correcta':`${Number(d.earned||0).toFixed(2).replace(".",",")} / ${d.possible}`}</span></td>
-      <td>${d.hint?'<span class="pill hint">Sí</span>':'—'}</td>
-    </tr>`;
-  }).join("");
-}
-</script>
-</body>
-</html>
+<style>.q-layout{grid-template-columns:1fr}.q-layout .sketch:empty{display:none}.hero{grid-template-columns:1fr}.hero-art{display:none}</style>
