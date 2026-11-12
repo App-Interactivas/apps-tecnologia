@@ -1,10 +1,50 @@
-/* Navegación de la revisión local. No escribe datos en servicios externos. */
+/* Navegación del portal: temas en panel lateral y presentación general. */
 (()=>{'use strict';
 const cfg=JSON.parse(document.getElementById('portal-config').textContent);
 const root=document.getElementById('pageRoot');
 const control=window.PortalControl;
 let states=control.snapshot().config.themes[cfg.course]||{};
 let edit=false;
+const resourceOrigins=new WeakMap();
+const resourceCard=button=>resourceOrigins.get(button)||button?.closest('.card');
+let themeCard=null,themeOpener=null;
+const themeDialog=document.createElement('dialog');
+themeDialog.id='themeDialog';themeDialog.className='theme-dialog';themeDialog.setAttribute('aria-labelledby','themeTitle');
+themeDialog.innerHTML='<header class="theme-dialog-top"><div><span class="num" id="themeContext"></span><h2 id="themeTitle"></h2></div><button type="button" id="themeClose" aria-label="Cerrar recursos del tema">Cerrar ×</button></header><div class="theme-dialog-body"><p id="themeDescription"></p><div class="resource-grid" id="themeResources"></div></div>';
+document.body.append(themeDialog);
+function layoutTheme(){
+ if(!themeDialog.open||!themeCard)return;
+ const r=themeCard.getBoundingClientRect(),vw=document.documentElement.clientWidth,vh=window.innerHeight,margin=16,gap=16;
+ const right=vw-r.right-margin-gap,left=r.left-margin-gap,side=right>=left?'right':'left';
+ const compact=vw<=720,space=Math.max(right,left),adjacent=!compact&&space>=360;
+ const width=compact?Math.min(540,vw-24):Math.min(540,adjacent?space:vw-2*margin);
+ let x=adjacent?(side==='right'?r.right+gap:r.left-gap-width):(compact?(vw-width)/2:side==='right'?r.left:r.right-width);
+ x=Math.max(compact?12:margin,Math.min(x,vw-width-(compact?12:margin)));
+ themeDialog.dataset.side=compact?'center':side;themeDialog.style.width=width+'px';themeDialog.style.left=x+'px';
+ const height=themeDialog.getBoundingClientRect().height;
+ themeDialog.style.top=Math.max(12,Math.min(compact?(vh-height)/2:r.top,vh-height-12))+'px';
+}
+function openTheme(card,opener){
+ if(!available(card))return;
+ themeCard?.classList.remove('theme-selected');themeCard=card;themeOpener=opener;
+ document.querySelectorAll('.card [data-toggle-card]').forEach(b=>b.setAttribute('aria-expanded','false'));
+ themeCard.classList.add('theme-selected');themeOpener.setAttribute('aria-expanded','true');
+ document.getElementById('themeContext').textContent=card.dataset.theme?'Tema '+card.dataset.theme:'Proyecto de taller';
+ document.getElementById('themeTitle').textContent=card.querySelector('h3').textContent;
+ document.getElementById('themeDescription').textContent=card.querySelector('.summary p')?.textContent||'Elige el recurso que quieres abrir.';
+ const buttons=[...card.querySelectorAll('.resource-grid [data-kind]')].map(original=>{
+  const b=original.cloneNode(true);b.removeAttribute('id');b.setAttribute('aria-expanded','false');b.setAttribute('aria-controls','resourceDialog');b.setAttribute('aria-haspopup','dialog');
+  resourceOrigins.set(b,card);b.addEventListener('click',()=>openResource(b));return b;
+ });
+ document.getElementById('themeResources').replaceChildren(...buttons);
+ if(!themeDialog.open)themeDialog.showModal();syncDialogScroll();layoutTheme();
+}
+document.getElementById('themeClose').addEventListener('click',()=>themeDialog.close());
+themeDialog.addEventListener('close',()=>{
+ if(resourceDialog.open&&resourceCard(resourceOpener)===themeCard)resourceDialog.close();
+ themeCard?.classList.remove('theme-selected');themeOpener?.setAttribute('aria-expanded','false');syncDialogScroll();themeOpener?.focus({preventScroll:true});themeCard=null;
+});
+window.addEventListener('resize',()=>{if(themeDialog.open)layoutTheme()});
 function toast(message){const el=document.getElementById('toast');el.setAttribute('role','status');el.textContent=message;el.classList.add('show');clearTimeout(window._toastTimer);window._toastTimer=setTimeout(()=>el.classList.remove('show'),2500)}
 function expanded(card,value){card.classList.toggle('open',value);const b=card.querySelector('[data-toggle-card]');if(b)b.setAttribute('aria-expanded',String(value))}
 function available(card){return !card.dataset.state||card.dataset.state==='active'||edit}
@@ -14,44 +54,40 @@ document.querySelectorAll('[data-theme]').forEach(card=>{
  sel.id='state-'+id;card.querySelector('.statebox label').setAttribute('for',sel.id);
  sel.addEventListener('change',async()=>{if(!edit)return;const desired=sel.value;sel.value=card.dataset.state;try{await control.patch({op:'theme',course:cfg.course,theme:id,state:desired});toast('Estado guardado para todos los dispositivos.')}catch(error){toast(error.message);sel.value=card.dataset.state;if(error.code==='AUTH_REQUIRED')leaveEdit()}});
 });
-document.querySelectorAll('[data-toggle-card]').forEach(b=>b.addEventListener('click',()=>{const card=b.closest('.card');if(!available(card))return;if(card.id==='comic-card'&&document.querySelector('.annual-row')){openAnnual('comic');return}expanded(card,!card.classList.contains('open'))}));
+document.querySelectorAll('[data-toggle-card]').forEach(b=>{
+ const card=b.closest('.card');if(card.querySelector('.resource-grid')){b.setAttribute('aria-controls','themeDialog');b.setAttribute('aria-haspopup','dialog')}
+ b.addEventListener('click',()=>{if(!available(card))return;if(card.id==='comic-card'&&document.querySelector('.annual-row')){openAnnual('comic');return}if(card.querySelector('.resource-grid')){openTheme(card,b);return}expanded(card,!card.classList.contains('open'))});
+});
 const escapeHtml=s=>String(s).replace(/[&<>"']/g,x=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[x]));
 const localUrl=u=>/^(blob:|data:)/.test(u)?u:cfg.prefix+u;
 function resourceLink(item,primary=false,tag=''){
  const url=item.url.startsWith('http')?item.url:localUrl(item.url),pdf=item.format==='PDF'||/\.pdf(?:$|[?#])/.test(item.url),name=item.url.split('/').pop().split(/[?#]/)[0];
  return `<div class="resource-unit"><a class="resource-link ${primary?'primary':''}" href="${escapeHtml(url)}" target="_blank" rel="noopener">${tag?'<span class="resource-tag">'+escapeHtml(tag)+'</span>':''}${escapeHtml(item.label)}<small>${pdf?'Abrir PDF ↗':'Abrir actividad ↗'}</small></a>${pdf?'<a class="resource-download" href="'+escapeHtml(url)+'" download="'+escapeHtml(name)+'" aria-label="Descargar '+escapeHtml(item.label)+' en PDF">↓ Descargar PDF</a>':''}</div>`;
 }
-function itemsFor(key,kind){return ({apps:cfg.activities,presentaciones:cfg.presentations,temario:cfg.temario,fichas:cfg.fichas}[kind]||{})[key]||[]}
-function renderPanel(card,kind){
- const key=cfg.course+'-t'+card.dataset.theme;
- if(kind==='apps'){const list=cfg.activities[key]||[];return '<h4>Actividades interactivas</h4>'+(list.length?'<div class="resource-list">'+list.map(x=>resourceLink(x)).join('')+'</div>':'<p class="resource-pending">Todavía no hay actividades vinculadas a este tema.</p>')}
- if(kind==='presentaciones'){
-  const list=cfg.presentations[key]||[];
-  return '<h4>Presentaciones</h4>'+(list.length?resourceLink(list[0],true):'<p class="resource-pending">Presentación general · pendiente de vincular.</p>')+'<div class="resource-subtitle">Presentaciones parciales</div>'+(list.length>1?'<div class="resource-list">'+list.slice(1).map(x=>resourceLink(x)).join('')+'</div>':'<p class="resource-pending">Todavía no hay presentaciones parciales vinculadas.</p>')
- }
- return `<h4>${kind==='fichas'?'Fichas y documentos':'Juego'}</h4><p class="resource-pending">Este recurso está pendiente de vincular.</p>`;
+function itemsFor(key,kind){
+ const list=({apps:cfg.activities,presentaciones:cfg.presentations,temario:cfg.temario,fichas:cfg.fichas}[kind]||{})[key]||[];
+ return kind==='presentaciones'?list.filter(x=>x.primary===true||/^presentaci[oó]n general\b/i.test(x.label)).slice(0,1):list;
 }
 const resourceDialog=document.getElementById('resourceDialog'),resourceBody=document.getElementById('resourceBody');
 let resourceItems=[],resourcePage=0,resourceOpener=null,resourceKind='';
 function resourcePageSize(){const cols=window.innerWidth<=760?2:3;const rows=Math.min(3,Math.max(1,Math.floor((window.innerHeight*.90-195)/165)));return cols*rows}
 function renderResources(){
  const size=resourcePageSize(),pages=Math.max(1,Math.ceil(resourceItems.length/size));resourcePage=Math.min(resourcePage,pages-1);
- const hasGeneral=resourceItems.some(x=>x.primary||x.label==='Presentación general');
- const note=resourceKind==='presentaciones'&&resourceItems.length&&!hasGeneral?'<p class="resource-note">Presentaciones parciales disponibles. La presentación general se incorporará cuando esté revisada.</p>':'';
- resourceBody.innerHTML=note+(resourceItems.length?'<div class="resource-list">'+resourceItems.slice(resourcePage*size,(resourcePage+1)*size).map(x=>resourceLink(x,x.primary||x.label==='Presentación general',resourceKind==='presentaciones'?(x.primary||x.label==='Presentación general'?'General':'Parcial'):'')).join('')+'</div>':'<p class="resource-pending">Este recurso está pendiente de vincular.</p>');
+ resourceDialog.classList.toggle('general-presentation',resourceKind==='presentaciones');
+ resourceBody.innerHTML=resourceItems.length?'<div class="resource-list">'+resourceItems.slice(resourcePage*size,(resourcePage+1)*size).map(x=>resourceLink(x,x.primary||resourceKind==='presentaciones',resourceKind==='presentaciones'?'Presentación general':'')).join('')+'</div>':'<p class="resource-pending">'+(resourceKind==='presentaciones'?'La presentación general de este tema está pendiente de incorporar.':'Este recurso está pendiente de vincular.')+'</p>';
  document.getElementById('resourceNav').hidden=pages===1;document.getElementById('resourceCount').textContent=`${resourcePage+1} / ${pages}`;document.getElementById('resourcePrev').disabled=resourcePage===0;document.getElementById('resourceNext').disabled=resourcePage===pages-1;
 }
 function openResource(b){
- const card=b.closest('.card');if(!available(card))return;
+ const card=resourceCard(b);if(!card||!available(card))return;
  const key=card.dataset.resourceKey||cfg.course+'-t'+card.dataset.theme,kind=b.dataset.kind;
  resourceItems=itemsFor(key,kind);
  resourcePage=0;resourceOpener=b;resourceKind=kind;
  document.querySelectorAll('[data-kind]').forEach(x=>x.setAttribute('aria-expanded',String(x===b)));
- document.getElementById('resourceTitle').textContent={apps:'Actividades interactivas',presentaciones:'Presentaciones',temario:'Temario',fichas:'Fichas y documentos'}[kind];
+ document.getElementById('resourceTitle').textContent={apps:'Actividades interactivas',presentaciones:'Presentación general',temario:'Temario',fichas:'Fichas y documentos'}[kind];
  document.getElementById('resourceContext').textContent=`${card.dataset.theme?'Tema '+card.dataset.theme:'Proyecto de taller'} · ${card.querySelector('h3').textContent}`;
  renderResources();if(!resourceDialog.open)resourceDialog.showModal();document.body.style.overflow='hidden';
 }
-document.querySelectorAll('[data-kind]').forEach(b=>{b.setAttribute('aria-expanded','false');b.addEventListener('click',()=>openResource(b))});
+document.querySelectorAll('[data-kind]').forEach(b=>{if(b.dataset.kind==='presentaciones')b.textContent='Presentación';b.setAttribute('aria-expanded','false');b.addEventListener('click',()=>openResource(b))});
 function closeOnBackdrop(dialog){
  let startedOutside=false;
  const outside=e=>{const r=dialog.getBoundingClientRect();return e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom};
@@ -96,8 +132,9 @@ function openAnnual(kind){
 }
 
 closeOnBackdrop(resourceDialog);
+closeOnBackdrop(themeDialog);
 document.getElementById('resourceClose').addEventListener('click',()=>resourceDialog.close());
-resourceDialog.addEventListener('close',()=>{syncDialogScroll();document.querySelectorAll('[data-kind]').forEach(x=>x.setAttribute('aria-expanded','false'));resourceOpener?.focus()});
+resourceDialog.addEventListener('close',()=>{syncDialogScroll();document.querySelectorAll('[data-kind]').forEach(x=>x.setAttribute('aria-expanded','false'));const target=resourceOpener?.closest('dialog')?.open?resourceOpener:resourceCard(resourceOpener)?.querySelector('[data-toggle-card]');target?.focus({preventScroll:true})});
 document.getElementById('resourcePrev').addEventListener('click',()=>{resourcePage=Math.max(0,resourcePage-1);renderResources()});document.getElementById('resourceNext').addEventListener('click',()=>{resourcePage++;renderResources()});
 window.addEventListener('resize',()=>{if(resourceDialog.open)renderResources()});
 
@@ -105,7 +142,7 @@ const editBtn=document.getElementById('editBtn'),modal=document.getElementById('
 modal.setAttribute('role','dialog');modal.setAttribute('aria-modal','true');pw.setAttribute('aria-label','Contraseña docente');
 function closeAuth(){modal.classList.remove('show');pw.value='';editBtn.focus()}
 function enterEdit(){edit=true;document.getElementById('sharedStatus').hidden=false;root.classList.add('teacher-mode');editBtn.classList.add('on');editBtn.textContent='Salir de edición';toast('Modo docente activo')}
-function leaveEdit(){edit=false;document.getElementById('sharedStatus').hidden=true;if(resourceDialog.open&&resourceOpener&&!available(resourceOpener.closest('.card')))resourceDialog.close();root.classList.remove('teacher-mode');editBtn.classList.remove('on');editBtn.textContent='✎ Editar';document.querySelectorAll('[data-theme]').forEach(c=>{if(c.dataset.state!=='active')expanded(c,false)});}
+function leaveEdit(){edit=false;document.getElementById('sharedStatus').hidden=true;if(resourceDialog.open&&resourceOpener&&!available(resourceCard(resourceOpener)))resourceDialog.close();if(themeDialog.open&&themeCard&&!available(themeCard))themeDialog.close();root.classList.remove('teacher-mode');editBtn.classList.remove('on');editBtn.textContent='✎ Editar';document.querySelectorAll('[data-theme]').forEach(c=>{if(c.dataset.state!=='active')expanded(c,false)});}
 editBtn.addEventListener('click',async()=>{if(edit){leaveEdit();return}try{await control.ensureReady();if(control.authenticated())enterEdit();else{modal.classList.add('show');pw.value='';pw.focus()}}catch(error){toast(error.message)}});
 form.addEventListener('submit',async e=>{e.preventDefault();const submit=form.querySelector('[type="submit"]');submit.disabled=true;try{await control.login(pw.value);closeAuth();enterEdit()}catch(error){toast(error.message)}finally{pw.value='';submit.disabled=false}});document.getElementById('cancel').addEventListener('click',closeAuth);
 modal.addEventListener('click',e=>{if(e.target===modal)closeAuth()});
@@ -179,7 +216,8 @@ control.subscribe(state=>{
  states=state.config.themes[cfg.course]||{};
  document.querySelectorAll('[data-theme]').forEach(card=>{const value=states[card.dataset.theme];if(value)card.dataset.state=value;const sel=card.querySelector('[data-state-select]');sel.value=card.dataset.state;sel.disabled=state.pending||!state.connected;if(!edit&&card.dataset.state!=='active')expanded(card,false)});
  if(edit&&!state.authenticated)leaveEdit();
- if(resourceDialog.open&&resourceOpener&&!available(resourceOpener.closest('.card')))resourceDialog.close();
+ if(resourceDialog.open&&resourceOpener&&!available(resourceCard(resourceOpener)))resourceDialog.close();
+ if(themeDialog.open&&themeCard&&!available(themeCard))themeDialog.close();
  const status=document.getElementById('sharedStatus');status.hidden=!edit;status.textContent=state.pending?'Guardando…':state.connected?'Configuración compartida · revisión '+state.revision:'Sin conexión · cambios bloqueados';
 });
 const raw=new URLSearchParams(location.search).get('resource');const res=({'APP interactivas':'apps','Actividades interactivas':'apps','Presentaciones':'presentaciones','Temario':'temario','Cómic':'comic','Juego GIP':'juego','Fichas':'fichas'})[raw]||raw;
@@ -187,3 +225,4 @@ if(res==='comic'){if(annualDialog)openAnnual('comic');else expanded(document.get
 else if(res==='juego'){const game=document.getElementById('game-card');if(game){game.scrollIntoView({block:'center'});openAnnual('juego')}else toast('El juego unificado de Nexo está en desarrollo para 1.º y 2.º ESO.');}
 else if(['apps','presentaciones','temario','fichas'].includes(res)){const all=[...document.querySelectorAll(`[data-kind="${res}"]`)].filter(b=>available(b.closest('.card')));const b=all.find(b=>{const c=b.closest('.card');return itemsFor(c.dataset.resourceKey||cfg.course+'-t'+c.dataset.theme,res).length})||all[0];if(b)openResource(b,true);}
 })();
+
