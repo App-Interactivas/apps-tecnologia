@@ -493,7 +493,7 @@ function actions(action,target){
  else if(action==='retrySend')void transmit();
  else if(action==='changeStudent')resetStudent();
  else if(action==='downloadResult'){if(S.result)download(JSON.stringify({...S.result,studentIds:S.students.map(x=>x.studentId),registered:S.mode==='registered',confirmedIds:[...S.confirmed],pending:!!S.pending},null,2),'application/json',APP.id+'_resultado.json');}
- else if(action==='exportBox'){labRefresh();const l=S.lab;if([$ ('labW'),$('labD'),$('labH')].map(e=>Number(e.value)).some((v,i)=>!Number.isFinite(v)||v<10||v>[120,80,60][i]))return;download(boxCleanSVG(l.w,l.d,l.h,true),'image/svg+xml','UD2_Mi_caja_vistas.svg');setStatus('labMessage','SVG descargado. Para comprobar 1:1 imprime al 100 % y mide una dimensión conocida.');}
+
 }
 function boot(){
  renderExplore();loadEndpoint();showScreen('entry');
