@@ -26,16 +26,27 @@ body{background:var(--paper)}.wrap{max-width:1160px}.top{background:white}.hero{
 .vp-front{grid-area:1/1}.vp-left{grid-area:1/2}.vp-top{grid-area:2/1}.vp-view{text-align:center;padding:8px}.vp-view svg{display:block;width:100%;height:auto}.vp-view h3{font-size:1rem}.vp-view p{margin:0}
 .vp-legend{gap:8px}.vp-legend span{display:inline-flex;align-items:center;gap:6px;font-size:.8rem}.vp-swatch{display:inline-block;width:12px;height:12px;border:1px solid #526173;border-radius:3px}
 @media(max-width:820px){.vp-workspace{grid-template-columns:minmax(0,1fr)}}@media(max-width:480px){.vp-sliders{grid-template-columns:1fr}.vp-card{padding:10px}}
+/* Laboratorio de dibujo: colores del PDI y cuatro vistas en sistema europeo. */
+.wrap{max-width:1460px}.vista-lab{padding:24px}.lab-top{display:flex;gap:16px;align-items:center;flex-wrap:wrap;margin:18px 0}.lab-top label{font-size:.86rem;font-weight:750}.lab-top select{display:block;min-width:245px;margin-top:5px}.unit-pill{display:inline-block;border-radius:30px;padding:8px 14px;background:#e8f6f6;color:#095c64;font-weight:750;font-size:.85rem}
+.vista-workspace{display:grid;grid-template-columns:minmax(260px,.8fr) minmax(0,1.7fr);gap:22px;align-items:start}.model-card{position:sticky;top:15px;padding:17px;border:1px solid var(--line);border-radius:14px;background:#f6fbfb}.new-model svg{display:block;width:100%;height:auto;max-height:320px;touch-action:none;cursor:grab;background:linear-gradient(90deg,#dce9e955 1px,transparent 1px),linear-gradient(#dce9e955 1px,transparent 1px);background-size:22px 22px;border-radius:10px}.new-model svg:active{cursor:grabbing}.new-model .note{text-align:center;font-size:.76rem;margin:.3rem 0 .6rem}.camera-tools{display:flex;flex-wrap:wrap;gap:6px}.camera-tools button{font-size:.78rem;padding:7px 10px;min-height:40px}.drawing-key{display:flex;gap:14px;flex-wrap:wrap;font-size:.78rem;border-top:1px solid var(--line);padding-top:14px}.drawing-key span{display:inline-flex;align-items:center;gap:6px}.key-line{display:inline-block;width:30px;border-top:3px solid #203d57}.key-line.dashed{border-top-style:dashed}
+.drawing-work{min-width:0}.practice-tools,.editor-toolbar{display:flex;gap:7px;flex-wrap:wrap;margin:0 0 10px}.practice-tools button,.editor-toolbar button{padding:8px 11px;font-size:.8rem;min-height:44px}.practice-tools button[aria-pressed=true],.editor-toolbar button[aria-pressed=true]{background:#007f89;color:#fff;border-color:#007f89}.drawing-instructions{font-size:.78rem}.four-views{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px;align-items:start}.view-card{border:2px solid #dae4e7;border-radius:12px;overflow:hidden;background:#fff;min-width:0}.view-card.active{border-color:#007f89;box-shadow:0 0 0 2px #007f8914}.view-card header{display:flex;align-items:center;justify-content:space-between;padding:7px 9px;background:#edf4f6;gap:3px}.view-card h3{font-size:.84rem;margin:0;letter-spacing:-.02em}.view-card header button{font-size:1.25rem;padding:0 5px;min-height:32px;min-width:32px;border:0;background:transparent}.card-right{grid-area:1/1}.card-front{grid-area:1/2}.card-left{grid-area:1/3}.card-top{grid-area:2/2}.vista-draw{display:block;width:100%;height:auto;touch-action:none;user-select:none;cursor:crosshair}.vista-draw:focus-visible{outline:3px solid #bd7f1c;outline-offset:-3px}.view-status{font-size:.75rem;margin:0;padding:4px 8px;min-height:8px;line-height:1.3}.view-status.good{color:#087844;background:#e3f7eb}.view-status.revise{color:#7c4b00;background:#fff5da}.four-views[class*=focus-]{display:block}.four-views[class*=focus-] .view-card{display:none}.four-views.focus-front .card-front,.four-views.focus-top .card-top,.four-views.focus-left .card-left,.four-views.focus-right .card-right{display:block;max-width:680px;margin:auto}.four-views[class*=focus-] .vista-draw{max-height:490px}.four-views[class*=focus-] h3{font-size:1rem}
+.choice-field{border:0;padding:0;margin:0}.choice-field legend{font-size:.86rem;color:var(--muted);margin-bottom:10px}.choices .choice svg{max-height:200px}.wb-models{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-bottom:20px}.wb-models>div{border:1px solid var(--line);border-radius:12px;padding:8px;text-align:center}.wb-models svg{max-height:180px}.wb-views{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:12px 0 20px}.wb-option{border:1px solid var(--line);border-radius:10px;padding:8px;text-align:center;background:#fcfdfb}.wb-option svg{width:100%;display:block}.board-full .field{max-width:650px}.board-full .field select{width:180px}#quizEditor{border:1px solid var(--line);padding:10px;border-radius:12px}#quizDrawing{max-height:430px}
+@media(max-width:1050px){.vista-workspace{grid-template-columns:minmax(240px,.75fr) minmax(0,1.25fr)}.four-views{grid-template-columns:repeat(2,minmax(0,1fr))}.card-front{grid-area:1/1}.card-top{grid-area:2/1}.card-left{grid-area:1/2}.card-right{grid-area:2/2}.view-card h3{font-size:.9rem}}
+@media(max-width:760px){.vista-workspace{grid-template-columns:1fr}.model-card{position:static}.model-card .new-model svg{max-height:265px}.vista-lab{padding:15px}.practice-tools{position:sticky;top:0;z-index:2;background:white;padding:8px 0;border-bottom:1px solid var(--line)}.wb-views{grid-template-columns:repeat(3,minmax(0,1fr))}.wb-models{gap:6px}.wb-models .new-model .note{font-size:.65rem}.view-card h3{font-size:.85rem}}
+@media(max-width:430px){.lab-top select{min-width:0;width:100%}.lab-top label{width:100%}.four-views{grid-template-columns:1fr}.card-front,.card-top,.card-left,.card-right{grid-area:auto}.card-front{order:0}.card-top{order:1}.card-left{order:2}.card-right{order:3}.four-views .vista-draw{max-height:320px}.wb-views{grid-template-columns:repeat(2,minmax(0,1fr))}.wb-models{grid-template-columns:1fr 1fr}.practice-tools button{flex:1;min-width:90px}.view-card h3{font-size:1rem}}
+
+.draw-start-notice{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:20px;margin:0 0 18px;background:#e4f7fb;border:3px solid #007f89;border-radius:14px;color:#123c54;box-shadow:0 5px 16px #007f8918}.draw-start-notice strong{display:block;font-size:clamp(1.3rem,2.2vw,1.8rem);line-height:1.2}.draw-start-notice strong span{color:#007f89;font-size:1.3em}.draw-start-notice p{margin:10px 0 0;font-size:.94rem}.draw-start-notice button{background:#007f89;color:white;border-color:#007f89;flex:none;min-height:48px}@media(max-width:580px){.draw-start-notice{align-items:stretch;flex-direction:column;padding:16px}.draw-start-notice button{width:100%}}
+
 </style></head><body>
-<header class="top"><div class="wrap"><div class="brand"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M9 9H3V31H9M31 9H37V31H31" fill="none" stroke="#126680" stroke-width="2.5"/><path d="M13 28L16 18L27 7L33 13L22 24Z" fill="#f3cb67" stroke="#20343b" stroke-width="1.5"/></svg>TECNOLOGÍA Y DIGITALIZACIÓN · 1.º ESO</div><a href="index.html">← Todas las apps del tema</a></div></header>
-<main class="wrap"><section class="hero"><div><div class="eyebrow">App 03 · Expresión y comunicación técnica</div><h1>Laboratorio de vistas</h1><p>Explora cinco piezas, dibuja sobre cuadrícula y relaciona figuras y vistas.</p><div class="chips"><span class="chip">Alzado · Planta · Perfil izquierdo</span><span class="chip">10 de práctica · 10 evaluables</span><span class="chip">25–30 min</span></div></div><div class="hero-art"><img src="data:image/png;base64,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" alt="Pieza geométrica con el frente señalado"></div></section>
+<header class="top"><div class="wrap"><div class="brand"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M9 9H3V31H9M31 9H37V31H31" fill="none" stroke="#126680" stroke-width="2.5"/><path d="M13 28L16 18L27 7L33 13L22 24Z" fill="#f3cb67" stroke="#20343b" stroke-width="1.5"/></svg>TECNOLOGÍA Y DIGITALIZACIÓN · 1.º ESO</div><a href="https://app-interactivas.github.io/apps-tecnologia/1ESO/Tema_2_Expresion_y_Comunicacion_Tecnica/index.html">← Todas las apps del tema</a></div></header>
+<main class="wrap"><section class="hero"><div><div class="eyebrow">App 03 · Expresión y comunicación técnica</div><h1>Laboratorio de vistas</h1><p>Gira, observa y dibuja: alzado, planta y los dos perfiles.</p><div class="chips"><span class="chip">Alzado · Planta · Ambos perfiles</span><span class="chip">9 piezas de práctica · 10 retos evaluables</span><span class="chip">25–30 min</span></div></div><div class="hero-art"><img src="data:image/png;base64,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" alt="Pieza geométrica con el frente señalado"></div></section>
 <p id="testBanner" class="test-banner" role="status" hidden>MODO PRUEBA · NX-01<small>Prueba técnica. No cuenta como resultado del alumnado.</small></p><section id="registration" class="panel registration" aria-labelledby="entryTitle">
 <h2 id="entryTitle">Introduce tu ID</h2><p class="note entry-note">Usa el ID que te ha dado tu profesor o profesora.</p>
 <div class="ids"><div><label for="id1">Tu ID</label><input id="id1" type="text" autocomplete="off" spellcheck="false" autocapitalize="characters" maxlength="32" placeholder="Escribe tu ID" aria-describedby="identityMessage"></div><div id="secondId" hidden><label for="id2">ID de tu pareja</label><input id="id2" type="text" autocomplete="off" spellcheck="false" autocapitalize="characters" maxlength="32" placeholder="Segundo ID del mismo grupo"></div></div>
 <label class="pair-toggle"><input id="pairMode" type="checkbox"> Trabajamos en pareja</label>
 <div class="actions"><button id="verifyIds" class="primary" data-action="verifyIds">Confirmar ID y continuar →</button></div><p id="identityMessage" class="status" role="status" aria-live="polite"></p>
 </section>
-<section id="modeStage" class="panel" hidden aria-labelledby="modeTitle"><div class="menu-header"><p id="verifiedNames" class="student-name"></p><button data-action="changeStudent">Cambiar de alumno</button></div><h2 id="modeTitle">¿Qué quieres hacer?</h2><div class="mode-grid"><button class="mode-card practice" data-action="practiceMode"><em>SIN NOTA</em><strong>PRACTICAR SIN NOTA</strong><span>Gira siete piezas y compara sus tres vistas. La práctica no puntúa ni envía resultados.</span></button><button id="evaluateMode" class="mode-card evaluable" data-action="evaluateMode"><em>CUENTA PARA LA NOTA</em><strong>ACTIVIDAD EVALUABLE</strong><span>Diez retos · 10 puntos. Al finalizar se enviará el resultado de cada ID validado.</span></button></div><p class="note">En la actividad evaluable, un consejo reduce a la mitad la puntuación de ese reto: un acierto completo pasa de 1 a 0,5 puntos. Un error vale 0.</p><p id="modeMessage" class="status" role="status" aria-live="polite"></p></section>
+<section id="modeStage" class="panel" hidden aria-labelledby="modeTitle"><div class="menu-header"><p id="verifiedNames" class="student-name"></p><button data-action="changeStudent">Cambiar de alumno</button></div><h2 id="modeTitle">¿Qué quieres hacer?</h2><div class="mode-grid"><button class="mode-card practice" data-action="practiceMode"><em>SIN NOTA</em><strong>PRACTICAR SIN NOTA</strong><span>Gira nueve piezas y dibuja cuatro vistas con línea continua, discontinua y goma. Sin nota ni envío.</span></button><button id="evaluateMode" class="mode-card evaluable" data-action="evaluateMode"><em>CUENTA PARA LA NOTA</em><strong>ACTIVIDAD EVALUABLE</strong><span>Diez retos: dibujar, elegir vistas y relacionarlas con varias piezas. Al terminar se enviará el resultado.</span></button></div><p class="note">En la actividad evaluable, un consejo reduce a la mitad la puntuación de ese reto: un acierto completo pasa de 1 a 0,5 puntos. Un error vale 0.</p><p id="modeMessage" class="status" role="status" aria-live="polite"></p></section>
 <nav id="sessionBar" class="flow-bar" hidden aria-label="Actividad actual"><div><div id="flowLabel" class="flow-label"></div><div id="sessionName" class="session-name"></div></div><div class="actions"><button data-action="backMenu">← Elegir modo</button></div></nav>
 <section id="explore" aria-label="Práctica sin nota" hidden></section>
 <section id="retos" aria-label="Retos autocorregibles" hidden><section id="quizStage" class="panel" hidden><div class="quiz-top"><div><div id="sessionLabel" class="note"></div><strong id="progressText">0 de 10 comprobados</strong></div><progress id="progress" max="10" value="0" aria-label="Retos comprobados"></progress></div><div id="quizContent"></div><div class="quiz-nav"><button id="prevButton" data-action="prev">← Reto anterior</button><button id="nextButton" class="primary" data-action="next">Siguiente reto →</button></div></section><section id="resultStage" aria-label="Resultado y envío" hidden></section></section>
@@ -150,7 +161,7 @@ function boxCleanSVG(w=100,d=60,h=40,download=false){
  let s=svg(b,'0 0 297 210','Vistas acotadas de la caja organizadora').replace('stroke-width="2"','stroke-width="0.6"');
  return download?s.replace('<svg ','<svg width="297mm" height="210mm" '):s;
 }
-function renderVisual(v){
+function legacyRenderVisual(v){
  if(!v)return '';
  if(v.type==='model')return `<img class="model" src="${MODELS[v.kind]}" alt="Pieza ${esc(v.name||v.kind)} con el frente marcado por una flecha"><p class="note">La flecha fija el frente. Se omiten las aristas ocultas.</p>`;
  if(v.type==='view')return viewSvg(v.shape);
@@ -173,7 +184,7 @@ function splitSegment(a,b){
  return Array.from({length:n},(_,i)=>unitKey([a[0]+i*dx,a[1]+i*dy],[a[0]+(i+1)*dx,a[1]+(i+1)*dy]));
 }
 function drawingOrigin(q){return [q.originNote?2+(q.shape.w/2-10)/5:2,2];}
-function expectedEdges(q){
+function legacyExpectedEdges(q){
  const shape=q.shape,origin=[2,2],edges=[];
  const add=(a,b)=>edges.push(...splitSegment(...[a,b].map(([x,y])=>[origin[0]+x/5,origin[1]+y/5])));
  const outline=points=>points.forEach((point,index)=>add(point,points[(index+1)%points.length]));
@@ -284,174 +295,7 @@ function selectTab(tab){
  if(S.result&&!S.reviewing){showScreen('results');return;}
  showScreen('quiz');renderQuiz();
 }
-function renderExplore(){
- const root=$('explore');
- root.innerHTML="<section class=\"panel\" aria-labelledby=\"vp-title\"><div class=\"eyebrow\">PRÁCTICA SIN NOTA</div><h2 id=\"vp-title\">Explora las vistas de siete piezas</h2><p>Elige una pieza y gírala. Compara su volumen con el alzado, la planta y el perfil izquierdo. Empieza por el prisma y continúa con las piezas más complejas.</p>\n<div class=\"vp-controls\"><label for=\"vp-piece\">Pieza<select id=\"vp-piece\"><option value=\"prism\">Prisma rectangular</option><option value=\"step\" selected>Pieza escalonada</option><option value=\"roof\">Pieza con plano inclinado</option><option value=\"rear\">Escalón alto hacia atrás</option><option value=\"l\">Pieza con base en L</option><option value=\"u\">Pieza en U abierta al frente</option><option value=\"tunnel\">Bloque con túnel rectangular</option></select></label><button id=\"vp-reset\" type=\"button\">Restablecer giro</button><label class=\"vp-check\"><input type=\"checkbox\" id=\"vp-colors\" checked> Caras de colores</label><label id=\"vp-hidden-control\" class=\"vp-check\" hidden><input type=\"checkbox\" id=\"vp-hidden-edges\" checked> Aristas ocultas en el volumen</label></div>\n<div class=\"vp-workspace\"><div class=\"vp-card\"><h3>Volumen que puedes girar</h3><p class=\"note\" id=\"vp-dimensions\" aria-live=\"polite\"></p><div class=\"vp-canvas\"><svg id=\"vp-model\" viewBox=\"0 0 440 340\" role=\"img\" aria-label=\"Modelo de la pieza seleccionada\"><g id=\"vp-faces\"></g></svg></div><p class=\"note\">Arrastra la pieza o utiliza los controles. Al activar los colores, la cara azul identifica el frente.</p>\n<div class=\"vp-sliders\"><label for=\"vp-yaw\">Giro horizontal<input id=\"vp-yaw\" type=\"range\" min=\"-180\" max=\"180\" step=\"1\" value=\"30\"></label><label for=\"vp-pitch\">Giro vertical<input id=\"vp-pitch\" type=\"range\" min=\"-90\" max=\"90\" step=\"1\" value=\"25\"></label></div>\n<div class=\"actions\"><button type=\"button\" data-vp-camera=\"front\">Mirar de frente</button><button type=\"button\" data-vp-camera=\"top\">Mirar desde arriba</button><button type=\"button\" data-vp-camera=\"left\">Mirar desde la izquierda</button><button type=\"button\" data-vp-camera=\"right\">Mirar desde la derecha</button></div><div id=\"vp-legend\" class=\"vp-legend\" aria-label=\"Colores de las caras\"></div></div>\n<div class=\"vp-card\"><h3>Vistas en sistema europeo</h3><p class=\"note\">Las vistas mantienen el frente de referencia aunque gires la pieza.</p><div class=\"vp-views\"><div class=\"vp-view vp-front\"><h3>Alzado</h3><svg id=\"vp-front\" viewBox=\"0 0 200 140\" role=\"img\" aria-label=\"Alzado\"></svg><p class=\"note\">Anchura × altura</p></div><div class=\"vp-view vp-left\"><h3>Perfil izquierdo</h3><svg id=\"vp-left\" viewBox=\"0 0 200 140\" role=\"img\" aria-label=\"Perfil izquierdo\"></svg><p class=\"note\">Fondo × altura</p></div><div class=\"vp-view vp-top\"><h3>Planta</h3><svg id=\"vp-top\" viewBox=\"0 0 200 140\" role=\"img\" aria-label=\"Planta\"></svg><p class=\"note\">Anchura × fondo</p></div></div>\n<p class=\"note\">Coloca la planta debajo del alzado y el perfil izquierdo a su derecha. Compara las dimensiones que comparten.</p><p id=\"vp-cavity\" class=\"hint\" hidden><strong>Ampliación: aristas ocultas.</strong> El túnel de 24 × 16 mm atraviesa la pieza. Las líneas discontinuas muestran sus bordes cuando el material los tapa.</p></div></div></section>";
- const get=id=>root.querySelector('#vp-'+id);
- const NS='http://www.w3.org/2000/svg';
-const palette={front:'#65b9dc',back:'#b4a0da',bottom:'#bdc9ce',right:'#efa25d',left:'#91bf91',top:'#f2d56c',topLow:'#a2d9d1',riser:'#de9db3',innerLeft:'#81b4c7',innerTop:'#e6b288',innerRight:'#b3bc80',innerBottom:'#c99dbf',innerBack:'#ceba94'};
-const names={front:'Frente',back:'Trasera',bottom:'Base',right:'Derecha',left:'Izquierda',top:'Superior',topLow:'Superior baja',riser:'Escalón vertical',innerLeft:'Pared interior izquierda',innerTop:'Techo interior',innerRight:'Pared interior derecha',innerBottom:'Suelo interior',innerBack:'Fondo de la cavidad'};
-function makePrism(w=60,d=40,h=30){return {w,d,h,type:'prism',poly:[[0,0],[w,0],[w,h],[0,h]]}}
-function makeStep(w=60,d=40,h=30,low=15,split=30){return {w,d,h,low,split,type:'step',poly:[[0,0],[w,0],[w,low],[split,low],[split,h],[0,h]]}}
-function makeRoof(w=60,d=40,h=30,low=15){return {w,d,h,low,type:'roof',poly:[[0,0],[w,0],[w,low],[0,h]]}}
-function makeTunnel(end=null){return {...makePrism(60,40,40),type:'tunnel',hole:{x0:18,x1:42,y0:12,y1:28,end}}}
-function heightPiece(rows,unit=15){
- const cells=[];rows.forEach((row,z)=>row.forEach((h,x)=>{for(let y=0;y<h;y++)cells.push([x,y,z]);}));
- return {type:'voxel',cells,unit,w:rows[0].length*unit,d:rows.length*unit,h:Math.max(...rows.flat())*unit};
-}
-function loopsOf(edges){
- const remaining=edges.map(e=>e.map(p=>[...p])),loops=[];
- while(remaining.length){const e=remaining.shift(),loop=[e[0]],start=e[0].join(','),next=e[1];let cur=next;
-  while(cur.join(',')!==start){loop.push(cur);const j=remaining.findIndex(x=>x[0].join(',')===cur.join(','));if(j<0)throw Error('Contorno abierto');cur=remaining.splice(j,1)[0][1];}
-  let changed=true;while(changed&&loop.length>3){changed=false;for(let i=0;i<loop.length;i++){const a=loop[(i+loop.length-1)%loop.length],b=loop[i],c=loop[(i+1)%loop.length];if(Math.abs((b[0]-a[0])*(c[1]-b[1])-(b[1]-a[1])*(c[0]-b[0]))<1e-8){loop.splice(i,1);changed=true;break;}}}loops.push(loop);
- }return loops;
-}
-function voxelGeometry(p){
- const set=new Set(p.cells.map(c=>c.join(','))),groups=new Map();
- const specs=[{n:[0,0,-1],color:'front',axis:2,uv:[0,1]},{n:[0,0,1],color:'back',axis:2,uv:[0,1]},{n:[1,0,0],color:'right',axis:0,uv:[2,1]},{n:[-1,0,0],color:'left',axis:0,uv:[2,1]},{n:[0,1,0],color:'top',axis:1,uv:[0,2]},{n:[0,-1,0],color:'bottom',axis:1,uv:[0,2]}];
- for(const cell of p.cells)for(const spec of specs){if(set.has(cell.map((v,i)=>v+spec.n[i]).join(',')))continue;
-  const plane=cell[spec.axis]+(spec.n[spec.axis]>0?1:0),key=spec.color+plane;let g=groups.get(key);if(!g){g={...spec,plane,squares:[]};groups.set(key,g);}g.squares.push(spec.uv.map(i=>cell[i]));
- }
- const faces=[];for(const g of groups.values()){
-  const squares=new Set(g.squares.map(c=>c.join(','))),edges=[];
-  for(const [u,v]of g.squares){if(!squares.has([u,v-1].join(',')))edges.push([[u,v],[u+1,v]]);if(!squares.has([u+1,v].join(',')))edges.push([[u+1,v],[u+1,v+1]]);if(!squares.has([u,v+1].join(',')))edges.push([[u+1,v+1],[u,v+1]]);if(!squares.has([u-1,v].join(',')))edges.push([[u,v+1],[u,v]]);}
-  for(const loop of loopsOf(edges)){const points=loop.map(q=>{const v=[0,0,0];v[g.axis]=g.plane;g.uv.forEach((i,j)=>v[i]=q[j]);return v.map((a,i)=>a*p.unit-[p.w,p.h,p.d][i]/2);});faces.push({points,n:g.n,color:g.color});}
- }return faces;
-}
-function voxelView(p,kind){
- const axes=kind==='front'?[0,1,2]:kind==='top'?[0,2,1]:[2,1,0],surf=new Map();
- for(const cell of p.cells){
-  const u=kind==='left'?Math.round(p.d/p.unit)-1-cell[2]:cell[axes[0]];
-  const key=[u,cell[axes[1]]].join(','),d=cell[axes[2]];
-  surf.set(key,surf.has(key)?(['front','left'].includes(kind)?Math.min(surf.get(key),d):Math.max(surf.get(key),d)):d);
- }
- const edges=[],inside=new Map();for(const [k,d] of surf){const [u,v]=k.split(',').map(Number);const sides=[[[u,v-1],[u,v],[u+1,v]],[[u+1,v],[u+1,v],[u+1,v+1]],[[u,v+1],[u+1,v+1],[u,v+1]],[[u-1,v],[u,v+1],[u,v]]];for(const [q,a,b]of sides){const other=q.join(',');if(!surf.has(other))edges.push([a,b]);else if(surf.get(other)!==d){const key=[a.join(','),b.join(',')].sort().join('|');inside.set(key,[a,b]);}}}
- const loops=loopsOf(edges).map(loop=>loop.map(q=>q.map(n=>n*p.unit))),segments=[...inside.values()];
- // Join contiguous unit segments; unit boundaries are not physical edges.
- let changed=true;while(changed){changed=false;outer:for(let i=0;i<segments.length;i++)for(let j=i+1;j<segments.length;j++){const a=segments[i],b=segments[j];for(const [ai,bi]of [[0,0],[0,1],[1,0],[1,1]])if(a[ai].join(',')===b[bi].join(',')){const x=a[1-ai],m=a[ai],z=b[1-bi];if((m[0]-x[0])*(z[1]-m[1])===(m[1]-x[1])*(z[0]-m[0])){segments[i]=[x,z];segments.splice(j,1);changed=true;break outer;}}}}
- return {w:['right','left'].includes(kind)?p.d:p.w,h:kind==='top'?p.d:p.h,outline:loops[0],holes:[],lines:segments.map(e=>line(e[0].map(n=>n*p.unit),e[1].map(n=>n*p.unit)))};
-}
-
-const pieces={prism:makePrism(55,35,25),step:makeStep(65,35,35,20,25),roof:makeRoof(),tunnel:makeTunnel(),rear:heightPiece([[1,1,1,1],[3,3,3,3]]),l:heightPiece([[2,2,2,2],[2,2,2,2],[2,0,0,0]]),u:heightPiece([[3,0,0,3],[3,0,0,3],[3,3,3,3]])};
-function dot(a,b){return a.reduce((sum,v,i)=>sum+v*b[i],0)}
-function project(v,ya,pi){return [dot(v,[Math.cos(ya),0,Math.sin(ya)]),dot(v,[-Math.sin(pi)*Math.sin(ya),Math.cos(pi),Math.sin(pi)*Math.cos(ya)])]}
-function geometry(p){
- if(p.cells)return voxelGeometry(p);
- const center=v=>[v[0]-p.w/2,v[1]-p.h/2,v[2]-p.d/2];
- const front=p.poly.map(v=>center([...v,0])),back=p.poly.map(v=>center([...v,p.d]));
- const faces=[{points:front,n:[0,0,-1],color:'front'},{points:back,n:[0,0,1],color:'back'}];
- p.poly.forEach((a,i)=>{const b=p.poly[(i+1)%p.poly.length],dx=b[0]-a[0],dy=b[1]-a[1];
-  let color=dy>0?'right':dy<0?'left':dx>0?'bottom':'top';
-  if(dy>0&&a[0]!==p.w)color='riser';if(dx<0&&dy>0)color='top';
-  if(p.type==='step'&&dx<0&&a[1]<p.h)color='topLow';
-  faces.push({points:[center([...a,0]),center([...b,0]),center([...b,p.d]),center([...a,p.d])],n:[dy,-dx,0],color});
- });
- if(p.hole){const h=p.hole,end=h.end??p.d,loop=[[h.x0,h.y0],[h.x0,h.y1],[h.x1,h.y1],[h.x1,h.y0]];
-  faces[0].holes=[loop.map(v=>center([...v,0]))];
-  if(h.end===null)faces[1].holes=[loop.map(v=>center([...v,p.d]))];
-  loop.forEach((a,i)=>{const b=loop[(i+1)%4],dx=b[0]-a[0],dy=b[1]-a[1];
-   faces.push({points:[center([...a,0]),center([...b,0]),center([...b,end]),center([...a,end])],n:[dy,-dx,0],color:['innerLeft','innerTop','innerRight','innerBottom'][i]});
-  });
-  if(h.end!==null)faces.push({points:loop.map(v=>center([...v,end])),n:[0,0,-1],color:'innerBack'});
- }
- return faces;
-}
-function svgNode(type,attrs,parent){const el=document.createElementNS(NS,type);Object.entries(attrs).forEach(([k,v])=>el.setAttribute(k,v));if(parent)parent.append(el);return el}
-function svgPath(points,transform){return points.map((p,i)=>`${i?'L':'M'}${transform(p).join(',')}`).join(' ')+' Z'}
-function rayOccluded(v,n,p){
- const point=[v[0]+p.w/2,v[1]+p.h/2,v[2]+p.d/2],h=p.hole;
- const planes=[[0,p.w,h.x0,h.x1],[0,p.h,h.y0,h.y1],[0,p.d,h.end??p.d]];
- const times=[0];planes.forEach((a,i)=>{if(Math.abs(n[i])<1e-9)return;a.forEach(c=>{const t=(c-point[i])/n[i];if(t>1e-7)times.push(t)})});
- times.sort((a,b)=>a-b);
- for(let i=0;i<times.length-1;i++){
-  const t=(times[i]+times[i+1])/2,x=point.map((c,j)=>c+t*n[j]);
-  const inBox=x[0]>1e-7&&x[0]<p.w-1e-7&&x[1]>1e-7&&x[1]<p.h-1e-7&&x[2]>1e-7&&x[2]<p.d-1e-7;
-  const inVoid=x[0]>h.x0-1e-7&&x[0]<h.x1+1e-7&&x[1]>h.y0-1e-7&&x[1]<h.y1+1e-7&&x[2]<(h.end??p.d)+1e-7;
-  if(inBox&&!inVoid)return true;
- }
- return false;
-}
-function cavityEdges(p){const h=p.hole,end=h.end??p.d,loop=[[h.x0,h.y0],[h.x1,h.y0],[h.x1,h.y1],[h.x0,h.y1]],center=v=>[v[0]-p.w/2,v[1]-p.h/2,v[2]-p.d/2],edges=[];
- loop.forEach((a,i)=>{const b=loop[(i+1)%4];for(const z of [0,end])edges.push([center([...a,z]),center([...b,z])]);edges.push([center([...a,0]),center([...a,end])])});return edges;
-}
-function drawModel(target,p,ya,pi,{colors=true,hidden=false,scale=3.6}={}){
- target.replaceChildren();const camera=[Math.sin(ya)*Math.cos(pi),Math.sin(pi),-Math.cos(ya)*Math.cos(pi)];
- const transform=v=>{const [x,y]=project(v,ya,pi);return [220+x*scale,170-y*scale]};
- const depth=f=>dot(f.points.reduce((t,v)=>t.map((n,i)=>n+v[i]/f.points.length),[0,0,0]),camera);
- const faces=geometry(p).filter(f=>dot(f.n,camera)>1e-7).sort((a,b)=>depth(a)-depth(b));
- faces.forEach(f=>{let attrs={fill:colors?palette[f.color]:'#e0e8ea',stroke:'#263b45','stroke-width':1.5,'stroke-linejoin':'round'};
-  let el;if(f.holes){attrs.d=svgPath(f.points,transform)+f.holes.map(h=>svgPath(h,transform)).join(' ');attrs['fill-rule']='evenodd';el=svgNode('path',attrs,target)}
-  else{attrs.points=f.points.map(transform).map(v=>v.join(',')).join(' ');el=svgNode('polygon',attrs,target)}
-  const title=svgNode('title',{},el);title.textContent=names[f.color];
- });
- if(p.hole&&hidden){const group=svgNode('g',{'aria-label':'Aristas interiores ocultas',stroke:'#344651','stroke-width':1.3,'stroke-dasharray':'5 4',fill:'none'},target);
-  cavityEdges(p).forEach(([a,b])=>{let start=null;const point=t=>a.map((v,i)=>v+(b[i]-v)*t);
-   for(let i=0;i<40;i++){
-    const isHidden=rayOccluded(point((i+.5)/40),camera,p);
-    if(isHidden&&start===null)start=i/40;
-    if(start!==null&&(!isHidden||i===39)){const end=isHidden&&i===39?1:i/40;const [x1,y1]=transform(point(start)),[x2,y2]=transform(point(end));svgNode('line',{x1,y1,x2,y2},group);start=null}
-   }
-  });
- }
-}
-function line(a,b,hidden=false){return {type:'line',a,b,hidden}}
-function viewSpec(p,kind){
- if(p.cells)return voxelView(p,kind);
- const rect=(w,h)=>({w,h,outline:[[0,0],[w,0],[w,h],[0,h]],lines:[],holes:[]});let v;
- if(kind==='front'){v=rect(p.w,p.h);v.outline=p.poly.map(x=>[...x]);if(p.hole){const h=p.hole;v.holes.push({x:h.x0,y:h.y0,w:h.x1-h.x0,h:h.y1-h.y0})}}
- if(kind==='top'){v=rect(p.w,p.d);if(p.type==='step'){v.lines.push(line([p.split,0],[p.split,p.d]));v.regions=[{outline:[[p.split,0],[p.w,0],[p.w,p.d],[p.split,p.d]],color:'topLow'}]}if(p.hole){const h=p.hole,end=h.end??p.d;v.lines.push(line([h.x0,0],[h.x0,end],true),line([h.x1,0],[h.x1,end],true));if(h.end!==null)v.lines.push(line([h.x0,end],[h.x1,end],true))}}
- if(kind==='right'){v=rect(p.d,p.h);if(p.type==='step'||p.type==='roof'){v.lines.push(line([0,p.low],[p.d,p.low]));v.regions=[{outline:[[0,p.low],[p.d,p.low],[p.d,p.h],[0,p.h]],color:p.type==='step'?'riser':'top'}]}if(p.hole){const h=p.hole,end=h.end??p.d;v.lines.push(line([0,h.y0],[end,h.y0],true),line([0,h.y1],[end,h.y1],true));if(h.end!==null)v.lines.push(line([end,h.y0],[end,h.y1],true))}}
- if(kind==='left'){
-  v=rect(p.d,p.h);
-  if(p.hole){const h=p.hole,end=h.end??p.d;v.lines.push(line([p.d, h.y0],[p.d-end,h.y0],true),line([p.d,h.y1],[p.d-end,h.y1],true));if(h.end!==null)v.lines.push(line([p.d-end,h.y0],[p.d-end,h.y1],true));}
- }
- return v;
-}
-function drawView(target,v,{cx=100,cy=70,scale=2.1,color=null}={}){
- const transform=([x,y])=>[cx+(x-v.w/2)*scale,cy-(y-v.h/2)*scale];
- const stroke={stroke:'#263b45','stroke-width':1.6,'stroke-linecap':'butt','stroke-linejoin':'round'};
- svgNode('polygon',{points:v.outline.map(transform).map(x=>x.join(',')).join(' '),fill:color??'#fff',...stroke},target);
- if(color)(v.regions??[]).forEach(r=>svgNode('polygon',{points:r.outline.map(transform).map(x=>x.join(',')).join(' '),fill:palette[r.color],...stroke},target));
- v.holes.forEach(h=>{if(h.circle){const [x,y]=transform([h.x,h.y]);svgNode('circle',{cx:x,cy:y,r:h.r*scale,fill:'#fff',...stroke,...(h.hidden?{'stroke-dasharray':'5 4'}:{})},target)}
-  else{const [x,y]=transform([h.x,h.y+h.h]);svgNode('rect',{x,y,width:h.w*scale,height:h.h*scale,fill:'#fff',...stroke,...(h.hidden?{'stroke-dasharray':'5 4'}:{})},target)}});
- v.lines.forEach(l=>{const [x1,y1]=transform(l.a),[x2,y2]=transform(l.b);svgNode('line',{x1,y1,x2,y2,...stroke,...(l.hidden?{'stroke-dasharray':'5 4'}:{})},target)});
-}
-
- let key='step',yaw=Math.PI/6,pitch=25*Math.PI/180,drag=null;
- const model=get('model'),rad=Math.PI/180;
- function render(){
-  const p=pieces[key];
-  drawModel(get('faces'),p,yaw,pitch,{colors:get('colors').checked,hidden:get('hidden-edges').checked,scale:Math.min(3.6,320/Math.hypot(p.w,p.h,p.d))});
-  get('yaw').value=Math.round(yaw/rad);get('pitch').value=Math.round(pitch/rad);
- }
- function views(){
-  const p=pieces[key],color=get('colors').checked;
-  for(const [kind,c] of [['front','front'],['top','top'],['left','left']]){
-   const target=get(kind),v=viewSpec(p,kind);target.replaceChildren();
-   drawView(target,v,{color:color?palette[c]:null,scale:Math.min(2.1,172/v.w,112/v.h)});
-  }
-  get('dimensions').textContent=[p.w+' mm de ancho',p.d+' mm de fondo',p.h+' mm de alto'].join(' · ');
-  get('cavity').hidden=!p.hole;get('hidden-control').hidden=!p.hole;
-  const legend=get('legend');legend.hidden=!color;legend.replaceChildren();
-  for(const k of new Set(geometry(p).map(f=>f.color))){
-   const tag=document.createElement('span'),swatch=document.createElement('i');
-   swatch.className='vp-swatch';swatch.style.background=palette[k];swatch.setAttribute('aria-hidden','true');
-   tag.append(swatch,document.createTextNode(names[k]));legend.append(tag);
-  }
- }
- function reset(){
-  yaw=(key==='tunnel'?20:30)*rad;pitch=(key==='tunnel'?15:25)*rad;render();
- }
- get('piece').onchange=e=>{key=e.target.value;views();reset();};
- get('colors').onchange=()=>{views();render();};get('hidden-edges').onchange=render;get('reset').onclick=reset;
- get('yaw').oninput=e=>{yaw=Number(e.target.value)*rad;render();};get('pitch').oninput=e=>{pitch=Number(e.target.value)*rad;render();};
- root.querySelectorAll('[data-vp-camera]').forEach(b=>b.onclick=()=>{const v=b.dataset.vpCamera;yaw=v==='right'?Math.PI/2:v==='left'?-Math.PI/2:0;pitch=v==='top'?Math.PI/2:0;render();});
- model.onpointerdown=e=>{if(drag||e.button!==0)return;drag={id:e.pointerId,x:e.clientX,y:e.clientY,yaw,pitch};model.setPointerCapture(e.pointerId);};
- model.onpointermove=e=>{if(drag?.id!==e.pointerId)return;const angle=drag.yaw-(e.clientX-drag.x)*.01;yaw=Math.atan2(Math.sin(angle),Math.cos(angle));pitch=Math.max(-Math.PI/2,Math.min(Math.PI/2,drag.pitch+(e.clientY-drag.y)*.01));render();};
- model.onpointerup=model.onpointercancel=model.onlostpointercapture=e=>{if(drag?.id===e.pointerId)drag=null;};
- views();reset();
-}
-function startAttempt(){
+function legacyStartAttempt(){
  S.index=0;S.drafts=[];S.records=[];S.hints=[];S.history={};S.point=null;S.kbPoint=[2,2];S.tool='draw';S.submissionId=uuid();S.startedAt=new Date().toISOString();S.result=null;S.pending=null;S.reviewing=false;S.confirmed=new Set();S.sending=false;$('resultStage').innerHTML='';if(S.mode==='registered')renderQuiz();
 }
 function fieldHtml(f,j,d,detail){
@@ -480,7 +324,7 @@ function drawingSVG(q){
 function solutionValue(expected){
  return `<p class="solution-value">✓ Solución: ${esc(expected)}</p>`;
 }
-function renderQuiz(){
+function legacyRenderQuiz(){
  if(S.mode!=='registered')return;if(S.result&&!S.reviewing){showScreen('results');return;}showScreen('quiz');$('quizStage').className='panel '+(S.mode==='registered'?'quiz-stage-evaluable':'quiz-stage-free');
  const bank=questionsForMode(),total=bank.length;
  const q=bank[S.index],d=draft(q),record=S.records[S.index],locked=!!record;
@@ -522,7 +366,7 @@ function finish(){
  if(S.result){S.reviewing=false;showScreen('results');return;}
  if(S.records.filter(Boolean).length!==questionsForMode().length)return;
  const maximo=questionsForMode().length,score=scoreTotal(S.records),penalty=S.records.reduce((n,r)=>n+r.hintPenalty,0);
- S.result=deepFreeze({submissionId:S.submissionId,modo_prueba:!!S.testMode,theme:'UD2 Expresión y comunicación técnica',activity:APP.id,title:APP.title,score:Number(score.toFixed(4)),scores:S.records.map(r=>Number((r.score*10).toFixed(4))),maximo,percentage:score*100/maximo,hints:questionsForMode().map((_,i)=>!!S.hints[i]),attempts:questionsForMode().map(()=>1),startedAt:S.startedAt,finishedAt:new Date().toISOString(),appVersion:'2.2.0-retos-y-soluciones',hintPolicy:{maximumWithoutHint:1,maximumWithHint:0.5,penaltyApplied:penalty},evidence:{course:S.testMode?'PRUEBA':'1ESO',modo_prueba:!!S.testMode,block:APP.block,questions:structuredClone(S.records),hintPenaltyTotal:penalty}});
+ S.result=deepFreeze({submissionId:S.submissionId,modo_prueba:!!S.testMode,theme:'UD2 Expresión y comunicación técnica',activity:APP.id,title:APP.title,score:Number(score.toFixed(4)),scores:S.records.map(r=>Number((r.score*10).toFixed(4))),maximo,percentage:score*100/maximo,hints:questionsForMode().map((_,i)=>!!S.hints[i]),attempts:questionsForMode().map(()=>1),startedAt:S.startedAt,finishedAt:new Date().toISOString(),appVersion:'3.0.0-cuatro-vistas',hintPolicy:{maximumWithoutHint:1,maximumWithHint:0.5,penaltyApplied:penalty},evidence:{course:S.testMode?'PRUEBA':'1ESO',modo_prueba:!!S.testMode,block:APP.block,questions:structuredClone(S.records),hintPenaltyTotal:penalty}});
  S.reviewing=false;showScreen('results');
  $('resultStage').innerHTML=`<div class="panel"><div class="eyebrow">${S.testMode?'MODO PRUEBA · NX-01':S.mode==='registered'?'Actividad evaluable terminada':'Práctica terminada · Sin nota'}</div><h2>${S.mode==='registered'?'Tu resultado':'Resultado de práctica'}</h2><div class="score">${fmt(score)} <small>/ ${maximo}</small></div><p>${S.mode==='registered'?'Diez retos de un punto. Con consejo, cada reto puntúa la mitad. Las relaciones y los dibujos conservan la puntuación parcial.':'Este ensayo no cuenta para la nota y no envía ningún resultado.'}</p><div id="sendMessage" role="status" aria-live="polite" aria-atomic="true"></div><div class="actions"><button class="primary" data-action="retrySend" id="retrySend" hidden>Reintentar envío</button><button data-action="reviewAttempt">Revisar respuestas</button><button data-action="downloadResult">Descargar resultado</button><button data-action="changeStudent">Cambiar de alumno</button></div><div class="results-scroll"><table class="results-table"><thead><tr><th>Reto</th><th>Trabajo</th><th>Puntos</th></tr></thead><tbody>${S.records.map((r,i)=>`<tr><td>${i+1}</td><td>${esc(r.title)}${r.hint?' · Con consejo':''}</td><td>${fmt(r.score)} / 1</td></tr>`).join('')}</tbody></table></div><p class="note">La revisión conserva la puntuación cerrada de este intento.</p></div>`;
  if(S.mode==='registered'){
@@ -599,7 +443,7 @@ async function transmit(){
  }catch(e){if(gen===S.generation){const message=e.name==='AbortError'?'Se agotó el tiempo de espera.':e.message||'No se pudo confirmar el envío.';sendStatus('failed','ENVÍO PENDIENTE',message+'\nConfirmados: '+S.confirmed.size+' de '+pending.students.length+'. Tu resultado se conserva en esta pestaña. Pulsa Reintentar sin repetir los retos.');$('retrySend').hidden=false;}}
  finally{if(gen===S.generation){S.sending=false;$('retrySend').disabled=false;}}
 }
-function resetStudent(force=false){
+function legacyResetStudent(force=false){
  if(S.pending||S.sending){showScreen('results');return;}
  if(!force&&S.mode&&!S.result&&S.records.some(Boolean)&&!confirm('El intento sin terminar se borrará. ¿Cambiar de alumno?'))return;
  S.generation++;S.mode='';S.students=[];S.testMode=false;S.result=null;S.pending=null;S.sending=false;S.identifying=false;S.reviewing=false;S.records=[];S.drafts=[];S.hints=[];S.confirmed=new Set();$('id1').value='';$('id2').value='';$('verifiedNames').textContent='';$('identityMessage').textContent='';$('pairMode').checked=false;$('secondId').hidden=true;['verifyIds','id1','id2','pairMode'].forEach(id=>$(id).disabled=false);$('evaluateMode').disabled=false;$('resultStage').innerHTML='';showScreen('entry');
@@ -656,7 +500,7 @@ function boot(){
 }
 const PDI_HINTS=[["Busca si hay cotas y si el trazo pretende explorar o definir.", "Fíjate en dos rasgos: está hecho a mano y comunica dimensiones reales.", "Busca precisión en los trazos, varias vistas y datos de identificación.", "Piensa en el orden del trabajo: imaginar, concretar las medidas y comunicar con precisión.", "Lee las cifras escritas junto a cada dimensión. No midas la imagen de la pantalla.", "Una caja tiene tres dimensiones exteriores distintas. Comprueba cuál no tiene su cifra.", "Busca el documento que comunica las tres dimensiones exteriores de la caja.", "Antes de elegir la forma definitiva conviene comparar varias propuestas.", "Las cifras de cota describen el objeto real, aunque la imagen se vea más pequeña.", "Relaciona cada necesidad con el documento o la observación que realmente ayuda a resolverla."], ["El centro del transportador debe coincidir con el vértice. Empieza en el cero del lado horizontal.", "La abertura es mayor que un ángulo recto: utiliza la escala que empieza en el lado horizontal.", "Localiza el cero del lado fijo y lleva el otro lado hasta la graduación pedida.", "Comprueba qué pareja conserva la misma dirección sin cortarse.", "Busca la pareja que forma una esquina de ángulo recto, no cualquier cruce.", "Compara los dos ángulos menores: ¿son iguales o diferentes?", "Piensa qué herramienta permite medir grados, cuál mide longitudes y cuál se desliza sobre un apoyo.", "Recuerda el formato A4 en milímetros y distingue los datos del dibujo de sus medidas.", "Compara el tamaño dibujado con el real: igual, menor o mayor.", "Distingue el croquis a mano alzada de la lámina a tamaño real; el cajetín identifica a quien dibuja."], ["La mirada desde arriba combina anchura y fondo, sin utilizar la altura.", "Divide cada dimensión pedida entre 5 para conocer el número de casillas. Mantén el punto azul como referencia.", "Mantén el frente indicado y compara en qué lado queda la parte alta.", "Convierte milímetros en casillas y coloca el cambio de altura a mitad de la anchura.", "Compara el contorno del alzado y la dirección de las divisiones que se ven desde arriba.", "Primero dibuja el contorno exterior y después sitúa las separaciones cada 20 mm.", "Mira si la figura interior deja el mismo espacio a ambos lados y también delante y detrás.", "Usa el punto azul como esquina del resalte. Comprueba el fondo total, la altura de la base y el centrado.", "La abertura se reconoce en la vista tomada desde arriba; las otras dos miradas muestran caras exteriores.", "Mantén el frente de cada figura y compara por separado contorno, proporciones y líneas interiores. Una vista puede repetirse."], ["Distingue la cifra, la línea que la acompaña, las auxiliares que llegan a la pieza y las flechas de los extremos.", "La cota vertical comunica la dimensión vertical real del rectángulo.", "El tramo que falta se obtiene comparando la medida total con la parte conocida.", "La altura total incluye la base y el resalte. Separa ambas partes antes de calcular.", "Comprueba si estás dando dos veces la misma información sobre la misma anchura.", "Cambiar el zoom no modifica el objeto: utiliza sus dimensiones reales.", "Cada cota debe indicar claramente qué dos extremos se están midiendo.", "Relaciona cada vista con las dos dimensiones que permite observar. No todas muestran las tres.", "Se conserva la dimensión real indicada en el enunciado y se evita repetirla sin necesidad.", "Cada vista comparte una dimensión con las demás: anchura, fondo o altura según desde dónde mires."]];
 
-function hintFor(q){return PDI_HINTS[APP.n-1][APP.questions.indexOf(q)]||q.hint;}
+function hintFor(q){return q.hint;}
 function deepFreeze(obj){if(obj&&typeof obj==='object'&&!Object.isFrozen(obj)){Object.freeze(obj);Object.values(obj).forEach(deepFreeze);}return obj;}
 function showScreen(screen){
  S.screen=screen;const identified=S.students.length>0;document.body.classList.toggle('is-identified',identified);
@@ -665,7 +509,7 @@ function showScreen(screen){
  
  $('explore').hidden=screen!=='explore';$('retos').hidden=!['quiz','results'].includes(screen);$('quizStage').hidden=screen!=='quiz';$('resultStage').hidden=screen!=='results';
  $('flowLabel').textContent=S.mode==='registered'?(S.testMode?'ACTIVIDAD EVALUABLE · Envío de prueba':'ACTIVIDAD EVALUABLE · Cuenta para la nota'):'PRACTICAR SIN NOTA';$('flowLabel').className='flow-label'+(S.mode==='registered'?' evaluable':'');
- $('evaluateMode').querySelector('em').textContent=S.testMode?'PRUEBA TÉCNICA · NO CUENTA PARA LA NOTA':'CUENTA PARA LA NOTA';$('evaluateMode').querySelector('span').textContent=S.testMode?'Recorre los diez retos y comprueba el envío con NX-01. El resultado se marcará como prueba.':'Diez retos · 10 puntos. Al finalizar se enviará el resultado de cada ID validado.';
+ $('evaluateMode').querySelector('em').textContent=S.testMode?'PRUEBA TÉCNICA · NO CUENTA PARA LA NOTA':'CUENTA PARA LA NOTA';$('evaluateMode').querySelector('span').textContent=S.testMode?'Recorre los diez retos y comprueba el envío con NX-01. El resultado se marcará como prueba.':'Diez retos: dibujar, elegir vistas y relacionarlas con varias piezas. Al terminar se enviará el resultado.';
  $('sessionName').textContent=S.students.map(s=>s.name+' · Grupo '+s.group).join(' / ');
  if(screen==='entry')$('id1').focus();
 }
@@ -687,6 +531,334 @@ function requestHint(){
  S.hints[S.index]=true;renderQuiz();
 }
 function sendStatus(state,title,message){const e=$('sendMessage');if(!e)return;e.className='send-banner '+state;e.replaceChildren();const strong=document.createElement('strong');strong.textContent=title;e.append(strong,document.createTextNode(message));}
+
+const VG=(()=>{
+ const NS='http://www.w3.org/2000/svg';
+const palette={front:'#65b9dc',back:'#b4a0da',bottom:'#bdc9ce',right:'#efa25d',left:'#91bf91',top:'#f2d56c',topLow:'#a2d9d1',riser:'#de9db3',innerLeft:'#81b4c7',innerTop:'#e6b288',innerRight:'#b3bc80',innerBottom:'#c99dbf',innerBack:'#ceba94'};
+const names={front:'Frente',back:'Trasera',bottom:'Base',right:'Derecha',left:'Izquierda',top:'Superior',topLow:'Superior baja',riser:'Escalón vertical',innerLeft:'Pared interior izquierda',innerTop:'Techo interior',innerRight:'Pared interior derecha',innerBottom:'Suelo interior',innerBack:'Fondo de la cavidad'};
+function makePrism(w=60,d=40,h=30){return {w,d,h,type:'prism',poly:[[0,0],[w,0],[w,h],[0,h]]}}
+function makeStep(w=60,d=40,h=30,low=15,split=30){return {w,d,h,low,split,type:'step',poly:[[0,0],[w,0],[w,low],[split,low],[split,h],[0,h]]}}
+function makeRoof(w=60,d=40,h=30,low=15){return {w,d,h,low,type:'roof',poly:[[0,0],[w,0],[w,low],[0,h]]}}
+function makeTunnel(end=null){return {...makePrism(60,40,40),type:'tunnel',hole:{x0:20,x1:40,y0:10,y1:25,end}}}
+function heightPiece(rows,unit=15){
+ const cells=[];rows.forEach((row,z)=>row.forEach((h,x)=>{for(let y=0;y<h;y++)cells.push([x,y,z]);}));
+ return {type:'voxel',cells,unit,w:rows[0].length*unit,d:rows.length*unit,h:Math.max(...rows.flat())*unit};
+}
+function loopsOf(edges){
+ const remaining=edges.map(e=>e.map(p=>[...p])),loops=[];
+ while(remaining.length){const e=remaining.shift(),loop=[e[0]],start=e[0].join(','),next=e[1];let cur=next;
+  while(cur.join(',')!==start){loop.push(cur);const j=remaining.findIndex(x=>x[0].join(',')===cur.join(','));if(j<0)throw Error('Contorno abierto');cur=remaining.splice(j,1)[0][1];}
+  let changed=true;while(changed&&loop.length>3){changed=false;for(let i=0;i<loop.length;i++){const a=loop[(i+loop.length-1)%loop.length],b=loop[i],c=loop[(i+1)%loop.length];if(Math.abs((b[0]-a[0])*(c[1]-b[1])-(b[1]-a[1])*(c[0]-b[0]))<1e-8){loop.splice(i,1);changed=true;break;}}}loops.push(loop);
+ }return loops;
+}
+function voxelGeometry(p){
+ const set=new Set(p.cells.map(c=>c.join(','))),groups=new Map();
+ const specs=[{n:[0,0,-1],color:'front',axis:2,uv:[0,1]},{n:[0,0,1],color:'back',axis:2,uv:[0,1]},{n:[1,0,0],color:'right',axis:0,uv:[2,1]},{n:[-1,0,0],color:'left',axis:0,uv:[2,1]},{n:[0,1,0],color:'top',axis:1,uv:[0,2]},{n:[0,-1,0],color:'bottom',axis:1,uv:[0,2]}];
+ for(const cell of p.cells)for(const spec of specs){if(set.has(cell.map((v,i)=>v+spec.n[i]).join(',')))continue;
+  const plane=cell[spec.axis]+(spec.n[spec.axis]>0?1:0),key=spec.color+plane;let g=groups.get(key);if(!g){g={...spec,plane,squares:[]};groups.set(key,g);}g.squares.push(spec.uv.map(i=>cell[i]));
+ }
+ const faces=[];for(const g of groups.values()){
+  const squares=new Set(g.squares.map(c=>c.join(','))),edges=[];
+  for(const [u,v]of g.squares){if(!squares.has([u,v-1].join(',')))edges.push([[u,v],[u+1,v]]);if(!squares.has([u+1,v].join(',')))edges.push([[u+1,v],[u+1,v+1]]);if(!squares.has([u,v+1].join(',')))edges.push([[u+1,v+1],[u,v+1]]);if(!squares.has([u-1,v].join(',')))edges.push([[u,v+1],[u,v]]);}
+  for(const loop of loopsOf(edges)){const points=loop.map(q=>{const v=[0,0,0];v[g.axis]=g.plane;g.uv.forEach((i,j)=>v[i]=q[j]);return v.map((a,i)=>a*p.unit-[p.w,p.h,p.d][i]/2);});faces.push({points,n:g.n,color:g.color});}
+ }return faces;
+}
+function voxelView(p,kind){
+ const axes=kind==='front'?[0,1,2]:kind==='top'?[0,2,1]:[2,1,0],surf=new Map();
+ for(const cell of p.cells){
+  const u=kind==='left'?Math.round(p.d/p.unit)-1-cell[2]:cell[axes[0]];
+  const key=[u,cell[axes[1]]].join(','),d=cell[axes[2]];
+  surf.set(key,surf.has(key)?(['front','left'].includes(kind)?Math.min(surf.get(key),d):Math.max(surf.get(key),d)):d);
+ }
+ const edges=[],inside=new Map();for(const [k,d] of surf){const [u,v]=k.split(',').map(Number);const sides=[[[u,v-1],[u,v],[u+1,v]],[[u+1,v],[u+1,v],[u+1,v+1]],[[u,v+1],[u+1,v+1],[u,v+1]],[[u-1,v],[u,v+1],[u,v]]];for(const [q,a,b]of sides){const other=q.join(',');if(!surf.has(other))edges.push([a,b]);else if(surf.get(other)!==d){const key=[a.join(','),b.join(',')].sort().join('|');inside.set(key,[a,b]);}}}
+ const loops=loopsOf(edges).map(loop=>loop.map(q=>q.map(n=>n*p.unit))),segments=[...inside.values()];
+ // Join contiguous unit segments; unit boundaries are not physical edges.
+ let changed=true;while(changed){changed=false;outer:for(let i=0;i<segments.length;i++)for(let j=i+1;j<segments.length;j++){const a=segments[i],b=segments[j];for(const [ai,bi]of [[0,0],[0,1],[1,0],[1,1]])if(a[ai].join(',')===b[bi].join(',')){const x=a[1-ai],m=a[ai],z=b[1-bi];if((m[0]-x[0])*(z[1]-m[1])===(m[1]-x[1])*(z[0]-m[0])){segments[i]=[x,z];segments.splice(j,1);changed=true;break outer;}}}}
+ return {w:['right','left'].includes(kind)?p.d:p.w,h:kind==='top'?p.d:p.h,outline:loops[0],holes:[],lines:segments.map(e=>line(e[0].map(n=>n*p.unit),e[1].map(n=>n*p.unit)))};
+}
+
+const pieces={prism:makePrism(55,35,25),step:makeStep(65,35,35,20,25),roof:makeRoof(50,30,35,15),tunnel:makeTunnel(),rear:heightPiece([[1,1,1,1],[3,3,3,3]]),l:heightPiece([[2,2,2,2],[2,2,2,2],[2,0,0,0]]),u:heightPiece([[3,0,0,3],[3,0,0,3],[3,3,3,3]])};
+function dot(a,b){return a.reduce((sum,v,i)=>sum+v*b[i],0)}
+function project(v,ya,pi){return [dot(v,[Math.cos(ya),0,Math.sin(ya)]),dot(v,[-Math.sin(pi)*Math.sin(ya),Math.cos(pi),Math.sin(pi)*Math.cos(ya)])]}
+function geometry(p){
+ if(p.cells)return voxelGeometry(p);
+ const center=v=>[v[0]-p.w/2,v[1]-p.h/2,v[2]-p.d/2];
+ const front=p.poly.map(v=>center([...v,0])),back=p.poly.map(v=>center([...v,p.d]));
+ const faces=[{points:front,n:[0,0,-1],color:'front'},{points:back,n:[0,0,1],color:'back'}];
+ p.poly.forEach((a,i)=>{const b=p.poly[(i+1)%p.poly.length],dx=b[0]-a[0],dy=b[1]-a[1];
+  let color=dy>0?'right':dy<0?'left':dx>0?'bottom':'top';
+  if(dy>0&&a[0]!==p.w)color='riser';if(dx<0&&dy>0)color='top';
+  if(p.type==='step'&&dx<0&&a[1]<p.h)color='topLow';
+  faces.push({points:[center([...a,0]),center([...b,0]),center([...b,p.d]),center([...a,p.d])],n:[dy,-dx,0],color});
+ });
+ if(p.hole){const h=p.hole,end=h.end??p.d,loop=[[h.x0,h.y0],[h.x0,h.y1],[h.x1,h.y1],[h.x1,h.y0]];
+  faces[0].holes=[loop.map(v=>center([...v,0]))];
+  if(h.end===null)faces[1].holes=[loop.map(v=>center([...v,p.d]))];
+  loop.forEach((a,i)=>{const b=loop[(i+1)%4],dx=b[0]-a[0],dy=b[1]-a[1];
+   faces.push({points:[center([...a,0]),center([...b,0]),center([...b,end]),center([...a,end])],n:[dy,-dx,0],color:['innerLeft','innerTop','innerRight','innerBottom'][i]});
+  });
+  if(h.end!==null)faces.push({points:loop.map(v=>center([...v,end])),n:[0,0,-1],color:'innerBack'});
+ }
+ return faces;
+}
+function svgNode(type,attrs,parent){const el=document.createElementNS(NS,type);Object.entries(attrs).forEach(([k,v])=>el.setAttribute(k,v));if(parent)parent.append(el);return el}
+function svgPath(points,transform){return points.map((p,i)=>`${i?'L':'M'}${transform(p).join(',')}`).join(' ')+' Z'}
+function rayOccluded(v,n,p){
+ const point=[v[0]+p.w/2,v[1]+p.h/2,v[2]+p.d/2],h=p.hole;
+ const planes=[[0,p.w,h.x0,h.x1],[0,p.h,h.y0,h.y1],[0,p.d,h.end??p.d]];
+ const times=[0];planes.forEach((a,i)=>{if(Math.abs(n[i])<1e-9)return;a.forEach(c=>{const t=(c-point[i])/n[i];if(t>1e-7)times.push(t)})});
+ times.sort((a,b)=>a-b);
+ for(let i=0;i<times.length-1;i++){
+  const t=(times[i]+times[i+1])/2,x=point.map((c,j)=>c+t*n[j]);
+  const inBox=x[0]>1e-7&&x[0]<p.w-1e-7&&x[1]>1e-7&&x[1]<p.h-1e-7&&x[2]>1e-7&&x[2]<p.d-1e-7;
+  const inVoid=x[0]>h.x0-1e-7&&x[0]<h.x1+1e-7&&x[1]>h.y0-1e-7&&x[1]<h.y1+1e-7&&x[2]<(h.end??p.d)+1e-7;
+  if(inBox&&!inVoid)return true;
+ }
+ return false;
+}
+function cavityEdges(p){const h=p.hole,end=h.end??p.d,loop=[[h.x0,h.y0],[h.x1,h.y0],[h.x1,h.y1],[h.x0,h.y1]],center=v=>[v[0]-p.w/2,v[1]-p.h/2,v[2]-p.d/2],edges=[];
+ loop.forEach((a,i)=>{const b=loop[(i+1)%4];for(const z of [0,end])edges.push([center([...a,z]),center([...b,z])]);edges.push([center([...a,0]),center([...a,end])])});return edges;
+}
+function drawModel(target,p,ya,pi,{colors=true,hidden=false,scale=3.6}={}){
+ target.replaceChildren();const camera=[Math.sin(ya)*Math.cos(pi),Math.sin(pi),-Math.cos(ya)*Math.cos(pi)];
+ const transform=v=>{const [x,y]=project(v,ya,pi);return [220+x*scale,170-y*scale]};
+ const depth=f=>dot(f.points.reduce((t,v)=>t.map((n,i)=>n+v[i]/f.points.length),[0,0,0]),camera);
+ const faces=geometry(p).filter(f=>dot(f.n,camera)>1e-7).sort((a,b)=>depth(a)-depth(b));
+ faces.forEach(f=>{let attrs={fill:colors?palette[f.color]:'#e0e8ea',stroke:'#263b45','stroke-width':1.5,'stroke-linejoin':'round'};
+  let el;if(f.holes){attrs.d=svgPath(f.points,transform)+f.holes.map(h=>svgPath(h,transform)).join(' ');attrs['fill-rule']='evenodd';el=svgNode('path',attrs,target)}
+  else{attrs.points=f.points.map(transform).map(v=>v.join(',')).join(' ');el=svgNode('polygon',attrs,target)}
+  const title=svgNode('title',{},el);title.textContent=names[f.color];
+ });
+ if(p.hole&&hidden){const group=svgNode('g',{'aria-label':'Aristas interiores ocultas',stroke:'#344651','stroke-width':1.3,'stroke-dasharray':'5 4',fill:'none'},target);
+  cavityEdges(p).forEach(([a,b])=>{let start=null;const point=t=>a.map((v,i)=>v+(b[i]-v)*t);
+   for(let i=0;i<40;i++){
+    const isHidden=rayOccluded(point((i+.5)/40),camera,p);
+    if(isHidden&&start===null)start=i/40;
+    if(start!==null&&(!isHidden||i===39)){const end=isHidden&&i===39?1:i/40;const [x1,y1]=transform(point(start)),[x2,y2]=transform(point(end));svgNode('line',{x1,y1,x2,y2},group);start=null}
+   }
+  });
+ }
+}
+function line(a,b,hidden=false){return {type:'line',a,b,hidden}}
+function baseSpec(p,kind){
+ if(p.cells)return voxelView(p,kind);
+ const rect=(w,h)=>({w,h,outline:[[0,0],[w,0],[w,h],[0,h]],lines:[],holes:[]});let v;
+ if(kind==='front'){v=rect(p.w,p.h);v.outline=p.poly.map(x=>[...x]);if(p.hole){const h=p.hole;v.holes.push({x:h.x0,y:h.y0,w:h.x1-h.x0,h:h.y1-h.y0})}}
+ if(kind==='top'){v=rect(p.w,p.d);if(p.type==='step'){v.lines.push(line([p.split,0],[p.split,p.d]));v.regions=[{outline:[[p.split,0],[p.w,0],[p.w,p.d],[p.split,p.d]],color:'topLow'}]}if(p.hole){const h=p.hole,end=h.end??p.d;v.lines.push(line([h.x0,0],[h.x0,end],true),line([h.x1,0],[h.x1,end],true));if(h.end!==null)v.lines.push(line([h.x0,end],[h.x1,end],true))}}
+ if(kind==='right'){v=rect(p.d,p.h);if(p.type==='step'||p.type==='roof'){v.lines.push(line([0,p.low],[p.d,p.low]));v.regions=[{outline:[[0,p.low],[p.d,p.low],[p.d,p.h],[0,p.h]],color:p.type==='step'?'riser':'top'}]}if(p.hole){const h=p.hole,end=h.end??p.d;v.lines.push(line([0,h.y0],[end,h.y0],true),line([0,h.y1],[end,h.y1],true));if(h.end!==null)v.lines.push(line([end,h.y0],[end,h.y1],true))}}
+ if(kind==='left'){
+  v=rect(p.d,p.h);
+  if(p.hole){const h=p.hole,end=h.end??p.d;v.lines.push(line([p.d, h.y0],[p.d-end,h.y0],true),line([p.d,h.y1],[p.d-end,h.y1],true));if(h.end!==null)v.lines.push(line([p.d-end,h.y0],[p.d-end,h.y1],true));}
+ }
+ return v;
+}
+function drawView(target,v,{cx=100,cy=70,scale=2.1,color=null}={}){
+ const transform=([x,y])=>[cx+(x-v.w/2)*scale,cy-(y-v.h/2)*scale];
+ const stroke={stroke:'#263b45','stroke-width':1.6,'stroke-linecap':'butt','stroke-linejoin':'round'};
+ svgNode('polygon',{points:v.outline.map(transform).map(x=>x.join(',')).join(' '),fill:color??'#fff',...stroke},target);
+ if(color)(v.regions??[]).forEach(r=>svgNode('polygon',{points:r.outline.map(transform).map(x=>x.join(',')).join(' '),fill:palette[r.color],...stroke},target));
+ v.holes.forEach(h=>{if(h.circle){const [x,y]=transform([h.x,h.y]);svgNode('circle',{cx:x,cy:y,r:h.r*scale,fill:'#fff',...stroke,...(h.hidden?{'stroke-dasharray':'5 4'}:{})},target)}
+  else{const [x,y]=transform([h.x,h.y+h.h]);svgNode('rect',{x,y,width:h.w*scale,height:h.h*scale,fill:'#fff',...stroke,...(h.hidden?{'stroke-dasharray':'5 4'}:{})},target)}});
+ v.lines.forEach(l=>{const [x1,y1]=transform(l.a),[x2,y2]=transform(l.b);svgNode('line',{x1,y1,x2,y2,...stroke,...(l.hidden?{'stroke-dasharray':'5 4'}:{})},target)});
+}
+
+
+const quizPieces={
+ eBlock:makePrism(60,40,30),eStep:makeStep(60,40,30,15,30),
+ eTower:heightPiece([[1,1,1,1,1,1],[1,1,3,3,1,1],[1,1,3,3,1,1],[1,1,1,1,1,1]],10),
+ eStairs:heightPiece([[3,3,2,2,1,1],[3,3,2,2,1,1],[3,3,2,2,1,1],[3,3,2,2,1,1]],10),
+ eTunnel:makeTunnel()
+};
+pieces.stairs=heightPiece([[4,3,2,1],[4,3,2,1],[4,3,2,1]],10);
+pieces.tower=heightPiece([[1,1,1,1,1],[1,1,3,1,1],[1,1,1,1,1]],10);
+// Referencia de práctica distinta del bloque de túnel evaluable.
+pieces.tunnel={...makePrism(65,35,35),type:'tunnel',hole:{x0:20,x1:45,y0:10,y1:25,end:null}};
+const all={...pieces,...quizPieces};
+function physicalEdges(p){
+ const cells=new Set(p.cells.map(c=>c.join(','))),edges=new Map();
+ for(const cell of p.cells)for(let axis=0;axis<3;axis++){
+  const others=[0,1,2].filter(a=>a!==axis);
+  for(const u of [0,1])for(const v of [0,1]){
+   const a=[...cell];a[others[0]]+=u;a[others[1]]+=v;const b=[...a];b[axis]++;
+   const bits=[];for(const du of [-1,0])for(const dv of [-1,0]){const c=[...a];c[others[0]]+=du;c[others[1]]+=dv;bits.push(cells.has(c.join(',')))}
+   const count=bits.filter(Boolean).length;
+   if(count===1||count===3||(count===2&&bits[0]===bits[3]))edges.set(a.join(',')+'|'+b.join(','),[a,b]);
+  }
+ }
+ return [...edges.values()];
+}
+function viewSpec(p,kind,hidden=true){
+ const v=baseSpec(p,kind);v.lines=v.lines||[];
+ if(hidden&&['step','roof'].includes(p.type)&&kind==='left')v.lines.push(line([0,p.low],[p.d,p.low],true));
+ if(hidden&&p.cells){
+  const project2=c=>kind==='front'?[c[0]*p.unit,c[1]*p.unit]:kind==='top'?[c[0]*p.unit,c[2]*p.unit]:kind==='left'?[p.d-c[2]*p.unit,c[1]*p.unit]:[c[2]*p.unit,c[1]*p.unit];
+  const visible=specKeys(v,false),seen=new Set();
+  for(const edge of physicalEdges(p)){
+   const [a,b]=edge.map(project2);if(a.join(',')===b.join(','))continue;
+   for(const key of lineUnits(a.map(n=>n/5),b.map(n=>n/5),'solid'))if(!visible.has(key)&&!seen.has(key)){seen.add(key);const [x,y]=readEdge(key);v.lines.push(line(x.map(n=>n*5),y.map(n=>n*5),true));}
+  }
+ }
+ if(!hidden){v.lines=v.lines.filter(l=>!l.hidden);v.holes=v.holes.filter(h=>!h.hidden)}
+ return v;
+}
+return {pieces,all,palette,names,drawModel,drawView,viewSpec};
+
+})();
+
+// Laboratorio propio: modelo 3D y dibujo vectorial sobre cuadrícula.
+const VIEW_LABEL={front:'Alzado',top:'Planta',left:'Perfil izquierdo',right:'Perfil derecho'};
+const PRACTICE_NAMES={prism:'1 · Prisma rectangular',step:'2 · Pieza escalonada',roof:'3 · Plano inclinado',stairs:'4 · Tres escalones',rear:'5 · Escalón hacia atrás',l:'6 · Base en L',tower:'7 · Resalte central',u:'8 · Pieza en U',tunnel:'9 · Túnel rectangular'};
+const LP={piece:'prism',tool:'solid',active:'front',solution:false,focus:'',db:{}};
+const pointKey=a=>a.join(',');
+function gcd(a,b){return b?gcd(b,a%b):Math.abs(a)}
+function edgeKey(a,b,style='solid'){
+ if(a[0]>b[0]||(a[0]===b[0]&&a[1]>b[1]))[a,b]=[b,a];
+ return (style==='dash'||style==='d'?'d':'c')+'|'+pointKey(a)+'|'+pointKey(b);
+}
+function readEdge(k){const [style,a,b]=k.split('|');return [a.split(',').map(Number),b.split(',').map(Number),style]}
+function lineUnits(a,b,style='solid'){
+ const dx=b[0]-a[0],dy=b[1]-a[1],n=gcd(Math.abs(Math.round(dx)),Math.abs(Math.round(dy)));if(!n)return [];
+ return Array.from({length:n},(_,i)=>edgeKey([a[0]+dx*i/n,a[1]+dy*i/n],[a[0]+dx*(i+1)/n,a[1]+dy*(i+1)/n],style));
+}
+function specKeys(v,includeHidden=true){
+ const out=new Set(),add=(a,b,s='solid')=>lineUnits(a.map(x=>x/5),b.map(x=>x/5),s).forEach(k=>out.add(k));
+ const loop=(points,s)=>points.forEach((a,i)=>add(a,points[(i+1)%points.length],s));
+ loop(v.outline,'solid');
+ for(const l of v.lines||[])if(includeHidden||!l.hidden)add(l.a,l.b,l.hidden?'dash':'solid');
+ for(const h of v.holes||[])if(includeHidden||!h.hidden)loop([[h.x,h.y],[h.x+h.w,h.y],[h.x+h.w,h.y+h.h],[h.x,h.y+h.h]],h.hidden?'dash':'solid');
+ // Una línea vista prevalece sobre una oculta que se proyecta en el mismo sitio.
+ for(const k of [...out])if(k[0]==='d'&&out.has('c'+k.slice(1)))out.delete(k);
+ return out;
+}
+function expectedForSpec(v){return [...specKeys(v)].map(k=>{const [a,b,s]=readEdge(k),t=p=>[1+p[0],1+v.h/5-p[1]];return edgeKey(t(a),t(b),s)})}
+function expectedEdges(q){return q.vistaSpec?expectedForSpec(q.vistaSpec):legacyExpectedEdges(q)}
+function editorState(){return {keys:[],history:[],anchor:null,cursor:[1,1],preview:null}}
+function practiceState(kind){LP.db[LP.piece]??={};return LP.db[LP.piece][kind]??=(editorState())}
+function svgEditor(id,label){return `<svg id="${id}" class="vista-draw" viewBox="0 0 360 280" role="application" aria-label="Dibujar ${label}" tabindex="0"></svg>`}
+function editorMarkup(id,label,locked=false){return `<div id="${id}-controls" class="editor-toolbar" aria-label="Herramientas de ${label}">${[['solid','Línea continua'],['dash','Línea discontinua'],['erase','Goma']].map(([t,n])=>`<button type="button" data-editor-tool="${t}" ${locked?'disabled':''}>${n}</button>`).join('')}<button type="button" data-editor-action="undo" ${locked?'disabled':''}>Deshacer</button><button type="button" data-editor-action="clear" ${locked?'disabled':''}>Limpiar</button></div>${svgEditor(id,label)}`}
+function editorSVGContent(st,expected=[],solution=false,preview=null){
+ let s='<rect width="360" height="280" rx="8" fill="#fcfdfb"/>';
+ for(let x=0;x<=16;x++)s+=`<path d="M${20+x*20} 20V260" stroke="#dce9e9" stroke-width="1"/>`;
+ for(let y=0;y<=12;y++)s+=`<path d="M20 ${20+y*20}H340" stroke="#dce9e9" stroke-width="1"/>`;
+ const draw=(k,color,width=2.8)=>{const[a,b,t]=readEdge(k);return `<path data-edge="${k}" d="M${20+a[0]*20} ${20+a[1]*20}L${20+b[0]*20} ${20+b[1]*20}" fill="none" stroke="${color}" stroke-width="${width}" ${t==='d'?'stroke-dasharray="6 4"':''} stroke-linecap="butt"/>`};
+ for(const k of st.keys)s+=draw(k,solution&&!expected.includes(k)?'#a22c38':'#203d57');
+ if(solution)for(const k of expected)s+=draw(k,'#087844',4.1);
+ if(preview)for(const k of preview)s+=draw(k,'#c27513',2.5);
+ s+='<circle cx="40" cy="40" r="4.5" fill="#007f89" stroke="white" stroke-width="1.5"/>';
+ const p=st.anchor||st.cursor;if(p){const x=20+p[0]*20,y=20+p[1]*20;s+=`<path d="M${x-7} ${y}h14M${x} ${y-7}v14" stroke="#aa5b04" stroke-width="1.7" pointer-events="none"/>`;if(st.anchor)s+=`<circle cx="${x}" cy="${y}" r="5" fill="#f3cb67" stroke="#8a5006"/>`}
+ return s;
+}
+function eraseConnected(keys,point){
+ let found=null,best=.43;
+ for(const k of keys){const[a,b]=readEdge(k),dx=b[0]-a[0],dy=b[1]-a[1],len=dx*dx+dy*dy,t=Math.max(0,Math.min(1,((point[0]-a[0])*dx+(point[1]-a[1])*dy)/len)),d=Math.hypot(point[0]-a[0]-t*dx,point[1]-a[1]-t*dy);if(d<best){best=d;found=k}}
+ if(!found)return keys;
+ const[a,b]=readEdge(found),dx=b[0]-a[0],dy=b[1]-a[1],same=keys.filter(k=>{const[c,d]=readEdge(k);return Math.abs((c[0]-a[0])*dy-(c[1]-a[1])*dx)<1e-7&&Math.abs((d[0]-a[0])*dy-(d[1]-a[1])*dx)<1e-7});
+ const erased=new Set([found]),points=new Set([pointKey(a),pointKey(b)]);let changed=true;
+ while(changed){changed=false;for(const k of same)if(!erased.has(k)){const[c,d]=readEdge(k);if(points.has(pointKey(c))||points.has(pointKey(d))){erased.add(k);points.add(pointKey(c));points.add(pointKey(d));changed=true}}}
+ return keys.filter(k=>!erased.has(k));
+}
+function installEditor(svg,st,{tool=()=>LP.tool,expected=[],solution=()=>false,locked=false,onchange=()=>{},onactivate=()=>{}}={}){
+ let down=null,erasing=false;
+ const paint=preview=>{svg.innerHTML=editorSVGContent(st,expected,solution(),preview)};
+ const commit=keys=>{if(JSON.stringify(keys)===JSON.stringify(st.keys))return;st.history.push([...st.keys]);st.keys=keys;st.anchor=null;onchange(st.keys);paint()};
+ const add=(a,b)=>{if(pointKey(a)===pointKey(b))return;const keys=new Set(st.keys);for(const k of lineUnits(a,b,tool())){keys.delete((k[0]==='c'?'d':'c')+k.slice(1));keys.add(k)}commit([...keys])};
+ function at(e,rounded=true){const m=svg.getScreenCTM();if(!m)return null;const p=svg.createSVGPoint();p.x=e.clientX;p.y=e.clientY;const t=p.matrixTransform(m.inverse());const a=[Math.max(0,Math.min(16,(t.x-20)/20)),Math.max(0,Math.min(12,(t.y-20)/20))];return rounded?a.map(Math.round):a}
+ function activate(){onactivate();svg.focus({preventScroll:true})}
+ if(!locked){
+  svg.onpointerdown=e=>{if(e.button!==0)return;e.preventDefault();e.stopPropagation();activate();down=at(e);if(!down)return;svg.setPointerCapture(e.pointerId);erasing=tool()==='erase';if(erasing)commit(eraseConnected(st.keys,at(e,false)));st.cursor=down;paint()};
+  svg.onpointermove=e=>{if(!down&&!st.anchor)return;const p=at(e);if(!p)return;if(erasing&&down)commit(eraseConnected(st.keys,at(e,false)));else{st.cursor=p;const a=st.anchor||down;paint(a?lineUnits(a,p,tool()):null)}};
+  svg.onpointerup=e=>{if(!down)return;e.preventDefault();e.stopPropagation();const p=at(e);if(!erasing&&p){if(pointKey(down)!==pointKey(p))add(down,p);else if(st.anchor){const a=st.anchor;st.anchor=null;add(a,p)}else st.anchor=p}down=null;erasing=false;paint()};
+  svg.onpointercancel=()=>{down=null;erasing=false;st.anchor=null;paint()};svg.onlostpointercapture=()=>{down=null;erasing=false};
+  svg.onkeydown=e=>{if(['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','Enter',' ','Escape','Delete','Backspace'].includes(e.key)){e.preventDefault();e.stopPropagation();activate();const p=[...(st.cursor||[1,1])];if(e.key==='ArrowLeft')p[0]=Math.max(0,p[0]-1);if(e.key==='ArrowRight')p[0]=Math.min(16,p[0]+1);if(e.key==='ArrowUp')p[1]=Math.max(0,p[1]-1);if(e.key==='ArrowDown')p[1]=Math.min(12,p[1]+1);st.cursor=p;if(e.key==='Escape')st.anchor=null;if(['Delete','Backspace'].includes(e.key))commit(eraseConnected(st.keys,p));if(['Enter',' '].includes(e.key)){if(tool()==='erase')commit(eraseConnected(st.keys,p));else if(st.anchor){const a=st.anchor;st.anchor=null;add(a,p)}else st.anchor=p}paint()}};
+ }
+ paint();return {paint,undo(){if(locked||!st.history.length)return;st.keys=st.history.pop();st.anchor=null;onchange(st.keys);paint()},clear(){if(!locked)commit([])},cancel(){st.anchor=null;paint()}};
+}
+function modelHTML(key){return `<div class="new-model"><svg viewBox="0 0 440 340" data-vista-model="${key}" role="img" aria-label="Pieza 3D ${key}: arrastra para girar" tabindex="0"></svg><p class="note">Arrastra para girar · Frente azul</p></div>`}
+function mountModels(root){
+ root.querySelectorAll('[data-vista-model]').forEach(svg=>{
+  const key=svg.dataset.vistaModel,p=VG.all[key];let yaw=Math.PI/6,pitch=25*Math.PI/180,drag=null;
+  const draw=()=>VG.drawModel(svg,p,yaw,pitch,{colors:true,hidden:false,scale:Math.min(3.7,340/Math.hypot(p.w,p.d,p.h))});
+  svg.onpointerdown=e=>{if(e.button!==0)return;e.preventDefault();e.stopPropagation();drag={x:e.clientX,y:e.clientY,yaw,pitch};svg.setPointerCapture(e.pointerId)};
+  svg.onpointermove=e=>{if(!drag)return;const a=drag.yaw-(e.clientX-drag.x)*.012;yaw=Math.atan2(Math.sin(a),Math.cos(a));pitch=Math.max(-Math.PI/2,Math.min(Math.PI/2,drag.pitch+(e.clientY-drag.y)*.012));draw()};
+  svg.onpointerup=svg.onpointercancel=svg.onlostpointercapture=()=>{drag=null};
+  svg.onkeydown=e=>{if(e.key.startsWith('Arrow')){e.preventDefault();if(e.key==='ArrowLeft')yaw-=.15;if(e.key==='ArrowRight')yaw+=.15;if(e.key==='ArrowUp')pitch=Math.min(Math.PI/2,pitch+.15);if(e.key==='ArrowDown')pitch=Math.max(-Math.PI/2,pitch-.15);draw()}};
+  svg.vistaCamera=kind=>{yaw=kind==='left'?-Math.PI/2:kind==='right'?Math.PI/2:kind==='reset'?Math.PI/6:0;pitch=kind==='top'?Math.PI/2:kind==='reset'?25*Math.PI/180:0;draw()};
+  draw();
+ });
+}
+function viewHTML(spec,label='Vista propuesta'){
+ const temp=document.createElementNS('http://www.w3.org/2000/svg','svg');temp.setAttribute('viewBox','0 0 200 140');temp.setAttribute('role','img');temp.setAttribute('aria-label',label);VG.drawView(temp,spec,{scale:Math.min(2.1,174/spec.w,114/spec.h)});return temp.outerHTML;
+}
+function renderVisual(v){
+ if(!v)return '';
+ if(v.type==='workModel')return modelHTML(v.key);
+ if(v.type==='workView')return viewHTML(v.spec,v.label);
+ if(v.type==='workBoard')return `<div class="wb-models">${v.models.map((k,i)=>`<div><strong>F${i+1}</strong>${modelHTML(k)}</div>`).join('')}</div><h3>Vistas para relacionar</h3><div class="wb-views">${v.specs.map((s,i)=>`<div class="wb-option"><strong>${i+1}</strong>${viewHTML(s,'Vista '+(i+1))}</div>`).join('')}</div>`;
+ return legacyRenderVisual(v);
+}
+function spec(key,kind){return VG.viewSpec(VG.all[key],kind)}
+function modified(v,fn){v=structuredClone(v);fn(v);return v}
+function boardQuestion(models,tasks,title){
+ const specs=[],answers=new Map();
+ for(const key of models)for(const kind of ['front','top','left','right']){const v=spec(key,kind),s=[...specKeys(v)].sort().join(';');let index=specs.findIndex(x=>[...specKeys(x)].sort().join(';')===s);if(index<0){index=specs.length;specs.push(v)}answers.set(key+':'+kind,String(index+1))}
+ return {kind:'fields',title,prompt:'Relaciona cada pregunta con una vista numerada. Una vista puede servir para más de una pieza. Mantén el frente azul como referencia.',visual:{type:'workBoard',models,specs},board:true,fields:tasks.map(([fi,kind])=>({label:VIEW_LABEL[kind]+' de F'+fi,options:specs.map((_,i)=>String(i+1)),answer:answers.get(models[fi-1]+':'+kind)})),hint:'Localiza primero el frente de cada figura. Compara contorno, dimensiones y líneas interiores; después distingue línea vista y oculta.',explain:'El alzado combina anchura y altura; la planta, anchura y fondo; los perfiles, fondo y altura. Las aristas que tapa el material se representan discontinuas.'};
+}
+function drawQ(key,kind,title,extra=''){
+ const v=spec(key,kind);return {kind:'draw',title,prompt:`Dibuja ${kind==='top'?'la planta':'el '+VIEW_LABEL[kind].toLowerCase()}. El recuadro exterior de la vista ocupa ${v.w/5} casillas de anchura y ${v.h/5} de altura. Cada casilla representa 5 mm. ${extra}`,visual:{type:'workModel',key},vistaSpec:v,viewKind:kind,hint:'Cuenta las casillas del contorno. Traza primero las aristas vistas con línea continua; reserva la discontinua para las aristas tapadas.',explain:'La corrección compara posición, contorno, líneas interiores y tipo de trazo. El verde muestra la solución y el rojo los tramos que conviene corregir.'};
+}
+const choiceQ=(title,prompt,key,options,answer,hint)=>({kind:'choice',title,prompt,visual:{type:'workModel',key},options:options.map((v,i)=>({label:String.fromCharCode(65+i),visual:{type:'workView',spec:v,label:'Opción '+String.fromCharCode(65+i)}})),answer,hint,explain:hint+' La opción correcta respeta el frente, las dimensiones y el tipo de arista.'});
+APP.questions.splice(0,APP.questions.length,
+ choiceQ('Elige la planta','Observa el prisma de 60 × 40 × 30 mm. ¿Qué dibujo corresponde a su planta?','eBlock',[spec('eBlock','front'),spec('eBlock','top'),spec('eBlock','left')],1,'Desde arriba se ven anchura y fondo: 60 × 40 mm.'),
+ drawQ('eStep','front','Dibuja el alzado escalonado','Anchura 60 mm: dos tramos de 30. Zona izquierda de 30 mm de alto y derecha de 15. No hay aristas ocultas en este alzado.'),
+ choiceQ('¿Qué se ve desde la derecha?','Elige el perfil derecho de la pieza escalonada. Fíjate en el tipo de línea interior.','eStep',[spec('eStep','left'),spec('eBlock','left'),spec('eStep','right')],2,'Desde la derecha se ven la cara baja y el salto de nivel. La separación a 15 mm es continua.'),
+ drawQ('eTower','top','Dibuja la planta del resalte','Base de 60 × 40 mm. Resalte centrado de 20 × 20 mm: deja 20 mm a izquierda/derecha y 10 delante/detrás.'),
+ boardQuestion(['eBlock','eStairs'],[[1,'front'],[2,'top'],[2,'right'],[1,'left']],'Dos piezas, muchas vistas'),
+ drawQ('eStep','left','Dibuja el perfil izquierdo','Desde el lado alto, la arista a 15 mm queda tapada. Dibújala discontinua; el contorno exterior es continuo.'),
+ choiceQ('El perfil del lado alto','Elige el perfil izquierdo de los tres escalones, incluyendo las aristas ocultas.','eStairs',[spec('eStairs','left'),spec('eStairs','right'),spec('eBlock','left')],0,'El lado alto tapa los dos escalones inferiores: sus cambios de nivel aparecen discontinuos dentro del contorno rectangular.'),
+ drawQ('eTunnel','right','Dibuja el perfil del túnel','Bloque de 60 × 40 × 40 mm. El túnel atraviesa el fondo; su suelo está a 10 mm y su techo a 25 mm. En este perfil sus dos bordes quedan ocultos.'),
+ choiceQ('Un resalte centrado','Elige la planta que mantiene el resalte centrado en los dos sentidos.','eTower',[modified(spec('eTower','top'),v=>{v.lines=[];v.holes=[]}),modified(spec('eTower','top'),v=>{v.lines=v.lines.map(l=>({...l,a:[l.a[0]-10,l.a[1]],b:[l.b[0]-10,l.b[1]]}))}),spec('eTower','top')],2,'El resalte ocupa 20 × 20 mm, con márgenes de 20 mm a los lados y 10 mm delante y detrás.'),
+ boardQuestion(['eStep','eTower','eTunnel'],[[1,'front'],[1,'left'],[2,'top'],[2,'right'],[3,'front'],[3,'right']],'Tres piezas: identifica sus vistas')
+);
+APP.questions.forEach((q,i)=>q.id=`${APP.id}_V3_R${String(i+1).padStart(2,'0')}`);
+APP.focus='Alzado · Planta · Perfil izquierdo y derecho';
+function drawingStartNotice(scope,visible){return visible?`<aside class="draw-start-notice" role="status"><div><strong><span aria-hidden="true">●</span> ¡Empieza en el punto azul!</strong><p>Es la referencia de la esquina superior izquierda del espacio que ocupa la vista. Coloca el dibujo contando desde ese punto.</p></div><button type="button" data-start-dismiss="${scope}">Entendido</button></aside>`:''}
+function renderExplore(){
+ const root=$('explore');
+ root.innerHTML=`<section class="panel vista-lab"><div class="eyebrow">PRACTICAR SIN NOTA</div><h2>Del volumen a tus cuatro vistas</h2><p>Gira la pieza de la izquierda y dibuja en los recuadros de la derecha. El frente permanece azul aunque cambies la mirada.</p><div class="lab-top"><label for="practicePiece">Pieza de práctica<select id="practicePiece">${Object.entries(PRACTICE_NAMES).map(([k,n])=>`<option value="${k}" ${k===LP.piece?'selected':''}>${n}</option>`).join('')}</select></label><span class="unit-pill">1 casilla = 5 mm</span><span id="practiceDimensions" class="note"></span></div><div class="vista-workspace"><aside class="model-card"><h3>Observa y gira</h3>${modelHTML(LP.piece)}<div class="camera-tools"><button data-camera="front">Frente</button><button data-camera="top">Arriba</button><button data-camera="left">Izquierda</button><button data-camera="right">Derecha</button><button data-camera="reset">Restablecer giro</button></div><p class="note">También puedes girar con las flechas del teclado al enfocar la pieza.</p><div class="drawing-key"><span><i class="key-line"></i> Arista vista</span><span><i class="key-line dashed"></i> Arista oculta</span></div></aside><div class="drawing-work">${drawingStartNotice('practice',!(LP.startNotices||{})[LP.piece])}<div class="practice-tools" role="toolbar" aria-label="Herramientas de práctica">${[['solid','Línea continua'],['dash','Línea discontinua'],['erase','Goma']].map(([k,n])=>`<button data-practice-tool="${k}" aria-pressed="${LP.tool===k}">${n}</button>`).join('')}<button id="practiceUndo">Deshacer</button><button id="practiceClear">Limpiar vista activa</button></div><p class="note drawing-instructions">Arrastra de punto a punto o toca dos puntos. Goma: toca el tramo que quieras borrar. Puedes ampliar cada recuadro.</p><div id="fourViews" class="four-views ${LP.focus?'focus-'+LP.focus:''}">${['right','front','left','top'].map(kind=>`<section class="view-card card-${kind} ${LP.active===kind?'active':''}" data-view-card="${kind}"><header><h3>${VIEW_LABEL[kind]}</h3><button data-focus-view="${kind}" aria-label="Ampliar ${VIEW_LABEL[kind].toLowerCase()}">⤢</button></header>${svgEditor('practice-'+kind,VIEW_LABEL[kind].toLowerCase())}<p id="note-${kind}" class="view-status" aria-live="polite"></p></section>`).join('')}</div><p class="note">Sistema europeo: perfil derecho a la izquierda del alzado, perfil izquierdo a su derecha y planta debajo.</p><div class="actions"><button id="checkPractice" class="primary">Comprobar dibujos</button><button id="showPractice">${LP.solution?'Ocultar solución':'Ver solución'}</button><button id="allViews" ${LP.focus?'':'hidden'}>Ver las cuatro vistas</button></div><p id="practiceMessage" class="status" role="status" aria-live="polite">Práctica libre: no se envía ninguna nota.</p></div></div></section>`;
+ const dismiss=root.querySelector('[data-start-dismiss]');if(dismiss)dismiss.onclick=()=>{(LP.startNotices??={})[LP.piece]=true;dismiss.closest('.draw-start-notice').remove()};
+ const editors={};const p=VG.pieces[LP.piece];$('practiceDimensions').textContent=`${p.w} mm de ancho · ${p.d} mm de fondo · ${p.h} mm de alto`;
+ mountModels(root);
+ for(const kind of ['front','top','left','right'])editors[kind]=installEditor($('practice-'+kind),practiceState(kind),{expected:expectedForSpec(spec(LP.piece,kind)),solution:()=>LP.solution,onactivate:()=>{LP.active=kind;root.querySelectorAll('[data-view-card]').forEach(e=>e.classList.toggle('active',e.dataset.viewCard===kind))},onchange:()=>{$('note-'+kind).textContent='';$('practiceMessage').textContent='Dibujo actualizado. Puedes comprobarlo cuando quieras.'}});
+ $('practicePiece').onchange=e=>{LP.piece=e.target.value;LP.solution=false;renderExplore()};
+ root.querySelectorAll('[data-practice-tool]').forEach(b=>b.onclick=()=>{LP.tool=b.dataset.practiceTool;root.querySelectorAll('[data-practice-tool]').forEach(e=>e.setAttribute('aria-pressed',e===b));Object.values(editors).forEach(e=>e.cancel())});
+ $('practiceUndo').onclick=()=>editors[LP.active].undo();$('practiceClear').onclick=()=>editors[LP.active].clear();
+ $('showPractice').onclick=()=>{LP.solution=!LP.solution;$('showPractice').textContent=LP.solution?'Ocultar solución':'Ver solución';Object.values(editors).forEach(e=>e.paint())};
+ $('checkPractice').onclick=()=>{for(const kind of ['front','top','left','right']){const expected=expectedForSpec(spec(LP.piece,kind)),actual=practiceState(kind).keys,score=drawingScore(actual,expected),right=expected.filter(k=>actual.includes(k)).length;const n=$('note-'+kind);n.textContent=score===1?'✓ Vista correcta':`${right} de ${expected.length} tramos coinciden. Revisa el contorno y el tipo de línea.`;n.className='view-status '+(score===1?'good':'revise')}$('practiceMessage').textContent='Comprobación de práctica, sin nota ni envío. Puedes corregir y volver a comprobar.'};
+ root.querySelectorAll('[data-focus-view]').forEach(b=>b.onclick=()=>{LP.focus=LP.focus===b.dataset.focusView?'':b.dataset.focusView;LP.active=b.dataset.focusView;renderExplore()});$('allViews').onclick=()=>{LP.focus='';renderExplore()};
+ root.querySelectorAll('[data-camera]').forEach(b=>b.onclick=()=>{root.querySelector('[data-vista-model]').vistaCamera(b.dataset.camera)});
+}
+function renderQuiz(){
+ if(S.mode!=='registered')return;if(S.result&&!S.reviewing){showScreen('results');return;}showScreen('quiz');$('quizStage').className='panel quiz-stage-evaluable';
+ const q=questionsForMode()[S.index],total=questionsForMode().length,d=draft(q),r=S.records[S.index],locked=!!r;
+ $('progress').max=total;$('progress').value=S.records.filter(Boolean).length;$('progressText').textContent=`${S.records.filter(Boolean).length} de ${total} comprobados`;$('sessionLabel').textContent='4 dibujos · 4 elecciones · 2 asociaciones · Hasta 10 puntos';
+ let response='';
+ if(q.kind==='choice')response=`<fieldset class="choice-field"><legend>Elige una respuesta.</legend><div class="choices">${q.options.map((o,j)=>`<label class="choice ${locked&&j===q.answer?'correct':''} ${locked&&d===j&&d!==q.answer?'wrong':''}"><input type="radio" name="choice" data-choice="${j}" value="${j}" ${d===j?'checked':''} ${locked?'disabled':''}><span>${o.label}</span>${renderVisual(o.visual)}${locked&&j===q.answer?'<strong class="answer-badge">✓ Respuesta correcta</strong>':locked&&d===j?'<strong class="answer-badge">× Tu respuesta</strong>':''}</label>`).join('')}</div></fieldset>`;
+ else if(q.kind==='fields')response=q.fields.map((f,j)=>fieldHtml(f,j,d,r?.details[j])).join('');
+ else response=`<div id="quizEditor">${drawingStartNotice('quiz',!locked&&!(S.startNotices||{})[S.index])}${editorMarkup('quizDrawing',VIEW_LABEL[q.viewKind],locked)}<p class="note">El punto azul marca la esquina superior izquierda del recuadro que ocupa la vista. Una casilla equivale a 5 mm. Puedes dibujar con dos toques o arrastrar; con teclado, flechas y Enter.</p></div>`;
+ const figure=renderVisual(q.visual);
+ $('quizContent').innerHTML=`<div class="question-label">Reto ${S.index+1} de ${total} · ${q.kind==='draw'?'Dibuja':q.kind==='fields'?'Relaciona varias piezas':'Elige la vista'}</div><h2 class="qtitle">${q.title}</h2><p>${q.prompt}</p><div class="q-layout">${q.board?`<div class="board-full">${figure}</div><div class="board-full">${response}</div>`:`<div class="sketch">${figure}</div><div>${response}</div>`}</div>${locked?'':`<p class="cost-note">Consejo opcional: este reto pasa de un máximo de 1 a 0,5 puntos. La puntuación parcial también se reduce a la mitad; un error vale 0.</p>`}<div class="actions"><button id="checkButton" class="primary" data-action="check" ${locked?'disabled':''}>${locked?'Respuesta comprobada':'Comprobar respuesta'}</button><button class="hint-button" data-action="hint" ${locked||S.hints[S.index]?'disabled':''}>${S.hints[S.index]?'Consejo abierto':'Abrir consejo · máximo 0,5 puntos'}</button></div><div id="questionMessage" class="status" role="status" aria-live="polite"></div>${S.hints[S.index]?`<div class="hint">${q.hint}</div>`:''}${r?feedbackHtml(q,r):''}${S.reviewing?'<p class="review-tag">Revisión: puntuación cerrada.</p>':''}`;
+ mountModels($('quizContent'));
+ if(q.kind==='draw'){
+  const dismiss=$('quizEditor').querySelector('[data-start-dismiss]');if(dismiss)dismiss.onclick=()=>{(S.startNotices??={})[S.index]=true;dismiss.closest('.draw-start-notice').remove()};
+  S.newEditors??={};const st=S.newEditors[S.index]??=editorState();st.keys=[...d];
+  S.newTools??={};S.newTools[S.index]??='solid';const ed=installEditor($('quizDrawing'),st,{locked,tool:()=>S.newTools[S.index],expected:expectedEdges(q),solution:()=>locked&&r.rawScore<1,onchange:keys=>S.drafts[S.index]=[...keys]});
+  const controls=$('quizDrawing-controls');controls.querySelectorAll('[data-editor-tool]').forEach(b=>{b.setAttribute('aria-pressed',b.dataset.editorTool===S.newTools[S.index]);b.onclick=()=>{S.newTools[S.index]=b.dataset.editorTool;controls.querySelectorAll('[data-editor-tool]').forEach(e=>e.setAttribute('aria-pressed',e===b));ed.cancel()}});controls.querySelector('[data-editor-action="undo"]').onclick=()=>ed.undo();controls.querySelector('[data-editor-action="clear"]').onclick=()=>ed.clear();
+ }
+ $('prevButton').disabled=S.index===0;$('nextButton').disabled=!locked;$('nextButton').textContent=S.index===total-1?(S.reviewing?'Volver al resultado':'Finalizar y guardar'):'Siguiente reto →';
+}
+
+function startAttempt(){S.startNotices={};S.newEditors={};S.newTools={};legacyStartAttempt()}
+function resetStudent(force=false){legacyResetStudent(force);if(!S.students.length){LP.db={};LP.startNotices={};LP.solution=false;LP.focus='';renderExplore()}}
 
 if(typeof document!=='undefined')boot();
 
