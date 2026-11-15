@@ -48,6 +48,13 @@ h1{position:relative;z-index:1;margin:0;font-size:clamp(2rem,5vw,3.7rem);line-he
 .notice .icon{margin:0 auto 14px}
 .notice h2{margin:0 0 8px}
 .notice p{margin:0;color:var(--muted)}
+.resource-panel{margin-top:18px;padding:22px;border:1px solid var(--line);border-radius:22px;background:rgba(255,255,255,.88)}
+.resource-panel h3{margin:0 0 8px;font-size:1.05rem}
+.resource-panel p{margin:0 0 15px;color:var(--muted);line-height:1.5}
+.resource-list{display:flex;flex-wrap:wrap;gap:9px}
+.resource-list a{display:inline-flex;align-items:center;padding:10px 13px;border:1px solid #a5d6cf;border-radius:12px;background:#f0fdfa;color:#0f766e;font-weight:750;text-decoration:none}
+.resource-list a:hover,.resource-list a:focus-visible{background:#ccfbf1;text-decoration:underline}
+.infographic{display:block;width:100%;height:auto;margin:17px 0 0;border:1px solid var(--line);border-radius:14px}
 .back{display:inline-flex;align-items:center;gap:8px;margin-top:24px;padding:11px 15px;border-radius:13px;text-decoration:none;background:rgba(255,255,255,.82);border:1px solid var(--line);font-weight:800;color:#455166}
 .back:hover{background:#fff}
 footer{text-align:center;margin-top:34px;color:#8a94a4;font-size:.82rem}
@@ -81,6 +88,31 @@ footer{text-align:center;margin-top:34px;color:#8a94a4;font-size:.82rem}
   <span class="arrow" aria-hidden="true">→</span>
 </a>
 </div>
+<div class="section-title"><h2>Materiales para aprender y practicar</h2><span>Consulta y descarga · PDF</span></div>
+<div class="grid">
+<a class="card" href="./recursos/Temario_desarrollado_Tema_2_2ESO.pdf" style="--accent:#2563eb;--soft:#dbeafe;--tint:#eff6ff">
+  <span class="icon" aria-hidden="true">📖</span><span class="card-copy"><span class="tag">Estudio</span><span class="title">Temario desarrollado</span><span class="desc">Boceto, croquis y plano; escalas, acotación y vistas.</span></span><span class="arrow" aria-hidden="true">→</span>
+</a>
+<a class="card" href="./recursos/Ficha_Alumnado_Tema_2_2ESO.pdf" style="--accent:#7c3aed;--soft:#ede9fe;--tint:#f5f3ff">
+  <span class="icon" aria-hidden="true">✏️</span><span class="card-copy"><span class="tag">Trabajo</span><span class="title">Ficha del alumnado</span><span class="desc">Actividades y espacios para trabajar en clase.</span></span><span class="arrow" aria-hidden="true">→</span>
+</a>
+<a class="card" href="./recursos/Bateria_vistas_2ESO_Alumnado.pdf" style="--accent:#b45309;--soft:#fef3c7;--tint:#fffbeb">
+  <span class="icon" aria-hidden="true">▣</span><span class="card-copy"><span class="tag">Práctica</span><span class="title">Batería de vistas</span><span class="desc">Piezas y ejercicios de reconocimiento de vistas.</span></span><span class="arrow" aria-hidden="true">→</span>
+</a>
+<a class="card" href="./recursos/Infografia_Expresion_Grafica_Tema_2_2ESO.pdf" style="--accent:#0f766e;--soft:#ccfbf1;--tint:#f0fdfa">
+  <span class="icon" aria-hidden="true">◈</span><span class="card-copy"><span class="tag">Resumen</span><span class="title">Infografía del tema</span><span class="desc">Conceptos clave en una página.</span></span><span class="arrow" aria-hidden="true">→</span>
+</a>
+</div>
+<section class="resource-panel" aria-labelledby="presentacion-title">
+  <h3 id="presentacion-title">Presentación general</h3>
+  <p>La presentación está dividida en tres archivos para facilitar su consulta y descarga.</p>
+  <div class="resource-list">
+    <a href="./recursos/Presentacion_General_Tema_2_2ESO_1-9.pdf">Parte 1 · diapositivas 1–9</a>
+    <a href="./recursos/Presentacion_General_Tema_2_2ESO_10-40.pdf">Parte 2 · diapositivas 10–40</a>
+    <a href="./recursos/Presentacion_General_Tema_2_2ESO_41-73.pdf">Parte 3 · diapositivas 41–73</a>
+  </div>
+  <img class="infographic" src="./recursos/Infografia_Expresion_Grafica_Tema_2_2ESO.png" alt="Infografía resumen de expresión gráfica: boceto, croquis, plano, escalas, acotación y vistas" loading="lazy">
+</section>
 <a class="back" href="../">← Volver a 2º ESO</a>
 <footer>2º ESO · Tema 2 · Expresión gráfica</footer></main>
 </body>
