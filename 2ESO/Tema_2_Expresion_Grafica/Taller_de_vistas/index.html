@@ -1,315 +1,488 @@
 <!doctype html>
-<html lang="es">
-<head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Taller de vistas · Expresión gráfica</title>
-<meta name="description" content="Gira piezas con caras de colores y relaciona el volumen con su alzado, planta y perfil. Tecnología y Digitalización de 2.º ESO.">
-<style>
-:root{--ink:#20323b;--muted:#586a72;--blue:#146783;--paper:#fcfaf3;--line:#d8dfde;--yellow:#f1c752}*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.5 system-ui,sans-serif}header,main,footer{max-width:1240px;margin:auto;padding:24px}header{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line)}.brand{font-weight:800;letter-spacing:.08em;font-size:13px}.tag{font-size:13px;color:var(--muted)}h1{font-size:clamp(26px,4vw,39px);line-height:1.15;margin:12px 0}h2{font-size:21px;margin:0 0 10px}h3{font-size:17px;margin:0 0 8px}p{margin:8px 0 16px}.intro{max-width:800px}.tabs{display:flex;gap:8px;margin:24px 0}button,select,input{font:inherit}button,select{border:1px solid #a9b9bf;background:white;border-radius:9px;padding:9px 15px;color:var(--ink)}button{cursor:pointer}button:hover{background:#edf4f4}button[aria-pressed=true],.active{background:var(--blue);color:white;border-color:var(--blue)}button:focus-visible,select:focus-visible,input:focus-visible{outline:3px solid #c38100;outline-offset:3px}.toolbar{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-bottom:18px}.workspace{display:grid;grid-template-columns:1.1fr 1fr;gap:22px}.panel{background:white;border:1px solid var(--line);border-radius:14px;padding:20px}.canvas{height:355px;position:relative;background-image:linear-gradient(#e8efef 1px,transparent 1px),linear-gradient(90deg,#e8efef 1px,transparent 1px);background-size:22px 22px;border-radius:8px}#model{width:100%;height:100%;touch-action:none;cursor:grab}#model:active{cursor:grabbing}.legend{display:flex;flex-wrap:wrap;gap:8px;font-size:13px;margin:14px 0}.chip{display:inline-flex;gap:6px;align-items:center}.swatch{width:12px;height:12px;border:1px solid #53646c;border-radius:3px}.controls{display:flex;gap:8px;flex-wrap:wrap}.note{color:var(--muted);font-size:14px}.sliders{display:grid;grid-template-columns:1fr 1fr;gap:15px;margin:15px 0}.sliders label{display:grid;font-size:14px}.sliders input{width:100%;accent-color:var(--blue)}.views{display:grid;grid-template-columns:1fr 1fr;gap:8px}.view{padding:10px;border:1px solid var(--line);border-radius:9px;background:#fff}.view svg{width:100%;height:128px}.view h3{text-align:center;font-size:15px}.view .note{text-align:center;font-size:12px;margin:0}.blank{display:flex;align-items:center;padding:14px;font-size:14px;color:var(--muted)}.span{grid-column:1/-1}.hint{background:#f9f3d9;padding:10px;border-radius:8px;font-size:14px}.dim{font-size:14px;font-weight:600}.practice{max-width:850px}.question{padding:22px 0;border-bottom:1px solid var(--line)}.options{display:flex;gap:10px;flex-wrap:wrap}.options label{background:white;border:1px solid var(--line);border-radius:8px;padding:10px;cursor:pointer}.answer{max-width:130px;padding:8px;border:1px solid #a9b9bf;border-radius:7px}.feedback{font-weight:600;min-height:27px}.correct{color:#21673a}.wrong{color:#9d3b1b}.actions{display:flex;gap:10px;flex-wrap:wrap;margin:20px 0}footer{font-size:13px;color:var(--muted);border-top:1px solid var(--line)}[hidden]{display:none!important}@media(max-width:820px){.workspace{grid-template-columns:1fr}.canvas{height:310px}header{display:block}.sliders{grid-template-columns:1fr}main{padding:18px}.panel{padding:15px}}@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto}}
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Actividades visuales de expresión gráfica de 2.º ESO con autocorrección."><title>Taller de vistas · UD 2 · 2.º ESO</title><style>:root{--ink:#20343b;--muted:#536972;--paper:#faf9f3;--blue:#126680;--accent:#08758c;--line:#d5e0df;--soft:#e9f3f3;--gold:#f3cb67;--good:#18633d;--bad:#963b29;font:17px/1.5 system-ui,-apple-system,Segoe UI,sans-serif;color:var(--ink);background:var(--paper)}*{box-sizing:border-box}body{margin:0}button,input,select{font:inherit}button,a,input,select{touch-action:manipulation}button{cursor:pointer}button,.button{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;border:1px solid #9db4bb;border-radius:10px;padding:.65rem 1rem;background:white;color:var(--ink);text-decoration:none;font-weight:650;min-height:46px}button:hover,.button:hover{background:var(--soft);border-color:var(--blue)}button.primary,.button.primary,button[aria-pressed=true]{background:var(--blue);color:white;border-color:var(--blue)}button:disabled{opacity:.6;cursor:default}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible,[tabindex]:focus-visible{outline:3px solid #b36c00;outline-offset:3px}input,select{border:1px solid #9db4bb;border-radius:8px;padding:.6rem;background:white;color:var(--ink);max-width:100%;min-height:44px}input[type=number]{width:145px}input[type=checkbox],input[type=radio]{width:20px;height:20px;min-height:0;accent-color:var(--blue)}input[type=range]{padding:0;width:100%;accent-color:var(--blue)}label{display:block}h1,h2,h3{line-height:1.18;letter-spacing:-.025em}h1{font-size:clamp(1.9rem,4vw,3.1rem);margin:.5rem 0 1rem}h2{font-size:1.5rem;margin:0 0 1rem}h3{font-size:1.1rem;margin:.2rem 0 .6rem}p{margin:.5rem 0 1rem}small,.note{font-size:.88rem;color:var(--muted)}[hidden]{display:none!important}.wrap{max-width:1220px;margin:auto;padding:22px}.top{border-bottom:1px solid var(--line);background:#fffdf8}.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:20px;padding-top:16px;padding-bottom:16px}.brand{font-weight:800;font-size:.8rem;letter-spacing:.07em}.brand svg{vertical-align:middle;width:35px;height:35px;margin-right:9px}.top a{color:var(--blue);font-size:.9rem}.hero{display:grid;grid-template-columns:1.45fr .55fr;gap:30px;align-items:center;padding-top:32px;padding-bottom:20px}.hero p{max-width:760px}.eyebrow{font-size:.8rem;letter-spacing:.09em;font-weight:800;text-transform:uppercase}.hero-art{background:linear-gradient(90deg,#dfebea 1px,transparent 1px),linear-gradient(#dfebea 1px,transparent 1px);background-size:20px 20px;border:1px solid var(--line);border-radius:24px;padding:16px;transform:rotate(2deg)}.hero-art img{width:100%;max-height:190px;object-fit:contain;mix-blend-mode:multiply}.chips,.actions,.tabs,.toolbar{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.chip{background:#fff;border:1px solid var(--line);border-radius:30px;padding:4px 12px;font-size:.78rem;font-weight:700}.tabs{border-bottom:1px solid var(--line);padding-bottom:12px;margin:15px 0 24px}.tabs button{border-radius:8px}.panel{background:white;border:1px solid var(--line);border-radius:16px;padding:24px;margin-bottom:20px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}.grid>*{min-width:0}.sketch{background:#fcfdfb;border:1px solid #e4eceb;border-radius:12px;padding:12px;overflow:hidden}.sketch svg{display:block;width:100%;height:auto;max-height:370px}.model{display:block;width:100%;max-height:300px;object-fit:contain;mix-blend-mode:multiply}.mini-model{width:100%;max-height:145px;object-fit:contain;mix-blend-mode:multiply}.doc-preview{width:100%;max-height:345px}.field{margin:14px 0;display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}.field label{font-weight:650;flex:1;min-width:150px}.field select{width:min(270px,100%)}.field input{flex:none}.status{padding:10px 0;min-height:34px;font-weight:600;white-space:pre-line}.status.ok{color:var(--good)}.status.error{color:var(--bad)}.registration{border-top:5px solid var(--gold)}.ids{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:16px 0}.ids input{width:100%;text-transform:uppercase}.teacher{font-size:.9rem;border-top:1px solid var(--line);margin-top:18px;padding-top:14px}.teacher input{width:100%;margin:8px 0}.teacher summary{cursor:pointer;font-weight:650}.student-name{font-weight:700;color:var(--good);margin:6px 0}.quiz-top{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:20px}.quiz-top progress{width:200px;height:12px;accent-color:var(--blue)}.question-label{font-size:.8rem;letter-spacing:.05em;font-weight:800;text-transform:uppercase;color:var(--muted)}.qtitle{font-size:clamp(1.3rem,2.6vw,1.8rem);margin-top:6px}.q-layout{display:grid;grid-template-columns:.9fr 1.1fr;gap:24px;align-items:start}.q-layout>*{min-width:0}.choices{display:grid;grid-template-columns:1fr 1fr;gap:12px}.choice{display:block;border:2px solid var(--line);border-radius:12px;padding:12px;cursor:pointer;background:white}.choice:hover{border-color:#809da6}.choice:has(input:checked){border-color:var(--blue);background:#f0f8f8}.choice.correct{border-color:var(--good)}.choice.wrong{border-color:var(--bad)}.choice span{font-weight:650}.choice svg{width:100%;height:auto;max-height:190px;display:block}.choice input{vertical-align:middle;margin-right:8px}.choices.text-only{grid-template-columns:1fr}.feedback{background:#f1f7f3;border-left:4px solid var(--good);padding:14px 18px;margin-top:20px;border-radius:0 10px 10px 0}.feedback.incomplete{background:#fff5ec;border-color:#b56b27}.feedback ul{padding-left:23px;margin-bottom:0}.hint{background:#fffae8;border:1px solid #e9d99e;border-radius:10px;padding:12px;margin-top:14px}.quiz-nav{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:24px;padding-top:18px;border-top:1px solid var(--line)}.order-item{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:12px;margin:12px 0}.order-item .num{border-radius:50%;width:36px;height:36px;display:grid;place-items:center;background:var(--soft);font-weight:800}.draw-svg{width:100%;display:block;background:#fff;touch-action:none;user-select:none;max-height:390px}.draw-svg [role=button]{cursor:crosshair;outline:none}.draw-svg [role=button]:focus circle{stroke:#b36c00;stroke-width:4}.draw-svg .line-target{stroke:#18713d;stroke-dasharray:5 4}.draw-tools button{font-size:.85rem;padding:.45rem .75rem}.score{font-size:3.5rem;line-height:1;font-weight:800;color:var(--blue);margin:14px 0}.results-table{width:100%;border-collapse:collapse;font-size:.9rem;margin:15px 0}.results-table th,.results-table td{padding:10px;text-align:left;border:1px solid var(--line)}.results-table th{background:var(--soft)}.results-table td:last-child{font-weight:700;width:110px}.board-models{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.board-models p{text-align:center;font-weight:800;margin:0}.board-views{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}.board-view{border:1px solid var(--line);border-radius:8px;text-align:center;font-weight:800;padding-top:5px}.board-view svg{width:100%;height:auto}.board-full{grid-column:1/-1}.lab-controls{display:flex;gap:12px;flex-wrap:wrap;margin:15px 0}.lab-controls label{min-width:140px;flex:1}.lab-controls input,.lab-controls select{display:block;width:100%;margin-top:6px}.home-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px}.app-card{display:grid;grid-template-columns:100px 1fr;gap:20px;align-items:center}.app-number{width:90px;height:90px;background:var(--soft);border-radius:24px;display:grid;place-items:center;font-size:2.4rem;font-weight:800}.app-card p{font-size:.95rem;color:var(--muted)}.app-card a{margin-top:8px}.notice{font-size:.9rem;color:var(--muted);max-width:950px}.guide{max-width:960px}.guide section{margin:28px 0}.guide li{margin:8px 0}.guide code{font-size:.86em;background:#eef3f2;padding:2px 5px;border-radius:4px}footer{border-top:1px solid var(--line);margin-top:30px;font-size:.8rem;color:var(--muted)}footer .wrap{display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap}a{color:var(--blue)}@media(max-width:820px){.hero{grid-template-columns:1fr}.hero-art{display:none}.q-layout,.grid,.home-grid{grid-template-columns:1fr}.wrap{padding:17px}.panel{padding:18px}.board-models{gap:0}.board-models .mini-model{max-height:105px}.top .wrap{align-items:start}.app-card{grid-template-columns:70px 1fr}.app-number{width:65px;height:65px;font-size:1.8rem}}@media(max-width:480px){.ids{grid-template-columns:1fr}.choices{gap:8px}.choice{padding:9px}.qtitle{font-size:1.3rem}.board-views{gap:3px}.board-view{font-size:.8rem}.field{display:block}.field label{margin-bottom:6px}.field input,.field select{width:100%}.quiz-nav>*{flex:1}.top .wrap{display:block}.top a{display:block;margin-top:8px}}@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}@media print{.tabs,.registration,.quiz-nav,button,.top a,.teacher,.actions{display:none!important}.panel{border:0;padding:0}.wrap{max-width:none}.q-layout,.grid{display:block}body{background:white}.hero-art{display:none}.sketch{break-inside:avoid}.guide{max-width:none}}
 
-.practice{max-width:none}.quiz-progress{display:flex;align-items:center;gap:20px;flex-wrap:wrap;margin:22px 0;font-size:15px;font-weight:600}progress{accent-color:var(--blue);width:240px;height:12px}.question-heading{display:flex;gap:12px;align-items:center;margin:15px 0}.question-heading h3{font-size:23px;margin:0}.difficulty{background:#f7ebbc;border-radius:20px;padding:5px 13px;font-size:13px;font-weight:700;white-space:nowrap}.quiz-layout{display:grid;grid-template-columns:1fr 1.15fr;gap:24px;align-items:start}.quiz-piece{position:sticky;top:15px}.quiz-piece .canvas{height:290px}#quizModel{width:100%;height:100%;touch-action:none;cursor:grab}.graphic-fieldset{border:0;padding:0;margin:0;min-width:0}.graphic-fieldset legend{font-weight:700;margin-bottom:12px}.graphic-options{display:grid;grid-template-columns:1fr 1fr;gap:12px}.graphic-option{display:block;background:white;border:2px solid #d6e0e2;border-radius:12px;cursor:pointer;padding:12px}.graphic-option:hover{border-color:#879fa8}.graphic-option.selected{border-color:#146783;background:#f3f9fa}.graphic-option.option-correct{border-color:#297a47}.graphic-option.option-wrong{border-color:#b34928}.graphic-option:focus-within{outline:3px solid #c38100;outline-offset:2px}.graphic-option svg{width:100%;height:auto;display:block}.option-title{display:flex;align-items:center;gap:8px;font-weight:700;font-size:15px}.option-title input{accent-color:var(--blue);width:18px;height:18px}.quiz-actions{margin:20px 0}.quiz-actions .feedback{max-width:1000px;padding-top:10px}.quiz-piece details{font-size:14px}.quiz-piece summary{cursor:pointer}.quiz-piece .sliders{margin-bottom:8px}button:disabled{opacity:.5;cursor:default}@media(max-width:820px){.quiz-layout{grid-template-columns:1fr}.quiz-piece{position:static}.quiz-piece .canvas{height:230px}.question-heading{align-items:start}.question-heading h3{font-size:21px}}@media(max-width:480px){.graphic-options{gap:8px}.graphic-option{padding:7px}.option-title{font-size:13px}.quiz-progress{gap:8px}.question-heading{flex-wrap:wrap}}
+/* Flujo PDI · revisión 2026-11-04. Las figuras mantienen su código original. */
+:root{--ink:#172033;--muted:#526173;--paper:#f6f7f9;--blue:#153c63;--soft:#e8f6f6;--line:#d7dce4;--good:#126e43;--bad:#a22c38}
+body{background:var(--paper)}.wrap{max-width:1160px}.top{background:white}.hero{padding-top:28px;padding-bottom:15px;grid-template-columns:1.5fr .5fr}.hero h1{font-size:clamp(2rem,4.3vw,3.3rem)}.hero-art{transform:none;border-radius:18px;background:#edf5f8}.hero-art img{max-height:160px}.panel{border-radius:18px;box-shadow:0 10px 30px #1d2e4710}.registration{border-top:0;max-width:760px}.registration h2{font-size:1.6rem}.ids{margin:18px 0}.ids input{font-size:1.1rem;min-height:52px}.ids label{font-weight:750}.pair-toggle{display:flex;align-items:center;gap:10px;margin:18px 0;color:var(--muted)}button,.button{min-height:48px;border-radius:12px;font-weight:750}button.primary{background:#007f89;border-color:#007f89}.mode-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin:24px 0 10px}.mode-card{display:flex;flex-direction:column;align-items:flex-start;text-align:left;justify-content:flex-start;gap:12px;padding:26px;border:2px solid;min-height:215px;box-shadow:0 9px 25px #1720330a;white-space:normal}.mode-card strong{font-size:1.4rem;line-height:1.2}.mode-card span{font-weight:500;line-height:1.5}.mode-card em{font-style:normal;font-size:.85rem;font-weight:800;letter-spacing:.05em}.mode-card.practice{background:#e8f6f6;border-color:#007f89;color:#095c64}.mode-card.practice:hover{background:#def1f1}.mode-card.evaluable{background:#fff5da;border-color:#b77b0b;color:#684700}.mode-card.evaluable:hover{background:#ffefc4}.mode-card:focus-visible{outline:3px solid #153c63;outline-offset:4px}.student-name{color:var(--blue);font-size:1.25rem;margin-bottom:10px}.menu-header,.flow-bar{display:flex;gap:15px;justify-content:space-between;align-items:center;flex-wrap:wrap}.flow-bar{padding:13px 17px;border:1px solid var(--line);border-radius:12px;background:white;margin-bottom:22px}.flow-label{font-weight:750;color:#095c64}.flow-label.evaluable{color:#765000}.cost-note{color:#684700;background:#fff5da;border-radius:9px;padding:11px 14px;margin:16px 0 8px}.hint{color:#684700;background:#fff9e9}.hint-button{border-color:#b77b0b;color:#684700;background:#fffaee}.hint-button:hover{background:#fff1c9}.send-banner{border-radius:14px;padding:22px;margin:22px 0;font-size:1.05rem;white-space:pre-line}.send-banner strong{display:block;font-size:clamp(1.6rem,4vw,2.2rem);line-height:1.2;margin-bottom:8px}.send-banner.waiting{background:#edf3f9;color:#153c63;border:2px solid #b7c9dc}.send-banner.sent{background:#e5f7ed;color:#0a6038;border:3px solid #16794b}.send-banner.failed{background:#fff0ee;color:#8b2b24;border:2px solid #cc7b71}.results-scroll{overflow:auto}.results-table{min-width:300px}.quiz-top progress{max-width:100%}.quiz-nav{align-items:center}.q-layout .choices.text-only{grid-template-columns:1fr}.feedback.incomplete{color:#654409}.feedback .advice-discount{font-weight:650;margin:10px 0 0}.entry-note{max-width:660px}.session-name{font-size:.9rem;color:var(--muted)}#modeMessage:empty,#identityMessage:empty,#questionMessage:empty{display:none}.review-tag{background:#e9edf2;padding:7px 11px;border-radius:8px;color:var(--blue);font-weight:700}.quiz-stage-evaluable{border-top:5px solid #e8a317}.quiz-stage-free{border-top:5px solid #007f89}
+@media(max-width:820px){.hero{grid-template-columns:1fr}.hero-art{display:none}.hero h1{font-size:2.25rem}.mode-grid{gap:16px}.mode-card{padding:22px}.q-layout{grid-template-columns:1fr}.flow-bar{padding:12px}}
+@media(max-width:580px){.mode-grid{grid-template-columns:1fr}.mode-card{min-height:175px}.wrap{padding:16px}.hero{padding-top:23px}.panel{padding:19px}.hero h1{font-size:2rem}.registration .actions>button{width:100%}.mode-card strong{font-size:1.2rem}.ids{grid-template-columns:1fr}.flow-bar .button{padding:9px 12px}.quiz-top{gap:11px}.qtitle{font-size:1.4rem}.results-table th,.results-table td{padding:9px}.choices:not(.text-only){grid-template-columns:1fr 1fr}footer .wrap{display:block}.top .wrap{display:block}}
+@media(max-width:360px){.wrap{padding:12px}.panel{padding:15px}.choices:not(.text-only){grid-template-columns:1fr}.board-models{grid-template-columns:repeat(2,1fr)}.board-views{grid-template-columns:repeat(3,1fr)}}
+.is-identified .hero{padding-top:18px;padding-bottom:12px;display:block}.is-identified .hero h1{font-size:clamp(1.5rem,3vw,2.05rem);margin:.35rem 0 .4rem}.is-identified .hero-art,.is-identified .hero p,.is-identified .hero .chips{display:none}.is-identified .hero .eyebrow{font-size:.7rem}@media(max-width:580px){.board-models{grid-template-columns:repeat(2,1fr)}.board-views{grid-template-columns:repeat(3,1fr)}.board-models .mini-model{max-height:135px}}@media(max-width:580px){footer .wrap span{display:block;margin-bottom:6px}}.test-banner{padding:13px 18px;background:#eee6fb;border:2px solid #7555a5;border-radius:12px;color:#503078;font-size:1.05rem;font-weight:850;margin:0 0 20px}.test-banner small{display:block;color:#503078;font-weight:500}
+.choice.correct,.choice.correct:has(input:checked){border:3px solid #126e43;background:#e3f7eb;color:#0b4f30}
+.choice.wrong,.choice.wrong:has(input:checked){border:3px solid #a22c38;background:#fff0ef;color:#7e202c}
+.answer-badge{display:block;width:fit-content;margin:.55rem 0 0;padding:.23rem .6rem;border-radius:7px;background:#126e43;color:white;font-size:.86rem;font-weight:800}
+.choice.wrong .answer-badge{background:#a22c38}
+.field-wrong{padding:12px;border:2px solid #a22c38;border-radius:10px;background:#fff6f5}
+.solution-value{flex:0 0 100%;margin:6px 0 0;padding:8px 12px;border-left:4px solid #126e43;border-radius:7px;background:#e3f7eb;color:#0b4f30;font-weight:750}
+.feedback.incomplete{border-left-width:5px}
+.volume-view{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start}
+.volume-view>*{min-width:0}.volume-view h3{margin:.3rem 0;text-align:center}
+@media(max-width:650px){.volume-view{grid-template-columns:1fr}}
+/* Visor de práctica del Taller de vistas de 2.º ESO, adaptado a 2.º ESO. */
+.vp-controls,.vp-legend{display:flex;flex-wrap:wrap;gap:12px;align-items:end;margin:16px 0}.vp-controls select{display:block;width:100%;margin-top:4px}.vp-check{display:flex;align-items:center;gap:8px;min-height:48px}
+.vp-workspace{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:18px}.vp-card,.vp-view{min-width:0;border:1px solid var(--line);border-radius:12px;background:#fff;padding:14px}
+.vp-canvas{background-color:#f8fcfc;background-image:linear-gradient(#e7eff0 1px,transparent 1px),linear-gradient(90deg,#e7eff0 1px,transparent 1px);background-size:22px 22px;border-radius:8px}
+#vp-model{display:block;width:100%;height:auto;touch-action:none;cursor:grab}#vp-model:active{cursor:grabbing}.vp-sliders,.vp-views{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.vp-front{grid-area:1/1}.vp-left{grid-area:1/2}.vp-top{grid-area:2/1}.vp-view{text-align:center;padding:8px}.vp-view svg{display:block;width:100%;height:auto}.vp-view h3{font-size:1rem}.vp-view p{margin:0}
+.vp-legend{gap:8px}.vp-legend span{display:inline-flex;align-items:center;gap:6px;font-size:.8rem}.vp-swatch{display:inline-block;width:12px;height:12px;border:1px solid #526173;border-radius:3px}
+@media(max-width:820px){.vp-workspace{grid-template-columns:minmax(0,1fr)}}@media(max-width:480px){.vp-sliders{grid-template-columns:1fr}.vp-card{padding:10px}}
+/* Laboratorio de dibujo: colores del PDI y cuatro vistas en sistema europeo. */
+.wrap{max-width:1460px}.vista-lab{padding:24px}.lab-top{display:flex;gap:16px;align-items:center;flex-wrap:wrap;margin:18px 0}.lab-top label{font-size:.86rem;font-weight:750}.lab-top select{display:block;min-width:245px;margin-top:5px}.unit-pill{display:inline-block;border-radius:30px;padding:8px 14px;background:#e8f6f6;color:#095c64;font-weight:750;font-size:.85rem}
+.vista-workspace{display:grid;grid-template-columns:minmax(260px,.8fr) minmax(0,1.7fr);gap:22px;align-items:start}.model-card{position:sticky;top:15px;padding:17px;border:1px solid var(--line);border-radius:14px;background:#f6fbfb}.new-model svg{display:block;width:100%;height:auto;max-height:320px;touch-action:none;cursor:grab;background:linear-gradient(90deg,#dce9e955 1px,transparent 1px),linear-gradient(#dce9e955 1px,transparent 1px);background-size:22px 22px;border-radius:10px}.new-model svg:active{cursor:grabbing}.new-model .note{text-align:center;font-size:.76rem;margin:.3rem 0 .6rem}.camera-tools{display:flex;flex-wrap:wrap;gap:6px}.camera-tools button{font-size:.78rem;padding:7px 10px;min-height:40px}.drawing-key{display:flex;gap:14px;flex-wrap:wrap;font-size:.78rem;border-top:1px solid var(--line);padding-top:14px}.drawing-key span{display:inline-flex;align-items:center;gap:6px}.key-line{display:inline-block;width:30px;border-top:3px solid #203d57}.key-line.dashed{border-top-style:dashed}
+.drawing-work{min-width:0}.practice-tools,.editor-toolbar{display:flex;gap:7px;flex-wrap:wrap;margin:0 0 10px}.practice-tools button,.editor-toolbar button{padding:8px 11px;font-size:.8rem;min-height:44px}.practice-tools button[aria-pressed=true],.editor-toolbar button[aria-pressed=true]{background:#007f89;color:#fff;border-color:#007f89}.drawing-instructions{font-size:.78rem}.four-views{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px;align-items:start}.view-card{border:2px solid #dae4e7;border-radius:12px;overflow:hidden;background:#fff;min-width:0}.view-card.active{border-color:#007f89;box-shadow:0 0 0 2px #007f8914}.view-card header{display:flex;align-items:center;justify-content:space-between;padding:7px 9px;background:#edf4f6;gap:3px}.view-card h3{font-size:.84rem;margin:0;letter-spacing:-.02em}.view-card header button{font-size:1.25rem;padding:0 5px;min-height:32px;min-width:32px;border:0;background:transparent}.card-right{grid-area:1/1}.card-front{grid-area:1/2}.card-left{grid-area:1/3}.card-top{grid-area:2/2}.vista-draw{display:block;width:100%;height:auto;touch-action:none;user-select:none;cursor:crosshair}.vista-draw:focus-visible{outline:3px solid #bd7f1c;outline-offset:-3px}.view-status{font-size:.75rem;margin:0;padding:4px 8px;min-height:8px;line-height:1.3}.view-status.good{color:#087844;background:#e3f7eb}.view-status.revise{color:#7c4b00;background:#fff5da}.four-views[class*=focus-]{display:block}.four-views[class*=focus-] .view-card{display:none}.four-views.focus-front .card-front,.four-views.focus-top .card-top,.four-views.focus-left .card-left,.four-views.focus-right .card-right{display:block;max-width:680px;margin:auto}.four-views[class*=focus-] .vista-draw{max-height:490px}.four-views[class*=focus-] h3{font-size:1rem}
+.choice-field{border:0;padding:0;margin:0}.choice-field legend{font-size:.86rem;color:var(--muted);margin-bottom:10px}.choices .choice svg{max-height:200px}.wb-models{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-bottom:20px}.wb-models>div{border:1px solid var(--line);border-radius:12px;padding:8px;text-align:center}.wb-models svg{max-height:180px}.wb-views{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:12px 0 20px}.wb-option{border:1px solid var(--line);border-radius:10px;padding:8px;text-align:center;background:#fcfdfb}.wb-option svg{width:100%;display:block}.board-full .field{max-width:650px}.board-full .field select{width:180px}#quizEditor{border:1px solid var(--line);padding:10px;border-radius:12px}#quizDrawing{max-height:430px}
+@media(max-width:1050px){.vista-workspace{grid-template-columns:minmax(240px,.75fr) minmax(0,1.25fr)}.four-views{grid-template-columns:repeat(2,minmax(0,1fr))}.card-front{grid-area:1/1}.card-top{grid-area:2/1}.card-left{grid-area:1/2}.card-right{grid-area:2/2}.view-card h3{font-size:.9rem}}
+@media(max-width:760px){.vista-workspace{grid-template-columns:1fr}.model-card{position:static}.model-card .new-model svg{max-height:265px}.vista-lab{padding:15px}.practice-tools{position:sticky;top:0;z-index:2;background:white;padding:8px 0;border-bottom:1px solid var(--line)}.wb-views{grid-template-columns:repeat(3,minmax(0,1fr))}.wb-models{gap:6px}.wb-models .new-model .note{font-size:.65rem}.view-card h3{font-size:.85rem}}
+@media(max-width:430px){.lab-top select{min-width:0;width:100%}.lab-top label{width:100%}.four-views{grid-template-columns:1fr}.card-front,.card-top,.card-left,.card-right{grid-area:auto}.card-front{order:0}.card-top{order:1}.card-left{order:2}.card-right{order:3}.four-views .vista-draw{max-height:320px}.wb-views{grid-template-columns:repeat(2,minmax(0,1fr))}.wb-models{grid-template-columns:1fr 1fr}.practice-tools button{flex:1;min-width:90px}.view-card h3{font-size:1rem}}
 
-/* Pantallas y jerarquía visual compartidas con las apps del Tema 1. */
-:root{--navy:#153c63;--cyan:#007f89;--cyan-soft:#e8f6f6;--amber:#e8a317;--amber-soft:#fff5da;--green-soft:#eaf7f0;--red-soft:#fff0f1;--shadow:0 16px 45px rgba(29,46,71,.12)}
-body{background:#f6f7f9;color:#172033;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
-header{background:white;border-bottom:1px solid #d7dce4;max-width:none;padding:18px max(20px,calc((100vw - 1120px)/2))}
-header h1{letter-spacing:-.035em}main{max-width:1120px}
-#entryScreen{max-width:720px;margin:32px auto 60px}
-#entryScreen .registro{padding:clamp(25px,5vw,46px);border-radius:18px;box-shadow:var(--shadow)}
-#entryScreen .reg-controls{display:grid;align-items:stretch;gap:10px}
-#entryScreen .reg-controls input{width:100%;height:52px}
-#entryScreen .reg-controls label{font-weight:750}
-#entryScreen .reg-controls button{min-height:50px}
-#entryScreen #comprobarID{background:var(--navy);color:#fff;font-weight:800;border:0}
-#entryScreen #registroMensaje{min-height:26px}
-.partner-field{border:0;padding:0;margin:5px 0;color:#40556b}
-.partner-field summary{cursor:pointer;font-weight:700}
-.partner-field label{display:block;margin:10px 0 6px}
-#activityScreen{padding-top:12px}
-.student-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:10px 0 24px;padding:14px 18px;background:white;border:1px solid #d7dce4;border-radius:14px}
-.student-bar strong{color:var(--navy)}
-#modeHub h2{font-size:clamp(26px,4vw,37px);letter-spacing:-.03em;margin:22px 0 10px}
-.mode-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;margin:22px 0 40px}
-.mode-card{display:flex;flex-direction:column;align-items:flex-start;min-height:230px;text-align:left;padding:28px;background:#fff;border:2px solid #a8d6d9;border-radius:18px;box-shadow:var(--shadow);font-weight:400}
-.mode-card:hover,.mode-card:focus-visible{transform:translateY(-2px);border-color:var(--cyan)}
-.mode-card.eval{border-color:#e7b65f;background:#fffaf0}
-.mode-card.eval:hover,.mode-card.eval:focus-visible{border-color:#b87a00}
-.mode-card .badge{padding:6px 10px;border-radius:99px;background:var(--cyan-soft);color:#075d63;font-size:13px;font-weight:850;letter-spacing:.05em}
-.mode-card.eval .badge{background:var(--amber-soft);color:#784d00}
-.mode-card strong{font-size:26px;line-height:1.2;margin:18px 0 10px}
-.mode-card small{font-size:16px;line-height:1.5;color:#40556b}
-.mode-card .go{margin-top:auto;padding-top:20px;font-weight:850;color:var(--navy)}
-.mode-label{font-size:14px;font-weight:850;letter-spacing:.05em;padding:8px 12px;border-radius:8px;background:var(--cyan-soft);color:#075d63}
-.mode-label.eval{background:var(--amber-soft);color:#784d00}
-.screen-head{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:16px 0 22px}
-.screen-head button{font-weight:750}
-#envioPanel{position:sticky;bottom:10px;z-index:20;margin:18px 0;border-width:2px;box-shadow:var(--shadow);font-size:18px}
-#envioPanel.sending{background:#edf5fb;border-color:#8db6d2}
-#envioPanel.sent{background:var(--green-soft);border-color:#16794b;color:#155d3d}
-#envioPanel.failed{background:var(--red-soft);border-color:#b53b43;color:#842a32}
-#envioPanel #envioMensaje{font-weight:850}
-#hint summary,#hintDetails summary{font-weight:800;color:#865900;cursor:pointer}
-@media(max-width:640px){#entryScreen{margin:8px auto 30px}.mode-grid{grid-template-columns:1fr}.mode-card{min-height:190px}header{padding:16px 20px}}
+.draw-start-notice{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:20px;margin:0 0 18px;background:#e4f7fb;border:3px solid #007f89;border-radius:14px;color:#123c54;box-shadow:0 5px 16px #007f8918}.draw-start-notice strong{display:block;font-size:clamp(1.3rem,2.2vw,1.8rem);line-height:1.2}.draw-start-notice strong span{color:#007f89;font-size:1.3em}.draw-start-notice p{margin:10px 0 0;font-size:.94rem}.draw-start-notice button{background:#007f89;color:white;border-color:#007f89;flex:none;min-height:48px}@media(max-width:580px){.draw-start-notice{align-items:stretch;flex-direction:column;padding:16px}.draw-start-notice button{width:100%}}
 
-.student-bar.test-mode{background:#fff5da;border:2px solid #b77900}.student-bar.test-mode strong{color:#6e4500}
-</style>
-<style>.registro{padding:18px;margin:18px 0;border:1px solid var(--line);border-radius:12px;background:white}.registro h2{font-size:18px}.reg-controls{display:flex;gap:9px;align-items:center;flex-wrap:wrap}.reg-controls input{width:300px}.registro #registroMensaje{font-size:14px;margin-top:12px}.teacher{margin-top:10px;color:var(--muted);font-size:14px}.teacher summary{cursor:pointer}.teacher input{display:block;width:100%;margin:8px 0}.registro #envioMensaje{font-weight:600}.metric{font-size:22px;font-weight:700}.mini-tabs{display:flex;gap:7px;flex-wrap:wrap;margin:15px 0}.mini-tabs button{font-size:14px}.figure-note{font-size:13px;text-align:center;color:var(--muted)}</style><style>.tabs{flex-wrap:wrap}select,input{max-width:100%}.exam-bank{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px;margin:16px 0 24px}.bank-view{background:white;border:1px solid var(--line);border-radius:8px;text-align:center;padding:6px}.bank-view svg{width:100%;display:block}.exam-pieces{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px}.exam-pieces svg{width:100%;display:block}.exam-fields{display:grid;gap:7px}.exam-fields label{display:flex;justify-content:space-between;align-items:center;gap:8px}.exam-fields select{width:80px}.match-ok{border:3px solid #286943}.match-bad{border:3px solid #a2382e}@media(max-width:820px){.exam-pieces{grid-template-columns:repeat(2,minmax(0,1fr))}.exam-bank{grid-template-columns:repeat(4,minmax(0,1fr))}}@media(max-width:480px){.exam-pieces{grid-template-columns:1fr}.exam-bank{grid-template-columns:repeat(3,minmax(0,1fr))}.reg-controls input{width:100%}}</style></head>
-<body>
-<header><div class="brand">PDI · CUADERNO TÉCNICO</div><div class="tag">Tecnología y Digitalización · 2.º ESO</div></header>
-<main>
-<div class="intro"><div class="tag">TEMA 2 · EXPRESIÓN GRÁFICA</div><h1>Explora las vistas de una pieza</h1><p>Gira el volumen, mira desde distintas direcciones y comprueba qué información aparece en cada vista.</p></div>
-<section id="entryScreen"><section class="registro" aria-labelledby="registroTitulo">
-<div><h2 id="registroTitulo">Introduce tu ID para comenzar</h2><p class="note" id="conexionInfo"></p></div>
-<div class="reg-controls"><label for="alumnoID">ID del alumnado</label><input id="alumnoID" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="El código que te da el profesor" maxlength="32"><details class="partner-field"><summary>¿Trabajáis en pareja? Añade el segundo ID</summary><label for="alumnoID2">ID del compañero o compañera</label><input id="alumnoID2" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="Solo si trabajáis en pareja" maxlength="32"></details><button id="comprobarID">Comprobar ID</button><button id="cambiarAlumno" hidden>Cambiar de alumno</button></div>
-<p id="registroMensaje" role="status" aria-live="polite">Escribe tu ID y pulsa «Comprobar ID».</p>
-
-</section></section><div id="activityScreen" hidden><div class="student-bar"><strong id="studentGreeting"></strong><button type="button" id="switchStudent">Cambiar de alumno</button></div><section id="modeHub"><h2>Elige qué vas a hacer</h2><p>Empieza por practicar y pasa después a la actividad que se evalúa.</p><div class="mode-grid"><button type="button" class="mode-card" data-mode="explore"><span class="badge">SIN NOTA</span><strong>Practicar</strong><small>Investiga y prueba con ayuda. Esta parte no se envía ni cuenta para la nota.</small><span class="go">Entrar a practicar →</span></button><button type="button" class="mode-card eval" data-mode="practice"><span class="badge">SE EVALÚA</span><strong>Actividad evaluable</strong><small>Resuelve los retos. Las respuestas cuentan y el resultado se envía al terminar.</small><span class="go">Empezar actividad →</span></button><button type="button" class="mode-card eval" data-mode="exam"><span class="badge">SE EVALÚA</span><strong>Relacionar vistas</strong><small>Una segunda actividad evaluable: seis piezas y 18 correspondencias.</small><span class="go">Empezar actividad →</span></button></div></section><div id="activityContent" hidden><div class="screen-head"><button type="button" id="backToModes">← Elegir otra actividad</button><span id="currentMode" class="mode-label"></span></div>
-<nav class="tabs" hidden aria-label="Modo de trabajo"><button id="exploreTab" aria-pressed="true">Explorar</button><button id="practiceTab" aria-pressed="false">Retos de vistas</button><button id="examTab" aria-pressed="false">Relacionar piezas y vistas</button></nav>
-<section id="explore">
-<div class="toolbar"><label for="piece">Pieza</label><select id="piece"><option value="prism">Prisma rectangular</option><option value="step" selected>Pieza escalonada</option><option value="roof">Pieza con plano inclinado</option><option value="tunnel">Bloque con túnel rectangular</option><option value="rear">Escalón alto hacia atrás</option><option value="l">Pieza con base en L</option><option value="u">Pieza en U abierta al frente</option></select><button id="reset">Restablecer giro</button><label><input type="checkbox" id="colors" checked> Caras de colores</label><label id="hiddenControl" hidden><input type="checkbox" id="hiddenEdges" checked> Aristas ocultas en el volumen</label></div>
-<div class="workspace">
-<section class="panel"><h2>Volumen que puedes girar</h2><p class="dim" id="dimensions"></p><p id="cavityInfo" class="hint" hidden>Túnel rectangular de 24 × 16 mm que atraviesa los 40 mm de fondo. La entrada está centrada en el frente. Gira la pieza para mirar dentro; en planta y perfil, el material tapa el túnel y sus aristas aparecen discontinuas.</p><div class="canvas"><svg id="model" viewBox="0 0 440 340" role="img" aria-label="Modelo tridimensional de la pieza seleccionada"><g id="faces"></g></svg></div><p class="note">Arrastra sobre la pieza o utiliza los controles. El frente elegido sigue siendo la cara azul aunque gires la pieza.</p><div class="sliders"><label>Giro horizontal <input id="yaw" type="range" min="-180" max="180" step="1" value="30"></label><label>Giro vertical <input id="pitch" type="range" min="-90" max="90" step="1" value="25"></label></div><div class="controls"><button data-camera="front">Mirar de frente</button><button data-camera="top">Mirar desde arriba</button><button data-camera="right">Mirar desde la derecha</button><button data-camera="left">Mirar desde la izquierda</button></div><div class="legend" id="legend"></div></section>
-<section class="panel"><h2>Vistas en sistema europeo</h2><p class="note">Estas vistas mantienen la orientación inicial de la pieza. Girar la cámara ayuda a comprobarlas.</p><div class="views"><div class="view"><h3>Perfil derecho</h3><svg id="rightView" viewBox="0 0 200 140" role="img" aria-label="Perfil derecho"></svg><p class="note">Profundidad × altura</p></div><div class="view"><h3>Alzado</h3><svg id="frontView" viewBox="0 0 200 140" role="img" aria-label="Alzado"></svg><p class="note">Anchura × altura</p></div><div class="blank">Se observa desde la derecha y se coloca a la izquierda del alzado.</div><div class="view"><h3>Planta</h3><svg id="topView" viewBox="0 0 200 140" role="img" aria-label="Planta"></svg><p class="note">Anchura × profundidad</p></div></div><p class="hint">El alzado y la planta comparten anchura. El alzado y el perfil comparten altura. La planta y el perfil comparten profundidad.</p><p class="note">Colores para reconocer caras, líneas continuas para aristas visibles y discontinuas para las ocultas. Las dimensiones se expresan en mm. Los dibujos de pantalla son esquemas, no plantillas para medir o cortar.</p></section>
-</div></section>
-<section id="practice" class="practice" hidden><p class="mode-label eval">SE EVALÚA · Cada respuesta cuenta · Consejo: −0,5 si aciertas</p><p id="sessionWarning" class="hint">Comprueba tu ID para acceder a los retos puntuables. La exploración está disponible sin ID.</p>
-<h2>Diez retos con piezas y dibujos</h2>
-<p>5 fáciles, 3 de dificultad media y 2 difíciles. Observa el volumen y elige la vista o el conjunto de vistas que le corresponde. Todas las opciones de un reto usan la misma escala. Para los conjuntos se utiliza el sistema europeo.</p>
-<div class="quiz-progress"><span id="quizProgress" aria-live="polite"></span><progress id="progressBar" max="10" value="0" aria-label="Retos comprobados"></progress></div>
-<div id="quizWorkspace">
-<div class="question-heading"><span id="difficulty" class="difficulty"></span><h3 id="questionTitle"></h3></div>
-<div class="quiz-layout">
-<div class="panel quiz-piece"><h3>Pieza de referencia</h3><p id="quizDimensions" class="note"></p><div class="canvas"><svg id="quizModel" viewBox="0 0 440 340" role="img" aria-label="Pieza del reto que puedes girar"><g id="quizFaces"></g></svg></div><p class="note">Arrastra para girar. El frente sigue siendo la cara azul.</p><div class="sliders"><label>Giro horizontal<input id="quizYaw" type="range" min="-180" max="180" value="30"></label><label>Giro vertical<input id="quizPitch" type="range" min="-90" max="90" value="22"></label></div><details id="hintDetails"><summary>Pedir consejo (resta 0,5 puntos si aciertas)</summary><p id="questionHint" class="note"></p></details></div>
-<fieldset class="graphic-fieldset"><legend>Selecciona un dibujo</legend><div id="graphicOptions" class="graphic-options"></div></fieldset>
-</div>
-<div class="quiz-actions"><button id="checkAnswer" class="active" disabled>Comprobar elección</button><p id="feedback" class="feedback" aria-live="polite"></p></div>
-<div class="actions"><button id="prevQuestion">Anterior</button><button id="nextQuestion" disabled>Siguiente reto</button></div>
-</div>
-<section id="quizSummary" class="panel" hidden><h3 id="resultHeading"></h3><ul id="resultBreakdown"></ul><p>Revisa los dibujos y la explicación de cada reto.</p><div id="reviewQuestions" class="actions"></div></section>
-<div class="actions"><button id="download" disabled>Descargar resultado</button></div>
-<p class="note">Las respuestas se corrigen en este dispositivo. Un intento con ID comprobado se envía al registro central al terminar. El resultado de la práctica requiere un ID comprobado.</p>
+ .choice.correct{background:#e0f5e7!important;border:3px solid #167548!important;box-shadow:0 0 0 3px #b8e6c6 inset}
+.choice.wrong{background:#fff0ef!important;border:2px solid #a33f34!important}
+</style></head><body>
+<header class="top"><div class="wrap"><div class="brand"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M9 9H3V31H9M31 9H37V31H31" fill="none" stroke="#126680" stroke-width="2.5"/><path d="M13 28L16 18L27 7L33 13L22 24Z" fill="#f3cb67" stroke="#20343b" stroke-width="1.5"/></svg>TECNOLOGÍA Y DIGITALIZACIÓN · 2.º ESO</div><a href="https://app-interactivas.github.io/apps-tecnologia/2ESO/Tema_2_Expresion_Grafica/index.html">← Todas las apps del tema</a></div></header>
+<main class="wrap"><section class="hero"><div><div class="eyebrow">App 03 · Expresión gráfica</div><h1>Taller de vistas</h1><p>Gira, observa y dibuja: alzado, planta y los dos perfiles.</p><div class="chips"><span class="chip">Alzado · Planta · Ambos perfiles</span><span class="chip">9 piezas graduadas · 10 retos evaluables</span><span class="chip">35–45 min</span></div></div><div class="hero-art"><img src="data:image/png;base64,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" alt="Pieza geométrica con el frente señalado"></div></section>
+<p id="testBanner" class="test-banner" role="status" hidden>MODO PRUEBA · NX-01<small>Prueba técnica. No cuenta como resultado del alumnado.</small></p><section id="registration" class="panel registration" aria-labelledby="entryTitle">
+<h2 id="entryTitle">Introduce tu ID</h2><p class="note entry-note">Usa el ID que te ha dado tu profesor o profesora.</p>
+<div class="ids"><div><label for="id1">Tu ID</label><input id="id1" type="text" autocomplete="off" spellcheck="false" autocapitalize="characters" maxlength="32" placeholder="Escribe tu ID" aria-describedby="identityMessage"></div><div id="secondId" hidden><label for="id2">ID de tu pareja</label><input id="id2" type="text" autocomplete="off" spellcheck="false" autocapitalize="characters" maxlength="32" placeholder="Segundo ID del mismo grupo"></div></div>
+<label class="pair-toggle"><input id="pairMode" type="checkbox"> Trabajamos en pareja</label>
+<div class="actions"><button id="verifyIds" class="primary" data-action="verifyIds">Confirmar ID y continuar →</button></div><p id="identityMessage" class="status" role="status" aria-live="polite"></p>
 </section>
-<section id="examViews" hidden><p class="mode-label eval">SE EVALÚA · El resultado se envía al terminar</p><h2>Relaciona seis piezas con sus vistas</h2><p>Elige un número para cada alzado, planta y perfil derecho. Una vista puede repetirse. El frente es azul; en la planta queda abajo y en el perfil derecho, a la izquierda.</p><p class="hint">Primero observa las tres dimensiones, después los escalones y huecos. Las líneas discontinuas representan aristas ocultas. Las 18 casillas se corrigen al terminar; se registra la nota de la primera comprobación.</p><h3>Banco de 17 vistas</h3><div id="examBank" class="exam-bank"></div><h3>Piezas y respuestas</h3><div id="examPieces" class="exam-pieces"></div><div class="actions"><button id="examHint" type="button">Pedir consejo (resta 0,5 puntos)</button><button id="examCheck" class="active">Finalizar actividad</button><button id="examSolution" hidden>Ver correspondencias</button><button id="examDownload" disabled>Descargar resultado</button></div><p id="examHintText" class="hint" hidden>Consejo: parte del frente azul y compara la anchura, el fondo y la altura en las tres vistas. Si hay huecos o escalones, localiza sus aristas visibles y ocultas.</p><p id="examFeedback" class="feedback" role="status" aria-live="polite"></p></section></div><div id="envioPanel" class="registro" hidden><p id="envioMensaje" role="status" aria-live="polite"></p><button id="reintentarEnvio" hidden>Reintentar el mismo envío</button></div>
-</div></main><footer>R1 · Apoyo a las actividades A8 y A9. Las vistas ortogonales mantienen las dimensiones compartidas; no usan puntos de fuga.</footer>
-<script>(function () {
-  'use strict';
-
-  // La URL procede de las aplicaciones vigentes del Tema 1 de 2.º ESO.
-  const ENDPOINT = 'https://script.google.com/macros/s/AKfycbzYhutDT6EZ7meQq2KfVdKq0h8JH9GYnOmZVqjW_IkmOvdMdjS7FxWQWezmx8SfWQf9/exec';
-  const KEY = 'pdi_pending_' + document.body.dataset.app + '_tema2_v1';
-  const $ = id => document.getElementById(id);
-  const normalize = value => String(value || '').trim().toUpperCase().replace(/\s+/g, '');
-  const uid = () => globalThis.crypto?.randomUUID?.() || 'pdi-' + Date.now() + '-' + Math.random().toString(36).slice(2);
-  const course = value => String(value || '').replace(/[^0-9A-Z]/gi, '').toUpperCase();
-  let identity = null, verifying = false, sending = false;
-  let queue = [];
-
-  try {
-    const saved = JSON.parse(localStorage.getItem(KEY) || '[]');
-    if (Array.isArray(saved)) queue = saved.filter(x => x && Array.isArray(x.ids) && x.result);
-  } catch (_) { /* El envío aún se puede reintentar durante esta sesión. */ }
-
-  function persist() {
-    try {
-      if (queue.length) localStorage.setItem(KEY, JSON.stringify(queue));
-      else localStorage.removeItem(KEY);
-      return true;
-    } catch (_) { return false; }
-  }
-
-  function showPending(message, state = 'failed') {
-    $('envioPanel').classList.remove('sending', 'sent', 'failed');
-    $('envioPanel').classList.add(state);
-    $('envioPanel').hidden = false;
-    $('envioMensaje').textContent = message;
-    $('reintentarEnvio').hidden = !queue.length;
-  }
-
-  async function lookup(id) {
-    const url = ENDPOINT + '?action=lookup&id=' + encodeURIComponent(id) + '&_=' + Date.now();
-    const response = await fetch(url, { method: 'GET', cache: 'no-store', redirect: 'follow' });
-    if (!response.ok) throw new Error('No se pudo consultar el registro: HTTP ' + response.status + '.');
-    const data = await response.json();
-    if (!data?.ok || !data?.encontrado || !data?.alumno) throw new Error('ID no encontrado o inactivo: ' + id + '.');
-    return data.alumno;
-  }
-
-  async function verify() {
-    if (verifying) return;
-    const id1 = normalize($('alumnoID').value), id2 = normalize($('alumnoID2').value);
-    $('alumnoID').value = id1;
-    $('alumnoID2').value = id2;
-    if (!id1) { $('registroMensaje').textContent = 'Introduce el primer ID.'; return; }
-    if (id2 && id1 === id2) { $('registroMensaje').textContent = 'Los dos ID deben ser diferentes.'; return; }
-    if (id2 === 'NX-01') { $('registroMensaje').textContent = 'Para probar la app, escribe NX-01 en el primer campo y deja el segundo vacío.'; return; }
-    verifying = true;
-    $('comprobarID').disabled = true;
-    $('registroMensaje').textContent = 'Comprobando ID en el registro del profesor…';
-    try {
-      // NX-01 es un ID técnico que confirma el Apps Script. Nunca se mezcla con un ID real.
-      const testRequested = id1 === 'NX-01';
-      const ids = testRequested ? [id1] : [id1, id2].filter(Boolean);
-      if (testRequested) $('alumnoID2').value = '';
-      const students = await Promise.all(ids.map(lookup));
-      const testMode = testRequested && students[0]?.modo_prueba === true;
-      if (testRequested && !testMode) throw new Error('El servidor no ha confirmado el modo de prueba.');
-      if (!testMode && students.some(x => course(x.curso) !== '2ESO')) throw new Error('Uno de los ID no corresponde a 2.º ESO.');
-      if (!testMode && students.length === 2 && String(students[0].grupo) !== String(students[1].grupo)) {
-        throw new Error('Para trabajar en pareja, ambos alumnos deben pertenecer al mismo grupo.');
-      }
-      identity = { ids, group: String(students[0].grupo), names: students.map(x => String(x.nombre || 'Alumno/a')), testMode };
-      $('alumnoID').disabled = true;
-      $('alumnoID2').disabled = true;
-      $('comprobarID').hidden = true;
-      $('cambiarAlumno').hidden = false;
-      $('registroMensaje').textContent = testMode ? 'MODO PRUEBA · NX-01 · USUARIO DE PRUEBA' : 'Identidad confirmada: ' + identity.names.join(' y ') + ' · 2.º ESO · Grupo ' + identity.group + '.';
-      document.dispatchEvent(new Event('pdi-session'));
-      showActivityHome();
-    } catch (error) {
-      identity = null;
-      $('registroMensaje').textContent = error.message || String(error);
-    } finally {
-      verifying = false;
-      $('comprobarID').disabled = false;
-    }
-  }
-
-  function resetIdentity() {
-    identity = null;
-    for (const id of ['alumnoID', 'alumnoID2']) { $(id).value = ''; $(id).disabled = false; }
-    $('comprobarID').hidden = false;
-    $('cambiarAlumno').hidden = true;
-    $('registroMensaje').textContent = 'Introduce el ID para iniciar otra actividad.';
-    document.dispatchEvent(new Event('pdi-reset'));
-    $('activityScreen').hidden = true; $('entryScreen').hidden = false; $('envioPanel').hidden = !queue.length;
-  }
-
-  function makePayload(item, id) {
-    const r = item.result;
-    return {
-      id,
-      tema: r.theme,
-      actividad: r.activity,
-      puntuacion: r.score,
-      maximo: 10,
-      evidencia: JSON.stringify({
-        puntuacionesRetos: r.scores || [],
-        pistasUsadas: (r.hints || []).filter(Boolean).length,
-        intentosTotales: (r.attempts || []).reduce((a, b) => a + (Number(b) || 0), 0),
-        resultado: r.evidence || null
-      }),
-      detalle: JSON.stringify({
-        inicio: r.startedAt,
-        fin: r.finishedAt,
-        intentos: r.attempts || [],
-        pistas: r.hints || [],
-        submissionId: r.submissionId,
-        titulo: r.title,
-        appVersion: r.appVersion,
-        urlOrigen: r.originUrl
-      })
-    };
-  }
-
-  async function transmit() {
-    if (sending || !queue.length) return;
-    sending = true;
-    $('reintentarEnvio').disabled = true;
-    showPending('Enviando el resultado al registro del profesor…', 'sending');
-    try {
-      while (queue.length) {
-        const item = queue[0];
-        for (const id of item.ids.filter(id => !item.sentIds.includes(id))) {
-          const response = await fetch(ENDPOINT, {
-            method: 'POST',
-            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-            body: JSON.stringify(makePayload(item, id)),
-            redirect: 'follow'
-          });
-          if (!response.ok) throw new Error('Error HTTP ' + response.status + ' al enviar el ID ' + id + '.');
-          const data = await response.json();
-          if (!data?.ok) throw new Error(data?.error || 'El servidor rechazó el resultado del ID ' + id + '.');
-          item.sentIds.push(id);
-          persist();
-        }
-        queue.shift();
-        persist();
-      }
-      showPending('✓ ENVIADO. Resultado recibido para todos los ID.', 'sent');
-    } catch (error) {
-      const saved = persist();
-      showPending((error.message || String(error)) +
-        (saved ? ' El resultado pendiente se ha conservado en este navegador. Pulsa Reintentar.' :
-          ' Pulsa Reintentar sin cerrar esta pestaña, o descarga el resultado.'));
-    } finally {
-      sending = false;
-      $('reintentarEnvio').disabled = false;
-      $('reintentarEnvio').hidden = !queue.length;
-    }
-  }
-
-  window.PDI = {
-    ready: () => !!identity,
-    registered: () => !!identity,
-    id: () => identity?.ids[0] || null,
-    newAttempt: uid,
-    submit(result) {
-      if (!identity) { showPending('Comprueba el ID antes de registrar el resultado.'); return; }
-      const item = { result: { ...result, originUrl: location.href }, ids: [...identity.ids], sentIds: [] };
-      queue.push(item);
-      const saved = persist();
-      showPending(saved ? 'Resultado guardado temporalmente. Iniciando envío…' :
-        'Iniciando envío. Mantén esta pestaña abierta hasta confirmar la recepción.', 'sending');
-      transmit();
-    },
-    export(result, file) {
-      const data = { ...result, studentIds: identity?.ids || [], group: identity?.group || null,
-        registro: queue.length ? 'Pendiente de envío' : 'Consulta la hoja central para confirmar el registro' };
-      const url = URL.createObjectURL(new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' }));
-      const a = document.createElement('a'); a.href = url; a.download = file; a.click();
-      setTimeout(() => URL.revokeObjectURL(url), 1000);
-    }
-  };
-
-  function showActivityHome() {
-    $('entryScreen').hidden = true;
-    $('activityScreen').hidden = false;
-    $('studentGreeting').textContent = identity.testMode ? 'MODO PRUEBA · NX-01 · USUARIO DE PRUEBA' : 'Hola, ' + identity.names.join(' y ') + ' · Grupo ' + identity.group;
-    $('studentGreeting').parentElement.classList.toggle('test-mode', identity.testMode);
-    $('modeHub').hidden = false;
-    $('activityContent').hidden = true;
-    $('envioPanel').hidden = !queue.length;
-  }
-  document.querySelectorAll('[data-mode]').forEach(button => button.onclick = () => {
-    const mode = button.dataset.mode;
-    $('modeHub').hidden = true;
-    $('activityContent').hidden = false;
-    $('currentMode').textContent = mode === 'explore' ? 'PRACTICAR · SIN NOTA' : 'ACTIVIDAD EVALUABLE · SE ENVÍA AL TERMINAR';
-    $('currentMode').classList.toggle('eval', mode !== 'explore');
-    $(mode === 'exam' ? 'examTab' : mode === 'explore' ? 'exploreTab' : 'practiceTab').click();
-    $('activityContent').scrollIntoView({block:'start'});
-  });
-  $('backToModes').onclick = () => { $('activityContent').hidden = true; $('modeHub').hidden = false; $('modeHub').scrollIntoView({block:'start'}); };
-  $('switchStudent').onclick = () => $('cambiarAlumno').click();
-  $('conexionInfo').textContent = 'El ID se comprueba con el registro del profesor. Necesitas conexión a Internet.';
-  $('comprobarID').onclick = verify;
-  for (const id of ['alumnoID', 'alumnoID2']) $(id).onkeydown = event => {
-    if (event.key === 'Enter') { event.preventDefault(); verify(); }
-  };
-  $('cambiarAlumno').onclick = () => {
-    if (confirm('Cambiar de alumno reinicia la actividad actual. Los resultados pendientes seguirán guardados. ¿Continuar?')) resetIdentity();
-  };
-  $('reintentarEnvio').onclick = transmit;
-  if (queue.length) showPending('Hay ' + queue.length + ' resultado(s) pendientes. Pulsa Reintentar.');
-})();
-</script><script>
+<section id="modeStage" class="panel" hidden aria-labelledby="modeTitle"><div class="menu-header"><p id="verifiedNames" class="student-name"></p><button data-action="changeStudent">Cambiar de alumno</button></div><h2 id="modeTitle">¿Qué quieres hacer?</h2><div class="mode-grid"><button class="mode-card practice" data-action="practiceMode"><em>SIN NOTA</em><strong>PRACTICAR SIN NOTA</strong><span>Gira nueve piezas y dibuja las cuatro vistas; usa línea continua, discontinua y goma. Sin nota ni envío.</span></button><button id="evaluateMode" class="mode-card evaluable" data-action="evaluateMode"><em>CUENTA PARA LA NOTA</em><strong>ACTIVIDAD EVALUABLE</strong><span>Diez retos de 2.º ESO: cuatro dibujos, cuatro elecciones y dos relaciones de piezas y vistas. Se envía al finalizar.</span></button></div><p class="note">En la actividad evaluable, un consejo reduce a la mitad la puntuación de ese reto: un acierto completo pasa de 1 a 0,5 puntos. Un error vale 0.</p><p id="modeMessage" class="status" role="status" aria-live="polite"></p></section>
+<nav id="sessionBar" class="flow-bar" hidden aria-label="Actividad actual"><div><div id="flowLabel" class="flow-label"></div><div id="sessionName" class="session-name"></div></div><div class="actions"><button data-action="backMenu">← Elegir modo</button></div></nav>
+<section id="explore" aria-label="Práctica sin nota" hidden></section>
+<section id="retos" aria-label="Retos autocorregibles" hidden><section id="quizStage" class="panel" hidden><div class="quiz-top"><div><div id="sessionLabel" class="note"></div><strong id="progressText">0 de 10 comprobados</strong></div><progress id="progress" max="10" value="0" aria-label="Retos comprobados"></progress></div><div id="quizContent"></div><div class="quiz-nav"><button id="prevButton" data-action="prev">← Reto anterior</button><button id="nextButton" class="primary" data-action="next">Siguiente reto →</button></div></section><section id="resultStage" aria-label="Resultado y envío" hidden></section></section>
+<noscript><p class="panel">Activa JavaScript en el navegador para usar las actividades y la autocorrección.</p></noscript></main><footer><div class="wrap"><span>Tema 2 · Expresión gráfica · 2.º ESO · 26/27</span><span>Cuaderno Técnico Ilustrado · Práctica visual</span></div></footer>
+<script>
 'use strict';
-const NS='http://www.w3.org/2000/svg';
+const APP_ID="UD2_2ESO_APP03";
+const MODELS={};
+'use strict';
+const VIEWS={
+ block:[{k:'rect',w:60,h:30},{k:'rect',w:40,h:30},{k:'rect',w:60,h:40}],
+ step30:[{k:'step',w:60,h:30,t:30,lo:15},{k:'rect',w:40,h:30},{k:'rect',w:60,h:40,v:[30]}],
+ step:[{k:'step',w:60,h:30,t:20,lo:15},{k:'rect',w:40,h:30},{k:'rect',w:60,h:40,v:[20]}],
+ stairs:[{k:'stairs',w:60,h:30},{k:'rect',w:40,h:30},{k:'rect',w:60,h:40,v:[20,40]}],
+ tower:[{k:'tower',w:60,h:30},{k:'tower',w:40,h:30},{k:'rect',w:60,h:40,inner:[20,10,20,20]}],
+ open:[{k:'rect',w:60,h:30},{k:'rect',w:40,h:30},{k:'rect',w:60,h:40,inner:[5,5,50,30]}]
+};
+const esc=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const svg=(body,box='0 0 420 260',label='Dibujo del ejercicio')=>`<svg viewBox="${box}" role="img" aria-label="${esc(label)}" xmlns="http://www.w3.org/2000/svg"><g fill="none" stroke="#20343b" stroke-width="2" stroke-linejoin="round" stroke-linecap="round">${body}</g></svg>`;
+const text=(x,y,t,size=14,color='#20343b',anchor='middle')=>`<text x="${x}" y="${y}" fill="${color}" stroke="none" font-family="system-ui,sans-serif" font-size="${size}" text-anchor="${anchor}">${esc(t)}</text>`;
+function contour(s){
+ const {w,h}=s;
+ if(s.k==='step')return [[0,h],[w,h],[w,h-(s.lo??15)],[s.t??30,h-(s.lo??15)],[s.t??30,0],[0,0]].map(([x,y])=>[s.rev?w-x:x,y]);
+ if(s.k==='stairs')return [[0,h],[w,h],[w,h-10],[40,h-10],[40,h-20],[20,h-20],[20,0],[0,0]].map(([x,y])=>[s.rev?w-x:x,y]);
+ if(s.k==='tower')return [[0,h],[w,h],[w,20],[w/2+10,20],[w/2+10,0],[w/2-10,0],[w/2-10,20],[0,20]];
+ return [[0,0],[w,0],[w,h],[0,h]];
+}
+function drawShape(s,cx=85,cy=55,scale=1.7){
+ const ox=cx-s.w*scale/2,oy=cy-s.h*scale/2,pt=(x,y)=>`${ox+x*scale},${oy+y*scale}`;
+ let body=`<path d="M${contour(s).map(([x,y])=>pt(x,y)).join('L')}Z" fill="#fff"/>`;
+ const line=(x1,y1,x2,y2)=>`<line x1="${ox+x1*scale}" y1="${oy+y1*scale}" x2="${ox+x2*scale}" y2="${oy+y2*scale}"/>`;
+ (s.v||[]).forEach(x=>body+=line(x,0,x,s.h));(s.hor||[]).forEach(y=>body+=line(0,y,s.w,y));
+ if(s.inner){let[x,y,w,h]=s.inner;body+=`<rect x="${ox+x*scale}" y="${oy+y*scale}" width="${w*scale}" height="${h*scale}"/>`;}
+ if(s.k==='tower')body+=line(0,20,s.w,20);
+ return body;
+}
+function viewSvg(s,label='Opción gráfica'){return svg(drawShape(s),'0 0 170 110',label);}
+function triadSvg(kind,replace={}){
+ const v=structuredClone(VIEWS[kind]);Object.keys(replace).forEach(k=>v[k]=replace[k]);
+ return svg(drawShape(v[0],73,49,1.35)+drawShape(v[1],184,49,1.35)+drawShape(v[2],73,137,1.35)+text(73,17,'Alzado',11)+text(184,17,'Perfil izq.',11)+text(73,103,'Planta',11),'0 0 240 183','Conjunto de alzado planta y perfil izquierdo');
+}
+function dimH(x1,x2,y,base,label){
+ return `<g stroke="#23768b" stroke-width="1.4"><path d="M${x1},${base}V${y+5} M${x2},${base}V${y+5} M${x1},${y}H${x2} M${x1+5},${y-3}L${x1},${y}L${x1+5},${y+3} M${x2-5},${y-3}L${x2},${y}L${x2-5},${y+3}"/></g><rect x="${(x1+x2)/2-20}" y="${y-10}" width="40" height="20" fill="white" stroke="none"/>${text((x1+x2)/2,y+5,label,15,'#23768b')}`;
+}
+function dimV(x,y1,y2,base,label){
+ return `<g stroke="#23768b" stroke-width="1.4"><path d="M${base},${y1}H${x+5} M${base},${y2}H${x+5} M${x},${y1}V${y2} M${x-3},${y1+5}L${x},${y1}L${x+3},${y1+5} M${x-3},${y2-5}L${x},${y2}L${x+3},${y2-5}"/></g><rect x="${x-10}" y="${(y1+y2)/2-19}" width="20" height="38" fill="white" stroke="none"/><text x="${x+5}" y="${(y1+y2)/2}" transform="rotate(-90 ${x+5} ${(y1+y2)/2})" fill="#23768b" stroke="none" font-family="system-ui,sans-serif" font-size="15" text-anchor="middle">${esc(label)}</text>`;
+}
+function dimensionSvg(mode='normal'){
+ let b='<rect x="80" y="45" width="180" height="90" stroke-width="2.5"/>';
+ b+=dimH(80,260,176,138,mode==='labels'?'A':'60')+dimV(305,45,135,263,mode==='missing'?'?':'30');
+ if(mode==='labels')b+=`<path d="M330,208L240,176 M48,210L80,157 M370,37L305,45" stroke="#b17412"/>${text(338,224,'B')+text(39,224,'C')+text(378,28,'D')}`;
+ b+=text(210,246,'Cotas en mm',12);
+ return svg(b,'0 0 420 260','Rectángulo con cotas de anchura y altura');
+}
+function steppedDimension(){return svg('<path d="M85 170H325V110H235V50H85Z" stroke-width="2.5"/>'+dimH(85,325,215,173,'80')+dimH(85,235,22,47,'50')+dimH(235,325,85,108,'?')+dimV(48,50,170,82,'40')+dimV(355,110,170,328,'20')+text(210,250,'Cotas en mm',12));}
+function angleSvg(deg,protractor=false){
+ let b='',cx=200,cy=210,r=155;
+ if(protractor){
+  b+=`<path d="M${cx-r} ${cy}A${r} ${r} 0 0 1 ${cx+r} ${cy}Z" fill="#e5f1f2" fill-opacity=".65" stroke="#769ba7" stroke-width="1"/>`;
+  for(let a=0;a<=180;a+=5){let z=a*Math.PI/180,rr=r-(a%10===0?13:7);b+=`<path stroke="#6f8b95" stroke-width="1" d="M${cx+rr*Math.cos(z)},${cy-rr*Math.sin(z)}L${cx+r*Math.cos(z)},${cy-r*Math.sin(z)}"/>`;if(a%20===0||a===90)b+=text(cx+(r-27)*Math.cos(z),cy-(r-27)*Math.sin(z)+4,a,10,'#375d6c');}
+ }
+ let a=deg*Math.PI/180;b+=`<path d="M${cx} ${cy}H${cx+140} M${cx} ${cy}L${cx+140*Math.cos(a)} ${cy-140*Math.sin(a)}" stroke-width="3"/><circle cx="${cx}" cy="${cy}" r="4" fill="#b66b22" stroke="none"/>`+text(cx-12,cy+23,'V',12);
+ b+=`<path d="M${cx+35} ${cy}A35 35 0 0 0 ${cx+35*Math.cos(a)} ${cy-35*Math.sin(a)}" stroke="#b66b22"/>`;
+ return svg(b,'0 0 420 255','Ángulo que se mide desde el lado horizontal hacia arriba');
+}
+function linesSvg(mode='parallel',deg=15){
+ let rad=deg*Math.PI/180,dx=120*Math.cos(rad),dy=120*Math.sin(rad),b='';
+ if(mode==='perp'){b=`<path d="M${210-dx} ${130+dy}L${210+dx} ${130-dy} M${210-dy} ${130-dx}L${210+dy} ${130+dx}"/>`;}
+ else if(mode==='cross')b='<path d="M50 190L360 60 M50 60L360 190"/>';
+ else b=`<path d="M${210-dx} ${100+dy}L${210+dx} ${100-dy} M${210-dx} ${160+dy}L${210+dx} ${160-dy}"/>`;
+ return svg(b,'0 0 420 260','Pareja de rectas para comparar sus direcciones');
+}
+function toolSvg(kind){
+ if(kind==='protractor')return angleSvg(60,true);
+ if(kind==='set')return svg('<path d="M110 215H290V35Z" fill="#edf5f5"/><path d="M165 190H265V90Z" fill="white"/>'+text(141,203,'45°',13)+text(268,203,'90°',13)+text(278,79,'45°',13));
+ if(kind==='cartabon')return svg('<path d="M60 195H340V33Z" fill="#fff5d8"/><path d="M130 172H300V75Z" fill="white"/>'+text(75,219,'30°',13)+text(315,181,'90°',13)+text(326,75,'60°',13));
+ return svg('<rect x="40" y="110" width="340" height="55" fill="#fff5d8"/>'+Array.from({length:21},(_,i)=>`<path d="M${50+i*16} 110v${i%5===0?25:12}"/>${i%5===0?text(50+i*16,153,i,10):''}`).join(''));
+}
+function sheetSvg(){return svg('<rect x="20" y="12" width="210" height="297" fill="#fff"/><rect x="30" y="22" width="190" height="277" stroke="#819ba3"/><rect x="140" y="279" width="80" height="20" fill="#e4f0f2"/>'+text(180,293,'CAJETÍN',9)+text(125,150,'A4 VERTICAL',13),'0 0 250 322','Hoja A4 vertical con marco y cajetín');}
+function docSvg(mode='croquis',missing=false){
+ if(mode==='plano'){
+  const frame='<rect x="22" y="12" width="376" height="272" fill="#fff"/><rect x="34" y="24" width="352" height="248" stroke="#b1c2c6"/>';
+  const views='<rect x="65" y="55" width="120" height="60"/><rect x="243" y="55" width="80" height="60"/><rect x="65" y="170" width="120" height="80"/>';
+  const dims=dimH(65,185,137,118,'120')+dimV(350,55,115,326,'60')+dimV(210,170,250,188,'80');
+  const labels=text(125,46,'Alzado',13)+text(283,46,'Perfil izquierdo',13)+text(125,161,'Planta',13);
+  const title='<rect x="250" y="229" width="136" height="43"/>'+text(318,247,'Caja · Escala 1:1',12)+text(318,263,'Cotas en mm',12);
+  return svg(frame+views+dims+labels+title,'0 0 420 296','Plano de una caja de 120 mm de ancho, 80 mm de fondo y 60 mm de alto');
+ }
+ let b=mode==='boceto'?'<path d="M79 106L208 176L340 101L211 31L78 105 M80 109L81 171L211 241L340 166L339 102 M210 177L211 240" stroke-width="2.4"/>':'<path d="M80 92L210 158L335 92L205 26Z M80 92V155L210 222L335 155V92 M210 158V222" stroke-width="2.4"/>';
+ if(mode==='croquis')b+=text(120,205,'120 mm',13,'#23768b')+text(302,198,'80 mm',13,'#23768b')+(missing?'':text(361,134,'60 mm',13,'#23768b'));
+ return svg(b,'0 0 420 260',mode==='boceto'?'Boceto rápido sin dimensiones':'Croquis a mano alzada con dimensiones');
+}
+function boxSVG(w=100,d=60,h=40,download=false){
+ const ax=22,ay=22,px=ax+w+24,py=ay+h+22;
+ let body=`<rect x="${ax}" y="${ay}" width="${w}" height="${h}"/><rect x="${px}" y="${ay}" width="${d}" height="${h}"/><rect x="${ax}" y="${py}" width="${w}" height="${d}"/><rect x="${ax+4}" y="${py+4}" width="${w-8}" height="${d-8}"/>`;
+ body+=text(ax+w/2,ay-6,'Alzado',5)+text(px+d/2,ay-6,'Perfil izquierdo',5)+text(ax+w/2,py-6,'Planta',5);
+ body+=dimH(ax,ax+w,ay+h+9,ay+h+1,w)+dimV(px+d+11,ay,ay+h,px+d+1,h)+dimV(ax+w+11,py,py+d,ax+w+1,d);
+ body+=text(148,197,'Mi caja organizadora · Cotas en mm · Escala 1:1 a tamaño real',4.2);
+ let s=svg(body,'0 0 297 210','Vistas acotadas de la caja organizadora');
+ s=s.replace('stroke-width="2"','stroke-width="0.6"').replaceAll('stroke-width="1.4"','stroke-width="0.35"').replaceAll('font-size="15"','font-size="4.5"').replaceAll('width="40" height="20"','width="13" height="7"');
+ // Las cotas se dibujan aparte en milímetros para conservar proporciones al exportar.
+ if(download)s=s.replace('<svg ','<svg width="297mm" height="210mm" ');
+ return s;
+}
+function boxCleanSVG(w=100,d=60,h=40,download=false){
+ const ax=22,ay=22,px=ax+w+24,py=ay+h+23;
+ const dh=(x1,x2,y,base,n)=>`<path d="M${x1} ${base}V${y+1} M${x2} ${base}V${y+1} M${x1} ${y}H${x2} M${x1+2} ${y-1}L${x1} ${y}L${x1+2} ${y+1} M${x2-2} ${y-1}L${x2} ${y}L${x2-2} ${y+1}" stroke="#23768b"/>`+text((x1+x2)/2,y-1.5,n,4.5,'#23768b');
+ const dv=(x,y1,y2,base,n)=>`<path d="M${base} ${y1}H${x+1} M${base} ${y2}H${x+1} M${x} ${y1}V${y2} M${x-1} ${y1+2}L${x} ${y1}L${x+1} ${y1+2} M${x-1} ${y2-2}L${x} ${y2}L${x+1} ${y2-2}" stroke="#23768b"/>`+`<text x="${x-1.5}" y="${(y1+y2)/2}" transform="rotate(-90 ${x-1.5} ${(y1+y2)/2})" fill="#23768b" stroke="none" font-size="4.5" font-family="system-ui" text-anchor="middle">${esc(n)}</text>`;
+ let b=`<rect x="${ax}" y="${ay}" width="${w}" height="${h}"/><rect x="${px}" y="${ay}" width="${d}" height="${h}"/><rect x="${ax}" y="${py}" width="${w}" height="${d}"/><rect x="${ax+4}" y="${py+4}" width="${w-8}" height="${d-8}"/>`;
+ b+=text(ax+w/2,ay-6,'Alzado',5)+text(px+d/2,ay-6,'Perfil izquierdo',5)+text(ax+w/2,py-6,'Planta',5)+dh(ax,ax+w,ay+h+9,ay+h+1,w)+dv(px+d+10,ay,ay+h,px+d+1,h)+dv(ax+w+10,py,py+d,ax+w+1,d);
+ b+=text(148,197,'Mi caja organizadora · Cotas en mm · 1:1 solo al imprimir a tamaño real',4.2);
+ let s=svg(b,'0 0 297 210','Vistas acotadas de la caja organizadora').replace('stroke-width="2"','stroke-width="0.6"');
+ return download?s.replace('<svg ','<svg width="297mm" height="210mm" '):s;
+}
+function legacyRenderVisual(v){
+ if(!v)return '';
+ if(v.type==='model')return `<img class="model" src="${MODELS[v.kind]}" alt="Pieza ${esc(v.name||v.kind)} con el frente marcado por una flecha"><p class="note">La flecha fija el frente. Se omiten las aristas ocultas.</p>`;
+ if(v.type==='view')return viewSvg(v.shape);
+ if(v.type==='triad')return triadSvg(v.kind,v.replace||{});
+ if(v.type==='document')return docSvg(v.mode,v.missing);
+ if(v.type==='angle')return angleSvg(v.deg,!!v.protractor);
+ if(v.type==='lines')return linesSvg(v.mode,v.deg||15);
+ if(v.type==='tool')return toolSvg(v.kind);
+ if(v.type==='sheet')return sheetSvg();
+ if(v.type==='dimensions')return v.mode==='step'?steppedDimension():dimensionSvg(v.mode);
+ if(v.type==='box')return boxCleanSVG(...(v.dims||[100,60,40]));
+ if(v.type==='board')return `<div class="board-models">${v.kinds.map((k,i)=>`<div><p>F${i+1}</p><img class="mini-model" src="${MODELS[k]}" alt="Figura F${i+1} con frente marcado"></div>`).join('')}</div><div class="board-views">${v.shapes.map((s,i)=>`<div class="board-view">${i+1}${viewSvg(s,'Vista número '+(i+1))}</div>`).join('')}</div><p class="note">Todas las vistas están a la misma escala. Una misma vista puede servir para varias figuras.</p>`;
+ return '';
+}
+function unitKey(a,b){const p=[a.join(','),b.join(',')].sort();return p.join('|');}
+function splitSegment(a,b){
+ if(a[0]!==b[0]&&a[1]!==b[1])return [];
+ const n=Math.max(Math.abs(a[0]-b[0]),Math.abs(a[1]-b[1]));if(!n)return [];
+ const dx=Math.sign(b[0]-a[0]),dy=Math.sign(b[1]-a[1]);
+ return Array.from({length:n},(_,i)=>unitKey([a[0]+i*dx,a[1]+i*dy],[a[0]+(i+1)*dx,a[1]+(i+1)*dy]));
+}
+function drawingOrigin(q){return [q.originNote?2+(q.shape.w/2-10)/5:2,2];}
+function legacyExpectedEdges(q){
+ const shape=q.shape,origin=[2,2],edges=[];
+ const add=(a,b)=>edges.push(...splitSegment(...[a,b].map(([x,y])=>[origin[0]+x/5,origin[1]+y/5])));
+ const outline=points=>points.forEach((point,index)=>add(point,points[(index+1)%points.length]));
+ outline(contour(shape));
+ (shape.v||[]).forEach(x=>add([x,0],[x,shape.h]));
+ (shape.hor||[]).forEach(y=>add([0,y],[shape.w,y]));
+ if(shape.inner){
+  const [x,y,w,h]=shape.inner;
+  outline([[x,y],[x+w,y],[x+w,y+h],[x,y+h]]);
+ }
+ if(shape.towerSeam)add([shape.w/2-10,20],[shape.w/2+10,20]);
+ return [...new Set(edges)];
+}
+function drawingScore(actual,expected){const a=new Set(actual||[]),e=new Set(expected);let right=0,extra=0;for(let x of a)e.has(x)?right++:extra++;return e.size?right/(e.size+extra):0;}
+
+const APPS=[{id:'UD2_2ESO_APP03',file:'index.html',n:3,title:'Taller de vistas',
+ subtitle:'Gira piezas, dibuja cuatro vistas y relaciona proyecciones.',
+ focus:'Alzado · Planta · Ambos perfiles',minutes:'35–45 minutos',model:'eStep',
+ block:'Vistas',intro:'Frente fijo y proyecciones en sistema europeo.',questions:[]}];
+const APP=APPS.find(a=>a.id===APP_ID);
+
+function questionsForMode(){return APP.questions;}
+
+const DEFAULT_ENDPOINT="https://script.google.com/macros/s/AKfycbzYhutDT6EZ7meQq2KfVdKq0h8JH9GYnOmZVqjW_IkmOvdMdjS7FxWQWezmx8SfWQf9/exec";
+const S={screen:'entry',identifying:false,reviewing:false,testMode:false,tab:'explore',mode:'',students:[],generation:0,index:0,drafts:[],records:[],hints:[],point:null,kbPoint:[2,2],history:{},tool:'draw',submissionId:'',startedAt:'',result:null,pending:null,sending:false,confirmed:new Set(),endpoint:'',manualEndpoint:false,lab:{doc:'boceto',angle:50,line:'parallel',direction:15,piece:'block',view:'iso',w:100,d:60,h:40}};
+const $=id=>document.getElementById(id);
+const normId=x=>String(x||'').trim().toUpperCase().replace(/\s+/g,'');
+const normCourse=x=>String(x||'').toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^A-Z0-9]/g,'');
+const normGroup=x=>String(x||'').trim().toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+const validEndpoint=x=>/^https:\/\/script\.google\.com\/macros\/s\/[A-Za-z0-9_-]+\/exec$/.test(x||'');
+const uuid=()=>globalThis.crypto?.randomUUID?.()||'ud2-'+Date.now()+'-'+Math.random().toString(36).slice(2);
+const fmt=x=>Number(x).toLocaleString('es-ES',{maximumFractionDigits:2});
+const scoreTotal=records=>records.reduce((n,r)=>n+(r?.score||0),0);
+function evaluate(q,response){
+ if(q.kind==='draw')return {score:drawingScore(response,expectedEdges(q)),details:[{label:'Segmentos correctos y sobrantes',expected:'Contorno y líneas pedidos en el enunciado',actual:response}]};
+ if(q.kind==='choice')return {score:response===q.answer?1:0,details:[{label:'Respuesta',correct:response===q.answer,expected:typeof q.options[q.answer]==='string'?q.options[q.answer]:q.options[q.answer].label,actual:response}]};
+ if(q.kind==='adjust'){let right=Number.isFinite(Number(response))&&Math.abs(Number(response)-q.target)<=q.tolerance;return {score:right?1:0,details:[{label:'Ángulo',correct:right,expected:q.target+'° (±'+q.tolerance+'°)',actual:response}]};}
+ const details=q.fields.map((f,i)=>{const raw=response[i],options=Array.isArray(f.answer)?f.answer:[f.answer];const correct=f.number?String(raw).trim()!==''&&Number.isFinite(Number(String(raw).replace(',','.')))&&Math.abs(Number(String(raw).replace(',','.'))-f.answer)<=(f.tolerance||0):options.includes(raw);return {label:f.label,correct,expected:options.join(' o ')+(f.tolerance?' (±'+f.tolerance+')':''),actual:raw};});
+ return {score:details.filter(x=>x.correct).length/details.length,details};
+}
+function complete(q,d){if(q.kind==='draw')return Array.isArray(d)&&d.length>0;if(q.kind==='fields')return Array.isArray(d)&&q.fields.every((_,i)=>String(d[i]??'').trim()!=='');if(q.kind==='adjust')return Number.isFinite(Number(d));return Number.isInteger(d)&&d>=0&&d<q.options.length;}
+function draft(q,i=S.index){if(S.drafts[i]===undefined)S.drafts[i]=q.kind==='draw'?[]:q.kind==='fields'?q.fields.map(()=> ''):q.kind==='adjust'?q.initial:null;return S.drafts[i];}
+function setStatus(id,message,error=false){const e=$(id);e.textContent=message;e.className='status'+(error?' error':'');}
+function download(textValue,type,name){const blob=new Blob([textValue],{type}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
+function selectTab(tab){
+ if(!S.students.length){showScreen('entry');return;}S.tab=tab;
+ if(tab==='explore'){showScreen('explore');return;}
+ if(S.mode!=='registered'){showScreen('menu');return;}
+ if(S.result&&!S.reviewing){showScreen('results');return;}
+ showScreen('quiz');renderQuiz();
+}
+function legacyStartAttempt(){
+ S.index=0;S.drafts=[];S.records=[];S.hints=[];S.history={};S.point=null;S.kbPoint=[2,2];S.tool='draw';S.submissionId=uuid();S.startedAt=new Date().toISOString();S.result=null;S.pending=null;S.reviewing=false;S.confirmed=new Set();S.sending=false;$('resultStage').innerHTML='';if(S.mode==='registered')renderQuiz();
+}
+function fieldHtml(f,j,d,detail){
+ const locked=!!detail;
+ const label=`<label for="f${j}">${esc(f.label)}</label>`;
+ const input=f.number?`<input id="f${j}" data-field="${j}" type="text" inputmode="decimal" maxlength="12" value="${esc(d[j])}" autocomplete="off" ${locked?'disabled':''}>`:`<select id="f${j}" data-field="${j}" ${locked?'disabled':''}><option value="">Selecciona…</option>${f.options.map(x=>`<option value="${esc(x)}" ${d[j]===x?'selected':''}>${esc(x)}</option>`).join('')}</select>`;
+ return `<div class="field${detail&&!detail.correct?' field-wrong':''}">${label}${input}${detail&&!detail.correct?solutionValue(detail.expected):''}</div>`;
+}
+function drawingSVG(q){
+ const d=draft(q),locked=!!S.records[S.index],origin=drawingOrigin(q);let b='';
+ for(let col=0;col<=16;col++)b+=`<path d="M${28+col*22} 30V294" stroke="#e0e9e8" stroke-width="1"/>`;
+ for(let row=0;row<=12;row++)b+=`<path d="M28 ${30+row*22}H380" stroke="#e0e9e8" stroke-width="1"/>`;
+ const edge=(key,color,width=3,dash='')=>{const[[x1,y1],[x2,y2]]=key.split('|').map(p=>p.split(',').map(Number));return `<path d="M${28+x1*22} ${30+y1*22}L${28+x2*22} ${30+y2*22}" stroke="${color}" stroke-width="${width}" ${dash?'stroke-dasharray="5 4"':''}/>`;};
+ const showSolution=locked&&S.records[S.index].rawScore<1;
+ for(const x of d)b+=edge(x,showSolution?'#9b4050':'#126680',3);
+ if(showSolution){
+  const solution=expectedEdges(q);
+  for(const x of solution)b+=edge(x,'#126e43',5);
+ }
+ if(S.point)b+=`<circle cx="${28+S.point[0]*22}" cy="${30+S.point[1]*22}" r="6" fill="#ce791e" stroke="none"/>`;
+ b+=`<circle cx="${28+origin[0]*22}" cy="${30+origin[1]*22}" r="5" fill="#126680" stroke="white" stroke-width="1"/>`;
+ if(!locked)for(let x=0;x<=16;x++)for(let y=0;y<=12;y++)b+=`<g role="button" tabindex="${S.kbPoint[0]===x&&S.kbPoint[1]===y?0:-1}" data-point="${x},${y}" aria-label="Punto columna ${x} fila ${y}"><circle cx="${28+x*22}" cy="${30+y*22}" r="8" fill="transparent" stroke="none"/></g>`;
+ b+=text(204,322,'Una casilla = 5 mm · Trazos horizontales y verticales',11);
+ return `<svg id="drawCanvas" class="draw-svg" viewBox="0 0 410 336" aria-label="Cuadrícula para dibujar la vista" xmlns="http://www.w3.org/2000/svg">${b}</svg>`;
+}
+function solutionValue(expected){
+ return `<p class="solution-value">✓ Solución: ${esc(expected)}</p>`;
+}
+function legacyRenderQuiz(){
+ if(S.mode!=='registered')return;if(S.result&&!S.reviewing){showScreen('results');return;}showScreen('quiz');$('quizStage').className='panel '+(S.mode==='registered'?'quiz-stage-evaluable':'quiz-stage-free');
+ const bank=questionsForMode(),total=bank.length;
+ const q=bank[S.index],d=draft(q),record=S.records[S.index],locked=!!record;
+ const completed=S.records.filter(Boolean).length;
+ $('progress').max=total;$('progress').value=completed;$('progressText').textContent=`${completed} de ${total} comprobados`;
+ $('sessionLabel').textContent='Diez retos · Hasta 10 puntos';
+ let response='';
+ if(q.kind==='choice')response=`<fieldset style="border:0;padding:0;margin:0"><legend class="note">Elige una respuesta.</legend><div class="choices ${q.options.every(x=>typeof x==='string')?'text-only':''}">${q.options.map((o,j)=>`<label class="choice ${locked&&j===q.answer?'correct':''} ${locked&&d===j&&d!==q.answer?'wrong':''}"><input type="radio" name="choice" data-choice="${j}" value="${j}" ${d===j?'checked':''} ${locked?'disabled':''}><span>${typeof o==='string'?esc(o):esc(o.label)}</span>${typeof o==='object'?renderVisual(o.visual):''}${locked&&j===q.answer?'<strong class="answer-badge">✓ Respuesta correcta</strong>':locked&&d===j?'<strong class="answer-badge">× Tu respuesta</strong>':''}</label>`).join('')}</div></fieldset>`;
+ else if(q.kind==='fields')response=q.fields.map((f,j)=>fieldHtml(f,j,d,record?.details[j])).join('');
+ else if(q.kind==='adjust')response=`<label for="adjustAngle">Ajusta la abertura de la línea</label><input id="adjustAngle" type="range" min="10" max="170" step="1" value="${d}" ${locked?'disabled':''}><p class="note">Objetivo: ${q.target}°. El transportador muestra los grados desde el lado horizontal.</p>${record?.rawScore===0?solutionValue(record.details[0].expected):''}`;
+ else response=`<div id="drawArea">${drawingSVG(q)}</div><div class="actions draw-tools"><button data-action="drawTool" data-tool="draw" aria-pressed="${S.tool==='draw'}" ${locked?'disabled':''}>Dibujar</button><button data-action="drawTool" data-tool="erase" aria-pressed="${S.tool==='erase'}" ${locked?'disabled':''}>Borrar trazo</button><button data-action="undoDraw" ${locked?'disabled':''}>Deshacer</button><button data-action="clearDraw" ${locked?'disabled':''}>Limpiar</button></div><p class="note">Arrastra entre dos puntos de una misma fila o columna, o toca dos puntos. Con teclado: Tab para entrar, flechas para moverte y Enter para elegir extremos. El punto azul es la referencia indicada.</p>`;
+ let figure=renderVisual(q.visual);
+ if(q.kind==='adjust')figure=angleSvg(Number(d),true);
+ if(q.protractor)figure+=`<label class="note"><input id="protractor" type="checkbox"> Mostrar transportador</label>`;
+ const board=q.board;
+ $('quizContent').innerHTML=`<div class="question-label">Reto ${S.index+1} de ${total} · ${q.kind==='draw'?'Dibujo en cuadrícula':q.kind==='fields'?'Relaciona o completa':'Observa y resuelve'}</div><h2 class="qtitle">${esc(q.title)}</h2><p>${esc(q.prompt)}</p><div class="q-layout">${!figure?`<div class="board-full">${response}</div>`:board?`<div class="sketch board-full">${figure}</div><div class="board-full">${response}</div>`:`<div id="questionFigure" class="sketch">${figure}</div><div>${response}</div>`}</div>${!locked?`<p class="cost-note">${S.mode==='registered'?'Consejo opcional: este reto pasará de un máximo de 1 a 0,5 puntos. La puntuación parcial también se reduce a la mitad; un error vale 0.':'Puedes pedir un consejo sin coste: estás practicando sin nota.'}</p>`:''}<div class="actions" style="margin-top:20px"><button id="checkButton" class="primary" data-action="check" ${locked?'disabled':''}>${locked?'Respuesta comprobada':'Comprobar respuesta'}</button><button class="hint-button" data-action="hint" ${locked||S.hints[S.index]?'disabled':''}>${S.hints[S.index]?'Consejo abierto':S.mode==='registered'?'Abrir consejo · máximo 0,5 puntos':'Ver consejo · sin coste'}</button></div><div id="questionMessage" role="status" aria-live="polite"></div>${S.hints[S.index]?`<div class="hint">${esc(hintFor(q))}</div>`:''}${record?feedbackHtml(q,record):''}${S.reviewing?'<p class="review-tag">Revisión: la puntuación de este intento está cerrada.</p>':''}`;
+ $('prevButton').disabled=S.index===0;$('nextButton').disabled=!locked;$('nextButton').textContent=S.index===total-1?(S.reviewing?'Volver al resultado':S.mode==='registered'?'Finalizar y guardar':'Ver resultado'):'Siguiente reto →';
+}
+function feedbackHtml(q,record){
+ const correct=record.rawScore===1;let details='';
+ if(q.kind==='draw'&&!correct)details='<p class="solution-value">✓ El trazo verde grueso muestra la solución. Los segmentos sobrantes de tu dibujo aparecen en rojo.</p>';
+ return `<div class="feedback ${correct?'':'incomplete'}" role="status"><strong>${correct?'Bien resuelto':'Revisa la solución'} · ${fmt(record.score)} / 1 punto</strong><p>${esc(q.explain)}</p>${details}${record.hintPenalty>0?`<p class="advice-discount">Consejo aplicado: ${fmt(record.rawScore)} × 0,5 = ${fmt(record.score)} puntos.</p>`:''}</div>`;
+}
+function checkQuestion(){
+ if(S.mode!=='registered'||S.result)return;const q=questionsForMode()[S.index];if(S.records[S.index])return;
+ const d=draft(q);if(!complete(q,d)){setStatus('questionMessage',q.kind==='draw'?'Dibuja al menos un segmento antes de comprobar.':'Completa todas las respuestas antes de comprobar.',true);return;}
+ const r=evaluate(q,d),hint=!!S.hints[S.index],factor=S.mode==='registered'&&hint?0.5:1;
+ S.records[S.index]={id:q.id,title:q.title,...r,rawScore:r.score,score:r.score*factor,maxPoints:factor,hintPenalty:r.score*(1-factor),hintCostMaximum:factor===0.5?0.5:0,response:structuredClone(d),hint,hintText:hint?hintFor(q):'',checkedAt:new Date().toISOString()};S.point=null;
+ renderQuiz();
+}
+function applySegment(a,b){
+ const q=questionsForMode()[S.index];if(q.kind!=='draw'||S.records[S.index])return;
+ const seg=splitSegment(a,b);if(!seg.length){setStatus('questionMessage','Selecciona dos puntos distintos de una misma fila o columna.',true);return;}
+ (S.history[S.index]??=[]).push([...draft(q)]);let set=new Set(draft(q));for(let x of seg)S.tool==='erase'?set.delete(x):set.add(x);S.drafts[S.index]=[...set];S.point=null;$('drawArea').innerHTML=drawingSVG(q);setStatus('questionMessage','Trazo actualizado. Puedes deshacer antes de comprobar.');
+}
+function choosePoint(point){S.kbPoint=point;if(S.point)applySegment(S.point,point);else {S.point=point;$('drawArea').innerHTML=drawingSVG(questionsForMode()[S.index]);}document.querySelector(`[data-point="${point.join(',')}"]`)?.focus();}
+function finish(){
+ if(S.mode!=='registered')return;
+ if(S.result){S.reviewing=false;showScreen('results');return;}
+ if(S.records.filter(Boolean).length!==questionsForMode().length)return;
+ const maximo=questionsForMode().length,score=scoreTotal(S.records),penalty=S.records.reduce((n,r)=>n+r.hintPenalty,0);
+ S.result=deepFreeze({submissionId:S.submissionId,modo_prueba:!!S.testMode,theme:'Tema_2_Expresion_grafica',activity:APP.id,title:APP.title,score:Number(score.toFixed(4)),scores:S.records.map(r=>Number((r.score*10).toFixed(4))),maximo,percentage:score*100/maximo,hints:questionsForMode().map((_,i)=>!!S.hints[i]),attempts:questionsForMode().map(()=>1),startedAt:S.startedAt,finishedAt:new Date().toISOString(),appVersion:'4.0.0-2eso-cuatro-vistas',hintPolicy:{maximumWithoutHint:1,maximumWithHint:0.5,penaltyApplied:penalty},evidence:{course:S.testMode?'PRUEBA':'2ESO',modo_prueba:!!S.testMode,block:APP.block,questions:structuredClone(S.records),hintPenaltyTotal:penalty}});
+ S.reviewing=false;showScreen('results');
+ $('resultStage').innerHTML=`<div class="panel"><div class="eyebrow">${S.testMode?'MODO PRUEBA · NX-01':S.mode==='registered'?'Actividad evaluable terminada':'Práctica terminada · Sin nota'}</div><h2>${S.mode==='registered'?'Tu resultado':'Resultado de práctica'}</h2><div class="score">${fmt(score)} <small>/ ${maximo}</small></div><p>${S.mode==='registered'?'Diez retos de un punto. Con consejo, cada reto puntúa la mitad. Las relaciones y los dibujos conservan la puntuación parcial.':'Este ensayo no cuenta para la nota y no envía ningún resultado.'}</p><div id="sendMessage" role="status" aria-live="polite" aria-atomic="true"></div><div class="actions"><button class="primary" data-action="retrySend" id="retrySend" hidden>Reintentar envío</button><button data-action="reviewAttempt">Revisar respuestas</button><button data-action="downloadResult">Descargar resultado</button><button data-action="changeStudent">Cambiar de alumno</button></div><div class="results-scroll"><table class="results-table"><thead><tr><th>Reto</th><th>Trabajo</th><th>Puntos</th></tr></thead><tbody>${S.records.map((r,i)=>`<tr><td>${i+1}</td><td>${esc(r.title)}${r.hint?' · Con consejo':''}</td><td>${fmt(r.score)} / 1</td></tr>`).join('')}</tbody></table></div><p class="note">La revisión conserva la puntuación cerrada de este intento.</p></div>`;
+ if(S.mode==='registered'){
+  const students=S.students.map(x=>({...x}));S.pending={result:S.result,students,endpoint:S.endpoint,payloads:students.map(s=>deepFreeze(centralPayload(S.result,s)))};void transmit();
+ }else sendStatus('waiting','SIN ENVÍO','Has terminado una práctica sin nota. Puedes repasar o elegir la actividad evaluable.');
+}
+async function centralGet(params,endpoint=S.endpoint){
+ const u=new URL(endpoint);Object.entries(params).forEach(([k,v])=>u.searchParams.set(k,v));u.searchParams.set('_',Date.now());
+ const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),30000);
+ try{
+  const response=await fetch(u.href,{method:'GET',cache:'no-store',redirect:'follow',signal:controller.signal});
+  if(!response.ok)throw Error('No se pudo consultar el registro: HTTP '+response.status+'.');
+  return await response.json();
+ }catch(e){throw Error(e.name==='AbortError'?'La consulta al registro ha agotado el tiempo. Comprueba la conexión e inténtalo de nuevo.':e.message||'No se pudo consultar el registro central.');}
+ finally{clearTimeout(timer);}
+}
+function validateStudents(students){
+ if(students.length===1&&students[0].testMode===true){if(students[0].studentId!=='NX-01')throw Error('El modo de prueba no corresponde a NX-01.');return true;}
+ if(students.some(x=>x.studentId==='NX-01'||x.testMode))throw Error('El servidor no ha confirmado el modo de prueba de NX-01.');
+ if(students.length<1||students.length>2)throw Error('Introduce uno o dos ID.');
+ if(students.some(s=>normCourse(s.level)!=='2ESO'))throw Error('Los ID deben corresponder a 2.º ESO.');
+ if(students.some(s=>!s.group||!s.name||!s.studentId))throw Error('El registro debe incluir nombre, curso y grupo.');
+ if(students.length===2&&students[0].studentId===students[1].studentId)throw Error('La pareja necesita dos ID distintos.');
+ if(students.length===2&&normGroup(students[0].group)!==normGroup(students[1].group))throw Error('Los dos alumnos deben pertenecer al mismo grupo.');return true;
+}
+async function verifyIds(){
+ if(S.students.length||S.identifying)return;
+ let ids=[normId($('id1').value)];if($('pairMode').checked)ids.push(normId($('id2').value));if(ids.includes('NX-01'))ids=['NX-01'];
+ $('id1').value=ids[0];if(ids[1])$('id2').value=ids[1];
+ if(ids.some(x=>!x)){setStatus('identityMessage','Introduce los ID que ha facilitado el profesor.',true);return;}
+ if(new Set(ids).size!==ids.length){setStatus('identityMessage','La pareja necesita dos ID distintos.',true);return;}
+ if(!S.endpoint){setStatus('identityMessage','El registro no está disponible. Avisa a tu profesor o profesora.',true);return;}
+ const gen=++S.generation;S.identifying=true;['verifyIds','id1','id2','pairMode'].forEach(id=>$(id).disabled=true);setStatus('identityMessage','Comprobando tu ID…');
+ try{
+  const students=[];for(let i=0;i<ids.length;i++){
+   const r=await centralGet({action:'lookup',id:ids[i]});if(gen!==S.generation)return;
+   if(r?.ok!==true||r.encontrado!==true||!r.alumno)throw Error(r?.error||`El ID ${i+1} no se ha encontrado o está inactivo.`);
+   if(r.alumno.activo===false||['NO','FALSE','INACTIVO','0'].includes(String(r.alumno.activo??'').trim().toUpperCase()))throw Error(`El ID ${i+1} está inactivo. Avisa a tu profesor o profesora.`);
+   if(r.alumno.id&&normId(r.alumno.id)!==ids[i])throw Error('El registro devolvió un ID diferente. Vuelve a comprobarlo.');
+   students.push({studentId:ids[i],name:String(r.alumno.nombre||'').trim(),level:String(r.alumno.curso||'').trim(),group:String(r.alumno.grupo||'').trim(),testMode:r.modo_prueba===true||r.alumno.modo_prueba===true});
+  }
+  validateStudents(students);S.students=students;S.testMode=students.length===1&&students[0].testMode===true;S.mode='';if(S.testMode){$('pairMode').checked=false;$('secondId').hidden=true;}$('id1').value='';$('id2').value='';$('verifiedNames').textContent='Hola, '+students.map(s=>s.name+' · Grupo '+s.group).join(' / ');setStatus('identityMessage','');setStatus('modeMessage','');showScreen('menu');
+ }catch(e){if(gen===S.generation){S.students=[];setStatus('identityMessage',e.message,true);}}
+ finally{if(gen===S.generation){S.identifying=false;['verifyIds','id1','id2','pairMode'].forEach(id=>$(id).disabled=false);}}
+}
+function centralPayload(result,student){
+ return {id:student.studentId,modo_prueba:!!student.testMode,tema:result.theme,actividad:result.activity,puntuacion:result.score,maximo:10,porcentaje:result.percentage,fecha:result.finishedAt,submissionId:result.submissionId,idempotencyKey:result.submissionId+':'+student.studentId,protocolo:'pdi-intentos-v1',cursoEsperado:student.level,grupoEsperado:student.group,
+ evidencia:JSON.stringify({puntuacionesRetos:result.scores,pistasUsadas:result.hints.filter(Boolean).length,descuentoConsejos:result.hintPolicy.penaltyApplied,politicaConsejos:result.hintPolicy,intentosTotales:result.attempts.reduce((a,b)=>a+b,0),resultado:result.evidence}),
+ detalle:JSON.stringify({inicio:result.startedAt,fin:result.finishedAt,intentos:result.attempts,pistas:result.hints,submissionId:result.submissionId,idempotencyKey:result.submissionId+':'+student.studentId,titulo:result.title,appVersion:result.appVersion,urlOrigen:location.href})};
+}
+async function postResult(payload,endpoint){
+ const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),30000);
+ try{
+  const response=await fetch(endpoint,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(payload),redirect:'follow',signal:controller.signal});
+  if(!response.ok)throw Error('Error HTTP '+response.status+' al enviar el resultado.');
+  const data=await response.json();
+  if(data?.ok!==true||data.guardado!==true)throw Error(data?.error||'El servidor no confirmó el guardado del resultado.');
+  if(data.idempotencia!==true||data.idempotencyKey!==payload.idempotencyKey||data.submissionId!==payload.submissionId||normId(data.id)!==payload.id)throw Error('La confirmación no corresponde a este intento. El resultado sigue pendiente.');
+  return data;
+ }finally{clearTimeout(timer);}
+}
+async function transmit(){
+ if(S.mode!=='registered'||!S.pending||S.sending)return;
+ const gen=S.generation,pending=S.pending;S.sending=true;$('retrySend').disabled=true;$('retrySend').hidden=true;sendStatus('waiting','ENVIANDO…','Espera a que se confirme el resultado.');
+ try{
+  for(let i=0;i<pending.students.length;i++){
+   const student=pending.students[i];if(gen!==S.generation)return;if(S.confirmed.has(student.studentId))continue;
+   const data=await postResult(pending.payloads[i],pending.endpoint);if(gen!==S.generation)return;
+   if(normCourse(data.curso)!==normCourse(student.level)||normGroup(data.grupo)!==normGroup(student.group))throw Error('El curso o grupo de la confirmación no coincide con tu identificación. Avisa al profesor.');
+   S.confirmed.add(student.studentId);
+  }
+  if(gen!==S.generation)return;
+  sendStatus('sent','ENVIADO',S.testMode?'El servidor ha confirmado un resultado de prueba de NX-01. No cuenta para la nota.':pending.students.length===2?'El servidor ha confirmado el resultado para los dos ID.':'El servidor ha confirmado tu resultado.');S.pending=null;
+ }catch(e){if(gen===S.generation){const message=e.name==='AbortError'?'Se agotó el tiempo de espera.':e.message||'No se pudo confirmar el envío.';sendStatus('failed','ENVÍO PENDIENTE',message+'\nConfirmados: '+S.confirmed.size+' de '+pending.students.length+'. Tu resultado se conserva en esta pestaña. Pulsa Reintentar sin repetir los retos.');$('retrySend').hidden=false;}}
+ finally{if(gen===S.generation){S.sending=false;$('retrySend').disabled=false;}}
+}
+function legacyResetStudent(force=false){
+ if(S.pending||S.sending){showScreen('results');return;}
+ if(!force&&S.mode&&!S.result&&S.records.some(Boolean)&&!confirm('El intento sin terminar se borrará. ¿Cambiar de alumno?'))return;
+ S.generation++;S.mode='';S.students=[];S.testMode=false;S.result=null;S.pending=null;S.sending=false;S.identifying=false;S.reviewing=false;S.records=[];S.drafts=[];S.hints=[];S.confirmed=new Set();$('id1').value='';$('id2').value='';$('verifiedNames').textContent='';$('identityMessage').textContent='';$('pairMode').checked=false;$('secondId').hidden=true;['verifyIds','id1','id2','pairMode'].forEach(id=>$(id).disabled=false);$('evaluateMode').disabled=false;$('resultStage').innerHTML='';showScreen('entry');
+}
+function loadEndpoint(){
+ const configured=window.RESULTADOS_CONFIG?.APPS_SCRIPT_URL||window.RESULTS_ENDPOINT||DEFAULT_ENDPOINT;S.endpoint=validEndpoint(configured)?configured:'';
+}
+function actions(action,target){
+ if(action==='verifyIds')void verifyIds();
+ else if(action==='practiceMode')void chooseMode('free');
+ else if(action==='evaluateMode')void chooseMode('registered');
+ else if(action==='backMenu'){if(S.pending||S.sending){S.reviewing=false;showScreen('results');}else showScreen(S.students.length?'menu':'entry');}
+ else if(action==='check')checkQuestion();
+ else if(action==='hint')requestHint();
+ else if(action==='reviewAttempt'){if(S.result){S.reviewing=true;S.index=0;selectTab('retos');}}
+ else if(action==='prev'){if(S.index>0){S.index--;S.point=null;renderQuiz();}}
+ else if(action==='next'){if(!S.records[S.index])return;if(S.index===questionsForMode().length-1)finish();else {S.index++;S.point=null;renderQuiz();}}
+ else if(action==='endReview'){S.reviewing=false;showScreen('results');}
+ else if(action==='drawTool'){if(S.result||S.records[S.index])return;S.tool=target.dataset.tool;renderQuiz();}
+ else if(action==='undoDraw'){if(S.result||S.records[S.index])return;const h=S.history[S.index];if(h?.length){S.drafts[S.index]=h.pop();S.point=null;renderQuiz();}}
+ else if(action==='clearDraw'){if(S.result||S.records[S.index])return;(S.history[S.index]??=[]).push([...draft(questionsForMode()[S.index])]);S.drafts[S.index]=[];S.point=null;renderQuiz();}
+ else if(action==='retrySend')void transmit();
+ else if(action==='changeStudent')resetStudent();
+ else if(action==='downloadResult'){if(S.result)download(JSON.stringify({...S.result,studentIds:S.students.map(x=>x.studentId),registered:S.mode==='registered',confirmedIds:[...S.confirmed],pending:!!S.pending},null,2),'application/json',APP.id+'_resultado.json');}
+}
+function drawingPointAt(e,canvas){
+ // SVG meet scaling can leave margins inside its CSS box. Use the actual
+ // screen transform so the pointer and the drawn geometry share coordinates.
+ const matrix=canvas.getScreenCTM();if(!matrix)return null;
+ const point=canvas.createSVGPoint();point.x=e.clientX;point.y=e.clientY;
+ const local=point.matrixTransform(matrix.inverse());
+ return [Math.max(0,Math.min(16,Math.round((local.x-28)/22))),Math.max(0,Math.min(12,Math.round((local.y-30)/22)))];
+}
+function boot(){
+ renderExplore();loadEndpoint();showScreen('entry');
+ document.addEventListener('click',e=>{const t=e.target.closest('[data-action],[data-tab]');if(!t||t.disabled)return;if(t.dataset.tab)selectTab(t.dataset.tab);else actions(t.dataset.action,t);});
+ document.addEventListener('change',e=>{const t=e.target;
+  if(t.id==='pairMode'){$('secondId').hidden=!t.checked;if(!t.checked)$('id2').value='';}
+  if(t.dataset.choice!==undefined&&!S.records[S.index])S.drafts[S.index]=Number(t.dataset.choice);
+  if(t.dataset.field!==undefined&&!S.records[S.index])draft(questionsForMode()[S.index])[Number(t.dataset.field)]=t.value;
+  if(t.id==='protractor'){const q=questionsForMode()[S.index];$('questionFigure').innerHTML=angleSvg(q.visual.deg,t.checked)+`<label class="note"><input id="protractor" type="checkbox" ${t.checked?'checked':''}> Mostrar transportador</label>`;}
+ });
+ document.addEventListener('input',e=>{const t=e.target;
+  if(t.dataset.field!==undefined&&!S.records[S.index])draft(questionsForMode()[S.index])[Number(t.dataset.field)]=t.value;
+  if(t.id==='adjustAngle'&&!S.records[S.index]){S.drafts[S.index]=Number(t.value);$('questionFigure').innerHTML=angleSvg(Number(t.value),true);}
+ });
+ document.addEventListener('keydown',e=>{const t=e.target.closest('[data-point]');if(t&&['Enter',' '].includes(e.key)){e.preventDefault();choosePoint(t.dataset.point.split(',').map(Number));}if(t&&['ArrowUp','ArrowDown','ArrowLeft','ArrowRight'].includes(e.key)){e.preventDefault();let[x,y]=t.dataset.point.split(',').map(Number);if(e.key==='ArrowUp')y--;if(e.key==='ArrowDown')y++;if(e.key==='ArrowLeft')x--;if(e.key==='ArrowRight')x++;x=Math.max(0,Math.min(16,x));y=Math.max(0,Math.min(12,y));t.setAttribute('tabindex','-1');S.kbPoint=[x,y];const next=document.querySelector(`[data-point="${x},${y}"]`);next?.setAttribute('tabindex','0');next?.focus();}if(['id1','id2'].includes(e.target.id)&&e.key==='Enter'){e.preventDefault();verifyIds();}});
+ let down=null;
+ document.addEventListener('pointerdown',e=>{const canvas=e.target.closest('#drawCanvas');if(canvas&&!S.records[S.index]){e.preventDefault();down=drawingPointAt(e,canvas);}});
+ document.addEventListener('pointerup',e=>{if(!down)return;const canvas=$('drawCanvas');if(canvas){const end=drawingPointAt(e,canvas);if(!end){down=null;return;}if(down[0]===end[0]&&down[1]===end[1])choosePoint(end);else applySegment(down,end);}down=null;});
+ document.addEventListener('pointercancel',()=>{down=null;});
+ window.addEventListener('beforeunload',e=>{if(S.pending){e.preventDefault();e.returnValue='';}});
+ window.addEventListener('pageshow',e=>{if(e.persisted)resetStudent(true);});
+}
+const PDI_HINTS=[["Busca si hay cotas y si el trazo pretende explorar o definir.", "Fíjate en dos rasgos: está hecho a mano y comunica dimensiones reales.", "Busca precisión en los trazos, varias vistas y datos de identificación.", "Piensa en el orden del trabajo: imaginar, concretar las medidas y comunicar con precisión.", "Lee las cifras escritas junto a cada dimensión. No midas la imagen de la pantalla.", "Una caja tiene tres dimensiones exteriores distintas. Comprueba cuál no tiene su cifra.", "Busca el documento que comunica las tres dimensiones exteriores de la caja.", "Antes de elegir la forma definitiva conviene comparar varias propuestas.", "Las cifras de cota describen el objeto real, aunque la imagen se vea más pequeña.", "Relaciona cada necesidad con el documento o la observación que realmente ayuda a resolverla."], ["El centro del transportador debe coincidir con el vértice. Empieza en el cero del lado horizontal.", "La abertura es mayor que un ángulo recto: utiliza la escala que empieza en el lado horizontal.", "Localiza el cero del lado fijo y lleva el otro lado hasta la graduación pedida.", "Comprueba qué pareja conserva la misma dirección sin cortarse.", "Busca la pareja que forma una esquina de ángulo recto, no cualquier cruce.", "Compara los dos ángulos menores: ¿son iguales o diferentes?", "Piensa qué herramienta permite medir grados, cuál mide longitudes y cuál se desliza sobre un apoyo.", "Recuerda el formato A4 en milímetros y distingue los datos del dibujo de sus medidas.", "Compara el tamaño dibujado con el real: igual, menor o mayor.", "Distingue el croquis a mano alzada de la lámina a tamaño real; el cajetín identifica a quien dibuja."], ["La mirada desde arriba combina anchura y fondo, sin utilizar la altura.", "Divide cada dimensión pedida entre 5 para conocer el número de casillas. Mantén el punto azul como referencia.", "Mantén el frente indicado y compara en qué lado queda la parte alta.", "Convierte milímetros en casillas y coloca el cambio de altura a mitad de la anchura.", "Compara el contorno del alzado y la dirección de las divisiones que se ven desde arriba.", "Primero dibuja el contorno exterior y después sitúa las separaciones cada 20 mm.", "Mira si la figura interior deja el mismo espacio a ambos lados y también delante y detrás.", "Usa el punto azul como esquina del resalte. Comprueba el fondo total, la altura de la base y el centrado.", "La abertura se reconoce en la vista tomada desde arriba; las otras dos miradas muestran caras exteriores.", "Mantén el frente de cada figura y compara por separado contorno, proporciones y líneas interiores. Una vista puede repetirse."], ["Distingue la cifra, la línea que la acompaña, las auxiliares que llegan a la pieza y las flechas de los extremos.", "La cota vertical comunica la dimensión vertical real del rectángulo.", "El tramo que falta se obtiene comparando la medida total con la parte conocida.", "La altura total incluye la base y el resalte. Separa ambas partes antes de calcular.", "Comprueba si estás dando dos veces la misma información sobre la misma anchura.", "Cambiar el zoom no modifica el objeto: utiliza sus dimensiones reales.", "Cada cota debe indicar claramente qué dos extremos se están midiendo.", "Relaciona cada vista con las dos dimensiones que permite observar. No todas muestran las tres.", "Se conserva la dimensión real indicada en el enunciado y se evita repetirla sin necesidad.", "Cada vista comparte una dimensión con las demás: anchura, fondo o altura según desde dónde mires."]];
+
+function hintFor(q){return q.hint;}
+function deepFreeze(obj){if(obj&&typeof obj==='object'&&!Object.isFrozen(obj)){Object.freeze(obj);Object.values(obj).forEach(deepFreeze);}return obj;}
+function showScreen(screen){
+ S.screen=screen;const identified=S.students.length>0;document.body.classList.toggle('is-identified',identified);
+ $('testBanner').hidden=!identified||!S.testMode;
+ $('registration').hidden=screen!=='entry';$('modeStage').hidden=screen!=='menu';$('sessionBar').hidden=!identified||!['explore','quiz','results'].includes(screen);
+
+ $('explore').hidden=screen!=='explore';$('retos').hidden=!['quiz','results'].includes(screen);$('quizStage').hidden=screen!=='quiz';$('resultStage').hidden=screen!=='results';
+ $('flowLabel').textContent=S.mode==='registered'?(S.testMode?'ACTIVIDAD EVALUABLE · Envío de prueba':'ACTIVIDAD EVALUABLE · Cuenta para la nota'):'PRACTICAR SIN NOTA';$('flowLabel').className='flow-label'+(S.mode==='registered'?' evaluable':'');
+ $('evaluateMode').querySelector('em').textContent=S.testMode?'PRUEBA TÉCNICA · NO CUENTA PARA LA NOTA':'CUENTA PARA LA NOTA';$('evaluateMode').querySelector('span').textContent=S.testMode?'Recorre los diez retos y comprueba el envío con NX-01. El resultado se marcará como prueba.':'Diez retos de 2.º ESO: cuatro dibujos, cuatro elecciones y dos relaciones de piezas y vistas. Se envía al finalizar.';
+ $('sessionName').textContent=S.students.map(s=>s.name+' · Grupo '+s.group).join(' / ');
+ if(screen==='entry')$('id1').focus();
+}
+async function chooseMode(mode,tab=mode==='free'?'explore':'retos'){
+ if(!S.students.length){showScreen('entry');return;}
+ if(S.pending||S.sending){showScreen('results');sendStatus('failed','RESULTADO PENDIENTE','Pulsa Reintentar para confirmar el envío antes de empezar otra actividad.');return;}
+ if(S.mode===mode&&!S.result){selectTab(tab);return;}
+ if(S.mode&&S.records.some(Boolean)&&!S.result&&!confirm('El intento actual quedará sin enviar. ¿Cambiar de modo y empezar desde el principio?'))return;
+ if(mode==='registered'){
+  const gen=S.generation;$('evaluateMode').disabled=true;setStatus('modeMessage','Comprobando que el registro está disponible…');
+  try{const data=await centralGet({action:'ping'});if(gen!==S.generation||S.screen!=='menu')return;if(data?.ok!==true||data?.idempotencia!==true||data?.protocolo!=='pdi-intentos-v1')throw Error('Tu profesor o profesora debe activar el registro de esta actividad. Mientras tanto puedes practicar sin nota.');}
+  catch(e){if(gen===S.generation)setStatus('modeMessage',e.message,true);return;}
+  finally{if(gen===S.generation)$('evaluateMode').disabled=false;}
+ }
+ setStatus('modeMessage','');S.mode=mode;startAttempt();selectTab(tab);
+}
+function requestHint(){
+ if(!S.mode||S.result||S.records[S.index]||S.hints[S.index])return;
+ S.hints[S.index]=true;renderQuiz();
+}
+function sendStatus(state,title,message){const e=$('sendMessage');if(!e)return;e.className='send-banner '+state;e.replaceChildren();const strong=document.createElement('strong');strong.textContent=title;e.append(strong,document.createTextNode(message));}
+
+const VG=(()=>{
+ const NS='http://www.w3.org/2000/svg';
 const palette={front:'#65b9dc',back:'#b4a0da',bottom:'#bdc9ce',right:'#efa25d',left:'#91bf91',top:'#f2d56c',topLow:'#a2d9d1',riser:'#de9db3',innerLeft:'#81b4c7',innerTop:'#e6b288',innerRight:'#b3bc80',innerBottom:'#c99dbf',innerBack:'#ceba94'};
 const names={front:'Frente',back:'Trasera',bottom:'Base',right:'Derecha',left:'Izquierda',top:'Superior',topLow:'Superior baja',riser:'Escalón vertical',innerLeft:'Pared interior izquierda',innerTop:'Techo interior',innerRight:'Pared interior derecha',innerBottom:'Suelo interior',innerBack:'Fondo de la cavidad'};
 function makePrism(w=60,d=40,h=30){return {w,d,h,type:'prism',poly:[[0,0],[w,0],[w,h],[0,h]]}}
 function makeStep(w=60,d=40,h=30,low=15,split=30){return {w,d,h,low,split,type:'step',poly:[[0,0],[w,0],[w,low],[split,low],[split,h],[0,h]]}}
 function makeRoof(w=60,d=40,h=30,low=15){return {w,d,h,low,type:'roof',poly:[[0,0],[w,0],[w,low],[0,h]]}}
-function makeTunnel(end=null){return {...makePrism(60,40,40),type:'tunnel',hole:{x0:18,x1:42,y0:12,y1:28,end}}}
+function makeTunnel(end=null){return {...makePrism(60,40,40),type:'tunnel',hole:{x0:20,x1:40,y0:10,y1:25,end}}}
 function heightPiece(rows,unit=15){
  const cells=[];rows.forEach((row,z)=>row.forEach((h,x)=>{for(let y=0;y<h;y++)cells.push([x,y,z]);}));
  return {type:'voxel',cells,unit,w:rows[0].length*unit,d:rows.length*unit,h:Math.max(...rows.flat())*unit};
@@ -335,15 +508,19 @@ function voxelGeometry(p){
 }
 function voxelView(p,kind){
  const axes=kind==='front'?[0,1,2]:kind==='top'?[0,2,1]:[2,1,0],surf=new Map();
- for(const cell of p.cells){const key=axes.slice(0,2).map(i=>cell[i]).join(','),d=cell[axes[2]];surf.set(key,surf.has(key)?(kind==='front'?Math.min(surf.get(key),d):Math.max(surf.get(key),d)):d);}
+ for(const cell of p.cells){
+  const u=kind==='left'?Math.round(p.d/p.unit)-1-cell[2]:cell[axes[0]];
+  const key=[u,cell[axes[1]]].join(','),d=cell[axes[2]];
+  surf.set(key,surf.has(key)?(['front','left'].includes(kind)?Math.min(surf.get(key),d):Math.max(surf.get(key),d)):d);
+ }
  const edges=[],inside=new Map();for(const [k,d] of surf){const [u,v]=k.split(',').map(Number);const sides=[[[u,v-1],[u,v],[u+1,v]],[[u+1,v],[u+1,v],[u+1,v+1]],[[u,v+1],[u+1,v+1],[u,v+1]],[[u-1,v],[u,v+1],[u,v]]];for(const [q,a,b]of sides){const other=q.join(',');if(!surf.has(other))edges.push([a,b]);else if(surf.get(other)!==d){const key=[a.join(','),b.join(',')].sort().join('|');inside.set(key,[a,b]);}}}
  const loops=loopsOf(edges).map(loop=>loop.map(q=>q.map(n=>n*p.unit))),segments=[...inside.values()];
  // Join contiguous unit segments; unit boundaries are not physical edges.
  let changed=true;while(changed){changed=false;outer:for(let i=0;i<segments.length;i++)for(let j=i+1;j<segments.length;j++){const a=segments[i],b=segments[j];for(const [ai,bi]of [[0,0],[0,1],[1,0],[1,1]])if(a[ai].join(',')===b[bi].join(',')){const x=a[1-ai],m=a[ai],z=b[1-bi];if((m[0]-x[0])*(z[1]-m[1])===(m[1]-x[1])*(z[0]-m[0])){segments[i]=[x,z];segments.splice(j,1);changed=true;break outer;}}}}
- return {w:kind==='right'?p.d:p.w,h:kind==='top'?p.d:p.h,outline:loops[0],holes:[],lines:segments.map(e=>line(e[0].map(n=>n*p.unit),e[1].map(n=>n*p.unit)))};
+ return {w:['right','left'].includes(kind)?p.d:p.w,h:kind==='top'?p.d:p.h,outline:loops[0],holes:[],lines:segments.map(e=>line(e[0].map(n=>n*p.unit),e[1].map(n=>n*p.unit)))};
 }
 
-const pieces={prism:makePrism(),step:makeStep(),roof:makeRoof(),tunnel:makeTunnel(),rear:heightPiece([[1,1,1,1],[3,3,3,3]]),l:heightPiece([[2,2,2,2],[2,2,2,2],[2,0,0,0]]),u:heightPiece([[3,0,0,3],[3,0,0,3],[3,3,3,3]])};
+const pieces={prism:makePrism(55,35,25),step:makeStep(65,35,35,20,25),roof:makeRoof(50,30,35,15),tunnel:makeTunnel(),rear:heightPiece([[1,1,1,1],[3,3,3,3]]),l:heightPiece([[2,2,2,2],[2,2,2,2],[2,0,0,0]]),u:heightPiece([[3,0,0,3],[3,0,0,3],[3,3,3,3]])};
 function dot(a,b){return a.reduce((sum,v,i)=>sum+v*b[i],0)}
 function project(v,ya,pi){return [dot(v,[Math.cos(ya),0,Math.sin(ya)]),dot(v,[-Math.sin(pi)*Math.sin(ya),Math.cos(pi),Math.sin(pi)*Math.cos(ya)])]}
 function geometry(p){
@@ -406,12 +583,16 @@ function drawModel(target,p,ya,pi,{colors=true,hidden=false,scale=3.6}={}){
  }
 }
 function line(a,b,hidden=false){return {type:'line',a,b,hidden}}
-function viewSpec(p,kind){
+function baseSpec(p,kind){
  if(p.cells)return voxelView(p,kind);
  const rect=(w,h)=>({w,h,outline:[[0,0],[w,0],[w,h],[0,h]],lines:[],holes:[]});let v;
  if(kind==='front'){v=rect(p.w,p.h);v.outline=p.poly.map(x=>[...x]);if(p.hole){const h=p.hole;v.holes.push({x:h.x0,y:h.y0,w:h.x1-h.x0,h:h.y1-h.y0})}}
  if(kind==='top'){v=rect(p.w,p.d);if(p.type==='step'){v.lines.push(line([p.split,0],[p.split,p.d]));v.regions=[{outline:[[p.split,0],[p.w,0],[p.w,p.d],[p.split,p.d]],color:'topLow'}]}if(p.hole){const h=p.hole,end=h.end??p.d;v.lines.push(line([h.x0,0],[h.x0,end],true),line([h.x1,0],[h.x1,end],true));if(h.end!==null)v.lines.push(line([h.x0,end],[h.x1,end],true))}}
  if(kind==='right'){v=rect(p.d,p.h);if(p.type==='step'||p.type==='roof'){v.lines.push(line([0,p.low],[p.d,p.low]));v.regions=[{outline:[[0,p.low],[p.d,p.low],[p.d,p.h],[0,p.h]],color:p.type==='step'?'riser':'top'}]}if(p.hole){const h=p.hole,end=h.end??p.d;v.lines.push(line([0,h.y0],[end,h.y0],true),line([0,h.y1],[end,h.y1],true));if(h.end!==null)v.lines.push(line([end,h.y0],[end,h.y1],true))}}
+ if(kind==='left'){
+  v=rect(p.d,p.h);
+  if(p.hole){const h=p.hole,end=h.end??p.d;v.lines.push(line([p.d, h.y0],[p.d-end,h.y0],true),line([p.d,h.y1],[p.d-end,h.y1],true));if(h.end!==null)v.lines.push(line([p.d-end,h.y0],[p.d-end,h.y1],true));}
+ }
  return v;
 }
 function drawView(target,v,{cx=100,cy=70,scale=2.1,color=null}={}){
@@ -423,205 +604,225 @@ function drawView(target,v,{cx=100,cy=70,scale=2.1,color=null}={}){
   else{const [x,y]=transform([h.x,h.y+h.h]);svgNode('rect',{x,y,width:h.w*scale,height:h.h*scale,fill:'#fff',...stroke,...(h.hidden?{'stroke-dasharray':'5 4'}:{})},target)}});
  v.lines.forEach(l=>{const [x1,y1]=transform(l.a),[x2,y2]=transform(l.b);svgNode('line',{x1,y1,x2,y2,...stroke,...(l.hidden?{'stroke-dasharray':'5 4'}:{})},target)});
 }
-function tripleSpecs(p){return {front:viewSpec(p,'front'),top:viewSpec(p,'top'),right:viewSpec(p,'right')}}
-function drawTriple(target,specs){for(const [kind,cx,cy,name] of [['right',65,76,'Perfil derecho'],['front',190,76,'Alzado'],['top',190,183,'Planta']]){
- const txt=svgNode('text',{x:cx,y:cy-47,'text-anchor':'middle','font-size':12,fill:'#344651','font-family':'system-ui,sans-serif'},target);txt.textContent=name;
- drawView(target,specs[kind],{cx,cy,scale:1.5});
-}}
 
-</script>
-<script>
-'use strict';
-const $=id=>document.getElementById(id);
-let key='step',yaw=Math.PI/6,pitch=25*Math.PI/180,drag=null;
-function render(){drawModel($('faces'),pieces[key],yaw,pitch,{colors:$('colors').checked,hidden:$('hiddenEdges').checked});$('yaw').value=Math.round(yaw*180/Math.PI);$('pitch').value=Math.round(pitch*180/Math.PI)}
-function views(){const p=pieces[key],color=$('colors').checked;
- for(const [id,kind,c] of [['frontView','front','front'],['topView','top','top'],['rightView','right','right']]){
-  const target=$(id);target.replaceChildren();drawView(target,viewSpec(p,kind),{color:color?palette[c]:null});
+
+const quizPieces={
+ eStep:makeStep(60,40,30,15,25),
+ eStairs:heightPiece([[3,3,2,2,1,1],[3,3,2,2,1,1],[3,3,2,2,1,1],[3,3,2,2,1,1]],10),
+ eDeep:heightPiece([[4,4,3,3,2,2],[4,4,3,3,2,2],[4,4,3,3,2,2],[4,4,3,3,2,2]],10),
+ eTunnel:makeTunnel(),
+ eTower:heightPiece([[1,1,1,1,1,1],[1,1,3,3,1,1],[1,1,3,3,1,1],[1,1,1,1,1,1]],10),
+ eU:heightPiece([[3,0,0,0,0,3],[3,0,0,0,0,3],[3,3,3,3,3,3]],10),
+ eRoof:makeRoof(55,35,35,15),
+ eOffset:heightPiece([[1,1,1,1,1,1],[1,1,1,3,3,1],[1,1,1,3,3,1],[1,1,1,1,1,1]],10),
+ eL:heightPiece([[2,2,2,2,2],[2,2,2,2,2],[2,0,0,0,0]],10),
+ eCorner:heightPiece([[2,2,2,2,2],[2,1,1,1,1],[2,1,1,1,1]],10),
+ eBank1:heightPiece([[1,1,1,1,1,1],[1,3,3,1,1,1],[1,3,3,1,1,1],[1,1,1,1,1,1]],10),
+ eBank2:heightPiece([[2,2,2,2,2,2],[2,2,1,1,2,2],[2,2,1,1,2,2],[2,2,2,2,2,2]],10),
+ eBank3:heightPiece([[1,1,2,2,3,3],[1,1,2,2,3,3],[1,1,2,2,3,3]],10),
+ eBank4:heightPiece([[3,3,3,1,1,1],[3,3,3,1,1,1],[1,1,1,1,1,1]],10)
+};
+pieces.stairs=heightPiece([[4,3,2,1],[4,3,2,1],[4,3,2,1]],10);
+pieces.tower=heightPiece([[1,1,1,1,1],[1,1,3,1,1],[1,1,1,1,1]],10);
+// Referencia de práctica distinta del bloque de túnel evaluable.
+pieces.tunnel={...makePrism(65,35,35),type:'tunnel',hole:{x0:20,x1:45,y0:10,y1:25,end:null}};
+const all={...pieces,...quizPieces};
+function physicalEdges(p){
+ const cells=new Set(p.cells.map(c=>c.join(','))),edges=new Map();
+ for(const cell of p.cells)for(let axis=0;axis<3;axis++){
+  const others=[0,1,2].filter(a=>a!==axis);
+  for(const u of [0,1])for(const v of [0,1]){
+   const a=[...cell];a[others[0]]+=u;a[others[1]]+=v;const b=[...a];b[axis]++;
+   const bits=[];for(const du of [-1,0])for(const dv of [-1,0]){const c=[...a];c[others[0]]+=du;c[others[1]]+=dv;bits.push(cells.has(c.join(',')))}
+   const count=bits.filter(Boolean).length;
+   if(count===1||count===3||(count===2&&bits[0]===bits[3]))edges.set(a.join(',')+'|'+b.join(','),[a,b]);
+  }
  }
- $('dimensions').textContent=`${p.w} mm de ancho · ${p.d} mm de fondo · ${p.h} mm de alto`;
- $('cavityInfo').hidden=!p.hole;$('hiddenControl').hidden=!p.hole;
- const colors=[...new Set(geometry(p).map(f=>f.color))];$('legend').replaceChildren();colors.forEach(k=>{const el=document.createElement('span');el.className='chip';const sw=document.createElement('span');sw.className='swatch';sw.style.background=color?palette[k]:'#e0e8ea';el.append(sw,document.createTextNode(names[k]));$('legend').append(el)});
+ return [...edges.values()];
 }
-function setPiece(value){key=value;$('piece').value=value;if(value==='tunnel'){yaw=20*Math.PI/180;pitch=15*Math.PI/180}views();render()}
-function switchTab(practice){$('explore').hidden=practice;$('practice').hidden=!practice;$('exploreTab').setAttribute('aria-pressed',String(!practice));$('practiceTab').setAttribute('aria-pressed',String(practice))}
-$('exploreTab').onclick=()=>switchTab(false);$('practiceTab').onclick=()=>{switchTab(true);$('sessionWarning').hidden=PDI.ready();if(PDI.ready()&&!viewStartedAt)viewStartedAt=new Date().toISOString();};
-$('piece').onchange=e=>setPiece(e.target.value);$('colors').onchange=()=>{views();render()};$('hiddenEdges').onchange=render;
-$('reset').onclick=()=>{yaw=(key==='tunnel'?20:30)*Math.PI/180;pitch=(key==='tunnel'?15:25)*Math.PI/180;render()};
-$('yaw').oninput=e=>{yaw=Number(e.target.value)*Math.PI/180;render()};$('pitch').oninput=e=>{pitch=Number(e.target.value)*Math.PI/180;render()};
-document.querySelectorAll('[data-camera]').forEach(b=>b.onclick=()=>{const v=b.dataset.camera;yaw=v==='right'?Math.PI/2:v==='left'?-Math.PI/2:0;pitch=v==='top'?Math.PI/2:0;render()});
-$('model').onpointerdown=e=>{drag={x:e.clientX,y:e.clientY,yaw,pitch};$('model').setPointerCapture(e.pointerId)};
-$('model').onpointermove=e=>{if(!drag)return;yaw=Math.atan2(Math.sin(drag.yaw-(e.clientX-drag.x)*.01),Math.cos(drag.yaw-(e.clientX-drag.x)*.01));pitch=Math.max(-Math.PI/2,Math.min(Math.PI/2,drag.pitch+(e.clientY-drag.y)*.01));render()};
-$('model').onpointerup=$('model').onpointercancel=()=>drag=null;
-setPiece('step');
+function viewSpec(p,kind,hidden=true){
+ const v=baseSpec(p,kind);v.lines=v.lines||[];
+ if(hidden&&['step','roof'].includes(p.type)&&kind==='left')v.lines.push(line([0,p.low],[p.d,p.low],true));
+ if(hidden&&p.cells){
+  const project2=c=>kind==='front'?[c[0]*p.unit,c[1]*p.unit]:kind==='top'?[c[0]*p.unit,c[2]*p.unit]:kind==='left'?[p.d-c[2]*p.unit,c[1]*p.unit]:[c[2]*p.unit,c[1]*p.unit];
+  const visible=specKeys(v,false),seen=new Set();
+  for(const edge of physicalEdges(p)){
+   const [a,b]=edge.map(project2);if(a.join(',')===b.join(','))continue;
+   for(const key of lineUnits(a.map(n=>n/5),b.map(n=>n/5),'solid'))if(!visible.has(key)&&!seen.has(key)){seen.add(key);const [x,y]=readEdge(key);v.lines.push(line(x.map(n=>n*5),y.map(n=>n*5),true));}
+  }
+ }
+ if(!hidden){v.lines=v.lines.filter(l=>!l.hidden);v.holes=v.holes.filter(h=>!h.hidden)}
+ return v;
+}
+return {pieces,all,palette,names,drawModel,drawView,viewSpec};
 
-</script>
-<script>
-'use strict';
-const clone=v=>JSON.parse(JSON.stringify(v));
-const option=(drawing,feedback)=>({drawing,feedback});
-function changed(base,edit){const v=clone(base);edit(v);return v}
-function mirrored(v){return changed(v,x=>{x.outline=x.outline.map(([a,b])=>[x.w-a,b]);x.lines=x.lines.map(l=>({...l,a:[x.w-l.a[0],l.a[1]],b:[x.w-l.b[0],l.b[1]]}))})}
-function makeChallenge(id,level,piece,prompt,kind,correctDrawing,feedback,wrong,hint,correctIndex){
- const opts=wrong.map(x=>option(x[0],x[1]));opts.splice(correctIndex,0,option(correctDrawing,feedback));
- return {id,level,piece,prompt,kind,options:opts,correctIndex,hint};
-}
-const challenges=[];
-{
- const p=makePrism(60,40,30),v=viewSpec(p,'front');
- challenges.push(makeChallenge('V01','Fácil',p,'Elige el alzado de este prisma.','single',v,
-  'El frente mide 60 de ancho y 30 de alto: el alzado es el rectángulo horizontal que conserva esas proporciones.',[
-   [viewSpec(p,'top'),'Este rectángulo corresponde a la planta: utiliza 40 mm de fondo en lugar de 30 mm de altura.'],
-   [viewSpec(makeRoof(),'front'),'El prisma no tiene una cara superior inclinada: su alzado no es un trapecio.'],
-   [viewSpec(makePrism(30,40,60),'front'),'Esta figura intercambia la anchura y la altura del prisma.']
-  ],'Localiza la cara frontal azul y compara su anchura con su altura.',1));
-}
-{
- const p=makeStep(),v=viewSpec(p,'front');
- challenges.push(makeChallenge('V02','Fácil',p,'¿Qué dibujo es el alzado de la pieza escalonada?','single',v,
-  'La parte alta está a la izquierda del frente azul; el alzado conserva ese escalón.',[
-   [mirrored(v),'Este dibujo coloca la parte alta a la derecha: está invertido respecto al frente de referencia.'],
-   [viewSpec(makePrism(),'front'),'Este rectángulo elimina el cambio de altura del frente.'],
-   [viewSpec(makeRoof(),'front'),'El cambio de nivel es un escalón, no una superficie inclinada.']
-  ],'Sigue con la vista el contorno de la cara azul, de izquierda a derecha.',2));
-}
-{
- const p=pieces.l,v=viewSpec(p,'top');challenges.push(makeChallenge('V03','Fácil',p,'¿Qué planta corresponde a la pieza con base en L?','single',v,'La planta conserva la base en L; el brazo largo queda delante.',[[mirrored(v),'El brazo está en el lado contrario.'],[viewSpec(makePrism(60,45,30),'top'),'Este rectángulo rellena el entrante.'],[viewSpec(pieces.u,'top'),'Esta planta corresponde a una U, no a la base en L.']],'En la planta, el frente queda en el borde inferior.',0));
-}
-{
- const p=makeStep(),v=viewSpec(p,'top');
- challenges.push(makeChallenge('V04','Fácil',p,'¿Cuál es la planta de esta pieza escalonada?','single',v,
-  'Desde arriba, el contorno es rectangular. La línea de cambio de nivel recorre el fondo y separa izquierda y derecha.',[
-   [viewSpec(p,'front'),'Esta forma escalonada corresponde al alzado, no al contorno visto desde arriba.'],
-   [changed(v,x=>{x.lines=[line([0,p.d/2],[p.w,p.d/2])] }),'Esta línea separa la parte delantera de la trasera; el escalón real separa izquierda y derecha.'],
-   [changed(v,x=>{x.lines=[]}),'Falta la arista visible entre las dos superficies superiores de distinta altura.']
-  ],'El escalón recorre todo el fondo. Imagina la pieza observada verticalmente desde arriba.',3));
-}
-{
- const p=pieces.rear,v=viewSpec(p,'right');challenges.push(makeChallenge('V05','Fácil',p,'Elige el perfil derecho del escalón alto hacia atrás.','single',v,'El frente queda a la izquierda del perfil: tramo bajo delante y tramo alto detrás.',[[mirrored(v),'Este perfil sitúa el tramo alto delante.'],[viewSpec(makePrism(60,30,45),'right'),'Falta el escalón.'],[viewSpec(makeRoof(30,30,45,15),'front'),'El desnivel no es un plano inclinado.']],'Observa desde la derecha: la parte delantera está a la izquierda del dibujo.',0));
-}
-{
- const p=makeStep(60,40,40,20,20),s=tripleSpecs(p);
- challenges.push(makeChallenge('V06','Media',p,'Selecciona el conjunto correcto de alzado, planta y perfil derecho.','triple',s,
-  'El tramo alto ocupa 20 mm de ancho. La planta conserva esa posición y el perfil alcanza 40 mm, con una arista visible a 20 mm de altura.',[
-   [changed(s,x=>{x.front=mirrored(x.front)}),'El alzado invierte el escalón: la parte alta debe quedar a la izquierda.'],
-   [changed(s,x=>{x.right=viewSpec(makePrism(40,40,20),'front')}),'El perfil no se limita a la parte baja: la parte alta sobresale detrás y alcanza 40 mm.'],
-   [changed(s,x=>{x.top.lines=[line([40,0],[40,p.d])]}),'La planta coloca el cambio de nivel a 40 mm del borde izquierdo; debe coincidir con el escalón del alzado a 20 mm.']
-  ],'Comprueba primero dónde cambia la altura y traslada esa posición a la planta.',2));
-}
-{
- const p=pieces.u,s=tripleSpecs(p);challenges.push(makeChallenge('V07','Media',p,'¿Qué conjunto de vistas corresponde a la U abierta al frente?','triple',s,'La planta abre hacia el frente, abajo. El alzado muestra las dos aristas que separan los brazos y el fondo.',[[changed(s,x=>{x.top.outline=x.top.outline.map(([a,b])=>[a,p.d-b]);}),'Esta planta abre hacia atrás.'],[changed(s,x=>{x.front.lines=[];}),'Faltan las aristas visibles del fondo de la U.'],[tripleSpecs(pieces.l),'Estas vistas pertenecen a una base en L.']],'El hueco llega desde el frente hasta el travesaño trasero.',1));
-}
-{
- const p=makeTunnel(),v=viewSpec(p,'top');
- challenges.push(makeChallenge('V08','Media',p,'Elige la planta del bloque con túnel rectangular pasante.','single',v,
-  'Desde arriba, el techo tapa el túnel. Sus dos límites laterales se proyectan como líneas discontinuas que recorren todo el fondo.',[
-   [changed(v,x=>{x.lines.forEach(l=>l.hidden=false)}),'Estas líneas continuas harían visible el hueco desde arriba, pero el techo del bloque lo tapa.'],
-   [changed(v,x=>{x.lines=[]}),'Sin discontinuas no se comunica la presencia del túnel interior.'],
-   [changed(v,x=>{x.lines=[];x.holes=[{x:18,y:12,w:24,h:16}]}),'Esta opción dibuja una abertura en la cara superior; el túnel se abre en el frente y la trasera.']
-  ],'La entrada está en el frente azul. Decide qué aristas quedan tapadas al mirar desde arriba.',3));
-}
-{
- const p={...makePrism(70,45,40),type:'tunnel',hole:{x0:12,x1:36,y0:10,y1:28,end:null}},s=tripleSpecs(p);
- challenges.push(makeChallenge('V09','Difícil',p,'Elige el conjunto completo de vistas de este túnel descentrado.','triple',s,
-  'La entrada descentrada se ve con línea continua en el alzado. Sus límites aparecen ocultos en planta y perfil, con posiciones coherentes con la abertura.',[
-   [changed(s,x=>{x.top.lines.forEach(l=>l.hidden=false)}),'Las aristas del túnel quedan tapadas por el techo en planta: no deben aparecer continuas.'],
-   [changed(s,x=>{x.front.holes[0].x=34}),'Esta abertura está desplazada al lado derecho y ya no coincide con el hueco del volumen ni con las discontinuas de la planta.'],
-   [changed(s,x=>{x.right.lines=[line([0,12],[45,12],true),line([0,30],[45,30],true)]}),'Las alturas de las discontinuas del perfil no coinciden con los bordes de la abertura: son 10 y 28 mm.']
-  ],'Relaciona la posición horizontal del hueco con la planta y sus alturas con el perfil.',2));
-}
-{
- const p=makeTunnel(26),s=tripleSpecs(p);
- challenges.push(makeChallenge('V10','Difícil',p,'Esta cavidad entra 26 mm desde el frente y termina dentro. ¿Qué conjunto de vistas es correcto?','triple',s,
-  'La abertura es visible en el alzado. Las discontinuas de planta y perfil llegan hasta 26 mm y se unen en el fondo de la cavidad; no atraviesan toda la pieza.',[
-   [tripleSpecs(makeTunnel()),'Estas discontinuas atraviesan todo el fondo: representan un túnel pasante y omiten el cierre interior.'],
-   [changed(s,x=>{x.front.holes[0].hidden=true}),'La entrada de la cavidad está abierta en el frente: sus bordes se ven y se dibujan con línea continua.'],
-   [changed(s,x=>{x.right.lines=x.right.lines.map(l=>({...l,a:[p.d-l.a[0],l.a[1]],b:[p.d-l.b[0],l.b[1]]}))}),'Este perfil sitúa la cavidad junto a la trasera. Debe comenzar en el borde delantero, igual que la entrada del alzado.']
-  ],'Busca en las vistas laterales y superior la arista que representa dónde termina la cavidad.',0));
-}
-
-</script>
-<script>
-'use strict';
-let quizIndex=0,quizAnswers=Array(challenges.length).fill(null),quizChecked=Array(challenges.length).fill(false),quizResult=null,quizYaw=30,quizPitch=22,quizDrag=null,viewAttemptId=PDI.newAttempt(),viewStartedAt="",viewHints=Array(10).fill(false),viewSentAttempt="";
-const difficultyGroup=level=>challenges.map((q,i)=>({q,i})).filter(x=>x.q.level===level);
-function quizScore(){return quizAnswers.reduce((sum,a,i)=>sum+(quizChecked[i]&&a===challenges[i].correctIndex?(viewHints[i]?0.5:1):0),0)}
-function drawQuizModel(){drawModel($('quizFaces'),challenges[quizIndex].piece,quizYaw*Math.PI/180,quizPitch*Math.PI/180,{colors:true,hidden:false})}
-function updateQuizProgress(){const completed=quizChecked.filter(Boolean).length;$('quizProgress').textContent=`Reto ${quizIndex+1} de 10 · ${completed} comprobados`;$('progressBar').value=completed}
-function renderQuestion(){
- const q=challenges[quizIndex];quizResult=null;$('download').disabled=true;$('quizSummary').hidden=true;$('quizWorkspace').hidden=false;
- $('difficulty').textContent=q.level;$('questionTitle').textContent=q.prompt;
- const p=q.piece;let detail=`${p.w} mm de ancho · ${p.d} mm de fondo · ${p.h} mm de altura máxima. Frente azul.`;
- if(p.type==='step')detail+=` Tramo alto: ${p.split} mm de ancho; tramo bajo: ${p.low} mm de altura.`;
- if(p.hole){const h=p.hole;detail+=` Hueco: ${h.x1-h.x0} × ${h.y1-h.y0} mm. Borde izquierdo a ${h.x0} mm; borde inferior a ${h.y0} mm.`;detail+=h.end===null?' Atraviesa todo el fondo.':` Profundidad de la cavidad: ${h.end} mm; trasera cerrada.`}
- $('quizDimensions').textContent=detail;
- $('questionHint').textContent=q.hint;$('hintDetails').open=false;
- const parent=$('graphicOptions');parent.replaceChildren();
- q.options.forEach((o,i)=>{const label=document.createElement('label');label.className='graphic-option';
-  if(quizChecked[quizIndex]){if(i===q.correctIndex)label.classList.add('option-correct');else if(i===quizAnswers[quizIndex])label.classList.add('option-wrong')}
-  const row=document.createElement('div');row.className='option-title';
-  const input=document.createElement('input');input.type='radio';input.name='graphicAnswer';input.value=String(i);input.checked=quizAnswers[quizIndex]===i;input.disabled=quizChecked[quizIndex];input.setAttribute('aria-label',`Opción ${'ABCD'[i]}`);
-  input.onchange=()=>{quizAnswers[quizIndex]=i;$('checkAnswer').disabled=false;document.querySelectorAll('.graphic-option').forEach(x=>x.classList.remove('selected'));label.classList.add('selected')};
-  if(input.checked)label.classList.add('selected');row.append(input,document.createTextNode(`Opción ${'ABCD'[i]}`));label.append(row);
-  const svg=svgNode('svg',{viewBox:q.kind==='triple'?'0 0 280 250':'0 0 200 140',role:'img','aria-label':`${q.kind==='triple'?'Conjunto de tres vistas':'Vista dibujada'} de la opción ${'ABCD'[i]}`},label);
-  if(q.kind==='triple')drawTriple(svg,o.drawing);else drawView(svg,o.drawing);
-  parent.append(label);
- });
- $('feedback').textContent=quizChecked[quizIndex]?(quizAnswers[quizIndex]===q.correctIndex?'Correcto. ':'Revisa esta orientación: ')+q.options[quizAnswers[quizIndex]].feedback:'';
- $('feedback').className='feedback '+(quizChecked[quizIndex]?(quizAnswers[quizIndex]===q.correctIndex?'correct':'wrong'):'');
- $('checkAnswer').disabled=quizChecked[quizIndex]||quizAnswers[quizIndex]===null;
- $('prevQuestion').disabled=quizIndex===0;$('nextQuestion').disabled=!quizChecked[quizIndex];$('nextQuestion').textContent=quizIndex===9?'Finalizar actividad':'Siguiente reto';
- quizYaw=30;quizPitch=22;$('quizYaw').value=30;$('quizPitch').value=22;drawQuizModel();updateQuizProgress();
-}
-function checkAnswer(){if(!PDI.ready()){$('registroMensaje').textContent='Comprueba tu ID para acceder a la actividad.';$('alumnoID').focus();return;}if(!viewStartedAt)viewStartedAt=new Date().toISOString();if(quizAnswers[quizIndex]===null||quizChecked[quizIndex])return;quizChecked[quizIndex]=true;renderQuestion()}
-function resultData(){return {actividad:'T2_R1_Vistas_graficas',fecha:new Date().toISOString(),puntuacion:quizScore(),maximo:10,retos:challenges.map((q,i)=>({id:q.id,dificultad:q.level,opcion:quizAnswers[i]===null?null:'ABCD'[quizAnswers[i]],correcta:quizChecked[i]&&quizAnswers[i]===q.correctIndex})),porDificultad:Object.fromEntries(['Fácil','Media','Difícil'].map(level=>{const group=difficultyGroup(level);return [level,{aciertos:group.filter(({q,i})=>quizChecked[i]&&quizAnswers[i]===q.correctIndex).length,total:group.length}]}))}}
-function showSummary(){if(!quizChecked.every(Boolean))return;quizResult=resultData();$('quizWorkspace').hidden=true;$('quizSummary').hidden=false;$('resultHeading').textContent=`Has resuelto ${quizResult.puntuacion} de 10 retos`;
- const list=$('resultBreakdown');list.replaceChildren();for(const [level,result] of Object.entries(quizResult.porDificultad)){const item=document.createElement('li');item.textContent=`${level}: ${result.aciertos} de ${result.total}`;list.append(item)}
- const review=$('reviewQuestions');review.replaceChildren();challenges.forEach((q,i)=>{const b=document.createElement('button');b.type='button';b.textContent=`${i+1} · ${quizAnswers[i]===q.correctIndex?'Resuelto':'Revisar'}`;b.onclick=()=>{quizIndex=i;renderQuestion()};review.append(b)});$('download').disabled=false;if(viewSentAttempt!==viewAttemptId){viewSentAttempt=viewAttemptId;PDI.submit(viewPayload());}
-}
-$('checkAnswer').onclick=checkAnswer;
-$('prevQuestion').onclick=()=>{if(quizIndex>0){quizIndex--;renderQuestion()}};
-$('nextQuestion').onclick=()=>{if(!quizChecked[quizIndex])return;if(quizIndex<9){quizIndex++;renderQuestion()}else showSummary()};
-$('quizYaw').oninput=e=>{quizYaw=Number(e.target.value);drawQuizModel()};$('quizPitch').oninput=e=>{quizPitch=Number(e.target.value);drawQuizModel()};
-$('quizModel').onpointerdown=e=>{quizDrag={x:e.clientX,y:e.clientY,yaw:quizYaw,pitch:quizPitch};$('quizModel').setPointerCapture(e.pointerId)};
-$('quizModel').onpointermove=e=>{if(!quizDrag)return;quizYaw=quizDrag.yaw-(e.clientX-quizDrag.x)*.5;quizYaw=((quizYaw+180)%360+360)%360-180;quizPitch=Math.max(-90,Math.min(90,quizDrag.pitch+(e.clientY-quizDrag.y)*.5));$('quizYaw').value=quizYaw;$('quizPitch').value=quizPitch;drawQuizModel()};
-$('quizModel').onpointerup=$('quizModel').onpointercancel=()=>quizDrag=null;
-function viewPayload(){
- const r=quizResult||resultData();return {submissionId:viewAttemptId,theme:'Tema_2_Expresion_grafica',activity:'T2_R1_Vistas_graficas',title:'Taller de vistas',score:r.puntuacion,scores:r.retos.map((x,i)=>x.correcta?(viewHints[i]?5:10):0),hints:[...viewHints],attempts:quizChecked.map(x=>x?1:0),startedAt:viewStartedAt,finishedAt:r.fecha,appVersion:'2.0-ID',evidence:r};
-}
-function resetViewAttempt(){quizIndex=0;quizAnswers=Array(10).fill(null);quizChecked=Array(10).fill(false);quizResult=null;viewAttemptId=PDI.newAttempt();viewStartedAt='';viewHints=Array(10).fill(false);viewSentAttempt='';renderQuestion();}
-$('download').onclick=()=>{if(quizResult)PDI.export(viewPayload(),'T2_R1_Vistas_10_retos_resultado.json');};
-$('hintDetails').querySelector('summary').addEventListener('click',()=>{if(!$('hintDetails').open&&!quizChecked[quizIndex])viewHints[quizIndex]=true;});
-document.addEventListener('pdi-reset',()=>{resetViewAttempt();$('exploreTab').click();});
-document.addEventListener('pdi-session',()=>{resetViewAttempt();$('sessionWarning').hidden=true;});
-
-renderQuestion();
-
-</script>
-<script>(function(){
- const el=id=>document.getElementById(id),container=el('examViews');
- const models=[heightPiece([[2,2,2,2],[2,2,2,2],[2,2,2,2]]),heightPiece([[3,3,1,1],[3,3,1,1],[3,3,1,1]]),pieces.rear,pieces.l,pieces.u,{...makePrism(60,45,45),type:'tunnel',hole:{x0:15,x1:45,y0:15,y1:30,end:null}}];
- const kinds=['front','top','right'],labels=['Alzado','Planta','Perfil derecho'];
- const bank=[],answers=[];
- const signature=v=>{const edges=v.outline.map((a,i)=>[a,v.outline[(i+1)%v.outline.length],false]).concat(v.lines.map(l=>[l.a,l.b,!!l.hidden]));return JSON.stringify([v.w,v.h,edges.map(([a,b,h])=>[...([a,b].map(p=>p.join(',')).sort()),h]).sort(),v.holes]);};
- models.forEach(p=>answers.push(kinds.map(kind=>{const v=viewSpec(p,kind),sig=signature(v);let n=bank.findIndex(x=>x.sig===sig);if(n<0){n=bank.length;bank.push({sig,v});}return n+1;})));
- if(bank.length!==17)throw Error('Banco de vistas: se esperaban 17 vistas distintas, hay '+bank.length);
- const order=bank.map((_,i)=>i);let seed=8723;for(let i=order.length-1;i>0;i--){seed=(seed*1664525+1013904223)>>>0;const j=seed%(i+1);[order[i],order[j]]=[order[j],order[i]];}const original=bank.slice();order.forEach((n,i)=>bank[i]=original[n]);answers.forEach(row=>row.forEach((n,j)=>row[j]=order.indexOf(n-1)+1));
- let firstChoices=null,first=null,attempt=crypto.randomUUID(),started='',finished='',sent=false,examHintUsed=false,values=Array.from({length:6},()=>Array(3).fill(''));
- const cards=el('examPieces');models.forEach((p,i)=>{const card=document.createElement('article');card.className='panel';card.innerHTML=`<h3>Pieza ${'ABCDEF'[i]}</h3><svg viewBox="0 0 440 340" role="img" aria-label="Pieza ${'ABCDEF'[i]}, frente azul"></svg><div class="exam-fields"></div>`;cards.append(card);drawModel(card.querySelector('svg'),p,Math.PI/6,25*Math.PI/180,{scale:3.8});
-  labels.forEach((label,j)=>{const lab=document.createElement('label');lab.textContent=label;const select=document.createElement('select');select.id=`match${i}${j}`;select.setAttribute('aria-label',label+' de la pieza '+'ABCDEF'[i]);select.innerHTML='<option value="">—</option>'+bank.map((_,n)=>`<option value="${n+1}">${n+1}</option>`).join('');select.onchange=()=>values[i][j]=select.value;lab.append(select);card.querySelector('.exam-fields').append(lab);});
- });
- bank.forEach(({v},i)=>{const box=document.createElement('div');box.className='bank-view';box.innerHTML=`<strong>${i+1}</strong><svg viewBox="0 0 200 140" role="img" aria-label="Vista numerada ${i+1}"></svg>`;el('examBank').append(box);drawView(box.querySelector('svg'),v,{scale:1.8});});
- const payload=()=>({submissionId:attempt,theme:'Tema_2_Expresion_grafica',activity:'T2_A8_Vistas_Examen',title:'Relacionar piezas y vistas',score:Math.max(0,first.reduce((a,b)=>a+b,0)/6-(examHintUsed?0.5:0)),scores:first,hints:[examHintUsed,false,false,false,false,false],attempts:Array(6).fill(1),startedAt:started,finishedAt:finished,appVersion:'3.0-ID',evidence:{pieces:'ABCDEF',viewOrder:labels,answers:firstChoices,reviewedAnswers:values.map(row=>row.map(Number)),correct:answers,firstScores:first,bankCount:17,consejoUsado:examHintUsed}});
- el('examHint').onclick=()=>{if(first)return;examHintUsed=true;el('examHint').disabled=true;el('examHintText').hidden=false;};
- el('examCheck').onclick=()=>{if(!PDI.ready()){el('examFeedback').textContent='Comprueba tu ID para acceder a la actividad.';el('alumnoID').focus();return;}if(values.flat().some(x=>!x)){el('examFeedback').textContent='Completa las 18 casillas antes de comprobar.';return;}started=started||new Date().toISOString();const scores=values.map((row,i)=>row.filter((n,j)=>Number(n)===answers[i][j]).length*10/3);if(!first){first=scores;firstChoices=values.map(row=>row.map(Number));finished=new Date().toISOString();}
-  let correct=0;values.forEach((row,i)=>row.forEach((n,j)=>{const select=el(`match${i}${j}`),ok=Number(n)===answers[i][j];if(ok)correct++;select.classList.toggle('match-ok',ok);select.classList.toggle('match-bad',!ok);select.setAttribute('aria-invalid',String(!ok));}));el('examFeedback').textContent=`${correct} de 18 vistas correctas. Nota del primer intento: ${Math.max(0,first.reduce((a,b)=>a+b,0)/6-(examHintUsed?0.5:0)).toFixed(2).replace('.',',')} / 10. Compara las casillas marcadas con el frente azul, los escalones y las líneas ocultas. Puedes corregirlas y comprobar de nuevo.`;el('examDownload').disabled=false;el('examSolution').hidden=false;if(!sent){sent=true;PDI.submit(payload());}};
- el('examSolution').onclick=()=>{el('examFeedback').textContent=answers.map((row,i)=>'ABCDEF'[i]+': '+labels.map((l,j)=>l+' '+row[j]).join(' · ')).join(' | ');};
- function reset(){firstChoices=null;first=null;sent=false;examHintUsed=false;el('examHint').disabled=false;el('examHintText').hidden=true;started='';finished='';attempt=crypto.randomUUID();values=Array.from({length:6},()=>Array(3).fill(''));container.querySelectorAll('select').forEach(s=>{s.value='';s.classList.remove('match-ok','match-bad');s.removeAttribute('aria-invalid');});el('examFeedback').textContent='';el('examDownload').disabled=true;el('examSolution').hidden=true;}
- el('examDownload').onclick=()=>{if(first)PDI.export(payload(),'T2_Vistas_relacionar_resultado.json');};
- for(const id of ['exploreTab','practiceTab']){const old=el(id).onclick;el(id).onclick=e=>{container.hidden=true;el('examTab').setAttribute('aria-pressed','false');old(e);};}
- el('examTab').onclick=()=>{el('explore').hidden=true;el('practice').hidden=true;container.hidden=false;for(const id of ['exploreTab','practiceTab'])el(id).setAttribute('aria-pressed','false');el('examTab').setAttribute('aria-pressed','true');started=started||new Date().toISOString();};
- document.addEventListener('pdi-reset',reset);document.addEventListener('pdi-session',reset);
 })();
-</script></body></html>
 
+// Laboratorio propio: modelo 3D y dibujo vectorial sobre cuadrícula.
+const VIEW_LABEL={front:'Alzado',top:'Planta',left:'Perfil izquierdo',right:'Perfil derecho'};
+const PRACTICE_NAMES={prism:'1 · Prisma rectangular',step:'2 · Pieza escalonada',roof:'3 · Plano inclinado',stairs:'4 · Tres escalones',rear:'5 · Escalón hacia atrás',l:'6 · Base en L',tower:'7 · Resalte central',u:'8 · Pieza en U',tunnel:'9 · Túnel rectangular'};
+const LP={piece:'prism',tool:'solid',active:'front',solution:false,focus:'',db:{}};
+const pointKey=a=>a.join(',');
+function gcd(a,b){return b?gcd(b,a%b):Math.abs(a)}
+function edgeKey(a,b,style='solid'){
+ if(a[0]>b[0]||(a[0]===b[0]&&a[1]>b[1]))[a,b]=[b,a];
+ return (style==='dash'||style==='d'?'d':'c')+'|'+pointKey(a)+'|'+pointKey(b);
+}
+function readEdge(k){const [style,a,b]=k.split('|');return [a.split(',').map(Number),b.split(',').map(Number),style]}
+function lineUnits(a,b,style='solid'){
+ const dx=b[0]-a[0],dy=b[1]-a[1],n=gcd(Math.abs(Math.round(dx)),Math.abs(Math.round(dy)));if(!n)return [];
+ return Array.from({length:n},(_,i)=>edgeKey([a[0]+dx*i/n,a[1]+dy*i/n],[a[0]+dx*(i+1)/n,a[1]+dy*(i+1)/n],style));
+}
+function specKeys(v,includeHidden=true){
+ const out=new Set(),add=(a,b,s='solid')=>lineUnits(a.map(x=>x/5),b.map(x=>x/5),s).forEach(k=>out.add(k));
+ const loop=(points,s)=>points.forEach((a,i)=>add(a,points[(i+1)%points.length],s));
+ loop(v.outline,'solid');
+ for(const l of v.lines||[])if(includeHidden||!l.hidden)add(l.a,l.b,l.hidden?'dash':'solid');
+ for(const h of v.holes||[])if(includeHidden||!h.hidden)loop([[h.x,h.y],[h.x+h.w,h.y],[h.x+h.w,h.y+h.h],[h.x,h.y+h.h]],h.hidden?'dash':'solid');
+ // Una línea vista prevalece sobre una oculta que se proyecta en el mismo sitio.
+ for(const k of [...out])if(k[0]==='d'&&out.has('c'+k.slice(1)))out.delete(k);
+ return out;
+}
+function expectedForSpec(v){return [...specKeys(v)].map(k=>{const [a,b,s]=readEdge(k),t=p=>[1+p[0],1+v.h/5-p[1]];return edgeKey(t(a),t(b),s)})}
+function expectedEdges(q){return q.vistaSpec?expectedForSpec(q.vistaSpec):legacyExpectedEdges(q)}
+function editorState(){return {keys:[],history:[],anchor:null,cursor:[1,1],preview:null}}
+function practiceState(kind){LP.db[LP.piece]??={};return LP.db[LP.piece][kind]??=(editorState())}
+function svgEditor(id,label){return `<svg id="${id}" class="vista-draw" viewBox="0 0 360 280" role="application" aria-label="Dibujar ${label}" tabindex="0"></svg>`}
+function editorMarkup(id,label,locked=false){return `<div id="${id}-controls" class="editor-toolbar" aria-label="Herramientas de ${label}">${[['solid','Línea continua'],['dash','Línea discontinua'],['erase','Goma']].map(([t,n])=>`<button type="button" data-editor-tool="${t}" ${locked?'disabled':''}>${n}</button>`).join('')}<button type="button" data-editor-action="undo" ${locked?'disabled':''}>Deshacer</button><button type="button" data-editor-action="clear" ${locked?'disabled':''}>Limpiar</button></div>${svgEditor(id,label)}`}
+function editorSVGContent(st,expected=[],solution=false,preview=null){
+ let s='<rect width="360" height="280" rx="8" fill="#fcfdfb"/>';
+ for(let x=0;x<=16;x++)s+=`<path d="M${20+x*20} 20V260" stroke="#dce9e9" stroke-width="1"/>`;
+ for(let y=0;y<=12;y++)s+=`<path d="M20 ${20+y*20}H340" stroke="#dce9e9" stroke-width="1"/>`;
+ const draw=(k,color,width=2.8)=>{const[a,b,t]=readEdge(k);return `<path data-edge="${k}" d="M${20+a[0]*20} ${20+a[1]*20}L${20+b[0]*20} ${20+b[1]*20}" fill="none" stroke="${color}" stroke-width="${width}" ${t==='d'?'stroke-dasharray="6 4"':''} stroke-linecap="butt"/>`};
+ for(const k of st.keys)s+=draw(k,solution&&!expected.includes(k)?'#a22c38':'#203d57');
+ if(solution)for(const k of expected)s+=draw(k,'#087844',4.1);
+ if(preview)for(const k of preview)s+=draw(k,'#c27513',2.5);
+ s+='<circle cx="40" cy="40" r="4.5" fill="#007f89" stroke="white" stroke-width="1.5"/>';
+ const p=st.anchor||st.cursor;if(p){const x=20+p[0]*20,y=20+p[1]*20;s+=`<path d="M${x-7} ${y}h14M${x} ${y-7}v14" stroke="#aa5b04" stroke-width="1.7" pointer-events="none"/>`;if(st.anchor)s+=`<circle cx="${x}" cy="${y}" r="5" fill="#f3cb67" stroke="#8a5006"/>`}
+ return s;
+}
+function eraseConnected(keys,point){
+ let found=null,best=.43;
+ for(const k of keys){const[a,b]=readEdge(k),dx=b[0]-a[0],dy=b[1]-a[1],len=dx*dx+dy*dy,t=Math.max(0,Math.min(1,((point[0]-a[0])*dx+(point[1]-a[1])*dy)/len)),d=Math.hypot(point[0]-a[0]-t*dx,point[1]-a[1]-t*dy);if(d<best){best=d;found=k}}
+ if(!found)return keys;
+ const[a,b]=readEdge(found),dx=b[0]-a[0],dy=b[1]-a[1],same=keys.filter(k=>{const[c,d]=readEdge(k);return Math.abs((c[0]-a[0])*dy-(c[1]-a[1])*dx)<1e-7&&Math.abs((d[0]-a[0])*dy-(d[1]-a[1])*dx)<1e-7});
+ const erased=new Set([found]),points=new Set([pointKey(a),pointKey(b)]);let changed=true;
+ while(changed){changed=false;for(const k of same)if(!erased.has(k)){const[c,d]=readEdge(k);if(points.has(pointKey(c))||points.has(pointKey(d))){erased.add(k);points.add(pointKey(c));points.add(pointKey(d));changed=true}}}
+ return keys.filter(k=>!erased.has(k));
+}
+function installEditor(svg,st,{tool=()=>LP.tool,expected=[],solution=()=>false,locked=false,onchange=()=>{},onactivate=()=>{}}={}){
+ let down=null,erasing=false;
+ const paint=preview=>{svg.innerHTML=editorSVGContent(st,expected,solution(),preview)};
+ const commit=keys=>{if(JSON.stringify(keys)===JSON.stringify(st.keys))return;st.history.push([...st.keys]);st.keys=keys;st.anchor=null;onchange(st.keys);paint()};
+ const add=(a,b)=>{if(pointKey(a)===pointKey(b))return;const keys=new Set(st.keys);for(const k of lineUnits(a,b,tool())){keys.delete((k[0]==='c'?'d':'c')+k.slice(1));keys.add(k)}commit([...keys])};
+ function at(e,rounded=true){const m=svg.getScreenCTM();if(!m)return null;const p=svg.createSVGPoint();p.x=e.clientX;p.y=e.clientY;const t=p.matrixTransform(m.inverse());const a=[Math.max(0,Math.min(16,(t.x-20)/20)),Math.max(0,Math.min(12,(t.y-20)/20))];return rounded?a.map(Math.round):a}
+ function activate(){onactivate();svg.focus({preventScroll:true})}
+ if(!locked){
+  svg.onpointerdown=e=>{if(e.button!==0)return;e.preventDefault();e.stopPropagation();activate();down=at(e);if(!down)return;svg.setPointerCapture(e.pointerId);erasing=tool()==='erase';if(erasing)commit(eraseConnected(st.keys,at(e,false)));st.cursor=down;paint()};
+  svg.onpointermove=e=>{if(!down&&!st.anchor)return;const p=at(e);if(!p)return;if(erasing&&down)commit(eraseConnected(st.keys,at(e,false)));else{st.cursor=p;const a=st.anchor||down;paint(a?lineUnits(a,p,tool()):null)}};
+  svg.onpointerup=e=>{if(!down)return;e.preventDefault();e.stopPropagation();const p=at(e);if(!erasing&&p){if(pointKey(down)!==pointKey(p))add(down,p);else if(st.anchor){const a=st.anchor;st.anchor=null;add(a,p)}else st.anchor=p}down=null;erasing=false;paint()};
+  svg.onpointercancel=()=>{down=null;erasing=false;st.anchor=null;paint()};svg.onlostpointercapture=()=>{down=null;erasing=false};
+  svg.onkeydown=e=>{if(['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','Enter',' ','Escape','Delete','Backspace'].includes(e.key)){e.preventDefault();e.stopPropagation();activate();const p=[...(st.cursor||[1,1])];if(e.key==='ArrowLeft')p[0]=Math.max(0,p[0]-1);if(e.key==='ArrowRight')p[0]=Math.min(16,p[0]+1);if(e.key==='ArrowUp')p[1]=Math.max(0,p[1]-1);if(e.key==='ArrowDown')p[1]=Math.min(12,p[1]+1);st.cursor=p;if(e.key==='Escape')st.anchor=null;if(['Delete','Backspace'].includes(e.key))commit(eraseConnected(st.keys,p));if(['Enter',' '].includes(e.key)){if(tool()==='erase')commit(eraseConnected(st.keys,p));else if(st.anchor){const a=st.anchor;st.anchor=null;add(a,p)}else st.anchor=p}paint()}};
+ }
+ paint();return {paint,undo(){if(locked||!st.history.length)return;st.keys=st.history.pop();st.anchor=null;onchange(st.keys);paint()},clear(){if(!locked)commit([])},cancel(){st.anchor=null;paint()}};
+}
+function modelHTML(key){return `<div class="new-model"><svg viewBox="0 0 440 340" data-vista-model="${key}" role="img" aria-label="Pieza 3D ${key}: arrastra para girar" tabindex="0"></svg><p class="note">Arrastra para girar · Frente azul</p></div>`}
+function mountModels(root){
+ root.querySelectorAll('[data-vista-model]').forEach(svg=>{
+  const key=svg.dataset.vistaModel,p=VG.all[key];let yaw=Math.PI/6,pitch=25*Math.PI/180,drag=null;
+  const draw=()=>VG.drawModel(svg,p,yaw,pitch,{colors:true,hidden:false,scale:Math.min(3.7,340/Math.hypot(p.w,p.d,p.h))});
+  svg.onpointerdown=e=>{if(e.button!==0)return;e.preventDefault();e.stopPropagation();drag={x:e.clientX,y:e.clientY,yaw,pitch};svg.setPointerCapture(e.pointerId)};
+  svg.onpointermove=e=>{if(!drag)return;const a=drag.yaw-(e.clientX-drag.x)*.012;yaw=Math.atan2(Math.sin(a),Math.cos(a));pitch=Math.max(-Math.PI/2,Math.min(Math.PI/2,drag.pitch+(e.clientY-drag.y)*.012));draw()};
+  svg.onpointerup=svg.onpointercancel=svg.onlostpointercapture=()=>{drag=null};
+  svg.onkeydown=e=>{if(e.key.startsWith('Arrow')){e.preventDefault();if(e.key==='ArrowLeft')yaw-=.15;if(e.key==='ArrowRight')yaw+=.15;if(e.key==='ArrowUp')pitch=Math.min(Math.PI/2,pitch+.15);if(e.key==='ArrowDown')pitch=Math.max(-Math.PI/2,pitch-.15);draw()}};
+  svg.vistaCamera=kind=>{yaw=kind==='left'?-Math.PI/2:kind==='right'?Math.PI/2:kind==='reset'?Math.PI/6:0;pitch=kind==='top'?Math.PI/2:kind==='reset'?25*Math.PI/180:0;draw()};
+  draw();
+ });
+}
+function viewHTML(spec,label='Vista propuesta'){
+ const temp=document.createElementNS('http://www.w3.org/2000/svg','svg');temp.setAttribute('viewBox','0 0 200 140');temp.setAttribute('role','img');temp.setAttribute('aria-label',label);VG.drawView(temp,spec,{scale:Math.min(2.1,174/spec.w,114/spec.h)});return temp.outerHTML;
+}
+function renderVisual(v){
+ if(!v)return '';
+ if(v.type==='workModel')return modelHTML(v.key);
+ if(v.type==='workView')return viewHTML(v.spec,v.label);
+ if(v.type==='workBoard')return `<div class="wb-models">${v.models.map((k,i)=>`<div><strong>F${i+1}</strong>${modelHTML(k)}</div>`).join('')}</div><h3>Vistas para relacionar</h3><div class="wb-views">${v.specs.map((s,i)=>`<div class="wb-option"><strong>${i+1}</strong>${viewHTML(s,'Vista '+(i+1))}</div>`).join('')}</div>`;
+ return legacyRenderVisual(v);
+}
+function spec(key,kind){return VG.viewSpec(VG.all[key],kind)}
+function modified(v,fn){v=structuredClone(v);fn(v);return v}
+function boardQuestion(models,tasks,title){
+ const specs=[],answers=new Map();
+ for(const key of models)for(const kind of ['front','top','left','right']){const v=spec(key,kind),s=[...specKeys(v)].sort().join(';');let index=specs.findIndex(x=>[...specKeys(x)].sort().join(';')===s);if(index<0){index=specs.length;specs.push(v)}answers.set(key+':'+kind,String(index+1))}
+ return {kind:'fields',title,prompt:'Relaciona cada pregunta con una vista numerada. Una vista puede servir para más de una pieza. Mantén el frente azul como referencia.',visual:{type:'workBoard',models,specs},board:true,fields:tasks.map(([fi,kind])=>({label:VIEW_LABEL[kind]+' de F'+fi,options:specs.map((_,i)=>String(i+1)),answer:answers.get(models[fi-1]+':'+kind)})),hint:'Localiza primero el frente de cada figura. Compara contorno, dimensiones y líneas interiores; después distingue línea vista y oculta.',explain:'El alzado combina anchura y altura; la planta, anchura y fondo; los perfiles, fondo y altura. Las aristas que tapa el material se representan discontinuas.'};
+}
+function drawQ(key,kind,title,extra=''){
+ const v=spec(key,kind);return {kind:'draw',title,prompt:`Dibuja ${kind==='top'?'la planta':'el '+VIEW_LABEL[kind].toLowerCase()}. El recuadro exterior de la vista ocupa ${v.w/5} casillas de anchura y ${v.h/5} de altura. Cada casilla representa 5 mm. ${extra}`,visual:{type:'workModel',key},vistaSpec:v,viewKind:kind,hint:'Cuenta las casillas del contorno. Traza primero las aristas vistas con línea continua; reserva la discontinua para las aristas tapadas.',explain:'La corrección compara posición, contorno, líneas interiores y tipo de trazo. El verde muestra la solución y el rojo los tramos que conviene corregir.'};
+}
+const choiceQ=(title,prompt,key,options,answer,hint)=>({kind:'choice',title,prompt,visual:{type:'workModel',key},options:options.map((v,i)=>({label:String.fromCharCode(65+i),visual:{type:'workView',spec:v,label:'Opción '+String.fromCharCode(65+i)}})),answer,hint,explain:hint+' La opción correcta respeta el frente, las dimensiones y el tipo de arista.'});
+APP.id='T2_R1_Vistas_graficas';
+APP.title='Taller de vistas';APP.block='Vistas';APP.minutes='35–45 minutos';
+APP.questions.splice(0,APP.questions.length,
+ drawQ('eStep','front','1 · Alzado de un escalón','Conserva la zona alta a la izquierda y la baja a la derecha. El escalón se sitúa a 25 mm del borde izquierdo.'),
+ choiceQ('2 · Alzado de un resalte','Desde el frente, el resalte central supera la base. ¿Cuál es el alzado?','eTower',
+   [spec('eTower','top'),modified(spec('eTower','front'),v=>{v.lines=[]}),spec('eTower','front'),spec('eTower','right')],2,
+   'La silueta del alzado incluye la base completa y el resalte centrado en altura.'),
+ drawQ('eStairs','top','3 · Planta de dos escalones','Separa en planta las tres franjas de altura diferente. Mantén la misma anchura que en el alzado.'),
+ choiceQ('4 · Planta de una pieza en U','La abertura de la U se dirige hacia el frente azul. ¿Qué planta conserva esa orientación?','eU',
+   [spec('eU','front'),modified(spec('eU','top'),v=>{v.outline=v.outline.map(([x,y])=>[x,v.h-y]);v.lines=v.lines.map(l=>({...l,a:[l.a[0],v.h-l.a[1]],b:[l.b[0],v.h-l.b[1]]}));}),spec('eU','top'),spec('eU','right')],2,
+   'La planta muestra los dos brazos y el travesaño trasero, con la abertura en el frente.'),
+ boardQuestion(['eL','eCorner'],[[1,'top'],[1,'front'],[2,'top'],[2,'right']],'5 · Dos piezas y un banco de vistas'),
+ drawQ('eDeep','left','6 · Perfil del lado alto','Las franjas de menor altura quedan detrás de la cara alta. Distingue sus aristas ocultas con línea discontinua.'),
+ choiceQ('7 · Alzado del plano inclinado','Reconoce el alzado de la pieza con la cubierta inclinada desde la izquierda hacia la derecha.','eRoof',
+   [modified(spec('eRoof','front'),v=>{v.outline=v.outline.map(([x,y])=>[v.w-x,y])}),spec('eRoof','right'),spec('eRoof','front'),spec('eRoof','top')],2,
+   'El alzado conserva la pendiente y la anchura; el perfil no muestra esa pendiente.'),
+ drawQ('eTunnel','right','8 · Perfil de un túnel pasante','El túnel atraviesa el fondo. Sus límites en este perfil quedan tapados por el material: usa línea discontinua.'),
+ choiceQ('9 · Planta de un resalte desplazado','El resalte está desplazado a la derecha. ¿Qué planta lo sitúa correctamente?','eOffset',
+   [modified(spec('eOffset','top'),v=>{v.lines=v.lines.map(l=>({...l,a:[l.a[0]-10,l.a[1]],b:[l.b[0]-10,l.b[1]]}));}),modified(spec('eOffset','top'),v=>{v.lines=[];v.holes=[]}),spec('eOffset','top'),spec('eOffset','front')],2,
+   'La base mide 60 × 40 mm; el resalte de 20 × 20 deja mayor margen a la izquierda.'),
+ boardQuestion(['eBank1','eBank2','eBank3','eBank4'],[[1,'front'],[1,'top'],[2,'top'],[3,'left'],[4,'front'],[4,'right']],'10 · Cuatro piezas y muchas vistas')
+);
+APP.questions.forEach((q,i)=>q.id=`${APP.id}_V3_R${String(i+1).padStart(2,'0')}`);
+APP.focus='Alzado · Planta · Perfil izquierdo y derecho · Aristas ocultas';
+function drawingStartNotice(scope,visible){return visible?`<aside class="draw-start-notice" role="status"><div><strong><span aria-hidden="true">●</span> ¡Empieza en el punto azul!</strong><p>Es la referencia de la esquina superior izquierda del espacio que ocupa la vista. Coloca el dibujo contando desde ese punto.</p></div><button type="button" data-start-dismiss="${scope}">Entendido</button></aside>`:''}
+function renderExplore(){
+ const root=$('explore');
+ root.innerHTML=`<section class="panel vista-lab"><div class="eyebrow">PRACTICAR SIN NOTA</div><h2>Del volumen a tus cuatro vistas</h2><p>Gira la pieza de la izquierda y dibuja en los recuadros de la derecha. El frente permanece azul aunque cambies la mirada.</p><div class="lab-top"><label for="practicePiece">Pieza de práctica<select id="practicePiece">${Object.entries(PRACTICE_NAMES).map(([k,n])=>`<option value="${k}" ${k===LP.piece?'selected':''}>${n}</option>`).join('')}</select></label><span class="unit-pill">1 casilla = 5 mm</span><span id="practiceDimensions" class="note"></span></div><div class="vista-workspace"><aside class="model-card"><h3>Observa y gira</h3>${modelHTML(LP.piece)}<div class="camera-tools"><button data-camera="front">Frente</button><button data-camera="top">Arriba</button><button data-camera="left">Izquierda</button><button data-camera="right">Derecha</button><button data-camera="reset">Restablecer giro</button></div><p class="note">También puedes girar con las flechas del teclado al enfocar la pieza.</p><div class="drawing-key"><span><i class="key-line"></i> Arista vista</span><span><i class="key-line dashed"></i> Arista oculta</span></div></aside><div class="drawing-work">${drawingStartNotice('practice',!(LP.startNotices||{})[LP.piece])}<div class="practice-tools" role="toolbar" aria-label="Herramientas de práctica">${[['solid','Línea continua'],['dash','Línea discontinua'],['erase','Goma']].map(([k,n])=>`<button data-practice-tool="${k}" aria-pressed="${LP.tool===k}">${n}</button>`).join('')}<button id="practiceUndo">Deshacer</button><button id="practiceClear">Limpiar vista activa</button></div><p class="note drawing-instructions">Arrastra de punto a punto o toca dos puntos. Goma: toca el tramo que quieras borrar. Puedes ampliar cada recuadro.</p><div id="fourViews" class="four-views ${LP.focus?'focus-'+LP.focus:''}">${['right','front','left','top'].map(kind=>`<section class="view-card card-${kind} ${LP.active===kind?'active':''}" data-view-card="${kind}"><header><h3>${VIEW_LABEL[kind]}</h3><button data-focus-view="${kind}" aria-label="Ampliar ${VIEW_LABEL[kind].toLowerCase()}">⤢</button></header>${svgEditor('practice-'+kind,VIEW_LABEL[kind].toLowerCase())}<p id="note-${kind}" class="view-status" aria-live="polite"></p></section>`).join('')}</div><p class="note">Sistema europeo: perfil derecho a la izquierda del alzado, perfil izquierdo a su derecha y planta debajo.</p><div class="actions"><button id="checkPractice" class="primary">Comprobar dibujos</button><button id="showPractice">${LP.solution?'Ocultar solución':'Ver solución'}</button><button id="allViews" ${LP.focus?'':'hidden'}>Ver las cuatro vistas</button></div><p id="practiceMessage" class="status" role="status" aria-live="polite">Práctica libre: no se envía ninguna nota.</p></div></div></section>`;
+ const dismiss=root.querySelector('[data-start-dismiss]');if(dismiss)dismiss.onclick=()=>{(LP.startNotices??={})[LP.piece]=true;dismiss.closest('.draw-start-notice').remove()};
+ const editors={};const p=VG.pieces[LP.piece];$('practiceDimensions').textContent=`${p.w} mm de ancho · ${p.d} mm de fondo · ${p.h} mm de alto`;
+ mountModels(root);
+ for(const kind of ['front','top','left','right'])editors[kind]=installEditor($('practice-'+kind),practiceState(kind),{expected:expectedForSpec(spec(LP.piece,kind)),solution:()=>LP.solution,onactivate:()=>{LP.active=kind;root.querySelectorAll('[data-view-card]').forEach(e=>e.classList.toggle('active',e.dataset.viewCard===kind))},onchange:()=>{$('note-'+kind).textContent='';$('practiceMessage').textContent='Dibujo actualizado. Puedes comprobarlo cuando quieras.'}});
+ $('practicePiece').onchange=e=>{LP.piece=e.target.value;LP.solution=false;renderExplore()};
+ root.querySelectorAll('[data-practice-tool]').forEach(b=>b.onclick=()=>{LP.tool=b.dataset.practiceTool;root.querySelectorAll('[data-practice-tool]').forEach(e=>e.setAttribute('aria-pressed',e===b));Object.values(editors).forEach(e=>e.cancel())});
+ $('practiceUndo').onclick=()=>editors[LP.active].undo();$('practiceClear').onclick=()=>editors[LP.active].clear();
+ $('showPractice').onclick=()=>{LP.solution=!LP.solution;$('showPractice').textContent=LP.solution?'Ocultar solución':'Ver solución';Object.values(editors).forEach(e=>e.paint())};
+ $('checkPractice').onclick=()=>{for(const kind of ['front','top','left','right']){const expected=expectedForSpec(spec(LP.piece,kind)),actual=practiceState(kind).keys,score=drawingScore(actual,expected),right=expected.filter(k=>actual.includes(k)).length;const n=$('note-'+kind);n.textContent=score===1?'✓ Vista correcta':`${right} de ${expected.length} tramos coinciden. Revisa el contorno y el tipo de línea.`;n.className='view-status '+(score===1?'good':'revise')}$('practiceMessage').textContent='Comprobación de práctica, sin nota ni envío. Puedes corregir y volver a comprobar.'};
+ root.querySelectorAll('[data-focus-view]').forEach(b=>b.onclick=()=>{LP.focus=LP.focus===b.dataset.focusView?'':b.dataset.focusView;LP.active=b.dataset.focusView;renderExplore()});$('allViews').onclick=()=>{LP.focus='';renderExplore()};
+ root.querySelectorAll('[data-camera]').forEach(b=>b.onclick=()=>{root.querySelector('[data-vista-model]').vistaCamera(b.dataset.camera)});
+}
+function renderQuiz(){
+ if(S.mode!=='registered')return;if(S.result&&!S.reviewing){showScreen('results');return;}showScreen('quiz');$('quizStage').className='panel quiz-stage-evaluable';
+ const q=questionsForMode()[S.index],total=questionsForMode().length,d=draft(q),r=S.records[S.index],locked=!!r;
+ $('progress').max=total;$('progress').value=S.records.filter(Boolean).length;$('progressText').textContent=`${S.records.filter(Boolean).length} de ${total} comprobados`;$('sessionLabel').textContent='4 dibujos · 4 elecciones · 2 relaciones · Hasta 10 puntos';
+ let response='';
+ if(q.kind==='choice')response=`<fieldset class="choice-field"><legend>Elige una respuesta.</legend><div class="choices">${q.options.map((o,j)=>`<label class="choice ${locked&&j===q.answer?'correct':''} ${locked&&d===j&&d!==q.answer?'wrong':''}"><input type="radio" name="choice" data-choice="${j}" value="${j}" ${d===j?'checked':''} ${locked?'disabled':''}><span>${o.label}</span>${renderVisual(o.visual)}${locked&&j===q.answer?'<strong class="answer-badge">✓ Respuesta correcta</strong>':locked&&d===j?'<strong class="answer-badge">× Tu respuesta</strong>':''}</label>`).join('')}</div></fieldset>`;
+ else if(q.kind==='fields')response=q.fields.map((f,j)=>fieldHtml(f,j,d,r?.details[j])).join('');
+ else response=`<div id="quizEditor">${drawingStartNotice('quiz',!locked&&!(S.startNotices||{})[S.index])}${editorMarkup('quizDrawing',VIEW_LABEL[q.viewKind],locked)}<p class="note">El punto azul marca la esquina superior izquierda del recuadro que ocupa la vista. Una casilla equivale a 5 mm. Puedes dibujar con dos toques o arrastrar; con teclado, flechas y Enter.</p></div>`;
+ const figure=renderVisual(q.visual);
+ $('quizContent').innerHTML=`<div class="question-label">Reto ${S.index+1} de ${total} · ${q.kind==='draw'?'Dibuja':q.kind==='fields'?'Relaciona varias piezas':'Elige la vista'}</div><h2 class="qtitle">${q.title}</h2><p>${q.prompt}</p><div class="q-layout">${q.board?`<div class="board-full">${figure}</div><div class="board-full">${response}</div>`:`<div class="sketch">${figure}</div><div>${response}</div>`}</div>${locked?'':`<p class="cost-note">Consejo opcional: este reto pasa de un máximo de 1 a 0,5 puntos. La puntuación parcial también se reduce a la mitad; un error vale 0.</p>`}<div class="actions"><button id="checkButton" class="primary" data-action="check" ${locked?'disabled':''}>${locked?'Respuesta comprobada':'Comprobar respuesta'}</button><button class="hint-button" data-action="hint" ${locked||S.hints[S.index]?'disabled':''}>${S.hints[S.index]?'Consejo abierto':'Abrir consejo · máximo 0,5 puntos'}</button></div><div id="questionMessage" class="status" role="status" aria-live="polite"></div>${S.hints[S.index]?`<div class="hint">${q.hint}</div>`:''}${r?feedbackHtml(q,r):''}${S.reviewing?'<p class="review-tag">Revisión: puntuación cerrada.</p>':''}`;
+ mountModels($('quizContent'));
+ if(q.kind==='draw'){
+  const dismiss=$('quizEditor').querySelector('[data-start-dismiss]');if(dismiss)dismiss.onclick=()=>{(S.startNotices??={})[S.index]=true;dismiss.closest('.draw-start-notice').remove()};
+  S.newEditors??={};const st=S.newEditors[S.index]??=editorState();st.keys=[...d];
+  S.newTools??={};S.newTools[S.index]??='solid';const ed=installEditor($('quizDrawing'),st,{locked,tool:()=>S.newTools[S.index],expected:expectedEdges(q),solution:()=>locked&&r.rawScore<1,onchange:keys=>S.drafts[S.index]=[...keys]});
+  const controls=$('quizDrawing-controls');controls.querySelectorAll('[data-editor-tool]').forEach(b=>{b.setAttribute('aria-pressed',b.dataset.editorTool===S.newTools[S.index]);b.onclick=()=>{S.newTools[S.index]=b.dataset.editorTool;controls.querySelectorAll('[data-editor-tool]').forEach(e=>e.setAttribute('aria-pressed',e===b));ed.cancel()}});controls.querySelector('[data-editor-action="undo"]').onclick=()=>ed.undo();controls.querySelector('[data-editor-action="clear"]').onclick=()=>ed.clear();
+ }
+ $('prevButton').disabled=S.index===0;$('nextButton').disabled=!locked;$('nextButton').textContent=S.index===total-1?(S.reviewing?'Volver al resultado':'Finalizar y guardar'):'Siguiente reto →';
+}
+
+function startAttempt(){S.startNotices={};S.newEditors={};S.newTools={};legacyStartAttempt()}
+function resetStudent(force=false){legacyResetStudent(force);if(!S.students.length){LP.db={};LP.startNotices={};LP.solution=false;LP.focus='';renderExplore()}}
+
+if(typeof document!=='undefined')boot();
+
+</script></body></html>
